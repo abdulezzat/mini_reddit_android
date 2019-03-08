@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:id="@+id/postUpperPart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:layout_margin="15dp">
+
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/postLogo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/reddit_icon"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="5"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp">
+
+            <TextView
+                android:id="@+id/postUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+
+                android:text="r/Test" />
+
+            <TextView
+                android:id="@+id/postInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Posted by Aly Ramzy. 4h ago" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/postAdd"
+            android:src="@drawable/ic_add_box_black_48dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+           />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/postMainPart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/postText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+
+
+            android:text="This is the picture hint"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"/>
+        <ImageView
+            android:adjustViewBounds="true"
+            android:id="@+id/postImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:src="@drawable/iamadreamer"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:id="@+id/postLowerPart"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        >
+
+       <LinearLayout
+           android:layout_weight="1"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:orientation="horizontal"
+           android:layout_margin="15dp">
+           <ImageView
+
+               android:id="@+id/postLike"
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:src="@drawable/ic_arrow_upward_black_48dp"/>
+           <TextView
+               android:id="@+id/postLikeCount"
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:text="5k"
+
+               android:gravity="center"/>
+           <ImageView
+               android:id="@+id/postDislike"
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:src="@drawable/ic_arrow_downward_black_48dp"/>
+
+
+       </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/postComment"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_mode_comment_black_48dp"/>
+
+            <TextView
+                android:id="@+id/postCommentCount"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="22.2k"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/postShare"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_screen_share_black_48dp"/>
+
+            <TextView
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Share"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="#c0c0c0"/>
+
+</LinearLayout>
