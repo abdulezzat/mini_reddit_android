@@ -1,4 +1,4 @@
-package com.example.android.minireddit;
+package com.example.android.minireddit.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.R;
 
 import java.util.List;
 

@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PostsActivity"
-    android:name="com.example.android.minireddit.PostFragment">
+    android:name="com.example.android.minireddit.fragments.PostFragment">
 
 </fragment>
