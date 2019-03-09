@@ -1,4 +1,4 @@
-package com.example.android.minireddit;
+package com.example.android.minireddit.datastructure;
 
 public class Post {
 
