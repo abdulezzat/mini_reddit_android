@@ -1,4 +1,4 @@
-package com.example.android.minireddit;
+package com.example.android.minireddit.fragments;
 
 
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.adapters.PosterAdapter;
+import com.example.android.minireddit.R;
 
 import java.util.ArrayList;
 
@@ -35,7 +39,7 @@ public class PostFragment extends Fragment {
         posts.add(new Post(String.valueOf(R.drawable.reddit_icon),"r/alyramzy","Posted by Aly Ramzy. 4h ago","This is Photo Hint",null,15,200));
         posts.add(new Post(String.valueOf(R.drawable.reddit_icon),"r/alyramzy","Posted by Aly Ramzy. 4h ago","This is Photo Hint",String.valueOf(R.drawable.iamadreamer),15,200));
         posts.add(new Post(String.valueOf(R.drawable.reddit_icon),"r/alyramzy","Posted by Aly Ramzy. 4h ago","This is Text Message only works as a test for posts with no photos",null,15,200));
-        final  PosterAdapter adapter= new PosterAdapter(this.getContext(),posts);
+        final PosterAdapter adapter= new PosterAdapter(this.getContext(),posts);
         final ListView listView =(ListView) rootView.findViewById (R.id.postsListView);
         listView.setAdapter(adapter);
         return rootView;

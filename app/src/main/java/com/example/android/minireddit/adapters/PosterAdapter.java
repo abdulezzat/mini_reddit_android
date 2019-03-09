@@ -1,4 +1,4 @@
-package com.example.android.minireddit;
+package com.example.android.minireddit.adapters;
 
 import android.content.Context;
 import android.media.Image;
@@ -17,6 +17,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import java.lang.reflect.Method;
+import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.R;
+
 import java.util.List;
 
 
