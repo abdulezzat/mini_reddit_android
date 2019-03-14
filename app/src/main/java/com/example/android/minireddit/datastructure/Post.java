@@ -1,20 +1,66 @@
 package com.example.android.minireddit.datastructure;
 
+/**
+ * The Post Data.
+ */
 public class Post {
 
 
-
+    /**
+     * The Post logo url.
+     */
     String postLogoUrl;
+    /**
+     * The Post user.
+     */
     String postUser;
+    /**
+     * The Post info.
+     */
     String postInfo;
+    /**
+     * The Post Text Content.
+     */
     String postText;
+    /**
+     * The Post image url.
+     */
     String postImageUrl;
+    /**
+     * The Post like count.
+     */
     int postLikeCount;
+    /**
+     * The Post comment count.
+     */
     int postCommentCount;
+    /**
+     * Saved Post or not.
+     */
     boolean saved;
+    /**
+     * Hidden Post or Not.
+     */
     boolean hidden;
+    /**
+     * The Vote status.
+     */
     int voteStatus;
 
+    /**
+     * Instantiates a new Post.
+     *
+     * @param postLogoUrl      the post logo url
+     * @param postUser         the post user
+     * @param postInfo         the post info
+     * @param postText         the post text
+     * @param postImageUrl     the post image url
+     * @param postLikeCount    the post like count
+     * @param postCommentCount the post comment count
+     * @param saved            saved
+     * @param hidden           hidden
+     * @param voteStatus       the vote status
+     */
     public Post(String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden, int voteStatus) {
         this.postLogoUrl = postLogoUrl;
         this.postUser = postUser;
@@ -29,79 +75,182 @@ public class Post {
     }
 
 
+    /**
+     * Gets post logo url.
+     *
+     * @return post logo url
+     */
     public String getPostLogoUrl() {
         return postLogoUrl;
     }
 
+    /**
+     * Sets post logo url.
+     *
+     * @param postLogoUrl the post logo url
+     */
     public void setPostLogoUrl(String postLogoUrl) {
         this.postLogoUrl = postLogoUrl;
     }
 
+    /**
+     * Gets post user.
+     *
+     * @return the post user
+     */
     public String getPostUser() {
         return postUser;
     }
 
+    /**
+     * Sets post user.
+     *
+     * @param postUser the post user
+     */
     public void setPostUser(String postUser) {
         this.postUser = postUser;
     }
 
+    /**
+     * Gets post info.
+     *
+     * @return the post info
+     */
     public String getPostInfo() {
         return postInfo;
     }
 
+    /**
+     * Sets post info.
+     *
+     * @param postInfo the post info
+     */
     public void setPostInfo(String postInfo) {
         this.postInfo = postInfo;
     }
 
+    /**
+     * Gets post text.
+     *
+     * @return the post text
+     */
     public String getPostText() {
         return postText;
     }
 
+    /**
+     * Sets post text.
+     *
+     * @param postText the post text
+     */
     public void setPostText(String postText) {
         this.postText = postText;
     }
 
+    /**
+     * Gets post image url.
+     *
+     * @return the post image url
+     */
     public String getPostImageUrl() {
         return postImageUrl;
     }
 
+    /**
+     * Sets post image url.
+     *
+     * @param postImageUrl the post image url
+     */
     public void setPostImageUrl(String postImageUrl) {
         this.postImageUrl = postImageUrl;
     }
 
+    /**
+     * Gets post like count.
+     *
+     * @return the post like count
+     */
     public int getPostLikeCount() {
         return postLikeCount;
     }
 
+    /**
+     * Sets post like count.
+     *
+     * @param postLikeCount the post like count
+     */
     public void setPostLikeCount(int postLikeCount) {
         this.postLikeCount = postLikeCount;
     }
 
+    /**
+     * Gets post comment count.
+     *
+     * @return the post comment count
+     */
     public int getPostCommentCount() {
         return postCommentCount;
     }
 
+    /**
+     * Sets post comment count.
+     *
+     * @param postCommentCount the post comment count
+     */
     public void setPostCommentCount(int postCommentCount) {
         this.postCommentCount = postCommentCount;
     }
+
+    /**
+     * Is saved boolean.
+     *
+     * @return the boolean
+     */
     public boolean isSaved() {
         return saved;
     }
 
+    /**
+     * Sets saved.
+     *
+     * @param saved the saved
+     */
     public void setSaved(boolean saved) {
         this.saved = saved;
     }
+
+    /**
+     * Is hidden boolean.
+     *
+     * @return the boolean
+     */
     public boolean isHidden() {
         return hidden;
     }
 
+    /**
+     * Sets hidden.
+     *
+     * @param hidden the hidden
+     */
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
+
+    /**
+     * Gets vote status.
+     *
+     * @return the vote status
+     */
     public int getVoteStatus() {
         return voteStatus;
     }
 
+    /**
+     * Sets vote status.
+     *
+     * @param voteStatus the vote status
+     */
     public void setVoteStatus(int voteStatus) {
         this.voteStatus = voteStatus;
     }
