@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface Requests {
-    ArrayList<Post> getTrendingPost();
+     ArrayList<Post>  getTrendingPost();
 }
