@@ -1,121 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    tools:context=".adapters.ProfilePostsAdapter">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp">
+        android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/post_community"
+            android:id="@+id/postInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="r/community"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:text="r/community • 7mo"
             android:textSize="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" • "
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/post_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7mo"
-            android:textSize="16dp" />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/postMenu"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_more_vert_black_48dp" />
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/post_title"
+        android:id="@+id/postTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="the post title should show here"
+        android:text="the post title should appear here"
         android:textColor="@color/black"
         android:textSize="24sp" />
 
     <ImageView
-        android:id="@+id/post_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/post_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/postImage"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="gf ngf gnjgf  dfdfngf  kk fk   jfkk nongfnfg jnndfdj post title should be shown here dksgnlfngj jdgs aoifnjf afjsdg jnogdsnjkgsnngnnjgs jnn gf joo gjo n " />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
-
-        android:id="@+id/postLowerPart"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginTop="14dp"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="24dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <ImageView
-
-                android:id="@+id/post_upvote"
+                android:id="@+id/postUpVote"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/ic_arrow_upward_black_48dp" />
+                android:src="@drawable/upvote" />
 
             <TextView
-                android:id="@+id/post_votes_count"
+                android:id="@+id/postVotesCount"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-
                 android:text="5k" />
 
             <ImageView
-                android:id="@+id/post_downvote"
+
+                android:id="@+id/postDownVote"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/ic_arrow_downward_black_48dp" />
+                android:src="@drawable/downvote" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/post_comment"
+            android:id="@+id/postComment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:layout_weight="1">
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/ic_mode_comment_black_48dp" />
+                android:src="@drawable/comment" />
 
             <TextView
-                android:id="@+id/post_comment_count"
+                android:id="@+id/postCommentsCount"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="22.2k" />
@@ -125,20 +125,25 @@
 
 
         <LinearLayout
-            android:id="@+id/post_share"
+            android:id="@+id/postShare"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1">
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/baseline_reply_black_48dp" />
+                android:src="@drawable/share" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="Share" />
@@ -147,11 +152,5 @@
 
 
     </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#c0c0c0" />
-
 
 </LinearLayout>
