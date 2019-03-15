@@ -5,7 +5,11 @@ package com.example.android.minireddit.datastructure;
  */
 public class Post {
 
+    /**
+     * Post ID
+     */
 
+    int postId;
     /**
      * The Post logo url.
      */
@@ -47,9 +51,12 @@ public class Post {
      */
     int voteStatus;
 
+
+
     /**
      * Instantiates a new Post.
      *
+     * @param postId           the id of the post
      * @param postLogoUrl      the post logo url
      * @param postUser         the post user
      * @param postInfo         the post info
@@ -61,7 +68,8 @@ public class Post {
      * @param hidden           hidden
      * @param voteStatus       the vote status
      */
-    public Post(String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden, int voteStatus) {
+    public Post(int postId,String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden, int voteStatus) {
+        this.postId=postId;
         this.postLogoUrl = postLogoUrl;
         this.postUser = postUser;
         this.postInfo = postInfo;
@@ -72,6 +80,24 @@ public class Post {
         this.saved = saved;
         this.hidden = hidden;
         this.voteStatus = voteStatus;
+    }
+
+    /**
+     * Gets post id.
+     *
+     * @return the post id
+     */
+    public int getPostId() {
+        return postId;
+    }
+
+    /**
+     * Sets post id.
+     *
+     * @param postId the post id
+     */
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
 
