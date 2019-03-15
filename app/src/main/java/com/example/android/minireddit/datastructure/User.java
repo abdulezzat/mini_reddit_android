@@ -54,7 +54,7 @@ public class User {
     /**
      * Whether the User was deleted or not.
      */
-    private boolean Deleted;
+    private boolean deleted;
 
     /**
      * The List of UserName's of users who follow the User.
@@ -103,9 +103,7 @@ public class User {
         about=a;
         karma=k;
         cakeDay=cD;
-        Deleted=d;
-        getFollowersNo();
-        getFollowingNo();
+        deleted=d;
     }
 
     /**
@@ -121,33 +119,137 @@ public class User {
         return new User(uN, uN, "", eM, pW1, "", 0,new Date() , false);
     }
 
+
+    public void setUserName(String uN){
+        userName=uN;
+    }
+
+    public String getUserName() { return userName; }
+
+    public void setDisplayName (String dN) {
+        displayName=dN;
+    }
+
+    public String getDisplayName() { return displayName; }
+
+    public void setProfileImage(String pI) {
+        profileImage=pI;
+    }
+
+    public String getProfileImage() { return profileImage; }
+
+    public void setEmail(String eM) {
+        email=eM;
+    }
+
+    public String getEmail() { return getEmail(); }
+
+    public void setPassword(String pW) {
+        password=pW;
+    }
+
+    public String getPassword() { return password; }
+
+    public void setAbout (String a) {
+        about=a;
+    }
+
+    public String getAbout() { return about; }
+
     /**
-     * sends a request to server to get user's followers.
+     * validates that the entered karma is postive and then sets it.
+     * @param k The New Karma
      */
-    private void getFollowers() {
-        // TODO: send a request to server to get the followers.
+    public void setKarma(int k) {
+        karma=(k>=0)?k:0;
+    }
+
+    public int getKarma() { return karma; }
+
+    public void setCakeDay(Date cD) {
+        cakeDay=cD;
+    }
+
+    public Date getCakeDay() { return cakeDay; }
+
+    public void setDeleted(boolean d) {
+        deleted=d;
+    }
+
+    public boolean isDeleted() { return deleted; }
+
+    /**
+     * clears the followers Array and adds them from scratch.
+     * @param followersArr the followers to add.
+     */
+    public void setFollowers(ArrayList<String> followersArr) {
+        followers.clear();
+        for (int i=0;i<followersArr.size();i++) {
+            followers.add(followersArr.get(i));
+        }
+        updateFollowersNo();
     }
 
     /**
-     * @return number of Users who follow the user.
+     * Adds New followers to the existing ones.
+     * @param newFollowers the followers to add.
+     */
+    public void addFollowers(ArrayList<String> newFollowers) {
+        for (int i=0;i<newFollowers.size();i++) {
+            followers.add(newFollowers.get(i));
+        }
+        updateFollowersNo();
+    }
+
+    public ArrayList<String> getfollowers() { return followers; }
+
+    private void updateFollowersNo() { followersNo=followers.size(); }
+
+    /**
+     * Updates the followers Number and returns it.
+     *
+     * @return Number of the followers.
      */
     public int getFollowersNo() {
-        getFollowers();
-        return followers.size();
+        updateFollowersNo();
+        return followersNo;
     }
 
     /**
-     * sends a request to server to get the users that the user is following.
+     * Clears the following list and then add them from scratch.
+     * @param followingArr the users to add to the following list.
      */
-    private void getFollowing() {
-        // TODO: send a request to server to get the following.
+    public void setFollowing(ArrayList<String> followingArr) {
+        following.clear();
+        for(int i=0;i<followingArr.size();i++) {
+            following.add(followingArr.get(i));
+        }
+        updateFollowingNo();
     }
 
     /**
+     * adds new Users to the following list.
+     * @param followingArr the users to add to the following list.
+     */
+    public void addFollowing(ArrayList<String> followingArr) {
+        for(int i=0;i<followingArr.size();i++) {
+            following.add(followingArr.get(i));
+        }
+        updateFollowingNo();
+    }
+
+    public ArrayList<String> getFollowing() { return following; }
+
+    private void updateFollowingNo() { followingNo=following.size(); }
+
+    /**
+     * Update the Number of following and returns it.
+     * 
      * @return number of Users that the user is following.
      */
     public int getFollowingNo() {
-        getFollowing();
-        return following.size();
+        updateFollowingNo();
+        return followingNo;
     }
+
 }
