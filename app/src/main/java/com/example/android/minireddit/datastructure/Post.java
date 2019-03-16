@@ -26,6 +26,11 @@ public class Post {
      * The Post Text Content.
      */
     String postText;
+
+    /**
+     * The Url of The YouTube embedded Video in The Post.
+     */
+    String postVideoUrl;
     /**
      * The Post image url.
      */
@@ -68,13 +73,14 @@ public class Post {
      * @param hidden           hidden
      * @param voteStatus       the vote status
      */
-    public Post(int postId,String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden, int voteStatus) {
+    public Post(int postId,String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl,String postVideoUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden, int voteStatus) {
         this.postId=postId;
         this.postLogoUrl = postLogoUrl;
         this.postUser = postUser;
         this.postInfo = postInfo;
         this.postText = postText;
         this.postImageUrl = postImageUrl;
+        this.postVideoUrl=postVideoUrl;
         this.postLikeCount = postLikeCount;
         this.postCommentCount = postCommentCount;
         this.saved = saved;
@@ -279,5 +285,23 @@ public class Post {
      */
     public void setVoteStatus(int voteStatus) {
         this.voteStatus = voteStatus;
+    }
+
+    /**
+     * Gets post video url.
+     *
+     * @return the post video url
+     */
+    public String getPostVideoUrl() {
+        return postVideoUrl;
+    }
+
+    /**
+     * Sets post video url.
+     *
+     * @param postVideoUrl the post video url
+     */
+    public void setPostVideoUrl(String postVideoUrl) {
+        this.postVideoUrl = postVideoUrl;
     }
 }
