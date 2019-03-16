@@ -24,7 +24,7 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/PostSource"
+            android:id="@+id/postSource"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="r/community" />
@@ -35,7 +35,7 @@
             android:text=" • " />
 
         <TextView
-            android:id="@+id/PostDate"
+            android:id="@+id/commentDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2mo" />
@@ -52,16 +52,14 @@
             android:text="1" />
 
         <ImageView
-
-            android:id="@+id/commentVote"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:src="@drawable/ic_arrow_upward_black_48dp" />
+            android:src="@drawable/upvote" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/CommentText"
+        android:id="@+id/commentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
