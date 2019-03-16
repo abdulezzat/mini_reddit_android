@@ -135,7 +135,11 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             youtubeWebView.setVisibility(View.VISIBLE);
             String item = "http://www.youtube.com/embed/";
             String url= currentPost.getPostVideoUrl();
-            url=url.substring(url.indexOf("v=") + 2,url.indexOf('&'));
+            if(url.contains("&")) {
+                url = url.substring(url.indexOf("v=") + 2, url.indexOf('&'));
+            }
+            else
+                url=url.substring(url.indexOf("v=")+2);
             item+=url;
 
         youtubeWebView.setWebViewClient(new WebViewClient() {

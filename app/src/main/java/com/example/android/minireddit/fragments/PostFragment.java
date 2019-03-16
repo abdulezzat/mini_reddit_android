@@ -3,6 +3,7 @@ package com.example.android.minireddit.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class PostFragment extends Fragment {
+     ArrayList<Post> posts;
 
 
     public PostFragment() {
@@ -38,18 +40,40 @@ public class PostFragment extends Fragment {
         View rootView= inflater.inflate(R.layout.fragment_post, container, false);
         FrameLayout frameLayout=(FrameLayout)rootView.findViewById(R.id.framelayout);
         ImageView expand=(ImageView) rootView.findViewById(R.id.imageforanimation);
-        boolean debug=true;
+        final SwipeRefreshLayout refreshLayout=(SwipeRefreshLayout)rootView.findViewById(R.id.swipe);
+
+        final boolean debug=true;
         DependentClass restClient = null;
         if (debug) {
             restClient = new DependentClass(new MockRestService());
         } else {
             restClient = new DependentClass(new RestService());
         }
-        final ArrayList<Post> posts=restClient.getListOfTrendingPosts();
+        posts=restClient.getListOfTrendingPosts();
+
         final PosterAdapter adapter= new PosterAdapter(this.getContext(),posts,expand,frameLayout);
         final ListView listView =(ListView) rootView.findViewById (R.id.postsListView);
         listView.setAdapter(adapter);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                DependentClass restClient = null;
+                if (debug) {
+                    restClient = new DependentClass(new MockRestService());
+                } else {
+                    restClient = new DependentClass(new RestService());
+                }
+                posts=restClient.getListOfTrendingPosts();
+                adapter.clear();
+                adapter.addAll(posts);
+                refreshLayout.setRefreshing(false);
+
+            }
+        });
+
         return rootView;
     }
+
+
 
 }
