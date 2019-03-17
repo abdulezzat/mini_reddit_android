@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by Aly on 3/15/2019.
  */
 
-public class MockRestService implements Requests {
+public class MockRestService implements com.example.android.minireddit.networking.Requests {
 
     @Override
     public ArrayList<Post> getTrendingPost() {

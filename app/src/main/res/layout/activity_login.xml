@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_above="@id/email_sign_in_button"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/viewColor" />
 
         <Button
             android:id="@+id/email_sign_in_button"

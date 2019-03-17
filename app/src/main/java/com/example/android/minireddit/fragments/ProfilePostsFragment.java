@@ -1,5 +1,6 @@
 package com.example.android.minireddit.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,9 +30,9 @@ public class ProfilePostsFragment extends Fragment {
 
         ArrayList<Post> posts = new ArrayList<Post>();
 
-        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily. 4h ago", "Post Title", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg",null, 15, 200, false, false, 0));
-        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily. 4h ago", "An Example of upVotedPost", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg",null, 15, 200, false, false, 1));
-        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily. 4h ago", "downVoted Post", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg",null, 15, 200, false, false, -1));
+        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "Post Title", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, 0));
+        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "An Example of upVotedPost", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, 1));
+        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "downVoted Post", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, -1));
 
         ProfilePostsAdapter adapter = new ProfilePostsAdapter(this.getContext(), posts);
         ListView listView = (ListView) rootView.findViewById(R.id.ProfilePostsListView);
@@ -39,4 +40,21 @@ public class ProfilePostsFragment extends Fragment {
 
         return rootView;
     }
+
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
 }

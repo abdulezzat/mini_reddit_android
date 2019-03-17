@@ -2,6 +2,7 @@ package com.example.android.minireddit.networking;
 
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.networking.Requests;
 
 import org.json.JSONArray;
 import org.json.JSONException;
