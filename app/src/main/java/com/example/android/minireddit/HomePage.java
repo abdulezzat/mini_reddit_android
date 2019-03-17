@@ -1,12 +1,8 @@
 package com.example.android.minireddit;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.ActionBar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,23 +10,37 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
+import com.example.android.minireddit.adapters.ViewPagerAdapter;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
 
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Toolbar toolbar;
+    private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
+    private TabLayout tabLayout;
+    private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Clear focus
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        searchView =(SearchView)findViewById(R.id.search_bar);
+        searchView.clearFocus();
+
+        //Open navigation view when image get clicked
         ImageView userImage = (ImageView) findViewById(R.id.user_image);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -63,9 +73,15 @@ public class HomePage extends AppCompatActivity
         bnve.enableAnimation(true);
         bnve.enableShiftingMode(false);
         bnve.enableItemShiftingMode(false);
-        //bnve.setIconSize(30, 30);
-        //bnve.setTextSize(0);
         bnve.setTextVisibility(false);
+
+        //ViewPager setting
+        viewPager =(ViewPager)findViewById(R.id.pager);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+
+        tabLayout = (TabLayout)findViewById(R.id.tab);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
