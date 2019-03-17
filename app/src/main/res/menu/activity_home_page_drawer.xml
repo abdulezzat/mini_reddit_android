@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <item
+        android:id="@+id/nav_my_profile"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_my_profile"
+        />
+    <item
+        android:id="@+id/nav_reddit_coin"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_reddit_coins"
+        />
+    <item
+        android:id="@+id/nav_reddit_premium"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_reddit_premium"
+        />
+    <item
+        android:id="@+id/nav_my_saved"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_my_saved"
+        />
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_Histroy"
+        />
+
+
 
 </menu>
