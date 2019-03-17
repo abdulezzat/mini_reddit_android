@@ -1,4 +1,4 @@
-package com.example.android.minireddit.Networking;
+package com.example.android.minireddit.networking;
 
 import com.example.android.minireddit.datastructure.Post;
 
@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 
 public class DependentClass {
-    private final Requests mSupplier;
+    private final com.example.android.minireddit.networking.Requests mSupplier;
 
-    public DependentClass(Requests dataSupplier) {
+    public DependentClass(com.example.android.minireddit.networking.Requests dataSupplier) {
         mSupplier = dataSupplier;
     }
 
