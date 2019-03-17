@@ -6,4 +6,8 @@
     <color name="backGroung">#F5F5F5</color>
     <color name="black">#000000</color>
     <color name="buttonColor">#0288D1</color>
+    <color name="separatorsColor">#edeff1</color>
+    <color name="grayIconsColor">#a4a7a8</color>
+    <color name="activeGrayIconColor">#373c3f</color>
+    <color name="iconsColor">#24a0ed</color>
 </resources>
