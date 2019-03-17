@@ -1,4 +1,4 @@
-package com.example.android.minireddit.Networking;
+package com.example.android.minireddit.networking;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
