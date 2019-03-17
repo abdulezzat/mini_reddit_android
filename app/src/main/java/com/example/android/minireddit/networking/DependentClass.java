@@ -1,4 +1,4 @@
-package com.example.android.minireddit.Networking;
+package com.example.android.minireddit.networking;
 
 import com.example.android.minireddit.datastructure.Post;
 
@@ -18,5 +18,8 @@ public class DependentClass {
     public ArrayList<Post> getListOfTrendingPosts() {
 
       return mSupplier.getTrendingPost();
+    }
+    public boolean votePost(int postId){
+        return mSupplier.votePost(postId);
     }
 }

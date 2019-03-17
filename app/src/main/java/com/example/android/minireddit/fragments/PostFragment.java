@@ -11,12 +11,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.android.minireddit.Networking.DependentClass;
-import com.example.android.minireddit.Networking.MockRestService;
-import com.example.android.minireddit.Networking.RestService;
+import com.example.android.minireddit.networking.DependentClass;
+import com.example.android.minireddit.networking.MockRestService;
+import com.example.android.minireddit.networking.RestService;
+
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.Constants;
+
 
 import java.util.ArrayList;
 
@@ -42,7 +45,7 @@ public class PostFragment extends Fragment {
         ImageView expand=(ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout=(SwipeRefreshLayout)rootView.findViewById(R.id.swipe);
 
-        final boolean debug=true;
+        final boolean debug=Constants.debug;
         DependentClass restClient = null;
         if (debug) {
             restClient = new DependentClass(new MockRestService());
@@ -51,7 +54,7 @@ public class PostFragment extends Fragment {
         }
         posts=restClient.getListOfTrendingPosts();
 
-        final PosterAdapter adapter= new PosterAdapter(this.getContext(),posts,expand,frameLayout);
+        final PosterAdapter adapter= new PosterAdapter(this.getContext(),posts,expand,frameLayout,restClient);
         final ListView listView =(ListView) rootView.findViewById (R.id.postsListView);
         listView.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

@@ -1,4 +1,4 @@
-package com.example.android.minireddit.Networking;
+package com.example.android.minireddit.networking;
 
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Post;
@@ -29,5 +29,10 @@ public class MockRestService implements Requests {
 
 
         return posts;
+    }
+
+    @Override
+    public boolean votePost(int postId) {
+        return true;
     }
 }

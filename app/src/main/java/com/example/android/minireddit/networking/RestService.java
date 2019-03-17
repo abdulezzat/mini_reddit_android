@@ -1,4 +1,4 @@
-package com.example.android.minireddit.Networking;
+package com.example.android.minireddit.networking;
 
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Post;
@@ -50,5 +50,20 @@ public class RestService implements Requests {
         }
 
         return posts;
+    }
+
+    @Override
+    public boolean votePost(int postId) {
+        String JSON="{    \"success\": \"true\"}";
+        boolean output=false;
+        try {
+            JSONObject jsonObject = new JSONObject(JSON);
+            output=jsonObject.getBoolean("success");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return output;
+
     }
 }

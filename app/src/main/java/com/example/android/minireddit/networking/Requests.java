@@ -1,4 +1,4 @@
-package com.example.android.minireddit.Networking;
+package com.example.android.minireddit.networking;
 
 import com.example.android.minireddit.datastructure.Post;
 
@@ -10,4 +10,7 @@ import java.util.ArrayList;
 
 public interface Requests {
      ArrayList<Post>  getTrendingPost();
+     boolean votePost(int postId);
+
+
 }
