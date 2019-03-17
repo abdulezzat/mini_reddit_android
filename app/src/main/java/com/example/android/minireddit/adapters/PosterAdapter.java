@@ -30,18 +30,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.PopupMenu;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import java.lang.reflect.Method;
 
-import com.example.android.minireddit.Networking.DownloadImageTask;
+import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.R;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 

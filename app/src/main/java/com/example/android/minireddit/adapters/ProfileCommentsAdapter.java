@@ -15,7 +15,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.minireddit.Networking.DownloadImageTask;
+import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Post;
 

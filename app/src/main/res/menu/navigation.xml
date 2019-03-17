@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/navigation_new_post"
+        android:icon="@drawable/write"
+        android:title="@string/title_new_post" />
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/chat"
+        android:title="@string/title_chat" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/message"
+        android:title="@string/title_notifications" />
+
+</menu>

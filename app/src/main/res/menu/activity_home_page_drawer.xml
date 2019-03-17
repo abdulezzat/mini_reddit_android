@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+
+    <item
+        android:id="@+id/nav_my_profile"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_my_profile"
+        />
+    <item
+        android:id="@+id/nav_reddit_coin"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_reddit_coins"
+        />
+    <item
+        android:id="@+id/nav_reddit_premium"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_reddit_premium"
+        />
+    <item
+        android:id="@+id/nav_my_saved"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_my_saved"
+        />
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/reddit_navegation_bar"
+        android:title="@string/prompt_Histroy"
+        />
+
+
+
+</menu>
