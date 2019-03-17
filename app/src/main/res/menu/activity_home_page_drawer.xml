@@ -7,27 +7,27 @@
 
     <item
         android:id="@+id/nav_my_profile"
-        android:icon="@drawable/reddit_navegation_bar"
+        android:icon="@drawable/profile"
         android:title="@string/prompt_my_profile"
         />
     <item
         android:id="@+id/nav_reddit_coin"
-        android:icon="@drawable/reddit_navegation_bar"
+        android:icon="@drawable/coin"
         android:title="@string/prompt_reddit_coins"
         />
     <item
         android:id="@+id/nav_reddit_premium"
-        android:icon="@drawable/reddit_navegation_bar"
+        android:icon="@drawable/shield"
         android:title="@string/prompt_reddit_premium"
         />
     <item
         android:id="@+id/nav_my_saved"
-        android:icon="@drawable/reddit_navegation_bar"
+        android:icon="@drawable/saved"
         android:title="@string/prompt_my_saved"
         />
     <item
         android:id="@+id/nav_history"
-        android:icon="@drawable/reddit_navegation_bar"
+        android:icon="@drawable/history"
         android:title="@string/prompt_Histroy"
         />
 

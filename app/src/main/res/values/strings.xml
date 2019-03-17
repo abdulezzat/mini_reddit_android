@@ -41,4 +41,5 @@
     <string name="prompt_reddit_premium">Reddit Premium</string>
     <string name="prompt_my_saved">Saved</string>
     <string name="prompt_Histroy">History</string>
+    <string name="prompt_settings">Settings</string>
 </resources>

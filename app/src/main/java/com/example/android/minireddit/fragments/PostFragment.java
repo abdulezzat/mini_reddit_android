@@ -11,9 +11,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.android.minireddit.Networking.DependentClass;
-import com.example.android.minireddit.Networking.MockRestService;
-import com.example.android.minireddit.Networking.RestService;
+import com.example.android.minireddit.networking.DependentClass;
+import com.example.android.minireddit.networking.MockRestService;
+import com.example.android.minireddit.networking.RestService;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.R;

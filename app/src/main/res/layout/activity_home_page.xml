@@ -21,6 +21,44 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home_page"
         app:menu="@menu/activity_home_page_drawer"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/setting_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/settings"
+                android:paddingBottom="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                />
+            <TextView
+                android:id="@+id/setting"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/prompt_settings"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/setting_image"
+                android:textColor="@color/black"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/moon"
+                android:layout_alignParentRight="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                />
+        </RelativeLayout>
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
