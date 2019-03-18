@@ -10,4 +10,7 @@ import java.util.ArrayList;
 
 public interface Requests {
      ArrayList<Post>  getTrendingPost();
+     boolean votePost(int postId);
+
+
 }

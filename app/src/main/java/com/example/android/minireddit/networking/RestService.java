@@ -52,4 +52,19 @@ public class RestService implements Requests {
 
         return posts;
     }
+
+    @Override
+    public boolean votePost(int postId) {
+        String JSON="{    \"success\": \"true\"}";
+        boolean output=false;
+        try {
+            JSONObject jsonObject = new JSONObject(JSON);
+            output=jsonObject.getBoolean("success");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return output;
+
+    }
 }

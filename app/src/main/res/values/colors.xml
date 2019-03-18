@@ -2,10 +2,10 @@
 <resources>
     <color name="colorPrimary">#FAFAFA</color>
     <color name="colorPrimaryDark">#616161</color>
-    <color name="colorAccent">#2196F3</color>
+    <color name="colorAccent">#24a0ed</color>
     <color name="backGroung">#F5F5F5</color>
     <color name="black">#000000</color>
-    <color name="buttonColor">#0288D1</color>
+    <color name="buttonColor">#24a0ed</color>
     <color name="separatorsColor">#edeff1</color>
     <color name="grayIconsColor">#a4a7a8</color>
     <color name="activeGrayIconColor">#373c3f</color>

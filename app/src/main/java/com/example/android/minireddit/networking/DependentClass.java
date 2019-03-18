@@ -19,4 +19,7 @@ public class DependentClass {
 
       return mSupplier.getTrendingPost();
     }
+    public boolean votePost(int postId){
+        return mSupplier.votePost(postId);
+    }
 }

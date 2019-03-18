@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="fragments.ProfileAboutFragment">
 
     <LinearLayout
@@ -20,16 +19,17 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/karma"
-                android:layout_marginRight="10dp"/>
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/karma" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/karma"
@@ -37,12 +37,13 @@
                     android:layout_height="wrap_content"
                     android:text="409"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Karma" />
+                    android:text="Karma"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -50,8 +51,8 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
             android:background="@color/separatorsColor" />
 
@@ -66,17 +67,17 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/cake"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/cake" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_vertical">
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/redditAge"
@@ -84,38 +85,45 @@
                         android:layout_height="wrap_content"
                         android:text="2m 17d"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Reddit Age" />
+                        android:text="Reddit Age"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/userAbout"
-        android:text="user about should appear here."
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"/>
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/msg">
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="10dp"
+        android:text="Official account of KOKOWAWA. News that's meant to be shared."
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/msg"/>
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/msg" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Send a message"
-            android:layout_gravity="center"/>
+            android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>

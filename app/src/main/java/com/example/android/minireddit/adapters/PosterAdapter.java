@@ -34,6 +34,7 @@ import java.lang.reflect.Field;
 
 import java.lang.reflect.Method;
 
+import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.R;
@@ -46,10 +47,13 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     private int shortAnimationDuration;
     ImageView expanded_image;
     FrameLayout container;
-    public PosterAdapter(@NonNull Context context, @NonNull List<Post> objects, ImageView expand, FrameLayout container) {
+    DependentClass restClient;
+
+    public PosterAdapter(@NonNull Context context, @NonNull List<Post> objects, ImageView expand, FrameLayout container, DependentClass restClient) {
         super(context, 0, objects);
-        expanded_image=expand;
-        this.container=container;
+        expanded_image = expand;
+        this.container = container;
+        this.restClient = restClient;
 
         shortAnimationDuration = getContext().getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
@@ -58,16 +62,15 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     }
 
 
-
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
 
         View ListItemView = convertView;
         if (ListItemView == null) {//for making new List_item if there is no main one to change its data
             ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.post_list_item, parent, false);
         }
-        Post currentPost = getItem(position);// getting the current word in the arraylist
+        final Post currentPost = getItem(position);// getting the current word in the arraylist
 
 
         ImageView postLogo = (ImageView) ListItemView.findViewById(R.id.postLogo);
@@ -102,14 +105,15 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             postImage.setVisibility(View.GONE);
         }
 
-        TextView postlikeCount = (TextView) ListItemView.findViewById(R.id.postLikeCount);
+        final TextView postlikeCount = (TextView) ListItemView.findViewById(R.id.postLikeCount);
         postlikeCount.setText(String.valueOf(currentPost.getPostLikeCount()));
 
         TextView postCommentCount = (TextView) ListItemView.findViewById(R.id.postCommentCount);
         postCommentCount.setText(String.valueOf(currentPost.getPostCommentCount()));
 
-        ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.postLike);
-        ImageView postDownVote = (ImageView) ListItemView.findViewById(R.id.postDislike);
+        final ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.postLike);
+        final ImageView postDownVote = (ImageView) ListItemView.findViewById(R.id.postDislike);
+
         switch (currentPost.getVoteStatus()) {
 
             case 1:
@@ -126,37 +130,89 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                 break;
 
         }
-        WebView  youtubeWebView = (WebView) ListItemView.findViewById(R.id.youtube_web_view);
-        if (currentPost.getPostVideoUrl() != null) {
-            youtubeWebView.setVisibility(View.VISIBLE);
-            String item = "http://www.youtube.com/embed/";
-            String url= currentPost.getPostVideoUrl();
-            if(url.contains("&")) {
-                url = url.substring(url.indexOf("v=") + 2, url.indexOf('&'));
-            }
-            else
-                url=url.substring(url.indexOf("v=")+2);
-            item+=url;
-
-        youtubeWebView.setWebViewClient(new WebViewClient() {
+        postUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
+            public void onClick(View v) {
+                if (restClient.votePost(currentPost.getPostId())) {
+                    if (currentPost.getVoteStatus() == 0) {
+                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_clc_48dp);
+                        currentPost.setVoteStatus(1);
+                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
+                        //todo send request to upvote
+                    } else if (currentPost.getVoteStatus() == 1) {
+
+                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_48dp);
+                        currentPost.setVoteStatus(0);
+                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
+                        //todo send request to cancel upvote
+                    } else {
+                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_48dp);
+                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_clc_48dp);
+                        currentPost.setVoteStatus(1);
+                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 2);
+                    }
+                    postlikeCount.setText(String.valueOf(currentPost.getPostLikeCount()));
+                } else {
+                    Toast.makeText(getContext(), "Failed To Vote", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+        postDownVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (restClient.votePost(currentPost.getPostId())) {
+                    if (currentPost.getVoteStatus() == 0) {
+                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_clc_48dp);
+                        currentPost.setVoteStatus(-1);
+                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
+                    } else if (currentPost.getVoteStatus() == 1) {
+                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_clc_48dp);
+                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_48dp);
+                        currentPost.setVoteStatus(-1);
+                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 2);
+                    } else {
+                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_48dp);
+                        currentPost.setVoteStatus(0);
+                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
+                    }
+                    postlikeCount.setText(String.valueOf(currentPost.getPostLikeCount()));
+                }
+                else{
+                    Toast.makeText(getContext(),"Failed To Vote",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        WebSettings webSettings = youtubeWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUseWideViewPort(true);
+        WebView youtubeWebView = (WebView) ListItemView.findViewById(R.id.youtube_web_view);
+        if (currentPost.getPostVideoUrl() != null) {
+            youtubeWebView.setVisibility(View.VISIBLE);
+            String item = "http://www.youtube.com/embed/";
+            String url = currentPost.getPostVideoUrl();
+            if (url.contains("&")) {
+                url = url.substring(url.indexOf("v=") + 2, url.indexOf('&'));
+            } else
+                url = url.substring(url.indexOf("v=") + 2);
+            item += url;
 
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setAppCacheEnabled(true);
-        webSettings.setSaveFormData(true);
+            youtubeWebView.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    return false;
+                }
+            });
 
-        youtubeWebView.loadUrl(item);
-    }
-    else{
+            WebSettings webSettings = youtubeWebView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+            webSettings.setLoadWithOverviewMode(true);
+            webSettings.setUseWideViewPort(true);
+
+            webSettings.setBuiltInZoomControls(true);
+            webSettings.setAppCacheEnabled(true);
+            webSettings.setSaveFormData(true);
+
+            youtubeWebView.loadUrl(item);
+        } else {
             youtubeWebView.setVisibility(View.GONE);
 
         }
@@ -220,7 +276,6 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     }
 
 
-
     protected boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -248,6 +303,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             e.printStackTrace();
         }
     }
+
     private void zoomImageFromThumb(final View thumbView, Drawable imageResId) {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
@@ -356,7 +412,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                         .ofFloat(expandedImageView, View.X, startBounds.left))
                         .with(ObjectAnimator
                                 .ofFloat(expandedImageView,
-                                        View.Y,startBounds.top))
+                                        View.Y, startBounds.top))
                         .with(ObjectAnimator
                                 .ofFloat(expandedImageView,
                                         View.SCALE_X, startScaleFinal))
