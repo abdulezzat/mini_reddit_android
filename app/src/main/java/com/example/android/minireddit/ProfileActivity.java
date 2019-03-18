@@ -11,7 +11,7 @@ import com.example.android.minireddit.fragments.ProfileAboutFragment;
 import com.example.android.minireddit.fragments.ProfileCommentsFragment;
 import com.example.android.minireddit.fragments.ProfilePostsFragment;
 
-public class ProfileActivity extends AppCompatActivity implements ProfilePostsFragment.OnFragmentInteractionListener, ProfileCommentsFragment.OnFragmentInteractionListener, ProfileAboutFragment.OnFragmentInteractionListener {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,36 +22,12 @@ public class ProfileActivity extends AppCompatActivity implements ProfilePostsFr
         tabLayout.addTab(tabLayout.newTab().setText("Posts"));
         tabLayout.addTab(tabLayout.newTab().setText("Comments"));
         tabLayout.addTab(tabLayout.newTab().setText("About"));
-        tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.profileViewPager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.profileViewPager);
 
         ProfilePagerAdapter profilePagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(profilePagerAdapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
+        tabLayout.setupWithViewPager(viewPager);
     }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-    }
-
 
 }
