@@ -1,5 +1,6 @@
 package com.example.android.minireddit.networking;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.datastructure.Post;
 
 import java.util.ArrayList;
@@ -10,16 +11,28 @@ import java.util.ArrayList;
 
 public class DependentClass {
     private final com.example.android.minireddit.networking.Requests mSupplier;
+    private static final DependentClass restClient = new DependentClass();
 
-    public DependentClass(com.example.android.minireddit.networking.Requests dataSupplier) {
-        mSupplier = dataSupplier;
+
+    private DependentClass() {
+        if (Constants.debug) {
+            mSupplier = new MockRestService();
+        } else {
+            mSupplier = new RestService();
+        }
+
+    }
+
+    public static DependentClass getInstance() {
+        return restClient;
     }
 
     public ArrayList<Post> getListOfTrendingPosts() {
 
-      return mSupplier.getTrendingPost();
+        return mSupplier.getTrendingPost();
     }
-    public boolean votePost(int postId){
+
+    public boolean votePost(int postId) {
         return mSupplier.votePost(postId);
     }
 }
