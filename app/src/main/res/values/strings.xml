@@ -43,4 +43,6 @@
     <string name="prompt_Histroy">History</string>
     <string name="prompt_settings">Settings</string>
     <string name="prompt_search_view"><font size ="14">Search</font></string>
+    <string name="sign_up_in_message">Sign up to upvote the best contact, customize your feed, share your interests, and more!</string>
+    <string name="sign_up_log_in">Sign up / Log in</string>
 </resources>

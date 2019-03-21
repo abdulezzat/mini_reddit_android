@@ -1,5 +1,6 @@
 package com.example.android.minireddit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.android.minireddit.adapters.ViewPagerAdapter;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
@@ -27,6 +29,7 @@ public class HomePage extends AppCompatActivity
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
     private SearchView searchView;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,19 @@ public class HomePage extends AppCompatActivity
         tabLayout = (TabLayout)findViewById(R.id.tab);
         tabLayout.setupWithViewPager(viewPager);
 
+        //Update the navigation view if the user is anonymous
+        if(Constants.user==null){
+            navigationView.getMenu().getItem(0).setVisible(false);
+            navigationView.getMenu().getItem(1).setVisible(false);
+            navigationView.getMenu().getItem(2).setVisible(false);
+            navigationView.getMenu().getItem(3).setVisible(false);
+            navigationView.getMenu().getItem(4).setVisible(false);
+            navigationView.getMenu().getItem(5).setVisible(true);
+            View header = getLayoutInflater().inflate(R.layout.nav_header_home_page_anonymous,null);
+            navigationView.addHeaderView(header);
+            navigationView.removeHeaderView(navigationView.getHeaderView(0));
+        }
+
     }
 
     @Override
@@ -118,6 +134,20 @@ public class HomePage extends AppCompatActivity
 
         if (id == R.id.nav_my_profile) {
             // Handle the camera action
+        }else if (id == R.id.nav_my_profile){
+
+        }else if (id == R.id.nav_reddit_coin){
+            Toast.makeText(this,"Not available yet!",Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.nav_reddit_premium){
+            Toast.makeText(this,"Not available yet!",Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.nav_my_saved){
+
+        }else if (id == R.id.nav_history){
+
+        }else if (id == R.id.nav_sign_up_log_in){
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
