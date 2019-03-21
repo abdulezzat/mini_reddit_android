@@ -42,19 +42,19 @@ public class ProfileCommentsAdapter extends ArrayAdapter<Post> {
         }
         //Comment currentComment = getItem(position); // getting the current Comment in the ArrayList
 
-        TextView postTitle = (TextView) ListItemView.findViewById(R.id.postTitle);
+        TextView postTitle = (TextView) ListItemView.findViewById(R.id.post_title);
         //TODO: Set Title from currentComment.
 
-        TextView postSource = (TextView) ListItemView.findViewById(R.id.postSource);
+        TextView postSource = (TextView) ListItemView.findViewById(R.id.post_source);
         //TODO: Set Source from currentComment.
 
-        TextView commentDate = (TextView) ListItemView.findViewById(R.id.commentDate);
+        TextView commentDate = (TextView) ListItemView.findViewById(R.id.comment_date);
         //TODO: Set Date from currentComment.
 
-        TextView commentVoteCount = (TextView) ListItemView.findViewById(R.id.commentVoteCount);
+        TextView commentVoteCount = (TextView) ListItemView.findViewById(R.id.comment_vote_count);
         //commentVotesCount.setText(String.valueOf(currentComment.getCommentLikeCount()));
 
-        TextView commentText = (TextView) ListItemView.findViewById(R.id.commentText);
+        TextView commentText = (TextView) ListItemView.findViewById(R.id.comment_text);
         //TODO: Set Comment Text from currentComment.
 
         return ListItemView;

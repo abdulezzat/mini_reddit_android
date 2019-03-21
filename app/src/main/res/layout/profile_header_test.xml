@@ -22,8 +22,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="25dp">
 
             <TextView
@@ -48,9 +48,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:text="EDIT"
+                android:clickable="true"
                 android:textColor="@color/iconsColor" />
 
         </RelativeLayout>

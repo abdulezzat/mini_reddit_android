@@ -47,7 +47,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginBottom="5dp"
                         android:text="karashily"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
@@ -68,9 +67,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
+                        android:paddingLeft="30dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="30dp"
                         android:text="EDIT"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground"
                         android:textColor="@color/iconsColor"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -119,16 +123,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" • "
+                        android:id="@+id/dot_before_followers"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/followers"
+                        android:id="@+id/followers_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 followers"
                         android:textSize="12sp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="user about"
+                    android:id="@+id/user_about"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"/>
 
             </LinearLayout>
 
@@ -185,14 +201,14 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:layout_collapseMode="pin"
-            app:tabGravity="center"
+            app:tabGravity="fill"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/black"
             app:tabTextAppearance="@style/TabTextStyle"
@@ -203,7 +219,7 @@
 
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/profileViewPager"
+        android:id="@+id/profile_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:nestedScrollingEnabled="true"

@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.ProfileCommentsAdapter;
+import com.example.android.minireddit.datastructure.User;
 
 import org.w3c.dom.Comment;
 
@@ -20,6 +21,8 @@ import java.util.ArrayList;
  */
 
 public class ProfileCommentsFragment extends Fragment {
+
+    User mUser;
 
     public ProfileCommentsFragment() {
     }
@@ -34,25 +37,15 @@ public class ProfileCommentsFragment extends Fragment {
         //comments.add( );
 
         //ProfileCommentsAdapter adapter = new ProfileCommentsAdapter(this.getContext(), comments);
-        ListView listView = (ListView) rootView.findViewById(R.id.ProfileCommentsListView);
+        ListView listView = (ListView) rootView.findViewById(R.id.profile_comments_listview);
         //listView.setAdapter(adapter);
 
         return rootView;
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    public void setUser(User user)
+    {
+        mUser=user;
     }
+
 }
