@@ -67,4 +67,9 @@ public class RestService implements Requests {
         return output;
 
     }
+
+    @Override
+    public boolean logIn(String userName, String password) {
+        return false;
+    }
 }

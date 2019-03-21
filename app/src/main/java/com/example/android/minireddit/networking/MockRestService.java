@@ -35,4 +35,13 @@ public class MockRestService implements com.example.android.minireddit.networkin
     public boolean votePost(int postId) {
         return true;
     }
+
+    @Override
+    public boolean logIn(String userName, String password) {
+
+        if(userName.equals("admin")&&password.equals("admin")) return true;
+
+        return false;
+    }
+
 }

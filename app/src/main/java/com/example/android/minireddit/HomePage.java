@@ -1,7 +1,10 @@
 package com.example.android.minireddit;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -30,17 +34,42 @@ public class HomePage extends AppCompatActivity
     private TabLayout tabLayout;
     private SearchView searchView;
     private NavigationView navigationView;
+    private View JustView;
+    private ImageView JustImage;
+    private RelativeLayout RootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+
+        //Set my custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Clear focus
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(HomePage.this);
+
+        //ViewPager setting
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout = (TabLayout) findViewById(R.id.tab);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+        //Start motion configuration
+
+        BottomNavigationViewEx bnve = (BottomNavigationViewEx) findViewById(R.id.navigation);
+
+        bnve.enableAnimation(true);
+        bnve.enableShiftingMode(false);
+        bnve.enableItemShiftingMode(false);
+        bnve.setTextVisibility(false);
+
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        searchView =(SearchView)findViewById(R.id.search_bar);
+        searchView = (SearchView) findViewById(R.id.search_bar);
         searchView.clearFocus();
 
         //Open navigation view when image get clicked
@@ -66,39 +95,61 @@ public class HomePage extends AppCompatActivity
                 }
             }
         });
+    }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
+    @Override
+    protected void onStart() {
+        super.onStart();
         //Disable the internal motion in the bottom navigation bar
-        BottomNavigationViewEx bnve = (BottomNavigationViewEx) findViewById(R.id.navigation);
 
-        bnve.enableAnimation(true);
-        bnve.enableShiftingMode(false);
-        bnve.enableItemShiftingMode(false);
-        bnve.setTextVisibility(false);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
 
-        //ViewPager setting
-        viewPager =(ViewPager)findViewById(R.id.pager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
+                //Hide app image and the background view and make the root view visible
+                JustImage = (ImageView) findViewById(R.id.just_image);
+                JustView = (View) findViewById(R.id.just_view);
+                RootView = (RelativeLayout) findViewById(R.id.rootView);
 
-        tabLayout = (TabLayout)findViewById(R.id.tab);
-        tabLayout.setupWithViewPager(viewPager);
+                JustView.setVisibility(View.GONE);
+                JustImage.setVisibility(View.GONE);
+                RootView.setVisibility(View.VISIBLE);
 
+
+            }
+        }, 2000);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         //Update the navigation view if the user is anonymous
-        if(Constants.user==null){
+        if (Constants.user == null) {
             navigationView.getMenu().getItem(0).setVisible(false);
             navigationView.getMenu().getItem(1).setVisible(false);
             navigationView.getMenu().getItem(2).setVisible(false);
             navigationView.getMenu().getItem(3).setVisible(false);
             navigationView.getMenu().getItem(4).setVisible(false);
             navigationView.getMenu().getItem(5).setVisible(true);
-            View header = getLayoutInflater().inflate(R.layout.nav_header_home_page_anonymous,null);
+            View header = getLayoutInflater().inflate(R.layout.nav_header_home_page_anonymous, null);
             navigationView.addHeaderView(header);
             navigationView.removeHeaderView(navigationView.getHeaderView(0));
-        }
+        } else {
+            //Update the navigation view if the user isn't anonymous
+            navigationView.getMenu().getItem(0).setVisible(true);
+            navigationView.getMenu().getItem(2).setVisible(true);
+            navigationView.getMenu().getItem(1).setVisible(true);
+            navigationView.getMenu().getItem(3).setVisible(true);
+            navigationView.getMenu().getItem(4).setVisible(true);
+            navigationView.getMenu().getItem(5).setVisible(false);
+            View header = getLayoutInflater().inflate(R.layout.nav_header_home_page, null);
+            navigationView.addHeaderView(header);
+            navigationView.removeHeaderView(navigationView.getHeaderView(0));
 
+        }
     }
 
     @Override
@@ -134,18 +185,18 @@ public class HomePage extends AppCompatActivity
 
         if (id == R.id.nav_my_profile) {
             // Handle the camera action
-        }else if (id == R.id.nav_my_profile){
+        } else if (id == R.id.nav_my_profile) {
 
-        }else if (id == R.id.nav_reddit_coin){
-            Toast.makeText(this,"Not available yet!",Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.nav_reddit_premium){
-            Toast.makeText(this,"Not available yet!",Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.nav_my_saved){
+        } else if (id == R.id.nav_reddit_coin) {
+            Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_reddit_premium) {
+            Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_my_saved) {
 
-        }else if (id == R.id.nav_history){
+        } else if (id == R.id.nav_history) {
 
-        }else if (id == R.id.nav_sign_up_log_in){
-            Intent intent = new Intent(this,LoginActivity.class);
+        } else if (id == R.id.nav_sign_up_log_in) {
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 
         }

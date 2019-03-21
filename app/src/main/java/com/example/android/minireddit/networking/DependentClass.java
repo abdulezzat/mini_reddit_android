@@ -32,6 +32,7 @@ public class DependentClass {
         return mSupplier.getTrendingPost();
     }
 
+    public boolean logIn (String email,String password){ return  mSupplier.logIn(email,password);}
     public boolean votePost(int postId) {
         return mSupplier.votePost(postId);
     }
