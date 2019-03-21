@@ -3,9 +3,10 @@ package com.example.android.minireddit;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.support.v7.widget.Toolbar;
 import com.example.android.minireddit.adapters.ProfilePagerAdapter;
 import com.example.android.minireddit.fragments.ProfileAboutFragment;
 import com.example.android.minireddit.fragments.ProfileCommentsFragment;
@@ -18,7 +19,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Posts"));
         tabLayout.addTab(tabLayout.newTab().setText("Comments"));
         tabLayout.addTab(tabLayout.newTab().setText("About"));
@@ -28,6 +32,12 @@ public class ProfileActivity extends AppCompatActivity {
         ProfilePagerAdapter profilePagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(profilePagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
     }
 
 }

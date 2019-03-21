@@ -350,7 +350,7 @@ public class BottomNavigationViewEx extends BottomNavigationView {
          */
         // 1. get mMenuView
 //        BottomNavigationMenuView mMenuView = getBottomNavigationMenuView();
-        // 2. get buttons
+        // 2. get rounded_corners_icons_color
 //        BottomNavigationItemView[] mButtons = getBottomNavigationItemViews();
         // 3. change field mShiftingMode value in mButtons
 //        for (BottomNavigationItemView button : mButtons) {
@@ -470,7 +470,7 @@ public class BottomNavigationViewEx extends BottomNavigationView {
          * 2 private BottomNavigationItemView[] mButtons;
          */
         BottomNavigationMenuView mMenuView = getBottomNavigationMenuView();
-        mButtons = getField(mMenuView.getClass(), mMenuView, "buttons");
+        mButtons = getField(mMenuView.getClass(), mMenuView, "rounded_corners_icons_color");
         return mButtons;
     }
 
