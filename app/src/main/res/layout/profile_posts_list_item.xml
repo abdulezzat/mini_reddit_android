@@ -15,7 +15,7 @@
         android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/postInfo"
+            android:id="@+id/post_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:id="@+id/postMenu"
+            android:id="@+id/post_menu"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_alignParentRight="true"
@@ -34,7 +34,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/postTitle"
+        android:id="@+id/post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
@@ -45,7 +45,7 @@
         android:textSize="18sp" />
 
     <ImageView
-        android:id="@+id/postImage"
+        android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop" />
@@ -68,14 +68,14 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/postUpVote"
+                android:id="@+id/post_up_vote"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:src="@drawable/upvote" />
 
             <TextView
-                android:id="@+id/postVotesCount"
+                android:id="@+id/post_votes_count"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -86,7 +86,7 @@
 
             <ImageView
 
-                android:id="@+id/postDownVote"
+                android:id="@+id/post_down_vote"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -96,7 +96,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/postComment"
+            android:id="@+id/post_comment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -112,7 +112,7 @@
                 android:src="@drawable/comment" />
 
             <TextView
-                android:id="@+id/postCommentsCount"
+                android:id="@+id/post_comments_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -125,7 +125,7 @@
 
 
         <LinearLayout
-            android:id="@+id/postShare"
+            android:id="@+id/post_share"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"

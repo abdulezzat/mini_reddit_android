@@ -68,9 +68,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
+                        android:paddingLeft="40dp"
+                        android:paddingRight="40dp"
                         android:text="EDIT"
+                        android:clickable="true"
                         android:textColor="@color/iconsColor"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -119,10 +120,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" • "
+                        android:id="@+id/dot_before_followers"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/followers"
+                        android:id="@+id/followers_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 followers"
@@ -185,7 +187,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
@@ -203,7 +205,7 @@
 
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/profileViewPager"
+        android:id="@+id/profile_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:nestedScrollingEnabled="true"

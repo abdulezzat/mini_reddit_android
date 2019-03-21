@@ -6,7 +6,7 @@
     tools:context=".fragments.ProfilePostsFragment">
 
     <ListView
-        android:id="@+id/ProfilePostsListView"
+        android:id="@+id/profile_posts_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

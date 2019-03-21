@@ -2,6 +2,7 @@ package com.example.android.minireddit.networking;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.datastructure.User;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,10 @@ public class DependentClass {
     public ArrayList<Post> getListOfTrendingPosts() {
 
         return mSupplier.getTrendingPost();
+    }
+
+    public User getUser(String uN) {
+        return mSupplier.getUserPublicInfo(uN);
     }
 
     public boolean votePost(int postId) {

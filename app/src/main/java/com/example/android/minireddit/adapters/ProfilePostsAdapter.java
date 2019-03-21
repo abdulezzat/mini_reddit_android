@@ -56,13 +56,13 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
         }
         Post currentPost = getItem(position);// getting the current Post in the ArrayList
 
-        TextView postInfo = (TextView) ListItemView.findViewById(R.id.postInfo);
+        TextView postInfo = (TextView) ListItemView.findViewById(R.id.post_info);
         postInfo.setText(currentPost.getPostInfo());
 
-        TextView postText = (TextView) ListItemView.findViewById(R.id.postTitle);
+        TextView postText = (TextView) ListItemView.findViewById(R.id.post_title);
         postText.setText(currentPost.getPostText());
 
-        ImageView postImage = (ImageView) ListItemView.findViewById(R.id.postImage);
+        ImageView postImage = (ImageView) ListItemView.findViewById(R.id.post_image);
         if (currentPost.getPostImageUrl() != null) {
             boolean connected = isNetworkAvailable();
             if (connected) {
@@ -75,14 +75,14 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
             postImage.setVisibility(View.GONE);
         }
 
-        TextView postVotesCount = (TextView) ListItemView.findViewById(R.id.postVotesCount);
+        TextView postVotesCount = (TextView) ListItemView.findViewById(R.id.post_votes_count);
         postVotesCount.setText(String.valueOf(currentPost.getPostLikeCount()));
 
-        TextView postCommentCount = (TextView) ListItemView.findViewById(R.id.postCommentsCount);
+        TextView postCommentCount = (TextView) ListItemView.findViewById(R.id.post_comments_count);
         postCommentCount.setText(String.valueOf(currentPost.getPostCommentCount()));
 
-        ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.postUpVote);
-        ImageView postDownVote = (ImageView) ListItemView.findViewById(R.id.postDownVote);
+        ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.post_up_vote);
+        ImageView postDownVote = (ImageView) ListItemView.findViewById(R.id.post_down_vote);
         switch (currentPost.getVoteStatus()) {
 
             case 1:
@@ -100,7 +100,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
 
         }
 
-        ImageView menu = (ImageView) ListItemView.findViewById(R.id.postMenu);
+        ImageView menu = (ImageView) ListItemView.findViewById(R.id.post_menu);
 
 
         menu.setOnClickListener(new View.OnClickListener() {

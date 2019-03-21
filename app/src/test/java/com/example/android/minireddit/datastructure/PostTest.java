@@ -61,8 +61,8 @@ public class PostTest {
     public void setPostText_isCorrect(){
         Post post=new Post(0,null,null,null,null,null,null,0,0,false,false,0);
 
-        post.setPostText("Text for test");
-        assertEquals(post.getPostText(),"Text for test");
+        post.setPostText("Text for profile_header_test");
+        assertEquals(post.getPostText(),"Text for profile_header_test");
 
     }
     @Test

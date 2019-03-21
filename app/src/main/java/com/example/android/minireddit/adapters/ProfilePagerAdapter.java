@@ -4,65 +4,53 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.ProfileAboutFragment;
 import com.example.android.minireddit.fragments.ProfileCommentsFragment;
 import com.example.android.minireddit.fragments.ProfilePostsFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by karashily on 17/03/19.
  */
 
 public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
+    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    private int mNoOfTabs;
-
-    private ProfilePostsFragment mPostsFragment;
-    private ProfileCommentsFragment mCommentsFragment;
-    private ProfileAboutFragment mAboutFragment;
-
-    public ProfilePagerAdapter(FragmentManager fm, int noOfTabs) {
+    public ProfilePagerAdapter(FragmentManager fm) {
         super(fm);
-        this.mNoOfTabs = noOfTabs;
-        mPostsFragment = new ProfilePostsFragment();
-        mCommentsFragment = new ProfileCommentsFragment();
-        mAboutFragment = new ProfileAboutFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return mPostsFragment;
-
-            case 1:
-                return mCommentsFragment;
-
-            case 2:
-                return mAboutFragment;
-
-            default:
-                return null;
-        }
+        return mFragmentList.get(position);
     }
 
+    @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "Posts";
+        return mFragmentTitleList.get(position);
+    }
 
-            case 1:
-                return "Comments";
-
-            case 2:
-                return "About";
-
-            default:
-                return null;
+    public void addFragment (Fragment fragment, String title, User user) {
+        if(fragment instanceof ProfilePostsFragment) {
+            ProfilePostsFragment profileFragment=(ProfilePostsFragment) fragment;
+            profileFragment.setUser(user);
+        } else if(fragment instanceof ProfileCommentsFragment) {
+            ProfileCommentsFragment profileFragment=(ProfileCommentsFragment) fragment;
+            profileFragment.setUser(user);
+        } else if(fragment instanceof ProfileAboutFragment) {
+            ProfileAboutFragment profileFragment=(ProfileAboutFragment) fragment;
+            profileFragment.setUser(user);
         }
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
     }
 
     @Override
     public int getCount() {
-        return mNoOfTabs;
+        return mFragmentList.size();
     }
 }
