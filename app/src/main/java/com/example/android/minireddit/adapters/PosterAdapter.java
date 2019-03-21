@@ -47,13 +47,13 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     private int shortAnimationDuration;
     ImageView expanded_image;
     FrameLayout container;
-    DependentClass restClient;
 
-    public PosterAdapter(@NonNull Context context, @NonNull List<Post> objects, ImageView expand, FrameLayout container, DependentClass restClient) {
+
+    public PosterAdapter(@NonNull Context context, @NonNull List<Post> objects, ImageView expand, FrameLayout container) {
         super(context, 0, objects);
         expanded_image = expand;
         this.container = container;
-        this.restClient = restClient;
+
 
         shortAnimationDuration = getContext().getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
@@ -133,7 +133,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         postUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (restClient.votePost(currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePost(currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
                         postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_clc_48dp);
                         currentPost.setVoteStatus(1);
@@ -161,7 +161,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         postDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (restClient.votePost(currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePost(currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
                         postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_clc_48dp);
                         currentPost.setVoteStatus(-1);

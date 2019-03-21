@@ -16,25 +16,46 @@ public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
 
     private int mNoOfTabs;
 
+    private ProfilePostsFragment mPostsFragment;
+    private ProfileCommentsFragment mCommentsFragment;
+    private ProfileAboutFragment mAboutFragment;
+
     public ProfilePagerAdapter(FragmentManager fm, int noOfTabs) {
         super(fm);
         this.mNoOfTabs = noOfTabs;
+        mPostsFragment = new ProfilePostsFragment();
+        mCommentsFragment = new ProfileCommentsFragment();
+        mAboutFragment = new ProfileAboutFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                ProfilePostsFragment postsFragment = new ProfilePostsFragment();
-                return postsFragment;
+                return mPostsFragment;
 
             case 1:
-                ProfileCommentsFragment commentsFragment = new ProfileCommentsFragment();
-                return commentsFragment;
+                return mCommentsFragment;
 
             case 2:
-                ProfileAboutFragment aboutFragment = new ProfileAboutFragment();
-                return aboutFragment;
+                return mAboutFragment;
+
+            default:
+                return null;
+        }
+    }
+
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "Posts";
+
+            case 1:
+                return "Comments";
+
+            case 2:
+                return "About";
+
             default:
                 return null;
         }

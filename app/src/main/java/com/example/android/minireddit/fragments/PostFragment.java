@@ -7,10 +7,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.android.minireddit.EndlessScrollListener;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.MockRestService;
 import com.example.android.minireddit.networking.RestService;
@@ -45,31 +47,37 @@ public class PostFragment extends Fragment {
         ImageView expand=(ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout=(SwipeRefreshLayout)rootView.findViewById(R.id.swipe);
 
-        final boolean debug=Constants.debug;
-        DependentClass restClient = null;
-        if (debug) {
-            restClient = new DependentClass(new MockRestService());
-        } else {
-            restClient = new DependentClass(new RestService());
-        }
-        posts=restClient.getListOfTrendingPosts();
 
-        final PosterAdapter adapter= new PosterAdapter(this.getContext(),posts,expand,frameLayout,restClient);
+        posts=DependentClass.getInstance().getListOfTrendingPosts();
+
+        final PosterAdapter adapter= new PosterAdapter(this.getContext(),posts,expand,frameLayout);
         final ListView listView =(ListView) rootView.findViewById (R.id.postsListView);
         listView.setAdapter(adapter);
+        final EndlessScrollListener scrollListener=new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount) {
+
+
+                ArrayList<Post> morePosts=DependentClass.getInstance().getListOfTrendingPosts();
+                adapter.addAll(morePosts);
+                return true;
+            }
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+        };
+        listView.setOnScrollListener(scrollListener);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                DependentClass restClient = null;
-                if (debug) {
-                    restClient = new DependentClass(new MockRestService());
-                } else {
-                    restClient = new DependentClass(new RestService());
-                }
-                posts=restClient.getListOfTrendingPosts();
+
+                posts=DependentClass.getInstance().getListOfTrendingPosts();
                 adapter.clear();
                 adapter.addAll(posts);
                 refreshLayout.setRefreshing(false);
+
 
             }
         });
