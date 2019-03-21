@@ -110,7 +110,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
 
 
                 switch (v.getId()) {
-                    case (R.id.postMenu):
+                    case (R.id.post_menu):
 
                         PopupMenu popup = new PopupMenu(getContext(), v);
                         popup.getMenuInflater().inflate(R.menu.post_menu, popup.getMenu());

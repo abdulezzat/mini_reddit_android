@@ -71,6 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         TextView userDate=(TextView) findViewById(R.id.date);
         TextView userFollowersCount=(TextView) findViewById(R.id.followers_count);
         TextView dotBeforeFollowers=(TextView) findViewById(R.id.dot_before_followers);
+        TextView userAbout=(TextView) findViewById(R.id.user_about);
 
         displayName.setText(mUser.getDisplayName());
 
@@ -84,6 +85,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         String mUserFollowersCount=mUser.getFollowersNo()+" followers";
         userFollowersCount.setText(mUserFollowersCount);
+
+        userAbout.setText(mUser.getAbout());
 
     }
 
