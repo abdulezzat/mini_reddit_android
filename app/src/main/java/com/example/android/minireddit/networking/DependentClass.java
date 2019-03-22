@@ -29,6 +29,10 @@ public class DependentClass {
     public static DependentClass getInstance() {
         return restClient;
     }
+    public ArrayList<Post> getListOfHomePosts(Context context) {
+
+        return mSupplier.getHomePost(context);
+    }
 
     public ArrayList<Post> getListOfTrendingPosts(Context context) {
 
@@ -39,14 +43,17 @@ public class DependentClass {
         return mSupplier.getMoreTrendingPost( index);
     }
 
-    public boolean votePostUp(int postId) {
-        return mSupplier.votePostUp(postId);
+    public boolean votePostUp(Context context,int postId) {
+        return mSupplier.votePostUp(context,postId);
     }
-    public boolean votePostDown(int postId) {
-        return mSupplier.votePostDown(postId);
+    public boolean votePostDown(Context context,int postId) {
+        return mSupplier.votePostDown( context,postId);
     }
-    public boolean subscribeCommunity(int commId){
-        return mSupplier.subscribeCommunity(commId);
+    public boolean subscribeCommunity(Context context,int commId){
+        return mSupplier.subscribeCommunity(context,commId);}
+    public boolean unsubscribeCommunity(Context context,int commId){
+        return mSupplier.unsubscribeCommunity(context,commId);}
+
 
 
     public boolean logIn (String email,String password){ return  mSupplier.logIn(email,password);}
@@ -55,7 +62,5 @@ public class DependentClass {
         return mSupplier.getUserPublicInfo(uN);
     }
 
-    public boolean votePost(int postId) {
-        return mSupplier.votePost(postId);
-    }
+
 }

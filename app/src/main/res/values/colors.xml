@@ -4,12 +4,15 @@
     <color name="colorPrimaryDark">#616161</color>
     <color name="colorAccent">#24a0ed</color>
     <color name="black">#000000</color>
-    <color name="buttonColor">#24a0ed</color>
     <color name="separatorsColor">#edeff1</color>
     <color name="grayIconsColor">#a4a7a8</color>
     <color name="activeGrayIconColor">#373c3f</color>
     <color name="iconsColor">#24a0ed</color>
     <color name="viewColor">#EEEEEE</color>
     <color name="white">#FFFFFF</color>
-    <color name="start_background">#263238</color>
+    <color name="startBackground">#263238</color>
+    <color name="buttonEnabledStateColor">#0000CC</color>
+    <color name="buttonDisabledStateColor">#0099CC</color>
+    <color name="textDisabledStateColor">#90CAF9</color>
+    <color name="textEnabledStateColor">@color/colorPrimary</color>
 </resources>
