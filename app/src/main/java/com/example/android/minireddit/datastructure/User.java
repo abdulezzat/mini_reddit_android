@@ -1,7 +1,11 @@
 package com.example.android.minireddit.datastructure;
 
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by karashily on 15/03/19.
@@ -54,7 +58,12 @@ public class User {
     /**
      * The Date on which the user joined reddit.
      */
-    private Date cakeDay;
+    private String cakeDay;
+
+    /**
+     * How much ago did the user join Reddit.
+     */
+    private String redditAge;
 
     /**
      * Whether the User was deleted or not.
@@ -99,7 +108,7 @@ public class User {
      * @param cD User's Join Day
      * @param d  Whether the User is deleted or not
      */
-    public User(String uN, String dN, String pI, String eM, String pW, String a, int k, Date cD, boolean d) {
+    public User(String uN, String dN, String pI, String eM, String pW, String a, int k, String cD, boolean d) {
         userName = uN;
         displayName = dN;
         profileImage = pI;
@@ -111,17 +120,12 @@ public class User {
         deleted = d;
     }
 
-    /**
-     * A method for creating a new User in the database.
-     *
-     * @param uN  User's entered Name.
-     * @param pW1 User's entered Password.
-     * @param pW2 User's re-entered Password.
-     * @param eM  User's entered E-mail.
-     * @return a new User created object.
-     */
-    public User signUpUser(String uN, String pW1, String pW2, String eM) {
-        return new User(uN, uN, "", eM, pW1, "", 0, new Date(), false);
+    public User(String uN,int k,String rA,String a) {
+        userName=uN;
+        displayName=uN;
+        karma=k;
+        redditAge=rA;
+        about=a;
     }
 
     public String getUserName() {
@@ -193,11 +197,19 @@ public class User {
         karma = (k >= 0) ? k : 0;
     }
 
-    public Date getCakeDay() {
+    public String getCakeDay() {
         return cakeDay;
     }
 
-    public void setCakeDay(Date cD) {
+    public void setRedditAge(String rA) {
+        redditAge=rA;
+    }
+
+    public String getRedditAge() {
+        return redditAge;
+    }
+
+    public void setCakeDay(String cD) {
         cakeDay = cD;
     }
 
@@ -239,7 +251,11 @@ public class User {
     }
 
     private void updateFollowersNo() {
-        followersNo = followers.size();
+        if(followers!=null) {
+            followersNo = followers.size();
+        } else {
+            followersNo=0;
+        }
     }
 
     /**
@@ -283,7 +299,11 @@ public class User {
     }
 
     private void updateFollowingNo() {
-        followingNo = following.size();
+        if(following!=null) {
+            followingNo = following.size();
+        } else {
+            followingNo = 0;
+        }
     }
 
     /**

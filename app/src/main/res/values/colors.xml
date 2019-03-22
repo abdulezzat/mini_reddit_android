@@ -3,7 +3,6 @@
     <color name="colorPrimary">#FAFAFA</color>
     <color name="colorPrimaryDark">#616161</color>
     <color name="colorAccent">#24a0ed</color>
-    <color name="backGroung">#F5F5F5</color>
     <color name="black">#000000</color>
     <color name="buttonColor">#24a0ed</color>
     <color name="separatorsColor">#edeff1</color>
@@ -11,4 +10,6 @@
     <color name="activeGrayIconColor">#373c3f</color>
     <color name="iconsColor">#24a0ed</color>
     <color name="viewColor">#EEEEEE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="start_background">#263238</color>
 </resources>

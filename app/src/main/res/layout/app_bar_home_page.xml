@@ -15,50 +15,52 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                >
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/user_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/user_default_image"
-                    android:layout_marginTop="3dp"/>
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/user_default_image" />
 
                 <SearchView
                     android:id="@+id/search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
-                    android:queryHint="@string/prompt_search_view"
-                    android:textColorHint="@color/colorPrimaryDark"
-                    android:queryBackground="@android:color/transparent"
+                    android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/user_image"
                     android:background="@color/viewColor"
-                    android:layout_marginLeft="20dp"
                     android:iconifiedByDefault="false"
-                    />
+                    android:queryBackground="@android:color/transparent"
+                    android:queryHint="@string/prompt_search_view"
+                    android:textColorHint="@color/colorPrimaryDark" />
+
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tab"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:minHeight="?attr/actionBarSize"
-                    app:tabMode="fixed"
-                    app:tabGravity="center"
-                    app:tabTextColor="@color/black"
-                    app:tabSelectedTextColor="@color/black"
                     android:layout_below="@id/search_bar"
                     android:layout_marginTop="16dp"
-                    />
+                    android:background="@color/colorPrimary"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                    app:layout_collapseMode="pin"
+                    app:tabGravity="center"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/black"
+                    app:tabTextAppearance="@style/TabTextStyle"
+                    app:tabTextColor="@color/black" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>

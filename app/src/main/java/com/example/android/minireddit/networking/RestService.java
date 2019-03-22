@@ -17,6 +17,7 @@ import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.fragments.PostFragment;
 import com.example.android.minireddit.networking.Requests;
+import com.example.android.minireddit.datastructure.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -236,5 +237,12 @@ public class RestService implements Requests {
             e.printStackTrace();
         }
         return output;
+
+    @Override
+    public boolean logIn(String userName, String password) {
+        return false;
+    }
+    public User getUserPublicInfo(String uN) {
+        return null;
     }
 }

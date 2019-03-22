@@ -4,9 +4,7 @@ import android.content.Context;
 
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Post;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.android.minireddit.datastructure.User;
 
 import java.util.ArrayList;
 
@@ -60,8 +58,23 @@ public class MockRestService implements com.example.android.minireddit.networkin
         return true;
     }
 
+
     @Override
     public boolean subscribeCommunity(int commId) {
         return true;
+    }
+
+
+    @Override
+    public boolean logIn(String userName, String password) {
+
+        if(userName.equals("admin")&&password.equals("admin")) return true;
+
+        return false;
+    }
+
+    public User getUserPublicInfo(String uN) {
+        User user=new User("kokowawa",49415,"4m 24d","a creative potato. kokowawa lover.");
+        return user;
     }
 }

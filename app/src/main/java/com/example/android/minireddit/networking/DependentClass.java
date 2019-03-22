@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.datastructure.User;
 
 import java.util.ArrayList;
 
@@ -47,5 +48,14 @@ public class DependentClass {
     public boolean subscribeCommunity(int commId){
         return mSupplier.subscribeCommunity(commId);
 
+
+    public boolean logIn (String email,String password){ return  mSupplier.logIn(email,password);}
+
+    public User getUser(String uN) {
+        return mSupplier.getUserPublicInfo(uN);
+    }
+
+    public boolean votePost(int postId) {
+        return mSupplier.votePost(postId);
     }
 }

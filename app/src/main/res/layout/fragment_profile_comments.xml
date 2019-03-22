@@ -6,7 +6,7 @@
     tools:context=".fragments.ProfileCommentsFragment">
 
     <ListView
-        android:id="@+id/ProfileCommentsListView"
+        android:id="@+id/profile_comments_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="10.0sp">

@@ -1,12 +1,9 @@
 package com.example.android.minireddit.libraries;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
@@ -62,7 +59,6 @@ public class BottomNavigationViewEx extends BottomNavigationView {
 
     public BottomNavigationViewEx(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
     }
 
     /**
@@ -368,7 +364,6 @@ public class BottomNavigationViewEx extends BottomNavigationView {
      *
      * @return index of item, start from 0.
      */
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public int getCurrentItem() {
         /*
         1. get field in this class
@@ -398,7 +393,6 @@ public class BottomNavigationViewEx extends BottomNavigationView {
      * @param item
      * @return position if success, -1 otherwise
      */
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public int getMenuItemPosition(MenuItem item) {
         // get item id
         int itemId = item.getItemId();
@@ -418,7 +412,6 @@ public class BottomNavigationViewEx extends BottomNavigationView {
      *
      * @param index start from 0.
      */
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public BottomNavigationViewEx setCurrentItem(int index) {
         setSelectedItemId(getMenu().getItem(index).getItemId());
         return this;
@@ -779,7 +772,6 @@ public class BottomNavigationViewEx extends BottomNavigationView {
      * @param viewPager
      * @param smoothScroll whether ViewPager changed with smooth scroll animation
      */
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public BottomNavigationViewEx setupWithViewPager(final ViewPager viewPager, boolean smoothScroll) {
         if (mViewPager != null) {
             // If we've already been setup with a ViewPager, remove us from it
@@ -855,7 +847,6 @@ public class BottomNavigationViewEx extends BottomNavigationView {
         private int previousPosition = -1;
 
 
-        @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
         MyOnNavigationItemSelectedListener(ViewPager viewPager, BottomNavigationViewEx bnve, boolean smoothScroll, OnNavigationItemSelectedListener listener) {
             this.viewPagerRef = new WeakReference<>(viewPager);
             this.listener = listener;
