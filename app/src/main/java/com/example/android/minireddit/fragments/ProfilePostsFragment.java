@@ -34,11 +34,10 @@ public class ProfilePostsFragment extends Fragment {
 
         ArrayList<Post> posts = new ArrayList<Post>();
 
-        /*
-        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "Post Title", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, 0));
-        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "An Example of upVotedPost", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, 1));
-        posts.add(new Post(0, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "downVoted Post", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, -1));
-        */
+        posts.add(new Post(0,0,null, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "Post Title", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false,false, false, 0));
+        posts.add(new Post(0,0,null, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "An Example of upVotedPost", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false,false, false, 1));
+        posts.add(new Post(0,0,null, String.valueOf(R.drawable.reddit_icon), "u/karashily", "u/karashily • 4h ago", "downVoted Post", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false,false, -1));
+
         ProfilePostsAdapter adapter = new ProfilePostsAdapter(this.getContext(), posts);
         ListView listView = (ListView) rootView.findViewById(R.id.profile_posts_listview);
         listView.setAdapter(adapter);

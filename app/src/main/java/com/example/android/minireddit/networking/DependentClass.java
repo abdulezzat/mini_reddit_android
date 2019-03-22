@@ -1,5 +1,7 @@
 package com.example.android.minireddit.networking;
 
+import android.content.Context;
+
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
@@ -27,11 +29,31 @@ public class DependentClass {
     public static DependentClass getInstance() {
         return restClient;
     }
+    public ArrayList<Post> getListOfHomePosts(Context context) {
 
-    public ArrayList<Post> getListOfTrendingPosts() {
-
-        return mSupplier.getTrendingPost();
+        return mSupplier.getHomePost(context);
     }
+
+    public ArrayList<Post> getListOfTrendingPosts(Context context) {
+
+        return mSupplier.getTrendingPost(context);
+    }
+    public ArrayList<Post> getListOfMoreTrendingPosts(int index) {
+
+        return mSupplier.getMoreTrendingPost( index);
+    }
+
+    public boolean votePostUp(Context context,int postId) {
+        return mSupplier.votePostUp(context,postId);
+    }
+    public boolean votePostDown(Context context,int postId) {
+        return mSupplier.votePostDown( context,postId);
+    }
+    public boolean subscribeCommunity(Context context,int commId){
+        return mSupplier.subscribeCommunity(context,commId);}
+    public boolean unsubscribeCommunity(Context context,int commId){
+        return mSupplier.unsubscribeCommunity(context,commId);}
+
 
 
     public boolean logIn (String email,String password){ return  mSupplier.logIn(email,password);}
@@ -40,7 +62,5 @@ public class DependentClass {
         return mSupplier.getUserPublicInfo(uN);
     }
 
-    public boolean votePost(int postId) {
-        return mSupplier.votePost(postId);
-    }
+
 }
