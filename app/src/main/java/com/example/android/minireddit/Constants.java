@@ -8,5 +8,6 @@ public class Constants {
     public static final boolean debug=false;
     public static final String TRENDIN_POST="";
     public static PosterAdapter poster=null;
+    public static PosterAdapter homeposts=null;
     public static User user = null;
 }

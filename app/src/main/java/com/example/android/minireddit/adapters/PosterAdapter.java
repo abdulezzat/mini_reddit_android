@@ -113,20 +113,36 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         final ImageView subscribe=(ImageView)ListItemView.findViewById(R.id.postAdd);
         if(!currentPost.isSubscribed()) {
             subscribe.setVisibility(View.VISIBLE);
-            subscribe.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //todo check if auth
-                    if (DependentClass.getInstance().subscribeCommunity(getContext(),currentPost.getCommunityId())){
-                        subscribe.setVisibility(View.GONE);
-                    }else{
-                        Toast.makeText(getContext(),"Faieled To Subscribe",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+
         }
         else
             subscribe.setVisibility(View.GONE);
+        subscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo check if auth
+                if(!currentPost.isSubscribed()) {
+                    if (DependentClass.getInstance().subscribeCommunity(getContext(), currentPost.getCommunityId())) {
+                        subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
+                        currentPost.setSubscribed(true);
+                        Toast.makeText(getContext(), "Subscribed Successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    if (DependentClass.getInstance().unsubscribeCommunity(getContext(), currentPost.getCommunityId())) {
+                        subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
+                        currentPost.setSubscribed(false);
+                        Toast.makeText(getContext(), "unSubscribed Successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Faieled To unSubscribe", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+        });
+
 
         final ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.postLike);
         final ImageView postDownVote = (ImageView) ListItemView.findViewById(R.id.postDislike);

@@ -28,6 +28,7 @@ import com.example.android.minireddit.Constants;
 import java.sql.Struct;
 import java.util.ArrayList;
 
+import static com.example.android.minireddit.Constants.homeposts;
 import static com.example.android.minireddit.Constants.poster;
 
 
@@ -57,23 +58,42 @@ public class PostFragment extends Fragment {
         FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.framelayout);
         ImageView expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
-
-
-       // if (mPostType == PostType.Popular)
-            posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
-       // else
-          //  posts
-
-                    poster = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
         final ListView listView = (ListView) rootView.findViewById(R.id.postsListView);
+
+
+          if (mPostType == PostType.Popular){
+              posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+              poster = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
+              listView.setAdapter(poster);
+          }
+
+         else{
+              posts=DependentClass.getInstance().getListOfHomePosts(getContext());
+              Constants.homeposts=new PosterAdapter(this.getContext(),posts,expand,frameLayout);
+              listView.setAdapter(homeposts);
+
+          }
+
+
+
+
         listView.setAdapter(poster);
         final EndlessScrollListener scrollListener = new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
 
 
-                ArrayList<Post> morePosts = DependentClass.getInstance().getListOfMoreTrendingPosts(totalItemsCount);
-                poster.addAll(morePosts);
+                if (mPostType == PostType.Popular) {
+                    ArrayList<Post> morePosts = DependentClass.getInstance().getListOfMoreTrendingPosts(totalItemsCount);
+                    poster.addAll(morePosts);
+                    poster.notifyDataSetChanged();
+                }
+                else{
+                    ArrayList<Post> morePosts = DependentClass.getInstance().getListOfMoreTrendingPosts(totalItemsCount);
+                    homeposts.addAll(morePosts);
+                    homeposts.notifyDataSetChanged();
+
+                }
                 return true;
             }
 
@@ -87,10 +107,19 @@ public class PostFragment extends Fragment {
             @Override
             public void onRefresh() {
 
-                posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
-                poster.clear();
-                poster.addAll(posts);
-                refreshLayout.setRefreshing(false);
+                if (mPostType == PostType.Popular) {
+                    posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+                    poster.clear();
+                    poster.addAll(posts);
+                    refreshLayout.setRefreshing(false);
+                }
+                else{
+                    posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+                    homeposts.clear();
+                    homeposts.addAll(posts);
+                    refreshLayout.setRefreshing(false);
+
+                }
 
 
             }

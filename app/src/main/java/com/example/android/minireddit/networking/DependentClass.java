@@ -29,6 +29,10 @@ public class DependentClass {
     public static DependentClass getInstance() {
         return restClient;
     }
+    public ArrayList<Post> getListOfHomePosts(Context context) {
+
+        return mSupplier.getHomePost(context);
+    }
 
     public ArrayList<Post> getListOfTrendingPosts(Context context) {
 
@@ -47,6 +51,9 @@ public class DependentClass {
     }
     public boolean subscribeCommunity(Context context,int commId){
         return mSupplier.subscribeCommunity(context,commId);}
+    public boolean unsubscribeCommunity(Context context,int commId){
+        return mSupplier.unsubscribeCommunity(context,commId);}
+
 
 
     public boolean logIn (String email,String password){ return  mSupplier.logIn(email,password);}
