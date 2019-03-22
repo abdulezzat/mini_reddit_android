@@ -1,12 +1,15 @@
 package com.example.android.minireddit;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,21 +25,30 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.android.minireddit.adapters.ViewPagerAdapter;
+import com.example.android.minireddit.fragments.HomePageFragment;
+import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
 
 
 public class HomePage extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,BottomNavigationViewEx.OnNavigationItemSelectedListener {
 
+
+    //UI elements
     private Toolbar toolbar;
-    private ViewPager viewPager;
-    private ViewPagerAdapter viewPagerAdapter;
-    private TabLayout tabLayout;
     private SearchView searchView;
     private NavigationView navigationView;
     private View JustView;
     private ImageView JustImage;
     private RelativeLayout RootView;
+    private DrawerLayout drawer;
+
+    //My fragments
+    private HomePageFragment mHomePageFragment;
+    private MyProfileFragment mMyProfileFragment;
+
+    //helper members
+    private boolean mInHomeScreen = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,25 +60,21 @@ public class HomePage extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //apply listener to my navigation view
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(HomePage.this);
 
-        //ViewPager setting
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout = (TabLayout) findViewById(R.id.tab);
-        tabLayout.setupWithViewPager(viewPager);
-
 
         //Start motion configuration
-
         BottomNavigationViewEx bnve = (BottomNavigationViewEx) findViewById(R.id.navigation);
 
         bnve.enableAnimation(true);
         bnve.enableShiftingMode(false);
         bnve.enableItemShiftingMode(false);
         bnve.setTextVisibility(false);
+
+        //apply listener to my bottom navigation bar
+        bnve.setOnNavigationItemSelectedListener(HomePage.this);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         searchView = (SearchView) findViewById(R.id.search_bar);
@@ -75,13 +83,13 @@ public class HomePage extends AppCompatActivity
         //Open navigation view when image get clicked
         ImageView userImage = (ImageView) findViewById(R.id.user_image);
 
-        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //HIde the default image and put my image un the drawer
+        //hide the default image and put my image un the drawer
         toggle.setDrawerIndicatorEnabled(false);
 
         //listener to open the drawer
@@ -95,6 +103,13 @@ public class HomePage extends AppCompatActivity
                 }
             }
         });
+
+        //initialize fragments
+        mHomePageFragment = new HomePageFragment();
+        mMyProfileFragment = new MyProfileFragment();
+        //set default fragment homePage
+        loadFragment(mHomePageFragment);
+
     }
 
     @Override
@@ -116,6 +131,7 @@ public class HomePage extends AppCompatActivity
                 JustView.setVisibility(View.GONE);
                 JustImage.setVisibility(View.GONE);
                 RootView.setVisibility(View.VISIBLE);
+
 
 
             }
@@ -152,13 +168,20 @@ public class HomePage extends AppCompatActivity
         }
     }
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (mInHomeScreen) {
+                super.onBackPressed();
+                //additional code
+            } else {
+                navigator();
+            }
+
         }
     }
 
@@ -177,16 +200,18 @@ public class HomePage extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        boolean result =true;
         int id = item.getItemId();
 
         if (id == R.id.nav_my_profile) {
-            // Handle the camera action
-        } else if (id == R.id.nav_my_profile) {
-
+            mInHomeScreen =false;
+            getSupportActionBar().hide();
+            result = loadFragment(mMyProfileFragment);
         } else if (id == R.id.nav_reddit_coin) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_reddit_premium) {
@@ -199,10 +224,40 @@ public class HomePage extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 
+        }else if (id == R.id.navigation_home) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().show();
+            mInHomeScreen=true;
+            result = loadFragment(mHomePageFragment);
+        }else if (id == R.id.navigation_dashboard) {
+
+        }else if (id == R.id.navigation_new_post) {
+
+        }else if (id == R.id.navigation_chat) {
+            Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.navigation_message) {
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private boolean loadFragment(Fragment fragment){
+        if(fragment != null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container,fragment)
+                    .commit();
+
+            return true;
+        }else return false;
+    }
+
+    public void navigator(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().show();
+        mInHomeScreen=true;
+        loadFragment(mHomePageFragment);
     }
 }

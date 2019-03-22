@@ -6,10 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".HomePage">
 
+
+    <include layout="@layout/content_home_page" />
+
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -17,6 +22,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
+            android:translationZ="0.1dp"
+            app:elevation="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <RelativeLayout
@@ -45,27 +52,7 @@
                     android:queryHint="@string/prompt_search_view"
                     android:textColorHint="@color/colorPrimaryDark" />
 
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tab"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/search_bar"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/colorPrimary"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                    app:layout_collapseMode="pin"
-                    app:tabGravity="center"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/black"
-                    app:tabTextAppearance="@style/TabTextStyle"
-                    app:tabTextColor="@color/black" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_home_page" />
-
-
 </android.support.design.widget.CoordinatorLayout>

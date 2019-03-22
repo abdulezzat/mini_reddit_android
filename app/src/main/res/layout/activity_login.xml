@@ -105,7 +105,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:text="@string/sign_up"
-                    android:textColor="@color/buttonColor"
+                    android:textColor="@color/buttonEnabledStateColor"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:text="@string/forgot_password"
-                    android:textColor="@color/buttonColor"
+                    android:textColor="@color/buttonEnabledStateColor"
                     android:textSize="12sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -132,15 +132,15 @@
 
     <Button
         android:id="@+id/log_in_button"
-        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/buttonColor"
+        android:backgroundTint="@color/buttonDisabledStateColor"
         android:enabled="false"
         android:text="@string/log_in"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold" />
+        android:textColor="@color/textDisabledStateColor"
+        android:textStyle="bold"
+        />
 
 </RelativeLayout>

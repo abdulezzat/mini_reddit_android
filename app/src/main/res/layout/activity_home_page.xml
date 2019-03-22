@@ -10,7 +10,7 @@
         android:id="@+id/just_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/start_background" />
+        android:background="@color/startBackground" />
 
     <ImageView
         android:id="@+id/just_image"
@@ -55,20 +55,22 @@
                     android:layout_gravity="bottom"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
+                    <RelativeLayout
+                        android:layout_width="140dp"
+                        android:layout_height="60dp"
                         android:layout_margin="8dp"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:orientation="horizontal">
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true">
 
                         <ImageView
                             android:id="@+id/setting_image"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:paddingBottom="4dp"
-                            android:src="@drawable/settings" />
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/settings"
+                            android:layout_centerVertical="true"/>
 
                         <TextView
                             android:id="@+id/setting"
@@ -77,9 +79,12 @@
                             android:layout_marginLeft="8dp"
                             android:clickable="true"
                             android:text="@string/prompt_settings"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/setting_image"
+                            android:layout_marginTop="8dp"/>
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <ImageView
                         android:layout_width="30dp"
@@ -87,7 +92,10 @@
                         android:layout_alignParentRight="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
-                        android:src="@drawable/moon" />
+                        android:src="@drawable/moon"
+                        android:layout_alignParentBottom="true"
+                        android:paddingBottom="16dp"
+                        android:paddingRight="8dp"/>
                 </RelativeLayout>
             </android.support.design.widget.NavigationView>
 

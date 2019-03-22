@@ -9,7 +9,7 @@
         <item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
         <item name="bottomNavigationStyle">@style/Widget.Design.BottomNavigationView</item>
         <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
-
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
