@@ -113,10 +113,11 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         final ImageView subscribe=(ImageView)ListItemView.findViewById(R.id.postAdd);
         if(!currentPost.isSubscribed()) {
             subscribe.setVisibility(View.VISIBLE);
+            subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
 
         }
         else
-            subscribe.setVisibility(View.GONE);
+            subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
         subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

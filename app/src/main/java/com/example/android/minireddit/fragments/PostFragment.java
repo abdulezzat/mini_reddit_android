@@ -77,7 +77,7 @@ public class PostFragment extends Fragment {
 
 
 
-        listView.setAdapter(poster);
+
         final EndlessScrollListener scrollListener = new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
@@ -114,9 +114,10 @@ public class PostFragment extends Fragment {
                     refreshLayout.setRefreshing(false);
                 }
                 else{
-                    posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+                    posts = DependentClass.getInstance().getListOfHomePosts(getContext());
                     homeposts.clear();
                     homeposts.addAll(posts);
+                    homeposts.notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
 
                 }
