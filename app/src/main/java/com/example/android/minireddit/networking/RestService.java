@@ -36,6 +36,7 @@ public class RestService implements Requests {
     public ArrayList<Post> getTrendingPost(final Context context) {
         Toast.makeText(context,"Function Triggered",Toast.LENGTH_SHORT).show();
          boolean done = false;
+
          //
         //"https://api.myjson.com/bins/9xf3m"
         //"http://192.168.43.118:8000/api/unauth/ViewPosts"
@@ -237,6 +238,7 @@ public class RestService implements Requests {
             e.printStackTrace();
         }
         return output;
+    }
 
     @Override
     public boolean logIn(String userName, String password) {

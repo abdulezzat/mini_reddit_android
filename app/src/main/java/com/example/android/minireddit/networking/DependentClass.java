@@ -46,7 +46,7 @@ public class DependentClass {
         return mSupplier.votePostDown(postId);
     }
     public boolean subscribeCommunity(int commId){
-        return mSupplier.subscribeCommunity(commId);
+        return mSupplier.subscribeCommunity(commId);}
 
 
     public boolean logIn (String email,String password){ return  mSupplier.logIn(email,password);}
@@ -55,7 +55,5 @@ public class DependentClass {
         return mSupplier.getUserPublicInfo(uN);
     }
 
-    public boolean votePost(int postId) {
-        return mSupplier.votePost(postId);
-    }
+
 }

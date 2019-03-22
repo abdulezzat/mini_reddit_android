@@ -59,7 +59,7 @@ public class PostFragment extends Fragment {
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
 
 
-        if (mPostType == PostType.Popular)
+       // if (mPostType == PostType.Popular)
             posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
        // else
           //  posts
