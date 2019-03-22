@@ -11,6 +11,16 @@ public class Post {
 
     int postId;
     /**
+     * The Community id.
+     */
+    int communityId;
+
+    /**
+     * The Community name.
+     */
+
+    String communityName;
+    /**
      * The Post logo url.
      */
     String postLogoUrl;
@@ -52,29 +62,38 @@ public class Post {
      */
     boolean hidden;
     /**
+     * The User Has Subscribed The Post Publisher or Not .
+     */
+    boolean subscribed;
+    /**
      * The Vote status.
      */
     int voteStatus;
-
 
 
     /**
      * Instantiates a new Post.
      *
      * @param postId           the id of the post
+     * @param communityId      the community id
+     * @param communityName    the community name
      * @param postLogoUrl      the post logo url
      * @param postUser         the post user
      * @param postInfo         the post info
      * @param postText         the post text
      * @param postImageUrl     the post image url
+     * @param postVideoUrl     the post video url
      * @param postLikeCount    the post like count
      * @param postCommentCount the post comment count
      * @param saved            saved
      * @param hidden           hidden
+     * @param subscribed       the user has subscribed the post publisher or not .
      * @param voteStatus       the vote status
      */
-    public Post(int postId,String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl,String postVideoUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden, int voteStatus) {
+    public Post(int postId,int communityId,String communityName,String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl,String postVideoUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden,boolean subscribed, int voteStatus) {
         this.postId=postId;
+        this.communityId=communityId;
+        this.communityName=communityName;
         this.postLogoUrl = postLogoUrl;
         this.postUser = postUser;
         this.postInfo = postInfo;
@@ -85,6 +104,7 @@ public class Post {
         this.postCommentCount = postCommentCount;
         this.saved = saved;
         this.hidden = hidden;
+        this.subscribed=subscribed;
         this.voteStatus = voteStatus;
     }
 
@@ -106,6 +126,42 @@ public class Post {
         this.postId = postId;
     }
 
+    /**
+     * Gets community id.
+     *
+     * @return the community id
+     */
+    public int getCommunityId() {
+        return communityId;
+    }
+
+    /**
+     * Sets community id.
+     *
+     * @param communityId the community id
+     */
+    public void setCommunityId(int communityId) {
+        this.communityId = communityId;
+    }
+
+    /**
+     * Gets community name.
+     *
+     * @return the community name
+     */
+    public String getCommunityName() {
+        return communityName;
+    }
+
+    /**
+     * Sets community name.
+     *
+     * @param communityName the community name
+     */
+    public void setCommunityName(String communityName) {
+        this.communityName = communityName;
+    }
+
 
     /**
      * Gets post logo url.
@@ -115,6 +171,7 @@ public class Post {
     public String getPostLogoUrl() {
         return postLogoUrl;
     }
+
 
     /**
      * Sets post logo url.
@@ -267,6 +324,24 @@ public class Post {
      */
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
+    }
+
+    /**
+     * Is subscribed boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isSubscribed() {
+        return subscribed;
+    }
+
+    /**
+     * Sets subscribed.
+     *
+     * @param subscribed the subscribed
+     */
+    public void setSubscribed(boolean subscribed) {
+        this.subscribed = subscribed;
     }
 
     /**

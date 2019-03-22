@@ -1,6 +1,8 @@
 package com.example.android.minireddit.fragments;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,18 +25,27 @@ import com.example.android.minireddit.R;
 import com.example.android.minireddit.Constants;
 
 
+import java.sql.Struct;
 import java.util.ArrayList;
+
+import static com.example.android.minireddit.Constants.poster;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PostFragment extends Fragment {
-     ArrayList<Post> posts;
+    ArrayList<Post> posts;
 
+    private PostType mPostType;
 
     public PostFragment() {
         // Required empty public constructor
+    }
+
+    @SuppressLint("ValidFragment")
+    public PostFragment(PostType postType) {
+        mPostType = postType;
     }
 
 
@@ -42,24 +53,27 @@ public class PostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_post, container, false);
-        FrameLayout frameLayout=(FrameLayout)rootView.findViewById(R.id.framelayout);
-        ImageView expand=(ImageView) rootView.findViewById(R.id.imageforanimation);
-        final SwipeRefreshLayout refreshLayout=(SwipeRefreshLayout)rootView.findViewById(R.id.swipe);
+        View rootView = inflater.inflate(R.layout.fragment_post, container, false);
+        FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.framelayout);
+        ImageView expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
+        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
 
 
-        posts=DependentClass.getInstance().getListOfTrendingPosts();
+        if (mPostType == PostType.Popular)
+            posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+       // else
+          //  posts
 
-        final PosterAdapter adapter= new PosterAdapter(this.getContext(),posts,expand,frameLayout);
-        final ListView listView =(ListView) rootView.findViewById (R.id.postsListView);
-        listView.setAdapter(adapter);
-        final EndlessScrollListener scrollListener=new EndlessScrollListener() {
+                    poster = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
+        final ListView listView = (ListView) rootView.findViewById(R.id.postsListView);
+        listView.setAdapter(poster);
+        final EndlessScrollListener scrollListener = new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
 
 
-                ArrayList<Post> morePosts=DependentClass.getInstance().getListOfTrendingPosts();
-                adapter.addAll(morePosts);
+                ArrayList<Post> morePosts = DependentClass.getInstance().getListOfMoreTrendingPosts(totalItemsCount);
+                poster.addAll(morePosts);
                 return true;
             }
 
@@ -73,9 +87,9 @@ public class PostFragment extends Fragment {
             @Override
             public void onRefresh() {
 
-                posts=DependentClass.getInstance().getListOfTrendingPosts();
-                adapter.clear();
-                adapter.addAll(posts);
+                posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+                poster.clear();
+                poster.addAll(posts);
                 refreshLayout.setRefreshing(false);
 
 
@@ -85,6 +99,9 @@ public class PostFragment extends Fragment {
         return rootView;
     }
 
-
+    public enum PostType {
+        Popular,
+        Home
+    }
 
 }

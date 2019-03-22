@@ -1,5 +1,7 @@
 package com.example.android.minireddit.networking;
 
+import android.content.Context;
+
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.datastructure.Post;
 
@@ -27,12 +29,23 @@ public class DependentClass {
         return restClient;
     }
 
-    public ArrayList<Post> getListOfTrendingPosts() {
+    public ArrayList<Post> getListOfTrendingPosts(Context context) {
 
-        return mSupplier.getTrendingPost();
+        return mSupplier.getTrendingPost(context);
+    }
+    public ArrayList<Post> getListOfMoreTrendingPosts(int index) {
+
+        return mSupplier.getMoreTrendingPost( index);
     }
 
-    public boolean votePost(int postId) {
-        return mSupplier.votePost(postId);
+    public boolean votePostUp(int postId) {
+        return mSupplier.votePostUp(postId);
+    }
+    public boolean votePostDown(int postId) {
+        return mSupplier.votePostDown(postId);
+    }
+    public boolean subscribeCommunity(int commId){
+        return mSupplier.subscribeCommunity(commId);
+
     }
 }

@@ -110,6 +110,23 @@ public class PosterAdapter extends ArrayAdapter<Post> {
 
         TextView postCommentCount = (TextView) ListItemView.findViewById(R.id.postCommentCount);
         postCommentCount.setText(String.valueOf(currentPost.getPostCommentCount()));
+        final ImageView subscribe=(ImageView)ListItemView.findViewById(R.id.postAdd);
+        if(!currentPost.isSubscribed()) {
+            subscribe.setVisibility(View.VISIBLE);
+            subscribe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //todo check if auth
+                    if (DependentClass.getInstance().subscribeCommunity(currentPost.getCommunityId())){
+                        subscribe.setVisibility(View.GONE);
+                    }else{
+                        Toast.makeText(getContext(),"Faieled To Subscribe",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+        else
+            subscribe.setVisibility(View.GONE);
 
         final ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.postLike);
         final ImageView postDownVote = (ImageView) ListItemView.findViewById(R.id.postDislike);
@@ -133,7 +150,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         postUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePost(currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePostUp(currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
                         postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_clc_48dp);
                         currentPost.setVoteStatus(1);
@@ -161,7 +178,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         postDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePost(currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePostDown(currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
                         postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_clc_48dp);
                         currentPost.setVoteStatus(-1);

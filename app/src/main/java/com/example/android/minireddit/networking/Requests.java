@@ -1,5 +1,7 @@
 package com.example.android.minireddit.networking;
 
+import android.content.Context;
+
 import com.example.android.minireddit.datastructure.Post;
 
 import java.util.ArrayList;
@@ -9,8 +11,11 @@ import java.util.ArrayList;
  */
 
 public interface Requests {
-     ArrayList<Post>  getTrendingPost();
-     boolean votePost(int postId);
+     ArrayList<Post>  getTrendingPost(Context context);
+     ArrayList<Post>  getMoreTrendingPost(int index);
+     boolean votePostUp(int postId);
+     boolean votePostDown(int postId);
+     boolean subscribeCommunity(int commId );
 
 
 }

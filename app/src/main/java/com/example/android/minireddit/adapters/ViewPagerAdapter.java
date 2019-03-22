@@ -15,7 +15,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int i) {
-        PostFragment postFragment = new PostFragment();
+        PostFragment postFragment;
+
+        if(i==0) postFragment =new PostFragment(PostFragment.PostType.Home);
+        else postFragment = new PostFragment(PostFragment.PostType.Popular);
 
         return postFragment;
     }
