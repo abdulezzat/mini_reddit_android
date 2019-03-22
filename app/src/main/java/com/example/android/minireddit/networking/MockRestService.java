@@ -50,17 +50,17 @@ public class MockRestService implements com.example.android.minireddit.networkin
     }
 
     @Override
-    public boolean votePostUp(int postId) {
+    public boolean votePostUp(Context context,int postId) {
         return true;
     }
     @Override
-    public boolean votePostDown(int postId) {
+    public boolean votePostDown(Context context,int postId) {
         return true;
     }
 
 
     @Override
-    public boolean subscribeCommunity(int commId) {
+    public boolean subscribeCommunity(Context context,int commId) {
         return true;
     }
 

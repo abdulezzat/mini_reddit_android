@@ -117,7 +117,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                 @Override
                 public void onClick(View v) {
                     //todo check if auth
-                    if (DependentClass.getInstance().subscribeCommunity(currentPost.getCommunityId())){
+                    if (DependentClass.getInstance().subscribeCommunity(getContext(),currentPost.getCommunityId())){
                         subscribe.setVisibility(View.GONE);
                     }else{
                         Toast.makeText(getContext(),"Faieled To Subscribe",Toast.LENGTH_SHORT).show();
@@ -134,37 +134,37 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         switch (currentPost.getVoteStatus()) {
 
             case 1:
-                postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_clc_48dp);
-                postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_48dp);
+                postUpVote.setImageResource(R.drawable.upvote_clr);
+                postDownVote.setImageResource(R.drawable.downvote);
                 break;
             case -1:
-                postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_48dp);
-                postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_clc_48dp);
+                postUpVote.setImageResource(R.drawable.upvote);
+                postDownVote.setImageResource(R.drawable.downvote_clr);
                 break;
             default:
-                postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_48dp);
-                postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_48dp);
+                postUpVote.setImageResource(R.drawable.upvote);
+                postDownVote.setImageResource(R.drawable.downvote);
                 break;
 
         }
         postUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePostUp(currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePostUp(getContext(),currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
-                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_clc_48dp);
+                        postUpVote.setImageResource(R.drawable.upvote_clr);
                         currentPost.setVoteStatus(1);
                         currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
                         //todo send request to upvote
                     } else if (currentPost.getVoteStatus() == 1) {
 
-                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_48dp);
+                        postUpVote.setImageResource(R.drawable.upvote);
                         currentPost.setVoteStatus(0);
                         currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
                         //todo send request to cancel upvote
                     } else {
-                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_48dp);
-                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_clc_48dp);
+                        postDownVote.setImageResource(R.drawable.downvote);
+                        postUpVote.setImageResource(R.drawable.upvote_clr);
                         currentPost.setVoteStatus(1);
                         currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 2);
                     }
@@ -178,18 +178,18 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         postDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePostDown(currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePostDown(getContext(),currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
-                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_clc_48dp);
+                        postDownVote.setImageResource(R.drawable.downvote_clr);
                         currentPost.setVoteStatus(-1);
                         currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
                     } else if (currentPost.getVoteStatus() == 1) {
-                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_clc_48dp);
-                        postUpVote.setImageResource(R.drawable.ic_arrow_upward_black_48dp);
+                        postDownVote.setImageResource(R.drawable.downvote_clr);
+                        postUpVote.setImageResource(R.drawable.upvote);
                         currentPost.setVoteStatus(-1);
                         currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 2);
                     } else {
-                        postDownVote.setImageResource(R.drawable.ic_arrow_downward_black_48dp);
+                        postDownVote.setImageResource(R.drawable.downvote);
                         currentPost.setVoteStatus(0);
                         currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
                     }
