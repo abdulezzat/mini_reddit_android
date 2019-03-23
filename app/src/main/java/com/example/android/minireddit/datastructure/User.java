@@ -102,6 +102,8 @@ public class User {
         mKarma = karma;
         mCakeDay = cakeDay;
         mDeleted = deleted;
+        mFollowers=new ArrayList<>();
+        mFollowing=new ArrayList<>();
     }
 
     /**
@@ -117,6 +119,8 @@ public class User {
         mCakeDay = cakeDay;
         mKarma = karma;
         mAbout = about;
+        mFollowers=new ArrayList<>();
+        mFollowing=new ArrayList<>();
     }
 
     public String getmUserName() {
@@ -143,11 +147,11 @@ public class User {
         mProfileImage = profileImage;
     }
 
-    private String getmHeaderImage() {
+    public String getmHeaderImage() {
         return mHeaderImage;
     }
 
-    private void setmHeaderImage(String headerImage) {
+    public void setmHeaderImage(String headerImage) {
         mHeaderImage = headerImage;
     }
 
@@ -203,10 +207,8 @@ public class User {
      */
     public void setmFollowers(ArrayList<String> followersArr) {
         mFollowers.clear();
-        for (int i = 0; i < followersArr.size(); i++) {
-            mFollowers.add(followersArr.get(i));
-        }
-        updateFollowersNo();
+        mFollowers.addAll(followersArr);
+        updatemFollowersNo();
     }
 
     /**
@@ -215,20 +217,18 @@ public class User {
      * @param newFollowers the mFollowers to add.
      */
     public void addFollowers(ArrayList<String> newFollowers) {
-        for (int i = 0; i < newFollowers.size(); i++) {
-            mFollowers.add(newFollowers.get(i));
-        }
-        updateFollowersNo();
+        mFollowers.addAll(newFollowers);
+        updatemFollowersNo();
     }
 
-    public ArrayList<String> getfollowers() {
+    public ArrayList<String> getmFollowers() {
         return mFollowers;
     }
 
     /**
      * updates the current followers no.
      */
-    private void updateFollowersNo() {
+    private void updatemFollowersNo() {
         if (mFollowers != null || mFollowers.size() != 0) { // first check if the list is empty
             mFollowersNo = mFollowers.size();
         } else {
@@ -242,7 +242,7 @@ public class User {
      * @return Number of the mFollowers.
      */
     public int getmFollowersNo() {
-        updateFollowersNo();
+        updatemFollowersNo();
         return mFollowersNo;
     }
 
@@ -258,28 +258,24 @@ public class User {
      */
     public void setmFollowing(ArrayList<String> followingArr) {
         mFollowing.clear();
-        for (int i = 0; i < followingArr.size(); i++) {
-            mFollowing.add(followingArr.get(i));
-        }
-        updateFollowingNo();
+        mFollowing.addAll(followingArr);
+        updatemFollowingNo();
     }
 
     /**
      * adds new Users to the mFollowing list.
      *
-     * @param followingArr the users to add to the mFollowing list.
+     * @param newFollowing the users to add to the mFollowing list.
      */
-    public void addFollowing(ArrayList<String> followingArr) {
-        for (int i = 0; i < followingArr.size(); i++) {
-            mFollowing.add(followingArr.get(i));
-        }
-        updateFollowingNo();
+    public void addFollowing(ArrayList<String> newFollowing) {
+        mFollowing.addAll(newFollowing);
+        updatemFollowingNo();
     }
 
     /**
-     * updates the current following no.
+     * updates the current mfollowing no.
      */
-    private void updateFollowingNo() {
+    private void updatemFollowingNo() {
         if (mFollowing != null || mFollowing.size() != 0) { // first check if the list is empty.
             mFollowingNo = mFollowing.size();
         } else {
@@ -293,7 +289,7 @@ public class User {
      * @return number of Users that the user is mFollowing.
      */
     public int getmFollowingNo() {
-        updateFollowingNo();
+        updatemFollowingNo();
         return mFollowingNo;
     }
 

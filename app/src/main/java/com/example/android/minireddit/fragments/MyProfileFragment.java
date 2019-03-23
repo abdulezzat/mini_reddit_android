@@ -22,7 +22,7 @@ import com.example.android.minireddit.networking.DependentClass;
 
 /**
  * A simple {@link Fragment} subclass.
- *
+ * <p>
  * the profile fragment to show different user's profile.
  */
 public class MyProfileFragment extends Fragment {
@@ -44,10 +44,11 @@ public class MyProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         // get the user of the profile
-        mUser = DependentClass.getInstance().getUser("karashily");
-        mProfilePostsFragment =new ProfilePostsFragment();
-        mProfileCommentsFragment =new ProfileCommentsFragment();
-        mProfileAboutFragment =new ProfileAboutFragment();
+        mUser = DependentClass.getInstance().getUserPublicInfo("karashily");
+        mUser.setmEmail(DependentClass.getInstance().getUserPrivateInfo("karashily"));
+        mProfilePostsFragment = new ProfilePostsFragment();
+        mProfileCommentsFragment = new ProfileCommentsFragment();
+        mProfileAboutFragment = new ProfileAboutFragment();
 
 
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
@@ -58,9 +59,9 @@ public class MyProfileFragment extends Fragment {
 
         ProfilePagerAdapter mProfilePagerAdapter = new ProfilePagerAdapter(getFragmentManager());
 
-        mProfilePagerAdapter.addFragment(mProfilePostsFragment,"Posts", mUser);
-        mProfilePagerAdapter.addFragment(mProfileCommentsFragment,"Comments", mUser);
-        mProfilePagerAdapter.addFragment(mProfileAboutFragment,"About", mUser);
+        mProfilePagerAdapter.addFragment(mProfilePostsFragment, "Posts", mUser);
+        mProfilePagerAdapter.addFragment(mProfileCommentsFragment, "Comments", mUser);
+        mProfilePagerAdapter.addFragment(mProfileAboutFragment, "About", mUser);
 
         mViewPager.setAdapter(mProfilePagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -76,36 +77,36 @@ public class MyProfileFragment extends Fragment {
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        }
 
-        ImageView headerImage=(ImageView) rootView.findViewById(R.id.header_photo);
+        ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
 
-        Button followButton=(Button) rootView.findViewById(R.id.follow_button);
+        Button followButton = (Button) rootView.findViewById(R.id.follow_button);
 
-        TextView editButton=(TextView) rootView.findViewById(R.id.edit_profile);
+        TextView editButton = (TextView) rootView.findViewById(R.id.edit_profile);
 
-        TextView dotBeforeFollowers=(TextView) rootView.findViewById(R.id.dot_before_followers);
+        TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
 
-        TextView displayName=(TextView) rootView.findViewById(R.id.display_name);
+        TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
         displayName.setText(mUser.getmDisplayName());
 
-        TextView userName=(TextView) rootView.findViewById(R.id.username);
-        String mUserName="u/"+mUser.getmUserName();
+        TextView userName = (TextView) rootView.findViewById(R.id.username);
+        String mUserName = "u/" + mUser.getmUserName();
         userName.setText(mUserName);
 
-        TextView userKarma=(TextView) rootView.findViewById(R.id.karma);
-        String mUserKarma=mUser.getmKarma()+" karma";
+        TextView userKarma = (TextView) rootView.findViewById(R.id.karma);
+        String mUserKarma = mUser.getmKarma() + " karma";
         userKarma.setText(mUserKarma);
 
-        TextView userDate=(TextView) rootView.findViewById(R.id.date);
+        TextView userDate = (TextView) rootView.findViewById(R.id.date);
         userDate.setText(mUser.getmCakeDay());
 
-        TextView userFollowersCount=(TextView) rootView.findViewById(R.id.followers_count);
-        String mUserFollowersCount=mUser.getmFollowersNo()+" followers";
+        TextView userFollowersCount = (TextView) rootView.findViewById(R.id.followers_count);
+        String mUserFollowersCount = mUser.getmFollowersNo() + " followers";
         userFollowersCount.setText(mUserFollowersCount);
 
-        TextView userAbout=(TextView) rootView.findViewById(R.id.user_about);
+        TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
         userAbout.setText(mUser.getmAbout());
 
-        ImageView backButton=(ImageView) rootView.findViewById(R.id.back_button);
+        ImageView backButton = (ImageView) rootView.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 boolean result = DependentClass.getInstance().logIn(mEmail,mPassword);
                 if(result && Constants.debug){
                     Toast.makeText(getBaseContext(),"Log in as an admin successfully",Toast.LENGTH_SHORT).show();
-                    Constants.user =new User("admin","admin",null,"admin@gamil.com",null,null,200,null,false);
+                    Constants.user =new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
                     finish();
                 }else{
                     Toast.makeText(getBaseContext(),"Log in as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
