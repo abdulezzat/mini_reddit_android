@@ -1,15 +1,10 @@
 package com.example.android.minireddit;
 
-import android.graphics.Color;
-import android.media.Image;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,9 +15,6 @@ import com.example.android.minireddit.fragments.ProfileAboutFragment;
 import com.example.android.minireddit.fragments.ProfileCommentsFragment;
 import com.example.android.minireddit.fragments.ProfilePostsFragment;
 import com.example.android.minireddit.networking.DependentClass;
-import com.example.android.minireddit.networking.MockRestService;
-
-import org.w3c.dom.Text;
 
 public class ProfileActivity extends AppCompatActivity {
     ProfilePostsFragment profilePostsFragment;
@@ -35,10 +27,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mUser = DependentClass.getInstance().getUser("karashily");
-        profilePostsFragment=new ProfilePostsFragment();
-        profileCommentsFragment=new ProfileCommentsFragment();
-        profileAboutFragment=new ProfileAboutFragment();
+        mUser = DependentClass.getInstance().getUserPublicInfo("karashily");
+        profilePostsFragment = new ProfilePostsFragment();
+        profileCommentsFragment = new ProfileCommentsFragment();
+        profileAboutFragment = new ProfileAboutFragment();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -50,43 +42,45 @@ public class ProfileActivity extends AppCompatActivity {
 
         ProfilePagerAdapter mProfilePagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager());
 
-        mProfilePagerAdapter.addFragment(profilePostsFragment,"Posts", mUser);
-        mProfilePagerAdapter.addFragment(profileCommentsFragment,"Comments", mUser);
-        mProfilePagerAdapter.addFragment(profileAboutFragment,"About", mUser);
+        mProfilePagerAdapter.addFragment(profilePostsFragment, "Posts", mUser);
+        mProfilePagerAdapter.addFragment(profileCommentsFragment, "Comments", mUser);
+        mProfilePagerAdapter.addFragment(profileAboutFragment, "About", mUser);
 
         mViewPager.setAdapter(mProfilePagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
 
-        if(getSupportActionBar()!=null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }
 
-        ImageView headerImage=(ImageView) findViewById(R.id.header_photo);
-        TextView displayName=(TextView) findViewById(R.id.display_name);
-        Button followButton=(Button) findViewById(R.id.follow_button);
-        TextView editButton=(TextView) findViewById(R.id.edit_profile);
-        TextView userName=(TextView) findViewById(R.id.username);
-        TextView userKarma=(TextView) findViewById(R.id.karma);
-        TextView userDate=(TextView) findViewById(R.id.date);
-        TextView userFollowersCount=(TextView) findViewById(R.id.followers_count);
-        TextView dotBeforeFollowers=(TextView) findViewById(R.id.dot_before_followers);
-        TextView userAbout=(TextView) findViewById(R.id.user_about);
 
-        displayName.setText(mUser.getDisplayName());
+        ImageView headerImage = (ImageView) findViewById(R.id.header_photo);
+        TextView displayName = (TextView) findViewById(R.id.display_name);
+        Button followButton = (Button) findViewById(R.id.follow_button);
+        TextView editButton = (TextView) findViewById(R.id.edit_profile);
+        TextView userName = (TextView) findViewById(R.id.username);
+        TextView userKarma = (TextView) findViewById(R.id.karma);
+        TextView userDate = (TextView) findViewById(R.id.date);
+        TextView userFollowersCount = (TextView) findViewById(R.id.followers_count);
+        TextView dotBeforeFollowers = (TextView) findViewById(R.id.dot_before_followers);
+        TextView userAbout = (TextView) findViewById(R.id.user_about);
 
-        String mUserName="u/"+mUser.getUserName();
+        displayName.setText(mUser.getmDisplayName());
+
+        String mUserName = "u/" + mUser.getmUserName();
         userName.setText(mUserName);
 
-        String mUserKarma=mUser.getKarma()+" karma";
+        String mUserKarma = mUser.getmKarma() + " karma";
         userKarma.setText(mUserKarma);
 
-        userDate.setText(mUser.getRedditAge());
+        userDate.setText(mUser.getmCakeDay());
 
-        String mUserFollowersCount=mUser.getFollowersNo()+" followers";
+        String mUserFollowersCount = mUser.getmFollowersNo() + " followers";
         userFollowersCount.setText(mUserFollowersCount);
 
-        userAbout.setText(mUser.getAbout());
+        userAbout.setText(mUser.getmAbout());
 
     }
 

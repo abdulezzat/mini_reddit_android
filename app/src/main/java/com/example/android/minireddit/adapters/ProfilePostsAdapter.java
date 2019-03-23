@@ -25,8 +25,9 @@ import java.util.List;
 
 /**
  * Created by karashily on 15/03/19.
- *
+ * <p>
  * An Adapter For the ProfilePostsListView
+ * </p>
  */
 
 public class ProfilePostsAdapter extends ArrayAdapter<Post> {
@@ -40,7 +41,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
     }
 
     /**
-     * A method that takes a view and recycles it and gets a new view
+     * A method that takes a view and recycles it and gets a new view populated with the correct data.
      * @param position the position of the current view
      * @param convertView the view to recycle
      * @param parent needed to inflate new views

@@ -2,21 +2,19 @@ package com.example.android.minireddit.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.ProfilePagerAdapter;
 import com.example.android.minireddit.datastructure.User;
@@ -24,12 +22,14 @@ import com.example.android.minireddit.networking.DependentClass;
 
 /**
  * A simple {@link Fragment} subclass.
+ * <p>
+ * the profile fragment to show different user's profile.
  */
 public class MyProfileFragment extends Fragment {
 
-    ProfilePostsFragment profilePostsFragment;
-    ProfileCommentsFragment profileCommentsFragment;
-    ProfileAboutFragment profileAboutFragment;
+    ProfilePostsFragment mProfilePostsFragment;
+    ProfileCommentsFragment mProfileCommentsFragment;
+    ProfileAboutFragment mProfileAboutFragment;
     User mUser;
 
     public MyProfileFragment() {
@@ -38,72 +38,85 @@ public class MyProfileFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);;
+        View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
-        mUser = DependentClass.getInstance().getUser("karashily");
-        profilePostsFragment=new ProfilePostsFragment();
-        profileCommentsFragment=new ProfileCommentsFragment();
-        profileAboutFragment=new ProfileAboutFragment();
-
-
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        TabLayout mTabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
-
-        ViewPager mViewPager = (ViewPager) rootView.findViewById(R.id.profile_view_pager);
-
-        ProfilePagerAdapter mProfilePagerAdapter = new ProfilePagerAdapter(getFragmentManager());
-
-        mProfilePagerAdapter.addFragment(profilePostsFragment,"Posts", mUser);
-        mProfilePagerAdapter.addFragment(profileCommentsFragment,"Comments", mUser);
-        mProfilePagerAdapter.addFragment(profileAboutFragment,"About", mUser);
-
-        mViewPager.setAdapter(mProfilePagerAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+        // get the user of the profile
+        mUser = DependentClass.getInstance().getUserPublicInfo(Constants.user.getmUserName());
+        mUser.setmEmail(DependentClass.getInstance().getUserPrivateInfo(Constants.user.getmUserName()));
+        mProfilePostsFragment = new ProfilePostsFragment();
+        mProfileCommentsFragment = new ProfileCommentsFragment();
+        mProfileAboutFragment = new ProfileAboutFragment();
 
 
-        final AppCompatActivity act = (AppCompatActivity) getActivity();
-        if (act.getSupportActionBar() != null) {
-            act.setSupportActionBar(toolbar);
-            act.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-//        if((AppCompatActivity) getActivity().getSupportActionBar()!=null) {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        }
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
+
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.profile_view_pager);
+
+        ProfilePagerAdapter profilePagerAdapter = new ProfilePagerAdapter(getFragmentManager());
+
+        profilePagerAdapter.addFragment(mProfilePostsFragment, "Posts", mUser);
+        profilePagerAdapter.addFragment(mProfileCommentsFragment, "Comments", mUser);
+        profilePagerAdapter.addFragment(mProfileAboutFragment, "About", mUser);
+
+        viewPager.setAdapter(profilePagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
 
-        ImageView headerImage=(ImageView) rootView.findViewById(R.id.header_photo);
-        TextView displayName=(TextView) rootView.findViewById(R.id.display_name);
-        Button followButton=(Button) rootView.findViewById(R.id.follow_button);
-        TextView editButton=(TextView) rootView.findViewById(R.id.edit_profile);
-        TextView userName=(TextView) rootView.findViewById(R.id.username);
-        TextView userKarma=(TextView) rootView.findViewById(R.id.karma);
-        TextView userDate=(TextView) rootView.findViewById(R.id.date);
-        TextView userFollowersCount=(TextView) rootView.findViewById(R.id.followers_count);
-        TextView dotBeforeFollowers=(TextView) rootView.findViewById(R.id.dot_before_followers);
-        TextView userAbout=(TextView) rootView.findViewById(R.id.user_about);
+        // Setting Fragment Views values to be equal to values retrieved form server.
+        ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
+        //TODO: setting headerImage.
 
-        displayName.setText(mUser.getDisplayName());
+        Button followButton = (Button) rootView.findViewById(R.id.follow_button);
+        //TODO: setting headerImage.
 
-        String mUserName="u/"+mUser.getUserName();
+        TextView editButton = (TextView) rootView.findViewById(R.id.edit_profile);
+        //TODO: if mUser isn't the currentUser then this button should disappear.
+
+        TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
+        //TODO: if mUser isn't the currentUser then this dot should disappear.
+
+        TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
+        displayName.setText(mUser.getmDisplayName());
+
+        TextView userName = (TextView) rootView.findViewById(R.id.username);
+        String mUserName = "u/" + mUser.getmUserName();
         userName.setText(mUserName);
 
-        String mUserKarma=mUser.getKarma()+" karma";
+        TextView userKarma = (TextView) rootView.findViewById(R.id.karma);
+        String mUserKarma = mUser.getmKarma() + " karma";
         userKarma.setText(mUserKarma);
 
-        userDate.setText(mUser.getRedditAge());
+        TextView userDate = (TextView) rootView.findViewById(R.id.date);
+        userDate.setText(mUser.getmCakeDay());
 
-        String mUserFollowersCount=mUser.getFollowersNo()+" followers";
+        TextView userFollowersCount = (TextView) rootView.findViewById(R.id.followers_count);
+        //TODO: if mUser isn't the currentUser then this View should disappear.
+        String mUserFollowersCount = mUser.getmFollowersNo() + " followers";
         userFollowersCount.setText(mUserFollowersCount);
 
-        userAbout.setText(mUser.getAbout());
+        TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
+        userAbout.setText(mUser.getmAbout());
+
+        // setting backButton Action
+        ImageView backButton = (ImageView) rootView.findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AppCompatActivity act = (AppCompatActivity) getActivity();
+                try {
+                    act.onBackPressed();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         return rootView;
     }
-
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final AppCompatActivity act = (AppCompatActivity) getActivity();
@@ -120,5 +133,5 @@ public class MyProfileFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
 }

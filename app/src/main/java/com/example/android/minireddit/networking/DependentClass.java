@@ -29,6 +29,7 @@ public class DependentClass {
     public static DependentClass getInstance() {
         return restClient;
     }
+
     public ArrayList<Post> getListOfHomePosts(Context context) {
 
         return mSupplier.getHomePost(context);
@@ -38,28 +39,39 @@ public class DependentClass {
 
         return mSupplier.getTrendingPost(context);
     }
+
     public ArrayList<Post> getListOfMoreTrendingPosts(int index) {
 
-        return mSupplier.getMoreTrendingPost( index);
+        return mSupplier.getMoreTrendingPost(index);
     }
 
-    public boolean votePostUp(Context context,int postId) {
-        return mSupplier.votePostUp(context,postId);
+    public boolean votePostUp(Context context, int postId) {
+        return mSupplier.votePostUp(context, postId);
     }
-    public boolean votePostDown(Context context,int postId) {
-        return mSupplier.votePostDown( context,postId);
+
+    public boolean votePostDown(Context context, int postId) {
+        return mSupplier.votePostDown(context, postId);
     }
-    public boolean subscribeCommunity(Context context,int commId){
-        return mSupplier.subscribeCommunity(context,commId);}
-    public boolean unsubscribeCommunity(Context context,int commId){
-        return mSupplier.unsubscribeCommunity(context,commId);}
+
+    public boolean subscribeCommunity(Context context, int commId) {
+        return mSupplier.subscribeCommunity(context, commId);
+    }
+
+    public boolean unsubscribeCommunity(Context context, int commId) {
+        return mSupplier.unsubscribeCommunity(context, commId);
+    }
 
 
+    public boolean logIn(String email, String password) {
+        return mSupplier.logIn(email, password);
+    }
 
-    public boolean logIn (String email,String password){ return  mSupplier.logIn(email,password);}
+    public User getUserPublicInfo(String username) {
+        return mSupplier.getUserPublicInfo(username);
+    }
 
-    public User getUser(String uN) {
-        return mSupplier.getUserPublicInfo(uN);
+    public String getUserPrivateInfo(String username) {
+        return mSupplier.getUserPrivateInfo(username);
     }
 
 

@@ -451,7 +451,14 @@ public class RestService implements Requests {
     public boolean logIn(String userName, String password) {
         return false;
     }
-    public User getUserPublicInfo(String uN) {
+
+    @Override
+    public User getUserPublicInfo(String username){
+        return null;
+    }
+
+    @Override
+    public String getUserPrivateInfo(String username){
         return null;
     }
 }
