@@ -66,12 +66,12 @@ public class DependentClass {
         return mSupplier.logIn(email, password);
     }
 
-    public User getUserPublicInfo(String username) {
-        return mSupplier.getUserPublicInfo(username);
+    public User getUserPublicInfo(Context context, String username) {
+        return mSupplier.getUserPublicInfo(context, username);
     }
 
-    public String getUserPrivateInfo(String username) {
-        return mSupplier.getUserPrivateInfo(username);
+    public User getUserPrivateInfo(Context context) {
+        return mSupplier.getUserPrivateInfo(context);
     }
 
 

@@ -12,16 +12,25 @@ import java.util.ArrayList;
  */
 
 public interface Requests {
-     ArrayList<Post>  getTrendingPost(Context context);
-     ArrayList<Post>  getHomePost(Context context);
-     ArrayList<Post>  getMoreTrendingPost(int index);
-     boolean votePostUp(Context context,int postId);
-     boolean votePostDown(Context context,int postId);
-     boolean subscribeCommunity(Context context,int commId );
-     boolean unsubscribeCommunity(Context context,int commId );
-     boolean logIn(String userName,String password);
-     User getUserPublicInfo(String username);
-     String getUserPrivateInfo(String username);
+    ArrayList<Post> getTrendingPost(Context context);
+
+    ArrayList<Post> getHomePost(Context context);
+
+    ArrayList<Post> getMoreTrendingPost(int index);
+
+    boolean votePostUp(Context context, int postId);
+
+    boolean votePostDown(Context context, int postId);
+
+    boolean subscribeCommunity(Context context, int commId);
+
+    boolean unsubscribeCommunity(Context context, int commId);
+
+    boolean logIn(String userName, String password);
+
+    User getUserPublicInfo(Context context, String username);
+
+    User getUserPrivateInfo(Context context);
 
 
 }
