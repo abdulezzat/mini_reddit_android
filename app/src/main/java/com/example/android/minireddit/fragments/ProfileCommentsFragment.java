@@ -17,6 +17,8 @@ import org.w3c.dom.Comment;
 import java.util.ArrayList;
 
 /**
+ * Fragment for User Comments shown in the second tab of his/her profile
+ *
  * Created by karashily on 16/03/19.
  */
 
@@ -24,7 +26,7 @@ public class ProfileCommentsFragment extends Fragment {
 
     User mUser;
 
-    public ProfileCommentsFragment() {
+    public ProfileCommentsFragment() { // empty constructor required.
     }
 
     @Override

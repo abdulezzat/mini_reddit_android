@@ -20,7 +20,8 @@ public interface Requests {
      boolean subscribeCommunity(Context context,int commId );
      boolean unsubscribeCommunity(Context context,int commId );
      boolean logIn(String userName,String password);
-     User getUserPublicInfo(String uN);
+     User getUserPublicInfo(String username);
+     String getUserPrivateInfo(String username);
 
 
 }

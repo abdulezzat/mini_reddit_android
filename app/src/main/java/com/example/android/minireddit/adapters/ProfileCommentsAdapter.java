@@ -24,14 +24,29 @@ import java.util.List;
 
 /**
  * Created by karashily on 16/03/19.
+ * <p>
+ *     an adapter for the profile comments fragment that populates user comments with data.
+ * </p>
  */
 
 public class ProfileCommentsAdapter extends ArrayAdapter<Post> {
 
+    /**
+     * A Constructor that takes the Context and the Array of Objects(Posts) and passes them to the Superclass Constructor
+     * @param context Context of the view
+     * @param objects The List of objects (Comments)
+     */
     public ProfileCommentsAdapter(@NonNull Context context, @NonNull List<Post> objects) {
         super(context, 0, objects);
     }
 
+    /**
+     * A method that takes a view and recycles it and gets a new view populated with the correct data.
+     * @param position the position of the current view
+     * @param convertView the view to recycle
+     * @param parent needed to inflate new views
+     * @return the recycled view
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

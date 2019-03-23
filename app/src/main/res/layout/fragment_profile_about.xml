@@ -119,6 +119,9 @@
             android:id="@+id/msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contextClickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true">
 
             <ImageView

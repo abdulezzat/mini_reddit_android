@@ -96,8 +96,12 @@ public class MockRestService implements com.example.android.minireddit.networkin
         return false;
     }
 
-    public User getUserPublicInfo(String uN) {
-        User user=new User("kokowawa",49415,"4m 24d","a creative potato. kokowawa lover.");
+    public User getUserPublicInfo(String username) {
+        User user=new User("karashily",49415,"4m 24d","just a place holder for user about section. hello. hope you enjoy your visit with us.");
         return user;
+    }
+
+    public String getUserPrivateInfo(String username){
+        return "karashily@gmail.com";
     }
 }
