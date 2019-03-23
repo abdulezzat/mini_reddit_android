@@ -107,7 +107,8 @@ public class User {
     }
 
     /**
-     * A constructor for constructing a User object from the data returned from the getUserPublicInfo request.
+     * A constructor for constructing a User object from the data returned by the getUserPublicInfo request.
+     *
      * @param username  user's unique username.
      * @param karma     user's karma.
      * @param cakeDay   the day on which the user joined reddit.

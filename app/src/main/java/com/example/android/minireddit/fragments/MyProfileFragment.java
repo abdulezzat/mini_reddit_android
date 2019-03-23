@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.ProfilePagerAdapter;
 import com.example.android.minireddit.datastructure.User;
@@ -44,46 +44,39 @@ public class MyProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         // get the user of the profile
-        mUser = DependentClass.getInstance().getUserPublicInfo("karashily");
-        mUser.setmEmail(DependentClass.getInstance().getUserPrivateInfo("karashily"));
+        mUser = DependentClass.getInstance().getUserPublicInfo(Constants.user.getmUserName());
+        mUser.setmEmail(DependentClass.getInstance().getUserPrivateInfo(Constants.user.getmUserName()));
         mProfilePostsFragment = new ProfilePostsFragment();
         mProfileCommentsFragment = new ProfileCommentsFragment();
         mProfileAboutFragment = new ProfileAboutFragment();
 
 
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
 
-        TabLayout mTabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.profile_view_pager);
 
-        ViewPager mViewPager = (ViewPager) rootView.findViewById(R.id.profile_view_pager);
+        ProfilePagerAdapter profilePagerAdapter = new ProfilePagerAdapter(getFragmentManager());
 
-        ProfilePagerAdapter mProfilePagerAdapter = new ProfilePagerAdapter(getFragmentManager());
+        profilePagerAdapter.addFragment(mProfilePostsFragment, "Posts", mUser);
+        profilePagerAdapter.addFragment(mProfileCommentsFragment, "Comments", mUser);
+        profilePagerAdapter.addFragment(mProfileAboutFragment, "About", mUser);
 
-        mProfilePagerAdapter.addFragment(mProfilePostsFragment, "Posts", mUser);
-        mProfilePagerAdapter.addFragment(mProfileCommentsFragment, "Comments", mUser);
-        mProfilePagerAdapter.addFragment(mProfileAboutFragment, "About", mUser);
-
-        mViewPager.setAdapter(mProfilePagerAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+        viewPager.setAdapter(profilePagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
 
-//        final AppCompatActivity act = (AppCompatActivity) getActivity();
-
-//        if (act.getSupportActionBar() != null) {
-//            act.setSupportActionBar(toolbar);
-//            act.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        }
-//        if((AppCompatActivity) getActivity().getSupportActionBar()!=null) {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        }
-
+        // Setting Fragment Views values to be equal to values retrieved form server.
         ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
+        //TODO: setting headerImage.
 
         Button followButton = (Button) rootView.findViewById(R.id.follow_button);
+        //TODO: setting headerImage.
 
         TextView editButton = (TextView) rootView.findViewById(R.id.edit_profile);
+        //TODO: if mUser isn't the currentUser then this button should disappear.
 
         TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
+        //TODO: if mUser isn't the currentUser then this dot should disappear.
 
         TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
         displayName.setText(mUser.getmDisplayName());
@@ -100,12 +93,14 @@ public class MyProfileFragment extends Fragment {
         userDate.setText(mUser.getmCakeDay());
 
         TextView userFollowersCount = (TextView) rootView.findViewById(R.id.followers_count);
+        //TODO: if mUser isn't the currentUser then this View should disappear.
         String mUserFollowersCount = mUser.getmFollowersNo() + " followers";
         userFollowersCount.setText(mUserFollowersCount);
 
         TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
         userAbout.setText(mUser.getmAbout());
 
+        // setting backButton Action
         ImageView backButton = (ImageView) rootView.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
