@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mUser = DependentClass.getInstance().getUserPublicInfo("karashily");
+
         profilePostsFragment = new ProfilePostsFragment();
         profileCommentsFragment = new ProfileCommentsFragment();
         profileAboutFragment = new ProfileAboutFragment();

@@ -1,6 +1,7 @@
 package com.example.android.minireddit.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -44,8 +45,8 @@ public class MyProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         // get the user of the profile
-        mUser = DependentClass.getInstance().getUserPublicInfo(Constants.user.getmUserName());
-        mUser.setmEmail(DependentClass.getInstance().getUserPrivateInfo(Constants.user.getmUserName()));
+        mUser = DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.user.getmUserName());
+        mUser.setmEmail(DependentClass.getInstance().getUserPrivateInfo(getContext()).getmEmail());
         mProfilePostsFragment = new ProfilePostsFragment();
         mProfileCommentsFragment = new ProfileCommentsFragment();
         mProfileAboutFragment = new ProfileAboutFragment();

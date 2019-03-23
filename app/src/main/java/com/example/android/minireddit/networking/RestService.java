@@ -143,9 +143,8 @@ public class RestService implements Requests {
                 return headers;
             }
         };
+
         MySingleton.getInstance(context).addToRequestQueue(stringrequest);
-
-
         //String JSON = "{ \"posts\": [ { \"post_id\": 1, \"body\": \"post1\", \"username\": \"ahmed\", \"downvotes\": 17, \"upvotes\": 30, \"date\": \" 2 days ago \", \"comments_num\": 0, \"saved\": \"true\", \"hidden\": \"false\", \"postimageurl\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\", \"votestatus\":-1, \"videourl\":\"https://www.youtube.com/watch?v=4PUFV17_VkA\" , \"userimagelogo\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\" }, { \"post_id\": 2, \"body\": \"post2\", \"username\": \"ahmed\", \"downvotes\": 15, \"upvotes\": 20, \"date\": \" 2 days ago \", \"comments_num\": 0, \"saved\": \"false\", \"hidden\": \"true\", \"postimageurl\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\", \"votestatus\":-1, \"videourl\":\"https://www.youtube.com/watch?v=_kYJDce1Hcw\", \"userimagelogo\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\" }, { \"post_id\": 3, \"body\": \"post3\", \"username\": \"ahmed\", \"downvotes\": 15, \"upvotes\": 20, \"date\": \" 2 days ago \", \"comments_num\": 0, \"saved\": \"true\", \"hidden\": \"true\", \"postimageurl\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\", \"votestatus\":-1 , \"videourl\":\"https://www.youtube.com/watch?v=_kYJDce1Hcw\", \"userimagelogo\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\" } ] }";
         //JSONObject jsonObject = null;
 
@@ -505,12 +504,123 @@ public class RestService implements Requests {
     }
 
     @Override
-    public User getUserPublicInfo(String username) {
-        return null;
+    public User getUserPublicInfo(final Context context, final String username) {
+        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPublicUserInfo?username=" + username + "token="; // +token
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+
+        final User user = new User("", 0, "", "");
+
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String username = jsonObject.getString("username");
+                            user.setmUserName(username);
+                            user.setmDisplayName(username);
+
+                            int karma = jsonObject.getInt("karma");
+                            user.setmKarma(karma);
+
+                            String cakeDay = jsonObject.getString("cake_day");
+                            user.setmCakeDay(cakeDay);
+
+                            String about = jsonObject.getString("about");
+                            user.setmAbout(about);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+
+
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                //headers.put("Authorization","Bearer: "+ token );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+        return user;
     }
 
     @Override
-    public String getUserPrivateInfo(String username) {
-        return null;
+    public User getUserPrivateInfo(final Context context) {
+        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPrivateUserInfo?&token=";//+token
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+
+        final User user = new User("", 0, "", "");
+
+        //"http://192.168.43.223:82/api/unauth/ViewPosts"
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            String email = jsonObject.getString("email");
+                            user.setmEmail(email);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+
+
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                //headers.put("Authorization","Bearer: "+ token );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+        return user;
     }
 }

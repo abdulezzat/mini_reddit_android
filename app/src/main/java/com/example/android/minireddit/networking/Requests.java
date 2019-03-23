@@ -21,8 +21,10 @@ public interface Requests {
      boolean unsubscribeCommunity(Context context,int commId );
      boolean logIn(Context context,String username,String password);
      boolean signUp(Context context,String email,String username,String password);
-     User getUserPublicInfo(String username);
-     String getUserPrivateInfo(String username);
+
+    User getUserPublicInfo(Context context, String username);
+
+    User getUserPrivateInfo(Context context);
 
 
 }
