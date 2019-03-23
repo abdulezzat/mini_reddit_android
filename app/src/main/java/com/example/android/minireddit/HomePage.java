@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -210,6 +211,7 @@ public class HomePage extends AppCompatActivity
 
         if (id == R.id.nav_my_profile) {
             mInHomeScreen =false;
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             getSupportActionBar().hide();
             result = loadFragment(mMyProfileFragment);
         } else if (id == R.id.nav_reddit_coin) {
@@ -225,6 +227,7 @@ public class HomePage extends AppCompatActivity
             startActivity(intent);
 
         }else if (id == R.id.navigation_home) {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             setSupportActionBar(toolbar);
             getSupportActionBar().show();
             mInHomeScreen=true;
@@ -255,9 +258,11 @@ public class HomePage extends AppCompatActivity
     }
 
     public void navigator(){
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         setSupportActionBar(toolbar);
         getSupportActionBar().show();
         mInHomeScreen=true;
         loadFragment(mHomePageFragment);
+
     }
 }
