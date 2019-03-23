@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -262,5 +263,6 @@ public class HomePage extends AppCompatActivity
         getSupportActionBar().show();
         mInHomeScreen=true;
         loadFragment(mHomePageFragment);
+
     }
 }

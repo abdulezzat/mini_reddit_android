@@ -9,18 +9,21 @@ import com.example.android.minireddit.fragments.PostFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter{
     private int numberOfPages = 2;
+    PostFragment mPostFragmentHome;
+    PostFragment mPostFragmentPopular;
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
+        mPostFragmentHome =new PostFragment(PostFragment.PostType.Home);
+        mPostFragmentPopular = new PostFragment(PostFragment.PostType.Popular);
     }
 
     @Override
     public Fragment getItem(int i) {
-        PostFragment postFragment;
 
-        if(i==0) postFragment =new PostFragment(PostFragment.PostType.Home);
-        else postFragment = new PostFragment(PostFragment.PostType.Popular);
 
-        return postFragment;
+        if(i==0) return mPostFragmentHome ;
+        else return mPostFragmentPopular  ;
+
     }
 
     @Override
@@ -35,4 +38,5 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
         if(position==0) return "Home";
         else return "Popular";
     }
+
 }

@@ -40,6 +40,9 @@ public class PostFragment extends Fragment {
 
     private PostType mPostType;
 
+    //UI elements
+    View rootView;
+
     public PostFragment() {
         // Required empty public constructor
     }
@@ -54,7 +57,7 @@ public class PostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_post, container, false);
+        rootView= inflater.inflate(R.layout.fragment_post, container, false);
         FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.framelayout);
         ImageView expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
@@ -128,6 +131,8 @@ public class PostFragment extends Fragment {
 
         return rootView;
     }
+
+
 
     public enum PostType {
         Popular,
