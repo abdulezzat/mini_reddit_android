@@ -1,15 +1,10 @@
 package com.example.android.minireddit;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,20 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.android.minireddit.adapters.ViewPagerAdapter;
 import com.example.android.minireddit.fragments.HomePageFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
 
 
 public class HomePage extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,BottomNavigationViewEx.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationViewEx.OnNavigationItemSelectedListener {
 
 
     //UI elements
@@ -49,7 +42,7 @@ public class HomePage extends AppCompatActivity
     private MyProfileFragment mMyProfileFragment;
 
     //helper members
-    private boolean mInHomeScreen = true;
+    private boolean mInHomeScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +103,7 @@ public class HomePage extends AppCompatActivity
         mMyProfileFragment = new MyProfileFragment();
         //set default fragment homePage
         loadFragment(mHomePageFragment);
+        mInHomeScreen = true;
 
     }
 
@@ -132,7 +126,6 @@ public class HomePage extends AppCompatActivity
                 JustView.setVisibility(View.GONE);
                 JustImage.setVisibility(View.GONE);
                 RootView.setVisibility(View.VISIBLE);
-
 
 
             }
@@ -176,13 +169,16 @@ public class HomePage extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if (mInHomeScreen) {
-                super.onBackPressed();
-                //additional code
-            } else {
-                navigator();
-            }
+           int count = getSupportFragmentManager().getBackStackEntryCount();
 
+            if (count == 1 ||mInHomeScreen) {
+                finish();
+            } else {
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                setSupportActionBar(toolbar);
+                getSupportActionBar().show();
+                getSupportFragmentManager().popBackStack();
+            }
         }
     }
 
@@ -206,11 +202,11 @@ public class HomePage extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
-        boolean result =true;
+        boolean result = true;
         int id = item.getItemId();
 
         if (id == R.id.nav_my_profile) {
-            mInHomeScreen =false;
+            mInHomeScreen = false;
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             getSupportActionBar().hide();
             result = loadFragment(mMyProfileFragment);
@@ -226,42 +222,47 @@ public class HomePage extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 
-        }else if (id == R.id.navigation_home) {
+        } else if (id == R.id.navigation_home) {
+            mInHomeScreen = true;
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             setSupportActionBar(toolbar);
             getSupportActionBar().show();
-            mInHomeScreen=true;
             result = loadFragment(mHomePageFragment);
-        }else if (id == R.id.navigation_dashboard) {
+        } else if (id == R.id.navigation_dashboard) {
 
-        }else if (id == R.id.navigation_new_post) {
+        } else if (id == R.id.navigation_new_post) {
 
-        }else if (id == R.id.navigation_chat) {
+        } else if (id == R.id.navigation_chat) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.navigation_message) {
+        } else if (id == R.id.navigation_message) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return result;
     }
-    private boolean loadFragment(Fragment fragment){
-        if(fragment != null){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container,fragment)
+
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
                     .commit();
 
+            fragmentManager.executePendingTransactions();
+
+
             return true;
-        }else return false;
+        } else return false;
     }
 
-    public void navigator(){
+    public void navigator() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         setSupportActionBar(toolbar);
         getSupportActionBar().show();
-        mInHomeScreen=true;
+        mInHomeScreen = true;
         loadFragment(mHomePageFragment);
 
     }

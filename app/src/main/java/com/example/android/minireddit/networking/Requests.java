@@ -19,7 +19,8 @@ public interface Requests {
      boolean votePostDown(Context context,int postId);
      boolean subscribeCommunity(Context context,int commId );
      boolean unsubscribeCommunity(Context context,int commId );
-     boolean logIn(String userName,String password);
+     boolean logIn(Context context,String username,String password);
+     boolean signUp(Context context,String email,String username,String password);
      User getUserPublicInfo(String username);
      String getUserPrivateInfo(String username);
 

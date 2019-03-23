@@ -7,9 +7,23 @@ import com.example.android.minireddit.datastructure.User;
 public class Constants {
 
     public static final boolean debug=true;
-    //public static User user = null;
-    public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
+    public static User user = null;
+    //public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
     public static final String TRENDIN_POST="";
     public static PosterAdapter poster=null;
     public static PosterAdapter homeposts=null;
+
+    //URL
+    final static public String LOG_IN_URL ="";
+    final static public String SIGN_UP_URL ="";
+
+    //API parameters name
+    final static public String username = "username";
+    final static public String password = "password";
+    final static public String email = "email";
+
+    //result for start activity for result
+    final static public int CREATE_ACCOUNT_SUCCESSFULLY = 0;
+    final static public int CREATE_ACCOUNT_UNSUCCESSFULLY = 1;
+
 }

@@ -62,9 +62,13 @@ public class DependentClass {
     }
 
 
-    public boolean logIn(String email, String password) {
-        return mSupplier.logIn(email, password);
+    public boolean logIn(Context context,String email, String password) {
+        return mSupplier.logIn(context,email, password);
     }
+    public boolean signUp(Context context,String email,String username,String password) {
+        return mSupplier.logIn(context,email, password);
+    }
+
 
     public User getUserPublicInfo(String username) {
         return mSupplier.getUserPublicInfo(username);
