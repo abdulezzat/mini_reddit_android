@@ -10,21 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b74f979-8347-46c4-b5e5-3cc7084a8d28" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/LoginActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/LoginActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/DependentClass.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/DependentClass.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/MockRestService.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/MockRestService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/Requests.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/Requests.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/RestService.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/RestService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_login.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/nav_header_home_page_anonymous.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/nav_header_home_page_anonymous.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,14 +48,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignUpActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SignUpActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="63" column="71" lean-forward="false" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="71" />
+            <state relative-caret-position="425">
+              <caret line="76" column="32" lean-forward="false" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
               <folding>
-                <element signature="e#1756#2817#0" expanded="true" />
-                <element signature="e#2816#2817#0" expanded="true" />
+                <element signature="e#1893#2954#0" expanded="true" />
+                <element signature="e#2953#2954#0" expanded="true" />
+                <element signature="e#2999#3151#0" expanded="true" />
+                <element signature="e#3150#3151#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,8 +69,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="52" column="44" lean-forward="false" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
+            <state relative-caret-position="178">
+              <caret line="120" column="51" lean-forward="false" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="51" />
               <folding>
                 <element signature="e#3143#3165#0" expanded="true" />
               </folding>
@@ -126,25 +117,31 @@
       <file leaf-file-name="RestService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/RestService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="444" column="79" lean-forward="false" selection-start-line="444" selection-start-column="79" selection-end-line="444" selection-end-column="79" />
+            <state relative-caret-position="71">
+              <caret line="443" column="79" lean-forward="false" selection-start-line="443" selection-start-column="79" selection-end-line="443" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#28496#28497#0" expanded="true" />
-                <element signature="e#28523#28524#0" expanded="true" />
-                <element signature="e#28594#28595#0" expanded="true" />
-                <element signature="e#28621#28622#0" expanded="true" />
+                <element signature="e#33242#33243#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MockRestService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MockRestService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/MockRestService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="91" column="42" lean-forward="false" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="169">
+              <caret line="88" column="20" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
+              <folding>
+                <element signature="e#7140#7141#0" expanded="true" />
+                <element signature="e#7167#7168#0" expanded="true" />
+                <element signature="e#7245#7246#0" expanded="true" />
+                <element signature="e#7272#7273#0" expanded="true" />
+                <element signature="e#7357#7358#0" expanded="true" />
+                <element signature="e#7384#7385#0" expanded="true" />
+                <element signature="e#7470#7471#0" expanded="true" />
+                <element signature="e#7497#7498#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -164,7 +161,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="234">
               <caret line="67" column="42" lean-forward="false" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
-              <folding />
+              <folding>
+                <marker date="1553324267996" expanded="true" signature="2220:2228" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2243,14 +2242,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/Requests.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/DependentClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/RestService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/MockRestService.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java" />
       </list>
     </option>
   </component>
@@ -3006,7 +3005,7 @@
         <state relative-caret-position="252">
           <caret line="12" column="35" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
           <folding>
-            <element signature="e#5471#5496#0" expanded="true" />
+            <element signature="e#5471#5496#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3019,19 +3018,6 @@
         <state relative-caret-position="517">
           <caret line="38" column="52" lean-forward="false" selection-start-line="38" selection-start-column="52" selection-end-line="38" selection-end-column="52" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="52" column="44" lean-forward="false" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
-          <folding>
-            <element signature="e#3143#3165#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3057,7 +3043,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="67" column="42" lean-forward="false" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
-          <folding />
+          <folding>
+            <marker date="1553324267996" expanded="true" signature="2220:2228" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3080,36 +3068,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="63" column="71" lean-forward="false" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="71" />
-          <folding>
-            <element signature="e#1756#2817#0" expanded="true" />
-            <element signature="e#2816#2817#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/RestService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="444" column="79" lean-forward="false" selection-start-line="444" selection-start-column="79" selection-end-line="444" selection-end-column="79" />
+        <state relative-caret-position="71">
+          <caret line="443" column="79" lean-forward="false" selection-start-line="443" selection-start-column="79" selection-end-line="443" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#28496#28497#0" expanded="true" />
-            <element signature="e#28523#28524#0" expanded="true" />
-            <element signature="e#28594#28595#0" expanded="true" />
-            <element signature="e#28621#28622#0" expanded="true" />
+            <element signature="e#33242#33243#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/MockRestService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="91" column="42" lean-forward="false" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
-          <folding />
+        <state relative-caret-position="169">
+          <caret line="88" column="20" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
+          <folding>
+            <element signature="e#7140#7141#0" expanded="true" />
+            <element signature="e#7167#7168#0" expanded="true" />
+            <element signature="e#7245#7246#0" expanded="true" />
+            <element signature="e#7272#7273#0" expanded="true" />
+            <element signature="e#7357#7358#0" expanded="true" />
+            <element signature="e#7384#7385#0" expanded="true" />
+            <element signature="e#7470#7471#0" expanded="true" />
+            <element signature="e#7497#7498#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="120" column="51" lean-forward="false" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="51" />
+          <folding>
+            <element signature="e#3143#3165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SignUpActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="76" column="32" lean-forward="false" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
+          <folding>
+            <element signature="e#1893#2954#0" expanded="true" />
+            <element signature="e#2953#2954#0" expanded="true" />
+            <element signature="e#2999#3151#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

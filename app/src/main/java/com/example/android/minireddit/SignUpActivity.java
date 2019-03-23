@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.minireddit.datastructure.User;
@@ -20,6 +21,7 @@ public class SignUpActivity extends AppCompatActivity {
     private AutoCompleteTextView mEmailView;
     private AutoCompleteTextView mUserNameView;
     private EditText mPasswordView;
+    private TextView mLogInInstead;
     private View mProgressView;
     private View mLoginFormView;
     private Button mCreateAccountButton;
@@ -47,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
         mEmailView = (AutoCompleteTextView)findViewById(R.id.email);
         mUserNameView = (AutoCompleteTextView)findViewById(R.id.user_name);
         mPasswordView = (EditText)findViewById(R.id.password);
+        mLogInInstead = (TextView)findViewById(R.id.log_in_instead);
 
         //Listener part
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +68,13 @@ public class SignUpActivity extends AppCompatActivity {
                 }else{
                     //TODO handel this after the connection is complete "sign up unsuccessfully"
                 }
+            }
+        });
+
+        mLogInInstead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
         mPasswordView.addTextChangedListener(new TextWatcher() {
