@@ -30,7 +30,6 @@ import java.util.Map;
 /**
  * Created by Aly on 3/15/2019.
  */
-
 public class RestService implements Requests {
     @Override
     public ArrayList<Post> getTrendingPost(final Context context) {
@@ -433,7 +432,7 @@ public class RestService implements Requests {
     }
 
     @Override
-    public boolean logIn(Context context, final String username, final String password) {
+    public boolean logIn(final Context context, final String username, final String password) {
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 (Constants.LOG_IN_URL),
                 new Response.Listener<String>() {
@@ -442,9 +441,11 @@ public class RestService implements Requests {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             //TODO handel this after the connection is complete
+                            Toast.makeText(context,"Login Done",Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -468,15 +469,16 @@ public class RestService implements Requests {
     }
 
     @Override
-    public boolean signUp(Context context, final String email, final String username, final String password) {
+    public boolean signUp(final Context context, final String email, final String username, final String password) {
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
-                (Constants.LOG_IN_URL),
+                (Constants.SIGN_UP_URL),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             //TODO handel this after the connection is complete
+                            Toast.makeText(context,"Signup Done",Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -505,7 +507,7 @@ public class RestService implements Requests {
 
     @Override
     public User getUserPublicInfo(final Context context, final String username) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPublicUserInfo?username=" + username + "token="; // +token
+        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPublicUserInfo?username=" + username; // +token
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         final User user = new User("", 0, "", "");
@@ -550,7 +552,6 @@ public class RestService implements Requests {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", username);
                 Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
                 return params;
             }

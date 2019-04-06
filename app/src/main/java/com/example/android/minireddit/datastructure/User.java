@@ -10,6 +10,12 @@ import java.util.ArrayList;
  */
 
 public class User {
+    /**
+     *  The Token For The Logged in User.
+     */
+    private String mToken;
+
+
 
     /**
      * The Unique User Name for the user.
@@ -122,6 +128,24 @@ public class User {
         mAbout = about;
         mFollowers=new ArrayList<>();
         mFollowing=new ArrayList<>();
+    }
+
+    /**
+     * Gets token.
+     *
+     * @return the token
+     */
+    public String getmToken() {
+        return mToken;
+    }
+
+    /**
+     * Sets token.
+     *
+     * @param mToken the m token
+     */
+    public void setmToken(String mToken) {
+        this.mToken = mToken;
     }
 
     public String getmUserName() {

@@ -42,13 +42,30 @@ import com.example.android.minireddit.R;
 import java.util.List;
 
 
+/**
+ * The type Poster adapter.
+ */
 public class PosterAdapter extends ArrayAdapter<Post> {
     private Animator currentAnimator;
     private int shortAnimationDuration;
+    /**
+     * The Expanded image To Animate.
+     */
     ImageView expanded_image;
+    /**
+     * The Container View Of The Animation.
+     */
     FrameLayout container;
 
 
+    /**
+     * Instantiates a new Poster adapter.
+     *
+     * @param context   the context of the fragment
+     * @param objects   the objects to be in the list
+     * @param expand    the expand view to animate
+     * @param container the container view of the animation
+     */
     public PosterAdapter(@NonNull Context context, @NonNull List<Post> objects, ImageView expand, FrameLayout container) {
         super(context, 0, objects);
         expanded_image = expand;
@@ -310,6 +327,11 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     }
 
 
+    /**
+     * Is network available boolean.
+     *
+     * @return the boolean
+     */
     protected boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -318,6 +340,11 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     }
 
 
+    /**
+     * Sets force show icon.
+     *
+     * @param popupMenu the popup menu
+     */
     public static void setForceShowIcon(PopupMenu popupMenu) {
         try {
             Field[] fields = popupMenu.getClass().getDeclaredFields();

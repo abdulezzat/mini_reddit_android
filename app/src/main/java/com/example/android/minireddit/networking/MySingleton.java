@@ -11,7 +11,6 @@ import com.android.volley.toolbox.Volley;
 /**
  * Created by Aly on 3/20/2019.
  */
-
 public class MySingleton {
     private static MySingleton instance;
     private RequestQueue requestQueue;
@@ -25,6 +24,12 @@ public class MySingleton {
 
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param context the context
+     * @return the instance
+     */
     public static synchronized MySingleton getInstance(Context context) {
         if (instance == null) {
             instance = new MySingleton(context);
@@ -32,6 +37,11 @@ public class MySingleton {
         return instance;
     }
 
+    /**
+     * Gets request queue.
+     *
+     * @return the request queue
+     */
     public RequestQueue getRequestQueue() {
         if (requestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
@@ -41,6 +51,12 @@ public class MySingleton {
         return requestQueue;
     }
 
+    /**
+     * Add to request queue.
+     *
+     * @param <T> the type parameter
+     * @param req the req
+     */
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
     }

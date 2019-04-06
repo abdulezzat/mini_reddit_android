@@ -11,10 +11,17 @@ import java.io.InputStream;
 /**
  * Created by Aly on 3/14/2019.
  */
-
 public class DownloadImageTask  extends AsyncTask<String, Void, Bitmap> {
+    /**
+     * The Bm imageview to contaion the downloaded image.
+     */
     ImageView bmImage;
 
+    /**
+     * Instantiates a new Download image task.
+     *
+     * @param bmImage the bm image
+     */
     public DownloadImageTask(ImageView bmImage) {
         this.bmImage = bmImage;
     }

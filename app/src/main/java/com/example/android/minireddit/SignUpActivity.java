@@ -64,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }else if(!result&&Constants.debug){
                     Toast.makeText(getBaseContext(),"Sign up as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
                 }else if(result && !Constants.debug){
+                    DependentClass.getInstance().signUp(SignUpActivity.this,mEmail,mUserName,mPassword);
                     //TODO handel this after the connection is complete "sign up successfully"
                 }else{
                     //TODO handel this after the connection is complete "sign up unsuccessfully"

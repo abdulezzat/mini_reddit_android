@@ -6,16 +6,17 @@ import com.example.android.minireddit.datastructure.User;
 //
 public class Constants {
 
-    public static final boolean debug=true;
+    public static final boolean debug=false;
     public static User user = null;
     //public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
     public static final String TRENDIN_POST="";
     public static PosterAdapter poster=null;
     public static PosterAdapter homeposts=null;
 
+
     //URL
-    final static public String LOG_IN_URL ="";
-    final static public String SIGN_UP_URL ="";
+    final static public String LOG_IN_URL ="http://127.0.0.1:8000/api/unauth/signIn?";
+    final static public String SIGN_UP_URL ="http://127.0.0.1:8000/api/unauth/signUp?";
 
     //API parameters name
     final static public String username = "username";

@@ -7,34 +7,33 @@
     android:orientation="vertical"
     tools:context="com.example.android.minireddit.EditProfileActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            app:title=" "
-            android:layout_height="?attr/actionBarSize">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title=" ">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit Profile"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="10dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Save"
-                android:textAllCaps="true"
-                android:textColor="@color/iconsColor" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Save"
+            android:textAllCaps="true"
+            android:textColor="@color/iconsColor" />
 
-        </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -171,9 +170,9 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/rounded_corners_seperators_color"
+                    android:gravity="top"
                     android:maxLines="5"
                     android:minLines="5"
-                    android:gravity="top"
                     android:paddingBottom="10dp"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
@@ -206,12 +205,13 @@
 
                     </LinearLayout>
 
-                    <ToggleButton
+                    <Switch
                         android:id="@+id/first_button"
-                        android:layout_width="70dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true" />
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="15dp" />
 
                 </RelativeLayout>
 
@@ -241,12 +241,13 @@
 
                     </LinearLayout>
 
-                    <ToggleButton
+                    <Switch
                         android:id="@+id/second_button"
-                        android:layout_width="70dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true" />
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="15dp" />
 
                 </RelativeLayout>
             </LinearLayout>
