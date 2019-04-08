@@ -107,4 +107,16 @@ public class MockRestService implements com.example.android.minireddit.networkin
         user.setmEmail("karashily@gmail.com");
         return user;
     }
+
+    public boolean updateUserDisplayName(Context context, String displayName){
+        return true;
+    }
+
+    public boolean updateUserAbout (Context context, String about){
+        return true;
+    }
+
+    public boolean updateUserProfileImage (Context context, String profileImage) {
+        return true;
+    }
 }

@@ -26,6 +26,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"
+            android:onClick="saveEdits"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
@@ -54,7 +55,12 @@
                     android:id="@+id/header_photo"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:src="@drawable/iamadreamer" />
 
                 <ImageView
@@ -91,12 +97,16 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="67dp"
-                    app:cardCornerRadius="4dp">
+                    app:cardCornerRadius="4dp"
+                    android:outlineAmbientShadowColor="@android:color/transparent">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
+                        android:id="@+id/profile_picture"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:src="@drawable/default_avatar" />
 
                     <ImageView
@@ -136,7 +146,7 @@
                     android:textColor="@color/black" />
 
                 <EditText
-                    android:id="@+id/display_name_edit_text"
+                    android:id="@+id/display_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -164,7 +174,7 @@
                     android:textColor="@color/black" />
 
                 <EditText
-                    android:id="@+id/about_edit_text"
+                    android:id="@+id/about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -188,7 +198,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_toLeftOf="@id/first_button"
+                        android:layout_toLeftOf="@id/content_visibility_switch"
                         android:orientation="vertical">
 
                         <TextView
@@ -206,7 +216,7 @@
                     </LinearLayout>
 
                     <Switch
-                        android:id="@+id/first_button"
+                        android:id="@+id/content_visibility_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -224,7 +234,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_toLeftOf="@id/second_button"
+                        android:layout_toLeftOf="@id/show_communities_switch"
                         android:orientation="vertical">
 
                         <TextView
@@ -242,7 +252,7 @@
                     </LinearLayout>
 
                     <Switch
-                        android:id="@+id/second_button"
+                        android:id="@+id/show_communities_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

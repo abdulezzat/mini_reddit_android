@@ -624,4 +624,16 @@ public class RestService implements Requests {
 
         return user;
     }
+
+    public boolean updateUserDisplayName(Context context, String displayName){
+        return true;
+    }
+
+    public boolean updateUserAbout (Context context, String about){
+        return true;
+    }
+
+    public boolean updateUserProfileImage (Context context, String profileImage) {
+        return true;
+    }
 }
