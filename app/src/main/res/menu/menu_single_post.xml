@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.android.minireddit.SinglePost">
+    <item
+        android:id="@+id/hide_post"
+        android:title="Hide post"
+        android:icon="@drawable/baseline_visibility_off_black_48dp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/block_user"
+        android:title="Block user"
+        android:icon="@drawable/baseline_not_interested_black_48dp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/save_post"
+        android:title="@string/action_settings"
+        android:icon="@drawable/baseline_bookmark_black_48dp"
+        app:showAsAction="always"
+        />
+</menu>

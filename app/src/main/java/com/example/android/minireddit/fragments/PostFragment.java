@@ -3,6 +3,7 @@ package com.example.android.minireddit.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.android.minireddit.EndlessScrollListener;
+import com.example.android.minireddit.SinglePost;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.MockRestService;
 import com.example.android.minireddit.networking.RestService;
@@ -23,6 +26,7 @@ import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.Constants;
+import com.example.android.minireddit.SinglePost;
 
 
 import java.sql.Struct;
@@ -62,6 +66,24 @@ public class PostFragment extends Fragment {
         ImageView expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
         final ListView listView = (ListView) rootView.findViewById(R.id.postsListView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent =new Intent(getContext(),SinglePost.class);
+                intent.putExtra("position",position);
+                if(mPostType==PostType.Popular){
+                    intent.putExtra("type",0);
+
+                }
+                else{
+                    intent.putExtra("type",1);
+                }
+
+                //intent.setData(id);
+                startActivity(intent);
+
+            }
+        });
 
 
           if (mPostType == PostType.Popular){
