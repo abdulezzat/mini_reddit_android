@@ -8,6 +8,8 @@ import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.ProfileAboutFragment;
 import com.example.android.minireddit.fragments.ProfileCommentsFragment;
 import com.example.android.minireddit.fragments.ProfilePostsFragment;
+import com.example.android.minireddit.fragments.SavedCommentsFragment;
+import com.example.android.minireddit.fragments.SavedPostsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,16 +50,8 @@ public class SavedPagerAdapter extends FragmentStatePagerAdapter {
      * Function that adds a new fragment to the viewPager
      * @param fragment  the fragment to add.
      * @param title     the title of the added fragment.
-     * @param user      the user that we're showing the profile of.
      */
-    public void addFragment (Fragment fragment, String title, User user) {
-        if(fragment instanceof ProfilePostsFragment) {
-            ProfilePostsFragment profileFragment=(ProfilePostsFragment) fragment;
-            profileFragment.setUser(user);
-        } else if(fragment instanceof ProfileCommentsFragment) {
-            ProfileCommentsFragment profileFragment=(ProfileCommentsFragment) fragment;
-            profileFragment.setUser(user);
-        }
+    public void addFragment (Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
