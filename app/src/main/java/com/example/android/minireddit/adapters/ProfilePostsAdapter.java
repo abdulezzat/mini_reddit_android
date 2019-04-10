@@ -40,13 +40,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
         super(context, 0, objects);
     }
 
-    /**
-     * A method that takes a view and recycles it and gets a new view populated with the correct data.
-     * @param position the position of the current view
-     * @param convertView the view to recycle
-     * @param parent needed to inflate new views
-     * @return the recycled view
-     */
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -55,7 +49,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
         if (ListItemView == null) { //for making new List_item if there is no main one to change its data
             ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.profile_posts_list_item, parent, false);
         }
-        Post currentPost = getItem(position);// getting the current Post in the ArrayList
+        Post currentPost = getItem(position); // getting the current Post in the ArrayList
 
         TextView postInfo = (TextView) ListItemView.findViewById(R.id.post_info);
         postInfo.setText(currentPost.getPostInfo());

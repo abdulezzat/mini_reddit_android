@@ -40,13 +40,6 @@ public class ProfileCommentsAdapter extends ArrayAdapter<Post> {
         super(context, 0, objects);
     }
 
-    /**
-     * A method that takes a view and recycles it and gets a new view populated with the correct data.
-     * @param position the position of the current view
-     * @param convertView the view to recycle
-     * @param parent needed to inflate new views
-     * @return the recycled view
-     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

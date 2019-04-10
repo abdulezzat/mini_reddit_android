@@ -109,5 +109,11 @@ public interface Requests {
       */
      User getUserPrivateInfo(Context context);
 
+     boolean updateUserDisplayName(Context context, String displayName);
+
+     boolean updateUserAbout (Context context, String about);
+
+     boolean updateUserProfileImage (Context context, String profileImage);
+
 
 }

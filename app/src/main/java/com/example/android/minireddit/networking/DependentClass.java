@@ -159,5 +159,16 @@ public class DependentClass {
         return mSupplier.getUserPrivateInfo(context);
     }
 
+    public boolean updateUserDisplayName(Context context, String displayName){
+        return mSupplier.updateUserDisplayName(context,displayName);
+    }
+
+    public boolean updateUserAbout (Context context, String about){
+        return mSupplier.updateUserAbout(context,about);
+    }
+
+    public boolean updateUserProfileImage (Context context, String profileImage){
+        return mSupplier.updateUserProfileImage(context,profileImage);
+    }
 
 }
