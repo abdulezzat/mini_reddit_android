@@ -1,6 +1,8 @@
 package com.example.android.minireddit;
 
 import com.example.android.minireddit.adapters.PosterAdapter;
+import com.example.android.minireddit.adapters.SavedCommentsAdapter;
+import com.example.android.minireddit.adapters.SavedPostsAdapter;
 import com.example.android.minireddit.datastructure.User;
 
 //
@@ -12,6 +14,11 @@ public class Constants {
     public static final String TRENDIN_POST="";
     public static PosterAdapter poster=null;
     public static PosterAdapter homeposts=null;
+
+
+    //Saved Links
+    public static SavedPostsAdapter savedPosts=null;
+    public static SavedCommentsAdapter savedComments=null;
 
 
     //URL

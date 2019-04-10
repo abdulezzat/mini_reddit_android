@@ -119,4 +119,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
     public boolean updateUserProfileImage (Context context, String profileImage) {
         return true;
     }
+
+    public void ViewSavedLinks (Context context){}
+
 }

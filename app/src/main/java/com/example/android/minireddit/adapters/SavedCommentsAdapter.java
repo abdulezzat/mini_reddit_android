@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.datastructure.Comment;
 import com.example.android.minireddit.datastructure.Post;
 
 import java.util.List;
@@ -17,8 +18,8 @@ import java.util.List;
  * Created by karashily on 08/04/19.
  */
 
-public class SavedCommentsAdapter extends ArrayAdapter {
-    public SavedCommentsAdapter(@NonNull Context context, @NonNull List<Post> objects) {
+public class SavedCommentsAdapter extends ArrayAdapter<Comment> {
+    public SavedCommentsAdapter(@NonNull Context context, @NonNull List<Comment> objects) {
         super(context, 0, objects);
     }
 
@@ -29,9 +30,9 @@ public class SavedCommentsAdapter extends ArrayAdapter {
         if (ListItemView == null) { //for making new List_item if there is no main one to change its data
             ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.saved_comments_list_item, parent, false);
         }
-        //Comment currentPost = getItem(position); // getting the current Post in the ArrayList
+        Comment currentComment = getItem(position); // getting the current Post in the ArrayList
 
-        //TODO: set the data inside each item
+        
 
         return ListItemView;
     }
