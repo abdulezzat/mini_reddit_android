@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,8 +19,11 @@ import com.example.android.minireddit.libraries.atv.model.TreeNode;
 public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem> {
     public static final int DEFAULT = 0;
 
+    LinearLayout container;
+    View viewVertical;
     ImageView img;
     TextView tvValue;
+    TextView tvContent;
     boolean toggle;
     int child;
     int leftMargin;
@@ -39,15 +43,23 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
             view = inflater.inflate(R.layout.parent, null, false);
         } else {
             view = inflater.inflate(child, null, false);
+            container=(LinearLayout)view.findViewById(R.id.comment_container);
+            viewVertical=(View)view.findViewById(R.id.view);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                   1, LinearLayout.LayoutParams.MATCH_PARENT
+            );
+            params.setMargins(leftMargin, 0, 0, 0);
+            viewVertical.setLayoutParams(params);
+            tvContent=(TextView) view.findViewById(R.id.commet_child) ;
         }
 
         if (leftMargin == DEFAULT) {
             leftMargin = getDimens(R.dimen.treeview_left_padding);
         }
-        view.setPadding(leftMargin, getDimens(R.dimen.treeview_top_padding), getDimens(R.dimen.treeview_right_padding), getDimens(R.dimen.treeview_bottom_padding));
 
         img = (ImageView) view.findViewById(R.id.image);
         tvValue = (TextView) view.findViewById(R.id.text);
+        tvContent=(TextView) view.findViewById(R.id.commet_child) ;
         img.setImageResource(value.icon);
         tvValue.setText(value.text);
         return view;
