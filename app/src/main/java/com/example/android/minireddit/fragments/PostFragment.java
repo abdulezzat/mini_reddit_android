@@ -97,6 +97,7 @@ public class PostFragment extends Fragment {
               Constants.homeposts=new PosterAdapter(this.getContext(),posts,expand,frameLayout);
               listView.setAdapter(homeposts);
 
+
           }
 
 

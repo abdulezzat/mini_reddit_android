@@ -4,9 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -15,6 +18,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +28,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.PopupMenu;
@@ -34,12 +40,15 @@ import java.lang.reflect.Field;
 
 import java.lang.reflect.Method;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.R;
 
 import java.util.List;
+
+import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 
 
 /**
@@ -81,13 +90,15 @@ public class PosterAdapter extends ArrayAdapter<Post> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
 
         View ListItemView = convertView;
         if (ListItemView == null) {//for making new List_item if there is no main one to change its data
             ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.post_list_item, parent, false);
         }
         final Post currentPost = getItem(position);// getting the current word in the arraylist
+        final View hideView=ListItemView;
+        hideView.setVisibility(View.VISIBLE);
 
 
         ImageView postLogo = (ImageView) ListItemView.findViewById(R.id.postLogo);
@@ -294,13 +305,16 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                                 switch (item.getItemId()) {
                                     case R.id.save:
 
-                                        //Or Some other code you want to put here.. This is just an example.
-                                        Toast.makeText(getContext(), " Install Clicked at position " + " : ", Toast.LENGTH_LONG).show();
-
                                         break;
                                     case R.id.blockUser:
+                                        showBlockDialog(currentPost);
 
-                                        Toast.makeText(getContext(), "Add to Wish List Clicked at position " + " : ", Toast.LENGTH_LONG).show();
+
+                                        break;
+                                    case R.id.hidePost:
+                                       remove(currentPost);
+                                       hideView.setVisibility(View.GONE);
+
 
                                         break;
 
@@ -502,6 +516,43 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             }
         });
     }
+    private void showBlockDialog(Post post) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        String message ="Block u/"+post.getPostUser()+"?"+"\n \nYou Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
+        builder.setMessage(message);
+        builder.setPositiveButton("BLOCK USER", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button btnNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative. setBackgroundColor(Color.parseColor("#d3d3d3"));
+        btnPositive.setBackgroundColor(Color.parseColor("#8B0000"));
+
+        btnNegative.setTextColor(Color.parseColor("#808080"));
+        btnPositive.setTextColor(Color.parseColor("#ffffff"));
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
+
+    }
+
 
 
 }
