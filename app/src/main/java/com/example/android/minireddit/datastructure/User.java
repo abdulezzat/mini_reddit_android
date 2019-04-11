@@ -10,10 +10,7 @@ import java.util.ArrayList;
  */
 
 public class User {
-    /**
-     *  The Token For The Logged in User.
-     */
-    private String mToken;
+
 
 
 
@@ -130,23 +127,7 @@ public class User {
         mFollowing=new ArrayList<>();
     }
 
-    /**
-     * Gets token.
-     *
-     * @return the token
-     */
-    public String getmToken() {
-        return mToken;
-    }
 
-    /**
-     * Sets token.
-     *
-     * @param mToken the m token
-     */
-    public void setmToken(String mToken) {
-        this.mToken = mToken;
-    }
 
     public String getmUserName() {
         return mUserName;

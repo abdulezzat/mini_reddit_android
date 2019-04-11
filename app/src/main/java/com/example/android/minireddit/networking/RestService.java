@@ -68,7 +68,7 @@ public class RestService implements Requests {
                                 String postUser = post.getString("username");
                                 String community = post.getString("community");
                                 // Toast.makeText(context,"outer loop 4",Toast.LENGTH_SHORT).show();
-                                //int community_id=post.getInt("community_id");
+                                int community_id=post.getInt("community_id");
                                 // Toast.makeText(context,"outer loop 5 ",Toast.LENGTH_SHORT).show();
                                 boolean subs = post.getBoolean("subscribed");
                                 String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
@@ -97,7 +97,7 @@ public class RestService implements Requests {
                                     voteStatus = 1;
 
 
-                                Post newPost = new Post(id, 1, null, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
+                                Post newPost = new Post(id, community_id, null, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
                                 // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
                                 posts.add(newPost);
 
