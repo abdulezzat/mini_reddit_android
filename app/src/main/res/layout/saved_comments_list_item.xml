@@ -60,43 +60,43 @@
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:textColor="@color/black"
-        android:text="Comment text should appear here in this section." />
+        android:text="Comment text should appear here in this section."
+        android:textColor="@color/black" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_gravity="right|center_vertical">
+        android:layout_marginRight="15dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:padding="5dp"
-            android:src="@drawable/baseline_more_vert_black_48dp"/>
+            android:src="@drawable/baseline_more_vert_black_48dp" />
 
         <LinearLayout
+            android:id="@+id/reply_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:id="@+id/reply_button"
-            android:background="?attr/selectableItemBackground"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/baseline_reply_black_48dp"/>
+                android:src="@drawable/baseline_reply_black_48dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="Reply"/>
+                android:text="Reply" />
 
         </LinearLayout>
 
@@ -106,25 +106,25 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/upvote"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:padding="2dp"
-                android:id="@+id/upvote"
-                android:src="@drawable/upvote"/>
+                android:src="@drawable/upvote" />
 
             <TextView
+                android:id="@+id/upvotes_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="954"
-                android:id="@+id/upvotes_count"
+                android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"/>
+                android:text="954" />
 
             <ImageView
+                android:id="@+id/downvote"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/downvote"
-                android:src="@drawable/downvote"/>
+                android:src="@drawable/downvote" />
 
         </LinearLayout>
     </LinearLayout>

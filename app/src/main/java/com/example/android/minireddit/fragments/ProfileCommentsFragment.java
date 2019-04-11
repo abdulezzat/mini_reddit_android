@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 /**
  * Fragment for User Comments shown in the second tab of his/her profile
- *
+ * <p>
  * Created by karashily on 16/03/19.
  */
 
@@ -45,9 +45,8 @@ public class ProfileCommentsFragment extends Fragment {
         return rootView;
     }
 
-    public void setUser(User user)
-    {
-        mUser=user;
+    public void setUser(User user) {
+        mUser = user;
     }
 
 }

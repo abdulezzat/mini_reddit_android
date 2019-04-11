@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.datastructure.Comment;
 import com.example.android.minireddit.datastructure.Post;
 
 import java.lang.reflect.Field;
@@ -25,18 +26,19 @@ import java.util.List;
 /**
  * Created by karashily on 16/03/19.
  * <p>
- *     an adapter for the profile comments fragment that populates user comments with data.
+ * an adapter for the profile comments fragment that populates user comments with data.
  * </p>
  */
 
-public class ProfileCommentsAdapter extends ArrayAdapter<Post> {
+public class ProfileCommentsAdapter extends ArrayAdapter<Comment> {
 
     /**
      * A Constructor that takes the Context and the Array of Objects(Posts) and passes them to the Superclass Constructor
+     *
      * @param context Context of the view
      * @param objects The List of objects (Comments)
      */
-    public ProfileCommentsAdapter(@NonNull Context context, @NonNull List<Post> objects) {
+    public ProfileCommentsAdapter(@NonNull Context context, @NonNull List<Comment> objects) {
         super(context, 0, objects);
     }
 
@@ -48,22 +50,22 @@ public class ProfileCommentsAdapter extends ArrayAdapter<Post> {
         if (ListItemView == null) { //for making new List_item if there is no main one to change its data
             ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.profile_comments_list_item, parent, false);
         }
-        //Comment currentComment = getItem(position); // getting the current Comment in the ArrayList
+        Comment currentComment = getItem(position); // getting the current Comment in the ArrayList
 
         TextView postTitle = (TextView) ListItemView.findViewById(R.id.post_title);
-        //TODO: Set Title from currentComment.
+        postTitle.setText(currentComment.getmPostTitle());
 
         TextView postSource = (TextView) ListItemView.findViewById(R.id.post_source);
-        //TODO: Set Source from currentComment.
+        postSource.setText(currentComment.getmPostCommunity());
 
         TextView commentDate = (TextView) ListItemView.findViewById(R.id.comment_date);
-        //TODO: Set Date from currentComment.
+        commentDate.setText(currentComment.getmDate());
 
         TextView commentVoteCount = (TextView) ListItemView.findViewById(R.id.comment_vote_count);
-        //commentVotesCount.setText(String.valueOf(currentComment.getCommentLikeCount()));
+        commentVoteCount.setText(String.valueOf(currentComment.getmUpVotes()));
 
         TextView commentText = (TextView) ListItemView.findViewById(R.id.comment_text);
-        //TODO: Set Comment Text from currentComment.
+        commentText.setText(currentComment.getmBody());
 
         return ListItemView;
     }

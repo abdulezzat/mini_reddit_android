@@ -35,12 +35,12 @@ public class SavedFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_saved, container, false);
 
-        mSavedPostsFragment=new SavedPostsFragment();
-        mSavedCommentsFragment=new SavedCommentsFragment();
+        mSavedPostsFragment = new SavedPostsFragment();
+        mSavedCommentsFragment = new SavedCommentsFragment();
 
-        SavedPagerAdapter savedPagerAdapter=new SavedPagerAdapter(getFragmentManager());
-        savedPagerAdapter.addFragment(mSavedPostsFragment,"Posts");
-        savedPagerAdapter.addFragment(mSavedCommentsFragment,"Comments");
+        SavedPagerAdapter savedPagerAdapter = new SavedPagerAdapter(getFragmentManager());
+        savedPagerAdapter.addFragment(mSavedPostsFragment, "Posts");
+        savedPagerAdapter.addFragment(mSavedCommentsFragment, "Comments");
 
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
 

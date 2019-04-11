@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.android.minireddit.R;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 
 /**
  * Fragment for User Posts shown in the first tab of his/her profile
- *
+ * <p>
  * Created by karashily on 15/03/19.
  */
 
@@ -34,18 +36,20 @@ public class ProfilePostsFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile_posts, container, false);
 
+        FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.frame_layout);
+        ImageView expand = (ImageView) rootView.findViewById(R.id.animation_image);
+
         ArrayList<Post> posts = new ArrayList<Post>();
 
-        ProfilePostsAdapter adapter = new ProfilePostsAdapter(this.getContext(), posts);
+        ProfilePostsAdapter adapter = new ProfilePostsAdapter(this.getContext(), posts, expand, frameLayout);
         ListView listView = (ListView) rootView.findViewById(R.id.profile_posts_listview);
         listView.setAdapter(adapter);
 
         return rootView;
     }
 
-    public void setUser(User user)
-    {
-        mUser=user;
+    public void setUser(User user) {
+        mUser = user;
     }
 
 }

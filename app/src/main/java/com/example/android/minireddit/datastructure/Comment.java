@@ -2,7 +2,7 @@ package com.example.android.minireddit.datastructure;
 
 /**
  * Created by karashily on 11/04/19.
- *
+ * <p>
  * A class for holding comments data.
  */
 
@@ -83,24 +83,24 @@ public class Comment {
     private boolean mDownVoted;
 
 
-
     /**
      * A Constructor to instantiate a new comment object.
-     * @param mCommentId the comment id
-     * @param mBody the comment body
-     * @param mUser the username of the commenter
-     * @param mPostTitle the post title
-     * @param mPostBody the post body
+     *
+     * @param mCommentId     the comment id
+     * @param mBody          the comment body
+     * @param mUser          the username of the commenter
+     * @param mPostTitle     the post title
+     * @param mPostBody      the post body
      * @param mPostCommunity the post community
-     * @param mPostAuthor the username of the post author
-     * @param mAuthorPhoto the author photo
-     * @param mDownVotes number of down votes on the comment
-     * @param mUpVotes number of up votes on the comment
-     * @param mDate date of the comment
-     * @param mCommentsNum the number of comments on the comment
-     * @param mSaved whether the comment is saved or not
-     * @param mUpVoted whether the comment is up voted or not
-     * @param mDownVoted whether comment is down voted or not
+     * @param mPostAuthor    the username of the post author
+     * @param mAuthorPhoto   the author photo
+     * @param mDownVotes     number of down votes on the comment
+     * @param mUpVotes       number of up votes on the comment
+     * @param mDate          date of the comment
+     * @param mCommentsNum   the number of comments on the comment
+     * @param mSaved         whether the comment is saved or not
+     * @param mUpVoted       whether the comment is up voted or not
+     * @param mDownVoted     whether comment is down voted or not
      */
     public Comment(int mCommentId, String mBody, String mUser, String mPostTitle, String mPostBody, int mPostCommunity, String mPostAuthor, String mAuthorPhoto, int mDownVotes, int mUpVotes, String mDate, int mCommentsNum, boolean mSaved, boolean mUpVoted, boolean mDownVoted) {
         this.mCommentId = mCommentId;
