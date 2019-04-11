@@ -11,8 +11,7 @@ import android.widget.ListView;
 
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.SavedCommentsAdapter;
-import com.example.android.minireddit.adapters.SavedPostsAdapter;
-import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.datastructure.Comment;
 
 import java.util.ArrayList;
 
@@ -29,11 +28,12 @@ public class SavedCommentsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_saved_posts, container, false);
 
-        ArrayList<Post> posts=new ArrayList<>();
+        ArrayList<Comment> comments = new ArrayList<>();
 
-        SavedCommentsAdapter savedCommentsAdapter=new SavedCommentsAdapter(this.getContext(),posts);
-        ListView listView=(ListView) rootView.findViewById(R.id.saved_posts_list);
+        SavedCommentsAdapter savedCommentsAdapter = new SavedCommentsAdapter(this.getContext(), comments);
+        ListView listView = (ListView) rootView.findViewById(R.id.saved_posts_list);
         listView.setAdapter(savedCommentsAdapter);
 
-        return rootView;    }
+        return rootView;
+    }
 }

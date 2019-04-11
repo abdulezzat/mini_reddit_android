@@ -115,5 +115,7 @@ public interface Requests {
 
      boolean updateUserProfileImage (Context context, String profileImage);
 
+     void ViewSavedLinks (Context context);
+
 
 }

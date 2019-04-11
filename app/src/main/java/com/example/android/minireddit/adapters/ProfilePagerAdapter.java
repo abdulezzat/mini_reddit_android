@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by karashily on 17/03/19.
  * <p>
- *     an adapter for the viewPager on the Profile that handles the fragments.
+ * an adapter for the viewPager on the Profile that handles the fragments.
  * </p>
  */
 
@@ -25,7 +25,8 @@ public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
 
     /**
      * Constructor for new objects
-     * @param fm    FragmentManager
+     *
+     * @param fm FragmentManager
      */
     public ProfilePagerAdapter(FragmentManager fm) {
         super(fm);
@@ -49,19 +50,20 @@ public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
 
     /**
      * Function that adds a new fragment to the viewPager
-     * @param fragment  the fragment to add.
-     * @param title     the title of the added fragment.
-     * @param user      the user that we're showing the profile of.
+     *
+     * @param fragment the fragment to add.
+     * @param title    the title of the added fragment.
+     * @param user     the user that we're showing the profile of.
      */
-    public void addFragment (Fragment fragment, String title, User user) {
-        if(fragment instanceof ProfilePostsFragment) {
-            ProfilePostsFragment profileFragment=(ProfilePostsFragment) fragment;
+    public void addFragment(Fragment fragment, String title, User user) {
+        if (fragment instanceof ProfilePostsFragment) {
+            ProfilePostsFragment profileFragment = (ProfilePostsFragment) fragment;
             profileFragment.setUser(user);
-        } else if(fragment instanceof ProfileCommentsFragment) {
-            ProfileCommentsFragment profileFragment=(ProfileCommentsFragment) fragment;
+        } else if (fragment instanceof ProfileCommentsFragment) {
+            ProfileCommentsFragment profileFragment = (ProfileCommentsFragment) fragment;
             profileFragment.setUser(user);
-        } else if(fragment instanceof ProfileAboutFragment) {
-            ProfileAboutFragment profileFragment=(ProfileAboutFragment) fragment;
+        } else if (fragment instanceof ProfileAboutFragment) {
+            ProfileAboutFragment profileFragment = (ProfileAboutFragment) fragment;
             profileFragment.setUser(user);
         }
         mFragmentList.add(fragment);

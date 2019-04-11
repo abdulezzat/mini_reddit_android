@@ -48,7 +48,14 @@
         android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop" />
+        android:adjustViewBounds="true"
+        android:src="@drawable/empty" />
+
+    <WebView
+        android:id="@+id/youtube_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

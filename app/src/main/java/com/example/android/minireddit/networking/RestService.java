@@ -636,4 +636,14 @@ public class RestService implements Requests {
     public boolean updateUserProfileImage (Context context, String profileImage) {
         return true;
     }
+
+    public void ViewSavedLinks (Context context) {
+        ArrayList<Post> savedPosts=new ArrayList<>();
+        //ArrayList<Comment> savedComments=new ArrayList<>();
+
+
+        Constants.savedPosts.addAll(savedPosts);
+        //Constants.savedComments.addAll(savedComments);
+    }
+
 }

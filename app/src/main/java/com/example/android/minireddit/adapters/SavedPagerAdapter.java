@@ -24,7 +24,8 @@ public class SavedPagerAdapter extends FragmentStatePagerAdapter {
 
     /**
      * Constructor for new objects
-     * @param fm    FragmentManager
+     *
+     * @param fm FragmentManager
      */
     public SavedPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -48,10 +49,11 @@ public class SavedPagerAdapter extends FragmentStatePagerAdapter {
 
     /**
      * Function that adds a new fragment to the viewPager
-     * @param fragment  the fragment to add.
-     * @param title     the title of the added fragment.
+     *
+     * @param fragment the fragment to add.
+     * @param title    the title of the added fragment.
      */
-    public void addFragment (Fragment fragment, String title) {
+    public void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }

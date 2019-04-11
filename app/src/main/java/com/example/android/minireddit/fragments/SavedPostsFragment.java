@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.android.minireddit.R;
@@ -29,10 +31,13 @@ public class SavedPostsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_saved_posts, container, false);
 
-        ArrayList<Post> posts=new ArrayList<>();
+        FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.frame_layout);
+        ImageView expand = (ImageView) rootView.findViewById(R.id.animation_image);
 
-        SavedPostsAdapter savedPostsAdapter=new SavedPostsAdapter(this.getContext(),posts);
-        ListView listView=(ListView) rootView.findViewById(R.id.saved_posts_list);
+        ArrayList<Post> posts = new ArrayList<>();
+
+        SavedPostsAdapter savedPostsAdapter = new SavedPostsAdapter(this.getContext(), posts, expand, frameLayout);
+        ListView listView = (ListView) rootView.findViewById(R.id.saved_posts_list);
         listView.setAdapter(savedPostsAdapter);
 
         return rootView;
