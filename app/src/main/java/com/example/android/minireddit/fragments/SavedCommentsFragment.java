@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.SavedCommentsAdapter;
 import com.example.android.minireddit.datastructure.Comment;
@@ -30,9 +31,9 @@ public class SavedCommentsFragment extends Fragment {
 
         ArrayList<Comment> comments = new ArrayList<>();
 
-        SavedCommentsAdapter savedCommentsAdapter = new SavedCommentsAdapter(this.getContext(), comments);
+        Constants.savedComments = new SavedCommentsAdapter(this.getContext(), comments);
         ListView listView = (ListView) rootView.findViewById(R.id.saved_posts_list);
-        listView.setAdapter(savedCommentsAdapter);
+        listView.setAdapter(Constants.savedComments);
 
         return rootView;
     }

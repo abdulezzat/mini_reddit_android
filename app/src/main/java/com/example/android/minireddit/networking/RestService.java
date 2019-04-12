@@ -702,7 +702,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Authorization", "Bearer: " + Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -741,7 +741,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Authorization", "Bearer: " + Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -780,7 +780,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Authorization", "Bearer: " + Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -797,13 +797,118 @@ public class RestService implements Requests {
         return true;
     }
 
-    public void ViewSavedLinks(Context context) {
-        ArrayList<Post> savedPosts = new ArrayList<>();
-        ArrayList<Comment> savedComments = new ArrayList<>();
+    public void ViewSavedLinks(final Context context) {
+        String connectionStrong = "http://localhost/api/auth/viewSavedLink?token=" + Constants.mToken + "\"";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
 
-        Constants.savedPosts.addAll(savedPosts);
-        Constants.savedComments.addAll(savedComments);
+                            ArrayList<Post> posts = new ArrayList<>();
+                            ArrayList<Comment> comments = new ArrayList<>();
+
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String type = jsonObject.getString("type");
+                                if (type.equals("post")) {
+
+                                    int postId = jsonObject.getInt("post_id");
+                                    int communityId = jsonObject.getInt("community_id");
+                                    String communityName = jsonObject.getString("community");
+                                    String postLogoUrl = "";
+                                    String postUser = "Essam";
+                                    String postInfo = "";
+                                    String PostText = jsonObject.getString("body");
+                                    String PostImageUrl = jsonObject.getString("post_image");
+                                    String PostVideoUrl = jsonObject.getString("video_url");
+                                    int postLikeCount = jsonObject.getInt("upvotes") - jsonObject.getInt("downvotes");
+                                    int postCommentCount = jsonObject.getInt("comments_num");
+                                    boolean saved = true;
+                                    boolean hidden = jsonObject.getBoolean("hidden");
+                                    boolean subscribed = jsonObject.getBoolean("subscribed");
+                                    boolean upvoted = jsonObject.getBoolean("upvoted");
+                                    boolean downvoted = jsonObject.getBoolean("downvoted");
+                                    int voteStatus;
+                                    if (upvoted) {
+                                        voteStatus = 1;
+                                    } else if (downvoted) {
+                                        voteStatus = -1;
+                                    } else {
+                                        voteStatus = 0;
+                                    }
+
+                                    Post post = new Post(postId, communityId, communityName, postLogoUrl, postUser, postInfo, PostText, PostImageUrl, PostVideoUrl, postLikeCount, postCommentCount, saved, hidden, subscribed, voteStatus);
+                                    posts.add(post);
+
+                                } else if (type.equals("comment")) {
+
+                                    JSONObject jsonCommentPost = jsonObject.getJSONObject("post");
+
+                                    String postTitle = jsonCommentPost.getString("title");
+                                    String postBody = jsonCommentPost.getString("body");
+                                    int postCommunity = jsonCommentPost.getInt("community_id");
+                                    String postAuthor = jsonCommentPost.getString("author_username");
+                                    String AuthorPhoto = "";
+
+                                    JSONArray jsonComments = jsonObject.getJSONArray("comments");
+
+                                    for (int j = 0; j < jsonComments.length(); j++) {
+
+                                        JSONObject jsonComment = jsonComments.getJSONObject(i);
+
+                                        int commentId = jsonComment.getInt("comment_id");
+                                        String commentBody = jsonComment.getString("body");
+                                        String commentUser = jsonComment.getString("author_username");
+                                        int downVotes = jsonComment.getInt("downvotes");
+                                        int upVotes = jsonComment.getInt("upvotes");
+                                        String date = jsonComment.getString("link_date");
+                                        int commentsNum = 0;
+                                        boolean saved = true;
+                                        boolean upVoted = false;
+                                        boolean downVoted = false;
+
+                                        Comment comment = new Comment(commentId, commentBody, commentUser, postTitle, postBody, postCommunity, postAuthor, AuthorPhoto, downVotes, upVotes, date, commentsNum, saved, upVoted, downVoted);
+                                        comments.add(comment);
+                                    }
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                //headers.put("Authorization","Bearer: "+ Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
     }
 
     public boolean followUser(final Context context, final String username) {
@@ -829,7 +934,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Authorization", "Bearer: " + Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -869,7 +974,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Authorization", "Bearer: " + Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -903,7 +1008,7 @@ public class RestService implements Requests {
 
                             ArrayList<String> newFollowers = new ArrayList<>();
                             for (int i = 0; i < followers.length(); i++) {
-                                newFollowers.add(followers.get(i).toString());
+                                newFollowers.add(followers.getString(i));
                             }
                             Constants.visitedUser.addFollowers(newFollowers);
 
@@ -956,7 +1061,7 @@ public class RestService implements Requests {
 
                             ArrayList<String> newFollowings = new ArrayList<>();
                             for (int i = 0; i < followers.length(); i++) {
-                                newFollowings.add(followers.get(i).toString());
+                                newFollowings.add(followers.getString(i));
                             }
                             Constants.visitedUser.addFollowing(newFollowings);
 
