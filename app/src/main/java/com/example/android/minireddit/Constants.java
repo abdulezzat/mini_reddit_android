@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 //
 public class Constants {
-    public static String mToken =null;
+    public static String mToken ="";
 
     public static final boolean debug = true;
-    public static User user = null;
+    //public static User user = null;
     public static User visitedUser = null;
-    //public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
+    public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
     public static final String TRENDIN_POST = "";
     public static PosterAdapter poster = null;
     public static PosterAdapter homeposts = null;
@@ -29,7 +29,7 @@ public class Constants {
 
     //URL
     final static public String LOG_IN_URL = "http://127.0.0.1:8000/api/unauth/signIn?";
-    final static public String SIGN_UP_URL = "http://127.0.0.1:8000/api/unauth/signUp?";
+    final static public String SIGN_UP_URL = "http://35.204.169.121/api/unauth/signUp?";
 
     //API parameters name
     final static public String username = "username";

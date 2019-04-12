@@ -2,6 +2,7 @@ package com.example.android.minireddit.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.android.minireddit.datastructure.User;
@@ -18,9 +19,12 @@ import java.util.List;
  * Created by karashily on 08/04/19.
  */
 
-public class SavedPagerAdapter extends FragmentStatePagerAdapter {
+public class SavedPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
+    private int numberOfPages = 2;
+    private SavedPostsFragment mSavedPostsFragment;
+    private SavedCommentsFragment mSavedCommentsFragment;
 
     /**
      * Constructor for new objects
@@ -29,6 +33,8 @@ public class SavedPagerAdapter extends FragmentStatePagerAdapter {
      */
     public SavedPagerAdapter(FragmentManager fm) {
         super(fm);
+        mSavedPostsFragment = new SavedPostsFragment();
+        mSavedCommentsFragment = new SavedCommentsFragment();
     }
 
     /**
@@ -39,28 +45,20 @@ public class SavedPagerAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public Fragment getItem(int position) {
-        return mFragmentList.get(position);
+        if(position == 0 ) return mSavedPostsFragment;
+        else return mSavedCommentsFragment;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mFragmentTitleList.get(position);
-    }
 
-    /**
-     * Function that adds a new fragment to the viewPager
-     *
-     * @param fragment the fragment to add.
-     * @param title    the title of the added fragment.
-     */
-    public void addFragment(Fragment fragment, String title) {
-        mFragmentList.add(fragment);
-        mFragmentTitleList.add(title);
+        if(position == 0 ) return "Posts";
+        else return "Comments";
     }
 
     @Override
     public int getCount() {
-        return mFragmentList.size();
+        return numberOfPages;
     }
 
 }

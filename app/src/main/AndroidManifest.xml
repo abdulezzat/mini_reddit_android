@@ -17,12 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".HomePage"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -41,20 +35,21 @@
             android:name=".EditProfileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".SignUpActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".SinglePost"
             android:label=""
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".HomePage">
+            android:parentActivityName=".HomePage"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomePage" />
         </activity>
+        <activity android:name=".LogIn_SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan"
+            />
     </application>
 
 </manifest>

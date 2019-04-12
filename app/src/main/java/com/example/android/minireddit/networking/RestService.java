@@ -483,6 +483,7 @@ public class RestService implements Requests {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
@@ -492,6 +493,7 @@ public class RestService implements Requests {
                 params.put(Constants.username, username);
                 params.put(Constants.password, password);
                 params.put(Constants.email, email);
+                params.put("password_confirmation",password);
 
                 return params;
             }
@@ -1099,6 +1101,78 @@ public class RestService implements Requests {
         };
         MySingleton.getInstance(context).addToRequestQueue(stringrequest);
 
+    }
+
+    @Override
+    public boolean hidePost(final Context context, final int postID) {
+        String connectionStrong = "http://127.0.0.1:8000/api/auth/hidePost?";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(context,"Post Hidden Succesfull",Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,"Post Hidden Faield",Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("post_id", String.valueOf(postID));
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+        return true;
+    }
+
+    @Override
+    public boolean blockUser(final Context context, final String username) {
+        String connectionStrong = "http://127.0.0.1:8000/api/auth/blockUser?";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(context,"User Blocked Succesfull",Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,"User Blocked Faield",Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+        return true;
     }
 
     public void getMyPostsAndComments(final Context context, final String username) {

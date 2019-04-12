@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.HomePageFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
+import com.example.android.minireddit.fragments.SavedFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
 
 
@@ -41,6 +42,7 @@ public class HomePage extends AppCompatActivity
     //My fragments
     private HomePageFragment mHomePageFragment;
     private MyProfileFragment mMyProfileFragment;
+    private SavedFragment mMySavedFragment;
 
     //helper members
     private boolean mInHomeScreen;
@@ -102,6 +104,7 @@ public class HomePage extends AppCompatActivity
         //initialize fragments
         mHomePageFragment = new HomePageFragment();
         mMyProfileFragment = new MyProfileFragment();
+        mMySavedFragment = new SavedFragment();
         //set default fragment homePage
         loadFragment(mHomePageFragment);
         mInHomeScreen = true;
@@ -218,11 +221,15 @@ public class HomePage extends AppCompatActivity
         } else if (id == R.id.nav_reddit_premium) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_my_saved) {
+            mInHomeScreen = false;
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            getSupportActionBar().hide();
+            result = loadFragment(mMySavedFragment);
 
         } else if (id == R.id.nav_history) {
 
         } else if (id == R.id.nav_sign_up_log_in) {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, LogIn_SignUpActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.navigation_home) {
@@ -261,12 +268,12 @@ public class HomePage extends AppCompatActivity
         } else return false;
     }
 
-    public void navigator() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().show();
-        mInHomeScreen = true;
-        loadFragment(mHomePageFragment);
-
-    }
+//    public void navigator() {
+//        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().show();
+//        mInHomeScreen = true;
+//        loadFragment(mHomePageFragment);
+//
+//    }
 }

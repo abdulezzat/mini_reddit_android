@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.minireddit.EndlessScrollListener;
 import com.example.android.minireddit.SinglePost;
@@ -44,6 +45,11 @@ public class PostFragment extends Fragment {
 
     private PostType mPostType;
 
+    ImageView expand;
+
+    FrameLayout frameLayout;
+    ListView listView;
+
     //UI elements
     View rootView;
 
@@ -62,10 +68,10 @@ public class PostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView= inflater.inflate(R.layout.fragment_post, container, false);
-        FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.framelayout);
-        ImageView expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
+        frameLayout = (FrameLayout) rootView.findViewById(R.id.framelayout);
+        expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
-        final ListView listView = (ListView) rootView.findViewById(R.id.postsListView);
+        listView = (ListView) rootView.findViewById(R.id.postsListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,6 +90,7 @@ public class PostFragment extends Fragment {
 
             }
         });
+        posts=new ArrayList<>();
 
 
           if (mPostType == PostType.Popular){
@@ -92,12 +99,18 @@ public class PostFragment extends Fragment {
               listView.setAdapter(poster);
           }
 
-         else{
-              posts=DependentClass.getInstance().getListOfHomePosts(getContext());
-              Constants.homeposts=new PosterAdapter(this.getContext(),posts,expand,frameLayout);
-              listView.setAdapter(homeposts);
+         else {
+              Constants.homeposts = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
+              if (Constants.mToken.isEmpty()) {
+                  Toast.makeText(getContext(), "Please Login First", Toast.LENGTH_SHORT).show();
+              } else {
+                  posts = DependentClass.getInstance().getListOfHomePosts(getContext());
+                  homeposts.addAll(posts);
+
+                  listView.setAdapter(homeposts);
 
 
+              }
           }
 
 
@@ -114,11 +127,13 @@ public class PostFragment extends Fragment {
                     poster.addAll(morePosts);
                     poster.notifyDataSetChanged();
                 }
-                else{
-                    ArrayList<Post> morePosts = DependentClass.getInstance().getListOfMoreTrendingPosts(totalItemsCount);
-                    homeposts.addAll(morePosts);
-                    homeposts.notifyDataSetChanged();
+                else {
+                    if (!Constants.mToken.isEmpty()) {
+                        ArrayList<Post> morePosts = DependentClass.getInstance().getListOfMoreTrendingPosts(totalItemsCount);
+                        homeposts.addAll(morePosts);
+                        homeposts.notifyDataSetChanged();
 
+                    }
                 }
                 return true;
             }
@@ -139,13 +154,16 @@ public class PostFragment extends Fragment {
                     poster.addAll(posts);
                     refreshLayout.setRefreshing(false);
                 }
-                else{
-                    posts = DependentClass.getInstance().getListOfHomePosts(getContext());
-                    homeposts.clear();
-                    homeposts.addAll(posts);
-                    homeposts.notifyDataSetChanged();
-                    refreshLayout.setRefreshing(false);
+                else {
+                    if (!Constants.mToken.isEmpty()) {
+                        posts = DependentClass.getInstance().getListOfHomePosts(getContext());
+                        homeposts.clear();
+                        homeposts.addAll(posts);
+                        homeposts.notifyDataSetChanged();
 
+
+                    }
+                    refreshLayout.setRefreshing(false);
                 }
 
 
@@ -155,7 +173,32 @@ public class PostFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        if (mPostType == PostType.Popular){
+            posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+            poster = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
+            listView.setAdapter(poster);
+        }
+
+        else {
+            Constants.homeposts = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
+            if (Constants.mToken.isEmpty()) {
+                Toast.makeText(getContext(), "Please Login First", Toast.LENGTH_SHORT).show();
+            } else {
+                posts = DependentClass.getInstance().getListOfHomePosts(getContext());
+                homeposts.addAll(posts);
+
+                listView.setAdapter(homeposts);
+
+
+            }
+        }
+
+       // Toast.makeText(getContext(),"Resume",Toast.LENGTH_SHORT).show();
+    }
 
     public enum PostType {
         Popular,
