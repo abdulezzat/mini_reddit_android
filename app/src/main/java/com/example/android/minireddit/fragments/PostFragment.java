@@ -45,6 +45,11 @@ public class PostFragment extends Fragment {
 
     private PostType mPostType;
 
+    ImageView expand;
+
+    FrameLayout frameLayout;
+    ListView listView;
+
     //UI elements
     View rootView;
 
@@ -63,10 +68,10 @@ public class PostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView= inflater.inflate(R.layout.fragment_post, container, false);
-        FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.framelayout);
-        ImageView expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
+        frameLayout = (FrameLayout) rootView.findViewById(R.id.framelayout);
+        expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
-        final ListView listView = (ListView) rootView.findViewById(R.id.postsListView);
+        listView = (ListView) rootView.findViewById(R.id.postsListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -168,7 +173,32 @@ public class PostFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        if (mPostType == PostType.Popular){
+            posts = DependentClass.getInstance().getListOfTrendingPosts(getContext());
+            poster = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
+            listView.setAdapter(poster);
+        }
+
+        else {
+            Constants.homeposts = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
+            if (Constants.mToken.isEmpty()) {
+                Toast.makeText(getContext(), "Please Login First", Toast.LENGTH_SHORT).show();
+            } else {
+                posts = DependentClass.getInstance().getListOfHomePosts(getContext());
+                homeposts.addAll(posts);
+
+                listView.setAdapter(homeposts);
+
+
+            }
+        }
+
+       // Toast.makeText(getContext(),"Resume",Toast.LENGTH_SHORT).show();
+    }
 
     public enum PostType {
         Popular,

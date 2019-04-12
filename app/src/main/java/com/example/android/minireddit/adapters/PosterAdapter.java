@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -41,6 +42,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import com.example.android.minireddit.Constants;
+import com.example.android.minireddit.ProfileActivity;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
@@ -111,12 +113,28 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         if(currentPost.hasCommunity()){
             postUser.setText(currentPost.getCommunityName());
             postInfo.setText("Posted by "+currentPost.getPostUser()+" ."+currentPost.getPostInfo());
+            postInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getContext(), ProfileActivity.class);
+                    intent.putExtra("username",currentPost.getPostUser());
+                   // getContext().startActivity(intent);
+                }
+            });
 
         }
         else
         {
             postUser.setText(currentPost.getPostUser());
             postInfo.setText("."+currentPost.getPostInfo());
+            postUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getContext(), ProfileActivity.class);
+                    intent.putExtra("username",currentPost.getPostUser());
+                   // getContext().startActivity(intent);
+                }
+            });
         }
 
 
