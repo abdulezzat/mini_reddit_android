@@ -46,7 +46,7 @@ public class SavedCommentsAdapter extends ArrayAdapter<Comment> {
         commentUser.setText(currentComment.getmUser());
 
         TextView commentCommunity = ListItemView.findViewById(R.id.comment_community);
-        commentCommunity.setText(currentComment.getmPostCommunity());
+        commentCommunity.setText(Integer.toString(currentComment.getmPostCommunity()));
 
         TextView commentDate = ListItemView.findViewById(R.id.comment_date);
         commentDate.setText(currentComment.getmDate());
@@ -55,7 +55,7 @@ public class SavedCommentsAdapter extends ArrayAdapter<Comment> {
         commentBody.setText(currentComment.getmBody());
 
         final TextView upvoteCount = ListItemView.findViewById(R.id.upvotes_count);
-        upvoteCount.setText(currentComment.getmUpVotes() - currentComment.getmDownVotes());
+        upvoteCount.setText(Integer.toString(currentComment.getmUpVotes() - currentComment.getmDownVotes()));
 
         final ImageView upvoteButton = ListItemView.findViewById(R.id.upvote);
         final ImageView downvoteButton = ListItemView.findViewById(R.id.downvote);

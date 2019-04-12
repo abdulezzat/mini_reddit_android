@@ -1,27 +1,29 @@
-package com.example.android.minireddit;
+package com.example.android.minireddit.fragments;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.minireddit.Constants;
+import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.User;
-import com.example.android.minireddit.networking.*;
+import com.example.android.minireddit.networking.DependentClass;
 
-/**
- * A login screen that offers login via email/password.
- */
-public class LoginActivity extends AppCompatActivity {
+public class LogInFragment extends Fragment {
+
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -37,33 +39,32 @@ public class LoginActivity extends AppCompatActivity {
     private String mEmail;
     private String mPassword;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public LogInFragment() {
+    }
 
-        getSupportActionBar().show();
-        getSupportActionBar().setTitle(" ");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_login, container, false);
 
         //Bind UI references
-        mLoginButton = (Button) findViewById(R.id.log_in_button);
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mSignUpView = (TextView) findViewById(R.id.sign_up_text_view);
+        mLoginButton = (Button) rootView.findViewById(R.id.log_in_button);
+        mEmailView = (AutoCompleteTextView) rootView.findViewById(R.id.email);
+        mPasswordView = (EditText) rootView.findViewById(R.id.password);
+        mSignUpView = (TextView) rootView.findViewById(R.id.sign_up_text_view);
 
 
         //Listener part
-        mLoginButton.setOnClickListener(new OnClickListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean result = DependentClass.getInstance().logIn(LoginActivity.this,mEmail, mPassword);
+                boolean result = DependentClass.getInstance().logIn(getContext(),mEmail, mPassword);
                 if (result && Constants.debug) {
-                    Toast.makeText(getBaseContext(), "Log in as an admin successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Log in as an admin successfully", Toast.LENGTH_SHORT).show();
                     Constants.user = new User("admin", "admin", null, "admin@gamil.com", null, 200, null, false);
-                    finish();
+                    getActivity().finish();
                 } else if (!result && Constants.debug) {
-                    Toast.makeText(getBaseContext(), "Log in as an admin unsuccessfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Log in as an admin unsuccessfully", Toast.LENGTH_SHORT).show();
                 } else if (result && !Constants.debug) {
                     //TODO handel this after the connection is complete "log in successfully"
                 } else {
@@ -72,11 +73,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mSignUpView.setOnClickListener(new OnClickListener() {
+        mSignUpView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-                startActivityForResult(intent,Constants.CREATE_ACCOUNT_SUCCESSFULLY);
+                ViewPager viewpager = getActivity().findViewById(R.id.pager);
+                viewpager.setCurrentItem(1);
             }
         });
         mPasswordView.addTextChangedListener(new TextWatcher() {
@@ -141,40 +142,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // API 5+ solution
-                onBackPressed();
-                return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        // Check which request we're responding to
-        if (resultCode == Constants.CREATE_ACCOUNT_SUCCESSFULLY) {
-            if (Constants.debug) {
-                Toast.makeText(getBaseContext(), "Log in as an admin successfully", Toast.LENGTH_SHORT).show();
-                Constants.user = new User("admin", "admin", null, "admin@gamil.com", null, 200, null, false);
-                finish();
-            } else {
-                //TODO handel this after the connection is complete "log in successfully as a user"
-            }
-        } else if (resultCode == Constants.CREATE_ACCOUNT_UNSUCCESSFULLY) {
-            Toast.makeText(getBaseContext(), "sign up fail", Toast.LENGTH_SHORT).show();
-        }
+        return rootView;
     }
 }
-

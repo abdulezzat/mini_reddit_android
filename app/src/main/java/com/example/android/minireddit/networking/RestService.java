@@ -93,7 +93,7 @@ public class RestService implements Requests {
                                     voteStatus = 1;
 
 
-                                Post newPost = new Post(id, community_id, null, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
+                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
                                 // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
                                 posts.add(newPost);
 

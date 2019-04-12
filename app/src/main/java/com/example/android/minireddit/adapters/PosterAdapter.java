@@ -99,16 +99,32 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         final Post currentPost = getItem(position);// getting the current word in the arraylist
         final View hideView=ListItemView;
         hideView.setVisibility(View.VISIBLE);
+        TextView postUser = (TextView) ListItemView.findViewById(R.id.postUser);
+
+
+        TextView postInfo = (TextView) ListItemView.findViewById(R.id.postInfo);
+
+
+
+
+
+        if(currentPost.hasCommunity()){
+            postUser.setText(currentPost.getCommunityName());
+            postInfo.setText("Posted by "+currentPost.getPostUser()+" ."+currentPost.getPostInfo());
+
+        }
+        else
+        {
+            postUser.setText(currentPost.getPostUser());
+            postInfo.setText("."+currentPost.getPostInfo());
+        }
+
+
 
 
         ImageView postLogo = (ImageView) ListItemView.findViewById(R.id.postLogo);
         postLogo.setImageResource(Integer.valueOf(currentPost.getPostLogoUrl()));
 
-        TextView postUser = (TextView) ListItemView.findViewById(R.id.postUser);
-        postUser.setText(currentPost.getPostUser());
-
-        TextView postInfo = (TextView) ListItemView.findViewById(R.id.postInfo);
-        postInfo.setText(currentPost.getPostInfo());
 
         TextView postText = (TextView) ListItemView.findViewById(R.id.postText);
         postText.setText(currentPost.getPostText());
