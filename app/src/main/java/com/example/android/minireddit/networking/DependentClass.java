@@ -195,4 +195,11 @@ public class DependentClass {
         mSupplier.getUserFollowing(context, username);
     }
 
+    public void blockUser(Context context,String username){
+        mSupplier.blockUser(context,username);
+    }
+    public void hidePost(Context context,int postID){
+        mSupplier.hidePost(context,postID);
+    }
+
 }

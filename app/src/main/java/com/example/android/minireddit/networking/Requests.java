@@ -128,4 +128,8 @@ public interface Requests {
     void getUserFollowers(Context context, String username);
 
     void getUserFollowing(Context context, String username);
+
+    boolean hidePost(Context context,int postID);
+
+    boolean blockUser(Context context,String username);
 }

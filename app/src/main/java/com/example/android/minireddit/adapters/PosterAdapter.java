@@ -166,24 +166,28 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             @Override
             public void onClick(View v) {
                 //todo check if auth
-                if(!currentPost.isSubscribed()) {
-                    if (DependentClass.getInstance().subscribeCommunity(getContext(), currentPost.getCommunityId())) {
-                        subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
-                        currentPost.setSubscribed(true);
-                        Toast.makeText(getContext(), "Subscribed Successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getContext(), "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-                    if (DependentClass.getInstance().unsubscribeCommunity(getContext(), currentPost.getCommunityId())) {
-                        subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
-                        currentPost.setSubscribed(false);
-                        Toast.makeText(getContext(), "unSubscribed Successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getContext(), "Faieled To unSubscribe", Toast.LENGTH_SHORT).show();
-                    }
+                if (Constants.mToken.isEmpty()) {
+                    Toast.makeText(getContext(),"Please Login First",Toast.LENGTH_SHORT).show();
 
+                } else {
+                    if (!currentPost.isSubscribed()) {
+                        if (DependentClass.getInstance().subscribeCommunity(getContext(), currentPost.getCommunityId())) {
+                            subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
+                            currentPost.setSubscribed(true);
+                            Toast.makeText(getContext(), "Subscribed Successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        if (DependentClass.getInstance().unsubscribeCommunity(getContext(), currentPost.getCommunityId())) {
+                            subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
+                            currentPost.setSubscribed(false);
+                            Toast.makeText(getContext(), "unSubscribed Successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Faieled To unSubscribe", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
                 }
             }
         });
@@ -211,27 +215,33 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         postUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePostUp(getContext(),currentPost.getPostId())) {
-                    if (currentPost.getVoteStatus() == 0) {
-                        postUpVote.setImageResource(R.drawable.upvote_clr);
-                        currentPost.setVoteStatus(1);
-                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
-                        //todo send request to upvote
-                    } else if (currentPost.getVoteStatus() == 1) {
+                if (Constants.mToken.isEmpty()) {
+                    Toast.makeText(getContext(),"Please Login First",Toast.LENGTH_SHORT).show();
 
-                        postUpVote.setImageResource(R.drawable.upvote);
-                        currentPost.setVoteStatus(0);
-                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
-                        //todo send request to cancel upvote
-                    } else {
-                        postDownVote.setImageResource(R.drawable.downvote);
-                        postUpVote.setImageResource(R.drawable.upvote_clr);
-                        currentPost.setVoteStatus(1);
-                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 2);
-                    }
-                    postlikeCount.setText(String.valueOf(currentPost.getPostLikeCount()));
+
                 } else {
-                    Toast.makeText(getContext(), "Failed To Vote", Toast.LENGTH_SHORT).show();
+                    if (DependentClass.getInstance().votePostUp(getContext(), currentPost.getPostId())) {
+                        if (currentPost.getVoteStatus() == 0) {
+                            postUpVote.setImageResource(R.drawable.upvote_clr);
+                            currentPost.setVoteStatus(1);
+                            currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
+                            //todo send request to upvote
+                        } else if (currentPost.getVoteStatus() == 1) {
+
+                            postUpVote.setImageResource(R.drawable.upvote);
+                            currentPost.setVoteStatus(0);
+                            currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
+                            //todo send request to cancel upvote
+                        } else {
+                            postDownVote.setImageResource(R.drawable.downvote);
+                            postUpVote.setImageResource(R.drawable.upvote_clr);
+                            currentPost.setVoteStatus(1);
+                            currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 2);
+                        }
+                        postlikeCount.setText(String.valueOf(currentPost.getPostLikeCount()));
+                    } else {
+                        Toast.makeText(getContext(), "Failed To Vote", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -239,25 +249,29 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         postDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePostDown(getContext(),currentPost.getPostId())) {
-                    if (currentPost.getVoteStatus() == 0) {
-                        postDownVote.setImageResource(R.drawable.downvote_clr);
-                        currentPost.setVoteStatus(-1);
-                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
-                    } else if (currentPost.getVoteStatus() == 1) {
-                        postDownVote.setImageResource(R.drawable.downvote_clr);
-                        postUpVote.setImageResource(R.drawable.upvote);
-                        currentPost.setVoteStatus(-1);
-                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 2);
+                if (Constants.mToken.isEmpty()) {
+                    Toast.makeText(getContext(),"Please Login First",Toast.LENGTH_SHORT).show();
+
+                } else {
+                    if (DependentClass.getInstance().votePostDown(getContext(), currentPost.getPostId())) {
+                        if (currentPost.getVoteStatus() == 0) {
+                            postDownVote.setImageResource(R.drawable.downvote_clr);
+                            currentPost.setVoteStatus(-1);
+                            currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 1);
+                        } else if (currentPost.getVoteStatus() == 1) {
+                            postDownVote.setImageResource(R.drawable.downvote_clr);
+                            postUpVote.setImageResource(R.drawable.upvote);
+                            currentPost.setVoteStatus(-1);
+                            currentPost.setPostLikeCount(currentPost.getPostLikeCount() - 2);
+                        } else {
+                            postDownVote.setImageResource(R.drawable.downvote);
+                            currentPost.setVoteStatus(0);
+                            currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
+                        }
+                        postlikeCount.setText(String.valueOf(currentPost.getPostLikeCount()));
                     } else {
-                        postDownVote.setImageResource(R.drawable.downvote);
-                        currentPost.setVoteStatus(0);
-                        currentPost.setPostLikeCount(currentPost.getPostLikeCount() + 1);
+                        Toast.makeText(getContext(), "Failed To Vote", Toast.LENGTH_SHORT).show();
                     }
-                    postlikeCount.setText(String.valueOf(currentPost.getPostLikeCount()));
-                }
-                else{
-                    Toast.makeText(getContext(),"Failed To Vote",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -296,6 +310,12 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         }
 
         ImageView menu = (ImageView) ListItemView.findViewById(R.id.postOptions);
+        if(Constants.mToken.isEmpty()){
+            menu.setVisibility(View.GONE);
+        }
+        else{
+            menu.setVisibility(View.VISIBLE);
+        }
 
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -330,6 +350,8 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                                     case R.id.hidePost:
                                        remove(currentPost);
                                        hideView.setVisibility(View.GONE);
+                                       DependentClass.getInstance().hidePost(getContext(),currentPost.getPostId());
+
 
 
                                         break;
@@ -532,12 +554,13 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             }
         });
     }
-    private void showBlockDialog(Post post) {
+    private void showBlockDialog(final Post post) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         String message ="Block u/"+post.getPostUser()+"?"+"\n \nYou Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
         builder.setMessage(message);
         builder.setPositiveButton("BLOCK USER", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                DependentClass.getInstance().blockUser(getContext(),post.getPostUser());
 
 
             }
