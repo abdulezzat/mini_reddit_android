@@ -78,6 +78,16 @@ public class User {
      */
     private int mFollowingNo;
 
+    /**
+     * The List of Posts made by the user.
+     */
+    private ArrayList<Post> mPosts;
+
+    /**
+     * The list of Comments made by the user.
+     */
+    private ArrayList<Comment> mComments;
+
 
     /**
      * A constructor that Instantiates a new user with full info.
@@ -102,6 +112,8 @@ public class User {
         mDeleted = deleted;
         mFollowers=new ArrayList<>();
         mFollowing=new ArrayList<>();
+        mPosts=new ArrayList<>();
+        mComments=new ArrayList<>();
     }
 
     /**
@@ -122,6 +134,15 @@ public class User {
         mHeaderImage=headerImage;
         mFollowers=new ArrayList<>();
         mFollowing=new ArrayList<>();
+        mPosts=new ArrayList<>();
+        mComments=new ArrayList<>();
+    }
+
+    public User (){
+        mFollowers=new ArrayList<>();
+        mFollowing=new ArrayList<>();
+        mPosts=new ArrayList<>();
+        mComments=new ArrayList<>();
     }
 
     public User(User user) {
@@ -138,6 +159,8 @@ public class User {
         this.mFollowersNo = user.getmFollowersNo();
         this.mFollowing = user.getmFollowing();
         this.mFollowingNo = user.getmFollowingNo();
+        this.mPosts=user.getmPosts();
+        this.mComments=user.getmComments();
     }
 
     public String getmUserName() {
@@ -334,4 +357,19 @@ public class User {
         return false;
     }
 
+    public ArrayList<Post> getmPosts() {
+        return mPosts;
+    }
+
+    public void addPosts(ArrayList<Post> newPosts) {
+        mPosts.addAll(newPosts);
+    }
+
+    public ArrayList<Comment> getmComments() {
+        return mComments;
+    }
+
+    public void addComments(ArrayList<Comment> newComments) {
+        mComments.addAll(newComments);
+    }
 }

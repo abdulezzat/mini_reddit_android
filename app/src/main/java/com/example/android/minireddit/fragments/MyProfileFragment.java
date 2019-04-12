@@ -1,6 +1,7 @@
 package com.example.android.minireddit.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.minireddit.Constants;
+import com.example.android.minireddit.EditProfileActivity;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.ProfilePagerAdapter;
 import com.example.android.minireddit.datastructure.User;
@@ -53,6 +55,8 @@ public class MyProfileFragment extends Fragment {
         mProfilePostsFragment = new ProfilePostsFragment();
         mProfileCommentsFragment = new ProfileCommentsFragment();
         mProfileAboutFragment = new ProfileAboutFragment();
+
+        DependentClass.getInstance().getMyPostsAndComments(getContext(), Constants.visitedUser.getmUserName());
 
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
 
@@ -97,7 +101,13 @@ public class MyProfileFragment extends Fragment {
         });
 
         TextView editButton = (TextView) rootView.findViewById(R.id.edit_profile);
-        //Intent editProfile=new Intent();
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(), EditProfileActivity.class);
+                startActivity(i);
+            }
+        });
 
         TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
 

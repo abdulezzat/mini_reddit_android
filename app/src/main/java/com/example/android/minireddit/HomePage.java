@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.HomePageFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
@@ -209,6 +210,7 @@ public class HomePage extends AppCompatActivity
             mInHomeScreen = false;
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             getSupportActionBar().hide();
+            Constants.visitedUser=new User();
             Constants.visitedUser.setmUserName(Constants.user.getmUserName());
             result = loadFragment(mMyProfileFragment);
         } else if (id == R.id.nav_reddit_coin) {

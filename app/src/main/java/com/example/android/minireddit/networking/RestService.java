@@ -879,6 +879,9 @@ public class RestService implements Requests {
                                 }
                             }
 
+                            Constants.savedPosts.addAll(posts);
+                            Constants.savedComments.addAll(comments);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -1098,4 +1101,113 @@ public class RestService implements Requests {
 
     }
 
+    public void getMyPostsAndComments(final Context context, final String username) {
+
+        String connectionStrong = "http://localhost/api/auth/viewOverview?username=\"" + Constants.visitedUser.getmUserName() + "\"";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
+
+                            ArrayList<Post> posts=new ArrayList<>();
+                            ArrayList<Comment> comments=new ArrayList<>();
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonPostsArray = jsonObject.getJSONArray("posts");
+                            for(int i=0;i<jsonPostsArray.length();i++){
+                                JSONObject jsonPost=jsonPostsArray.getJSONObject(i);
+
+                                int postId = jsonPost.getInt("post_id");
+                                int communityId = jsonPost.getInt("community_id");
+                                String communityName = jsonPost.getString("community");
+                                String postLogoUrl = jsonPost.getString("author_photo_path");
+                                String postUser = jsonPost.getString("username");
+                                String postInfo = jsonPost.getString("date");
+                                String PostText = jsonPost.getString("body");
+                                String PostImageUrl = jsonPost.getString("image");
+                                String PostVideoUrl = jsonPost.getString("video_url");
+                                int postLikeCount = jsonPost.getInt("upvotes") - jsonPost.getInt("downvotes");
+                                int postCommentCount = jsonPost.getInt("comments_num");
+                                boolean saved = jsonPost.getBoolean("saved");
+                                boolean hidden = jsonPost.getBoolean("hidden");
+                                boolean subscribed = jsonPost.getBoolean("subscribed");
+                                boolean upvoted = jsonPost.getBoolean("upvoted");
+                                boolean downvoted = jsonPost.getBoolean("downvoted");
+                                int voteStatus;
+                                if (upvoted) {
+                                    voteStatus = 1;
+                                } else if (downvoted) {
+                                    voteStatus = -1;
+                                } else {
+                                    voteStatus = 0;
+                                }
+
+                                Post post = new Post(postId, communityId, communityName, postLogoUrl, postUser, postInfo, PostText, PostImageUrl, PostVideoUrl, postLikeCount, postCommentCount, saved, hidden, subscribed, voteStatus);
+                                posts.add(post);
+                            }
+
+                            JSONArray jsonCommentsArray=jsonObject.getJSONArray("comments");
+                            for (int i=0;i<jsonCommentsArray.length();i++){
+                                JSONObject jsonComment=jsonCommentsArray.getJSONObject(i);
+
+                                String postTitle = "";
+                                String postBody = "";
+                                int postCommunity = -1;
+                                String postAuthor = "";
+                                String AuthorPhoto = jsonComment.getString("author_photo_path");
+                                int commentId = jsonComment.getInt("comment_id");
+                                String commentBody = jsonComment.getString("body");
+                                String commentUser = jsonComment.getString("username");
+                                int downVotes = jsonComment.getInt("downvotes");
+                                int upVotes = jsonComment.getInt("upvotes");
+                                String date = jsonComment.getString("date");
+                                int commentsNum = jsonComment.getInt("comments_num");
+                                boolean saved = jsonComment.getBoolean("saved");
+                                boolean upVoted = jsonComment.getBoolean("upvoted");
+                                boolean downVoted = jsonComment.getBoolean("downvoted");
+
+                                Comment comment = new Comment(commentId, commentBody, commentUser, postTitle, postBody, postCommunity, postAuthor, AuthorPhoto, downVotes, upVotes, date, commentsNum, saved, upVoted, downVoted);
+                                comments.add(comment);
+                            }
+
+                            Constants.visitedUser.addPosts(posts);
+                            Constants.visitedUser.addComments(comments);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                //headers.put("Authorization","Bearer: "+ Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+    }
 }

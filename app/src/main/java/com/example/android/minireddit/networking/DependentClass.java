@@ -171,6 +171,10 @@ public class DependentClass {
         return mSupplier.updateUserProfileImage(context, profileImage);
     }
 
+    public void getMyPostsAndComments(Context context,String username){
+        mSupplier.getMyPostsAndComments(context,username);
+    }
+
     public void ViewSavedLinks(Context context) {
         mSupplier.ViewSavedLinks(context);
     }
