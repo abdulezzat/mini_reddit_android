@@ -35,11 +35,9 @@ public class SavedPostsFragment extends Fragment {
         FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.frame_layout);
         ImageView expand = (ImageView) rootView.findViewById(R.id.animation_image);
 
-        ArrayList<Post> posts = new ArrayList<>();
-
-        Constants.savedPosts = new SavedPostsAdapter(this.getContext(), posts, expand, frameLayout);
+        SavedPostsAdapter savedPostsAdapter = new SavedPostsAdapter(this.getContext(), Constants.savedPosts, expand, frameLayout);
         ListView listView = (ListView) rootView.findViewById(R.id.saved_posts_list);
-        listView.setAdapter(Constants.savedPosts);
+        listView.setAdapter(savedPostsAdapter);
 
         return rootView;
     }

@@ -31,9 +31,9 @@ public class SavedCommentsFragment extends Fragment {
 
         ArrayList<Comment> comments = new ArrayList<>();
 
-        Constants.savedComments = new SavedCommentsAdapter(this.getContext(), comments);
+        SavedCommentsAdapter savedCommentsAdapter = new SavedCommentsAdapter(this.getContext(),Constants.savedComments );
         ListView listView = (ListView) rootView.findViewById(R.id.saved_posts_list);
-        listView.setAdapter(Constants.savedComments);
+        listView.setAdapter(savedCommentsAdapter);
 
         return rootView;
     }

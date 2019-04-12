@@ -3,7 +3,11 @@ package com.example.android.minireddit;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.adapters.SavedCommentsAdapter;
 import com.example.android.minireddit.adapters.SavedPostsAdapter;
+import com.example.android.minireddit.datastructure.Comment;
+import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
+
+import java.util.ArrayList;
 
 //
 public class Constants {
@@ -19,8 +23,8 @@ public class Constants {
 
 
     //Saved Links
-    public static SavedPostsAdapter savedPosts = null;
-    public static SavedCommentsAdapter savedComments = null;
+    public static ArrayList<Post> savedPosts = new ArrayList<>();
+    public static ArrayList<Comment> savedComments = new ArrayList<>();
 
 
     //URL

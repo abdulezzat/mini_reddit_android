@@ -34,13 +34,10 @@ public class ProfileCommentsFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile_comments, container, false);
 
-        //ArrayList<Comment> comments = new ArrayList<Comment>();
 
-        //comments.add( );
-
-        //ProfileCommentsAdapter adapter = new ProfileCommentsAdapter(this.getContext(), comments);
+        ProfileCommentsAdapter adapter = new ProfileCommentsAdapter(this.getContext(), mUser.getmComments());
         ListView listView = (ListView) rootView.findViewById(R.id.profile_comments_listview);
-        //listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         return rootView;
     }

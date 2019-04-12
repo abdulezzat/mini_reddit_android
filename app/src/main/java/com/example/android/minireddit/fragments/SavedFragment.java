@@ -36,10 +36,10 @@ public class SavedFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_saved, container, false);
 
+        DependentClass.getInstance().ViewSavedLinks(getContext());
+
         mSavedPostsFragment = new SavedPostsFragment();
         mSavedCommentsFragment = new SavedCommentsFragment();
-
-        DependentClass.getInstance().ViewSavedLinks(getContext());
 
         SavedPagerAdapter savedPagerAdapter = new SavedPagerAdapter(getFragmentManager());
         savedPagerAdapter.addFragment(mSavedPostsFragment, "Posts");

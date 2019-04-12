@@ -101,7 +101,8 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
 
     public User getUserPublicInfo(Context context, String username) {
-        User user = new User("karashily", "Ahmed Elkarashily", 49415, "4m 24d", "just a place holder for user about section. hello. hope you enjoy your visit with us.", "https://theme.zdassets.com/theme_assets/2219439/89cbe072bbb76fc29a82367bd19b511df487d018.png", "https://data.whicdn.com/images/290284739/superthumb.jpg?t=1498330484");
+        User user = new User("admin", "Ahmed Elkarashily", 49415, "4m 24d", "just a place holder for user about section. hello. hope you enjoy your visit with us.", "https://theme.zdassets.com/theme_assets/2219439/89cbe072bbb76fc29a82367bd19b511df487d018.png", "https://data.whicdn.com/images/290284739/superthumb.jpg?t=1498330484");
+        Constants.visitedUser=user;
         return user;
     }
 

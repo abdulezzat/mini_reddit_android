@@ -50,7 +50,7 @@ public class MyProfileFragment extends Fragment {
         DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.visitedUser.getmUserName());
         DependentClass.getInstance().getUserFollowers(getContext(), Constants.visitedUser.getmUserName());
         DependentClass.getInstance().getUserFollowing(getContext(), Constants.visitedUser.getmUserName());
-        mUser = new User(Constants.visitedUser);
+        mUser = Constants.visitedUser;
 
         mProfilePostsFragment = new ProfilePostsFragment();
         mProfileCommentsFragment = new ProfileCommentsFragment();
