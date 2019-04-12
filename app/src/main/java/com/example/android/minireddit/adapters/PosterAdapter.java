@@ -43,6 +43,7 @@ import java.lang.reflect.Method;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.ProfileActivity;
+import com.example.android.minireddit.SinglePost;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
@@ -173,42 +174,49 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         TextView postCommentCount = (TextView) ListItemView.findViewById(R.id.postCommentCount);
         postCommentCount.setText(String.valueOf(currentPost.getPostCommentCount()));
         final ImageView subscribe=(ImageView)ListItemView.findViewById(R.id.postAdd);
-        if(!currentPost.isSubscribed()) {
+        if(currentPost.hasCommunity()){
             subscribe.setVisibility(View.VISIBLE);
-            subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
+            if(!currentPost.isSubscribed()) {
+                subscribe.setVisibility(View.VISIBLE);
+                subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
 
-        }
-        else
-            subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
-        subscribe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //todo check if auth
-                if (Constants.mToken.isEmpty()) {
-                    Toast.makeText(getContext(),"Please Login First",Toast.LENGTH_SHORT).show();
+            }
+            else
+                subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
+            subscribe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //todo check if auth
+                    if (Constants.mToken.isEmpty()) {
+                        Toast.makeText(getContext(),"Please Login First",Toast.LENGTH_SHORT).show();
 
-                } else {
-                    if (!currentPost.isSubscribed()) {
-                        if (DependentClass.getInstance().subscribeCommunity(getContext(), currentPost.getCommunityId())) {
-                            subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
-                            currentPost.setSubscribed(true);
-                            Toast.makeText(getContext(), "Subscribed Successfully", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
-                        }
                     } else {
-                        if (DependentClass.getInstance().unsubscribeCommunity(getContext(), currentPost.getCommunityId())) {
-                            subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
-                            currentPost.setSubscribed(false);
-                            Toast.makeText(getContext(), "unSubscribed Successfully", Toast.LENGTH_SHORT).show();
+                        if (!currentPost.isSubscribed()) {
+                            if (DependentClass.getInstance().subscribeCommunity(getContext(), currentPost.getCommunityId())) {
+                                subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
+                                currentPost.setSubscribed(true);
+                                Toast.makeText(getContext(), "Subscribed Successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(getContext(), "Faieled To unSubscribe", Toast.LENGTH_SHORT).show();
-                        }
+                            if (DependentClass.getInstance().unsubscribeCommunity(getContext(), currentPost.getCommunityId())) {
+                                subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
+                                currentPost.setSubscribed(false);
+                                Toast.makeText(getContext(), "unSubscribed Successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Faieled To unSubscribe", Toast.LENGTH_SHORT).show();
+                            }
 
+                        }
                     }
                 }
-            }
-        });
+            });
+
+        }
+        else{
+            subscribe.setVisibility(View.GONE);
+        }
 
 
         final ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.postLike);
@@ -388,6 +396,14 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                         break;
                 }
 
+
+            }
+        });
+        ListItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getContext(),SinglePost.class);
+                getContext().startActivity(intent);
 
             }
         });

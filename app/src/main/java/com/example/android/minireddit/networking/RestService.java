@@ -29,22 +29,14 @@ import java.util.Map;
 public class RestService implements Requests {
     @Override
     public ArrayList<Post> getTrendingPost(final Context context) {
-        Toast.makeText(context, "Function Triggered", Toast.LENGTH_SHORT).show();
-        //"https://api.myjson.com/bins/9xf3m"
-        //"http://192.168.43.118:8000/api/unauth/ViewPosts"
-        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10"
-        //"http://127.0.0.1:8000/api/unauth/ViewPosts?page_type=0"
-        //"http://localhost:8000/api/unauth/ViewPosts"
         int pageType = 0;
-        String connectionStrong = "http://127.0.0.1:8000/api/unauth/ViewPosts?page_type=0";
-        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
-        //"http://192.168.43.223:82/api/unauth/ViewPosts"
+
+        Uri.Builder builder = Uri.parse(Constants.TRENDING_POSTS).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
                 builder.toString(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
                         try {
 
                             JSONObject jsonObject = new JSONObject(response);
@@ -72,16 +64,10 @@ public class RestService implements Requests {
                                 int postLikeCount = post.getInt("upvotes") - post.getInt("downvotes");
                                 String postInfo = post.getString("date");
                                 int postCommentCount = post.getInt("comments_num");
-                                //Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
-                                //  Toast.makeText(context,postVideoUrl,Toast.LENGTH_SHORT).show();
-
-
                                 if (postVideoUrl == "null")
                                     postVideoUrl = null;
                                 if (postImage == "null")
                                     postImage = null;
-
-
                                 int voteStatus = 0;
                                 boolean saved = post.getBoolean("saved");
                                 boolean hidden = post.getBoolean("hidden");
@@ -150,21 +136,14 @@ public class RestService implements Requests {
     @Override
     public ArrayList<Post> getHomePost(final Context context) {
         Toast.makeText(context, "Function Triggered", Toast.LENGTH_SHORT).show();
-        //"https://api.myjson.com/bins/9xf3m"
-        //"http://192.168.43.118:8000/api/unauth/ViewPosts"
-        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10"
-        //"http://127.0.0.1:8000/api/unauth/ViewPosts?page_type=0"
-        //"http://localhost:8000/api/unauth/ViewPosts"
         int pageType = 0;
-        String connectionStrong = "http://127.0.0.1:8000/api/unauth/ViewPosts?page_type=1&token=";//+token
+        String connectionStrong = Constants.HOME_POSTS+Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
-        //"http://192.168.43.223:82/api/unauth/ViewPosts"
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
                 builder.toString(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
                         try {
 
                             JSONObject jsonObject = new JSONObject(response);
@@ -184,7 +163,7 @@ public class RestService implements Requests {
                                 String postUser = post.getString("username");
                                 String community = post.getString("community");
                                 // Toast.makeText(context,"outer loop 4",Toast.LENGTH_SHORT).show();
-                                //int community_id=post.getInt("community_id");
+                                int community_id=post.getInt("community_id");
                                 // Toast.makeText(context,"outer loop 5 ",Toast.LENGTH_SHORT).show();
                                 boolean subs = post.getBoolean("subscribed");
                                 String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
@@ -213,7 +192,7 @@ public class RestService implements Requests {
                                     voteStatus = 1;
 
 
-                                Post newPost = new Post(id, 1, null, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
+                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
                                 // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
                                 posts.add(newPost);
 
@@ -304,7 +283,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean votePostUp(final Context context, final int postId) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/upvoteLink?";
+        String connectionStrong =Constants.VOTE_POST_UP;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -323,7 +302,7 @@ public class RestService implements Requests {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("link_id", String.valueOf(postId));
-                params.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC91bmF1dGhcL3NpZ25JbiIsImlhdCI6MTU1MzI2ODA4NSwiZXhwIjoxNTUzODcyODg1LCJuYmYiOjE1NTMyNjgwODUsImp0aSI6IkpidmtvVXdZd0hETjh0aUciLCJzdWIiOiJhbHkxMjMiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.4BOQwLz6hUcTE-CH57iPPDdWkLxlrkhshZGgGZryHZE");
+                params.put("token", Constants.mToken);
 
                 return params;
             }
@@ -336,7 +315,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean votePostDown(final Context context, final int postId) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/downvoteLink?";
+        String connectionStrong = Constants.VOTE_LINK_DOWN;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -355,7 +334,7 @@ public class RestService implements Requests {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("link_id", String.valueOf(postId));
-                params.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC91bmF1dGhcL3NpZ25JbiIsImlhdCI6MTU1MzI2ODA4NSwiZXhwIjoxNTUzODcyODg1LCJuYmYiOjE1NTMyNjgwODUsImp0aSI6IkpidmtvVXdZd0hETjh0aUciLCJzdWIiOiJhbHkxMjMiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.4BOQwLz6hUcTE-CH57iPPDdWkLxlrkhshZGgGZryHZE");
+                params.put("token", Constants.mToken);
 
                 return params;
             }
@@ -367,7 +346,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean subscribeCommunity(final Context context, final int commId) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/subscribeCommunity?";
+        String connectionStrong = Constants.SUBSCRIBE_COMMUNITY;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -386,7 +365,7 @@ public class RestService implements Requests {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("community_id", String.valueOf(commId));
-                params.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC91bmF1dGhcL3NpZ25JbiIsImlhdCI6MTU1MzI2ODA4NSwiZXhwIjoxNTUzODcyODg1LCJuYmYiOjE1NTMyNjgwODUsImp0aSI6IkpidmtvVXdZd0hETjh0aUciLCJzdWIiOiJhbHkxMjMiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.4BOQwLz6hUcTE-CH57iPPDdWkLxlrkhshZGgGZryHZE");
+                params.put("token", Constants.mToken);
 
                 return params;
             }
@@ -398,7 +377,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean unsubscribeCommunity(final Context context, final int commId) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/unSubscribeCommunity?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC91bmF1dGhcL3NpZ25JbiIsImlhdCI6MTU1MzI2ODA4NSwiZXhwIjoxNTUzODcyODg1LCJuYmYiOjE1NTMyNjgwODUsImp0aSI6IkpidmtvVXdZd0hETjh0aUciLCJzdWIiOiJhbHkxMjMiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.4BOQwLz6hUcTE-CH57iPPDdWkLxlrkhshZGgGZryHZE&community_id=" + commId;
+        String connectionStrong = Constants.UNSUBSCRIBE_COMMUNITY+Constants.mToken+"&community_id=" + commId;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.DELETE,
                 builder.toString(),
@@ -416,9 +395,6 @@ public class RestService implements Requests {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                // params.put("community_id",String.valueOf(commId));
-                //params.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC91bmF1dGhcL3NpZ25JbiIsImlhdCI6MTU1MzI2ODA4NSwiZXhwIjoxNTUzODcyODg1LCJuYmYiOjE1NTMyNjgwODUsImp0aSI6IkpidmtvVXdZd0hETjh0aUciLCJzdWIiOiJhbHkxMjMiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.4BOQwLz6hUcTE-CH57iPPDdWkLxlrkhshZGgGZryHZE");
-
                 return params;
             }
 
@@ -436,6 +412,7 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            Constants.mToken=jsonObject.getString("token");
                             //TODO handel this after the connection is complete
                             Toast.makeText(context, "Login Done", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
@@ -1105,7 +1082,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean hidePost(final Context context, final int postID) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/hidePost?";
+        String connectionStrong = Constants.HIDE_POST;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -1140,7 +1117,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean blockUser(final Context context, final String username) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/blockUser?";
+        String connectionStrong = Constants.BLOCK_USER;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
