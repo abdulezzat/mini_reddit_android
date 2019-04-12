@@ -72,24 +72,6 @@ public class PostFragment extends Fragment {
         expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
         listView = (ListView) rootView.findViewById(R.id.postsListView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent =new Intent(getContext(),SinglePost.class);
-                intent.putExtra("position",position);
-                if(mPostType==PostType.Popular){
-                    intent.putExtra("type",0);
-
-                }
-                else{
-                    intent.putExtra("type",1);
-                }
-
-                //intent.setData(id);
-                startActivity(intent);
-
-            }
-        });
         posts=new ArrayList<>();
 
 
