@@ -2,6 +2,7 @@ package com.example.android.minireddit.networking;
 
 import android.content.Context;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
@@ -98,32 +99,67 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
    
     public User getUserPublicInfo(Context context, String username) {
-        User user = new User("karashily", 49415, "4m 24d", "just a place holder for user about section. hello. hope you enjoy your visit with us.");
+        User user = new User("karashily","Ahmed Elkarashily", 49415, "4m 24d", "just a place holder for user about section. hello. hope you enjoy your visit with us.","https://theme.zdassets.com/theme_assets/2219439/89cbe072bbb76fc29a82367bd19b511df487d018.png","https://data.whicdn.com/images/290284739/superthumb.jpg?t=1498330484");
         return user;
     }
 
     public User getUserPrivateInfo(Context context) {
-        User user = new User("", 0, "", "");
+        User user = new User("","", 0, "", "","","");
         user.setmEmail("karashily@gmail.com");
         return user;
     }
 
     public String getUsername (Context context){
+        Constants.user.setmUserName("MockedUserName");
         return "karashily";
     }
 
     public boolean updateUserDisplayName(Context context, String displayName){
+        Constants.user.setmDisplayName(displayName);
+        Constants.vistedUser.setmDisplayName(displayName);
         return true;
     }
 
     public boolean updateUserAbout (Context context, String about){
+        Constants.user.setmAbout(about);
+        Constants.vistedUser.setmAbout(about);
         return true;
     }
 
     public boolean updateUserProfileImage (Context context, String profileImage) {
+        Constants.user.setmProfileImage(profileImage);
+        Constants.vistedUser.setmProfileImage(profileImage);
         return true;
     }
 
     public void ViewSavedLinks (Context context){}
+
+    public boolean followUser (Context context, String username){
+        ArrayList<String> newFollowings=new ArrayList<>();
+        newFollowings.add(username);
+        Constants.user.addFollowing(newFollowings);
+        return true;
+    }
+
+    public boolean unFollowUser (Context context, String username){
+        ArrayList<String> removedFollowings=new ArrayList<>();
+        removedFollowings.add(username);
+        Constants.user.removeFollowing(removedFollowings);
+        return true;
+    }
+
+    public void getUserFollowers (Context context, String username){
+        ArrayList<String> newFollowers=new ArrayList<>();
+        newFollowers.add("alyramzy");
+        newFollowers.add("abdallaezzat");
+        Constants.vistedUser.addFollowers(newFollowers);
+    }
+
+    public void getUserFollowing (Context context, String username){
+        ArrayList<String> newFollowings=new ArrayList<>();
+        newFollowings.add("3lool");
+        newFollowings.add("gedo");
+        Constants.vistedUser.addFollowing(newFollowings);
+    }
 
 }

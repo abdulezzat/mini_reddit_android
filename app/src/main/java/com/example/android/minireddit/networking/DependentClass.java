@@ -120,8 +120,8 @@ public class DependentClass {
      * @param password the password
      * @return the boolean
      */
-    public boolean logIn(Context context,String email, String password) {
-        return mSupplier.logIn(context,email, password);
+    public boolean logIn(Context context, String email, String password) {
+        return mSupplier.logIn(context, email, password);
     }
 
     /**
@@ -133,8 +133,8 @@ public class DependentClass {
      * @param password the password
      * @return the boolean
      */
-    public boolean signUp(Context context,String email,String username,String password) {
-        return mSupplier.signUp(context,email,username, password);
+    public boolean signUp(Context context, String email, String username, String password) {
+        return mSupplier.signUp(context, email, username, password);
     }
 
 
@@ -159,20 +159,36 @@ public class DependentClass {
         return mSupplier.getUserPrivateInfo(context);
     }
 
-    public boolean updateUserDisplayName(Context context, String displayName){
-        return mSupplier.updateUserDisplayName(context,displayName);
+    public boolean updateUserDisplayName(Context context, String displayName) {
+        return mSupplier.updateUserDisplayName(context, displayName);
     }
 
-    public boolean updateUserAbout (Context context, String about){
-        return mSupplier.updateUserAbout(context,about);
+    public boolean updateUserAbout(Context context, String about) {
+        return mSupplier.updateUserAbout(context, about);
     }
 
-    public boolean updateUserProfileImage (Context context, String profileImage){
-        return mSupplier.updateUserProfileImage(context,profileImage);
+    public boolean updateUserProfileImage(Context context, String profileImage) {
+        return mSupplier.updateUserProfileImage(context, profileImage);
     }
 
-    public void ViewSavedLinks (Context context) {
+    public void ViewSavedLinks(Context context) {
         mSupplier.ViewSavedLinks(context);
+    }
+
+    public boolean followUser(Context context, String username) {
+        return mSupplier.followUser(context, username);
+    }
+
+    public boolean unFollowUser(Context context, String username) {
+        return mSupplier.unFollowUser(context, username);
+    }
+
+    public void getUserFollowers(Context context, String username) {
+        mSupplier.getUserFollowers(context, username);
+    }
+
+    public void getUserFollowing(Context context, String username) {
+        mSupplier.getUserFollowing(context, username);
     }
 
 }

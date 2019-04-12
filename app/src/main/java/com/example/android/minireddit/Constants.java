@@ -7,7 +7,7 @@ import com.example.android.minireddit.datastructure.User;
 
 //
 public class Constants {
-    String mToken =null;
+    public static String mToken =null;
 
     public static final boolean debug = true;
     public static User user = null;

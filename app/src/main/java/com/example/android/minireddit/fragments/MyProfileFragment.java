@@ -47,15 +47,14 @@ public class MyProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         // get the user of the profile
-        mUser = DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.vistedUser.getmUserName());
-
-        boolean isCurrentUser = (Constants.vistedUser.getmUserName() == Constants.user.getmUserName());
-        boolean followed = Constants.user.isFollowed(Constants.vistedUser.getmUserName());
+        DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.vistedUser.getmUserName());
+        DependentClass.getInstance().getUserFollowers(getContext(), Constants.vistedUser.getmUserName());
+        DependentClass.getInstance().getUserFollowing(getContext(), Constants.vistedUser.getmUserName());
+        mUser = new User(Constants.vistedUser);
 
         mProfilePostsFragment = new ProfilePostsFragment();
         mProfileCommentsFragment = new ProfileCommentsFragment();
         mProfileAboutFragment = new ProfileAboutFragment();
-
 
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
 
@@ -75,14 +74,29 @@ public class MyProfileFragment extends Fragment {
         ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
         new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
 
-        ImageView avatar=(ImageView) rootView.findViewById(R.id.avatar);
+        ImageView avatar = (ImageView) rootView.findViewById(R.id.avatar);
         new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
 
-        Button followButton = (Button) rootView.findViewById(R.id.follow_button);
-        //on click listener
+        final Button followButton = (Button) rootView.findViewById(R.id.follow_button);
+        final Button unFollowButton = (Button) rootView.findViewById(R.id.unfollow_button);
 
-        Button unFollowButton = (Button) rootView.findViewById(R.id.unfollow_button);
-        //on click listener
+        followButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DependentClass.getInstance().followUser(getContext(), Constants.vistedUser.getmUserName());
+                followButton.setVisibility(View.GONE);
+                unFollowButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        unFollowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DependentClass.getInstance().unFollowUser(getContext(), Constants.vistedUser.getmUserName());
+                followButton.setVisibility(View.VISIBLE);
+                unFollowButton.setVisibility(View.GONE);
+            }
+        });
 
         TextView editButton = (TextView) rootView.findViewById(R.id.edit_profile);
         //Intent editProfile=new Intent();
@@ -110,6 +124,10 @@ public class MyProfileFragment extends Fragment {
         TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
         userAbout.setText(mUser.getmAbout());
 
+        boolean isCurrentUser = (Constants.vistedUser.getmUserName() == Constants.user.getmUserName());
+        boolean followed = Constants.user.isFollowed(Constants.vistedUser.getmUserName());
+
+        // Viewing other User's Profile
         if (isCurrentUser) {
             followButton.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);

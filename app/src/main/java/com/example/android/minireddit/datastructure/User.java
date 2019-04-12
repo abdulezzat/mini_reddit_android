@@ -78,10 +78,6 @@ public class User {
      */
     private int mFollowingNo;
 
-    /**
-     * An Array of the Posts posted by the User.
-     */
-    private ArrayList<Post> mUserPosts;
 
     /**
      * A constructor that Instantiates a new user with full info.
@@ -116,17 +112,33 @@ public class User {
      * @param cakeDay   the day on which the user joined reddit.
      * @param about     user's about.
      */
-    public User(String username, int karma, String cakeDay, String about) {
+    public User(String username, String displayName, int karma, String cakeDay, String about, String profileImage, String headerImage) {
         mUserName = username;
-        mDisplayName = username;
+        mDisplayName = displayName;
         mCakeDay = cakeDay;
         mKarma = karma;
         mAbout = about;
+        mProfileImage=profileImage;
+        mHeaderImage=headerImage;
         mFollowers=new ArrayList<>();
         mFollowing=new ArrayList<>();
     }
 
-
+    public User(User user) {
+        this.mUserName = user.getmUserName();
+        this.mDisplayName = user.getmDisplayName();
+        this.mProfileImage = user.getmProfileImage();
+        this.mHeaderImage = user.getmHeaderImage();
+        this.mEmail = user.getmEmail();
+        this.mAbout = user.getmAbout();
+        this.mKarma = user.getmKarma();
+        this.mCakeDay = user.getmCakeDay();
+        this.mDeleted = user.ismDeleted();
+        this.mFollowers = user.getmFollowers();
+        this.mFollowersNo = user.getmFollowersNo();
+        this.mFollowing = user.getmFollowing();
+        this.mFollowingNo = user.getmFollowingNo();
+    }
 
     public String getmUserName() {
         return mUserName;
@@ -275,6 +287,17 @@ public class User {
     public void addFollowing(ArrayList<String> newFollowing) {
         mFollowing.addAll(newFollowing);
         updatemFollowingNo();
+    }
+
+    public void removeFollowing(ArrayList<String> removedFollowings) {
+        for(int i=0;i<removedFollowings.size();i++) {
+            for (int j=0;j<mFollowing.size();j++) {
+                if (mFollowing.get(j)==removedFollowings.get(i)) {
+                    mFollowing.remove(j);
+                    break;
+                }
+            }
+        }
     }
 
     /**

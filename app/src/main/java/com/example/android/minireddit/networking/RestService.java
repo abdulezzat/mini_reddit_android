@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.datastructure.Comment;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.fragments.PostFragment;
 import com.example.android.minireddit.networking.Requests;
@@ -68,7 +69,7 @@ public class RestService implements Requests {
                                 String postUser = post.getString("username");
                                 String community = post.getString("community");
                                 // Toast.makeText(context,"outer loop 4",Toast.LENGTH_SHORT).show();
-                                int community_id=post.getInt("community_id");
+                                int community_id = post.getInt("community_id");
                                 // Toast.makeText(context,"outer loop 5 ",Toast.LENGTH_SHORT).show();
                                 boolean subs = post.getBoolean("subscribed");
                                 String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
@@ -441,7 +442,7 @@ public class RestService implements Requests {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             //TODO handel this after the connection is complete
-                            Toast.makeText(context,"Login Done",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Login Done", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -478,7 +479,7 @@ public class RestService implements Requests {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             //TODO handel this after the connection is complete
-                            Toast.makeText(context,"Signup Done",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Signup Done", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -507,10 +508,10 @@ public class RestService implements Requests {
 
     @Override
     public User getUserPublicInfo(final Context context, final String username) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPublicUserInfo?username=" + username; // +token
+        String connectionStrong = "http://127.0.0.1:8000/api/unauth/viewPublicUserInfo?username=\"" + username + "\"";
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
-        final User user = new User("", 0, "", "");
+        final User user = new User("", "", 0, "", "", "", "");
 
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
                 builder.toString(),
@@ -522,22 +523,83 @@ public class RestService implements Requests {
                             JSONObject jsonObject = new JSONObject(response);
 
                             String username = jsonObject.getString("username");
-                            user.setmUserName(username);
-                            user.setmDisplayName(username);
+                            Constants.vistedUser.setmUserName(username);
+
+                            String displayName = jsonObject.getString("name");
+                            Constants.vistedUser.setmDisplayName(username);
 
                             int karma = jsonObject.getInt("karma");
-                            user.setmKarma(karma);
+                            Constants.vistedUser.setmKarma(karma);
 
                             String cakeDay = jsonObject.getString("cake_day");
-                            user.setmCakeDay(cakeDay);
+                            Constants.vistedUser.setmCakeDay(cakeDay);
 
                             String about = jsonObject.getString("about");
-                            user.setmAbout(about);
+                            Constants.vistedUser.setmAbout(about);
+
+                            String profileImage = jsonObject.getString("photo_path");
+                            Constants.vistedUser.setmProfileImage(profileImage);
+
+                            String headerImage = jsonObject.getString("cover_path");
+                            Constants.vistedUser.setmHeaderImage(headerImage);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+
+
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+        return user;
+    }
+
+    @Override
+    public User getUserPrivateInfo(final Context context) {
+        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPrivateUserInfo?&token=\"" + Constants.mToken + "\"";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+
+        final User user = new User("", "", 0, "", "", "", "");
+
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            String email = jsonObject.getString("email");
+                            Constants.user.setmEmail(email);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -571,13 +633,12 @@ public class RestService implements Requests {
     }
 
     @Override
-    public User getUserPrivateInfo(final Context context) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPrivateUserInfo?&token=";//+token
+    public String getUsername(final Context context) {
+        String connectionStrong = "http://localhost/api/auth/getUsername?&token=\"" + Constants.mToken + "\"";
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
-        final User user = new User("", 0, "", "");
+        final String string = "";
 
-        //"http://192.168.43.223:82/api/unauth/ViewPosts"
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
                 builder.toString(),
                 new Response.Listener<String>() {
@@ -587,8 +648,8 @@ public class RestService implements Requests {
                         try {
 
                             JSONObject jsonObject = new JSONObject(response);
-                            String email = jsonObject.getString("email");
-                            user.setmEmail(email);
+                            String username = jsonObject.getString("username");
+                            Constants.user.setmUserName(username);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -602,6 +663,266 @@ public class RestService implements Requests {
                     }
                 })
 
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                //headers.put("Authorization","Bearer: "+ Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+        return string;
+    }
+
+    public boolean updateUserDisplayName(final Context context, final String displayName) {
+        String connectionStrong = "http://localhost/api/auth/updateDisplayName";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Constants.user.setmDisplayName(displayName);
+                        Constants.vistedUser.setmDisplayName(displayName);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", displayName);
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+        return true;
+    }
+
+    public boolean updateUserAbout(final Context context, final String about) {
+        String connectionStrong = "http://localhost/api/auth/updateAbout";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Constants.user.setmAbout(about);
+                        Constants.vistedUser.setmAbout(about);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("about", about);
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+        return true;
+    }
+
+    public boolean updateUserProfileImage(final Context context, final String profileImage) {
+        String connectionStrong = "http://localhost/api/auth/updateProfileImage";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Constants.user.setmProfileImage(profileImage);
+                        Constants.vistedUser.setmProfileImage(profileImage);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("profile_image", profileImage);
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+        return true;
+    }
+
+    public void ViewSavedLinks(Context context) {
+        ArrayList<Post> savedPosts = new ArrayList<>();
+        ArrayList<Comment> savedComments = new ArrayList<>();
+
+
+        Constants.savedPosts.addAll(savedPosts);
+        Constants.savedComments.addAll(savedComments);
+    }
+
+    public boolean followUser(final Context context, final String username) {
+        String connectionStrong = "http://localhost/api/auth/follow";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ArrayList<String> newFollowings = new ArrayList<>();
+                        newFollowings.add(username);
+                        Constants.user.addFollowing(newFollowings);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+        return true;
+    }
+
+    public boolean unFollowUser(final Context context, final String username) {
+        String connectionStrong = "http://localhost/api/auth/unfollow";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ArrayList<String> removedFollowings = new ArrayList<>();
+                        removedFollowings.add(username);
+                        Constants.user.removeFollowing(removedFollowings);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                headers.put("Authorization", "Bearer: " + Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+        return true;
+    }
+
+    public void getUserFollowers(final Context context, final String username) {
+        String connectionStrong = "http://localhost/api/auth/followers?username=\"" + username + "&token=\"" + Constants.mToken + "\"";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray followers = jsonObject.getJSONArray("follwersList");
+
+                            ArrayList<String> newFollowers = new ArrayList<>();
+                            for (int i = 0; i < followers.length(); i++) {
+                                newFollowers.add(followers.get(i).toString());
+                            }
+                            Constants.vistedUser.addFollowers(newFollowers);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
 
         {
             @Override
@@ -615,39 +936,66 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                //headers.put("Authorization","Bearer: "+ token );
+                //headers.put("Authorization","Bearer: "+ Constants.mToken );
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+    }
+
+    public void getUserFollowing(final Context context, final String username) {
+        String connectionStrong = "http://localhost/api/auth/following?username=\"" + username + "&token=\"" + Constants.mToken + "\"";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray followers = jsonObject.getJSONArray("follwingList");
+
+                            ArrayList<String> newFollowings = new ArrayList<>();
+                            for (int i = 0; i < followers.length(); i++) {
+                                newFollowings.add(followers.get(i).toString());
+                            }
+                            Constants.vistedUser.addFollowing(newFollowings);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                //headers.put("Authorization","Bearer: "+ Constants.mToken );
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
         };
         MySingleton.getInstance(context).addToRequestQueue(stringrequest);
 
-        return user;
-    }
-
-    public String getUsername (Context context){
-        return null;
-    }
-
-    public boolean updateUserDisplayName(Context context, String displayName){
-        return true;
-    }
-
-    public boolean updateUserAbout (Context context, String about){
-        return true;
-    }
-
-    public boolean updateUserProfileImage (Context context, String profileImage) {
-        return true;
-    }
-
-    public void ViewSavedLinks (Context context) {
-        ArrayList<Post> savedPosts=new ArrayList<>();
-        //ArrayList<Comment> savedComments=new ArrayList<>();
-
-
-        Constants.savedPosts.addAll(savedPosts);
-        //Constants.savedComments.addAll(savedComments);
     }
 
 }
