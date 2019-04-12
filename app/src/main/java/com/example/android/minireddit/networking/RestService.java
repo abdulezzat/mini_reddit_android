@@ -30,8 +30,12 @@ public class RestService implements Requests {
     @Override
     public ArrayList<Post> getTrendingPost(final Context context) {
         int pageType = 0;
+        String connectionString=Constants.TRENDING_POSTS;
+        if(Constants.mToken!=null){
+            connectionString+="&token="+Constants.mToken;
+        }
 
-        Uri.Builder builder = Uri.parse(Constants.TRENDING_POSTS).buildUpon();
+        Uri.Builder builder = Uri.parse(connectionString).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
                 builder.toString(),
                 new Response.Listener<String>() {
@@ -64,9 +68,9 @@ public class RestService implements Requests {
                                 int postLikeCount = post.getInt("upvotes") - post.getInt("downvotes");
                                 String postInfo = post.getString("date");
                                 int postCommentCount = post.getInt("comments_num");
-                                if (postVideoUrl == "null")
+                                if (postVideoUrl == "-1")
                                     postVideoUrl = null;
-                                if (postImage == "null")
+                                if (postImage == "-1")
                                     postImage = null;
                                 int voteStatus = 0;
                                 boolean saved = post.getBoolean("saved");
