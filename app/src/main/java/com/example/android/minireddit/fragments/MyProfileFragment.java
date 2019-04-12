@@ -56,7 +56,7 @@ public class MyProfileFragment extends Fragment {
         mProfileCommentsFragment = new ProfileCommentsFragment();
         mProfileAboutFragment = new ProfileAboutFragment();
 
-        
+
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
 
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.profile_view_pager);
