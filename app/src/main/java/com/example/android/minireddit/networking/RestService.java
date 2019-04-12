@@ -1,10 +1,7 @@
 package com.example.android.minireddit.networking;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
-import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,8 +13,6 @@ import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Comment;
 import com.example.android.minireddit.datastructure.Post;
-import com.example.android.minireddit.fragments.PostFragment;
-import com.example.android.minireddit.networking.Requests;
 import com.example.android.minireddit.datastructure.User;
 
 import org.json.JSONArray;
@@ -523,25 +518,25 @@ public class RestService implements Requests {
                             JSONObject jsonObject = new JSONObject(response);
 
                             String username = jsonObject.getString("username");
-                            Constants.vistedUser.setmUserName(username);
+                            Constants.visitedUser.setmUserName(username);
 
                             String displayName = jsonObject.getString("name");
-                            Constants.vistedUser.setmDisplayName(username);
+                            Constants.visitedUser.setmDisplayName(username);
 
                             int karma = jsonObject.getInt("karma");
-                            Constants.vistedUser.setmKarma(karma);
+                            Constants.visitedUser.setmKarma(karma);
 
                             String cakeDay = jsonObject.getString("cake_day");
-                            Constants.vistedUser.setmCakeDay(cakeDay);
+                            Constants.visitedUser.setmCakeDay(cakeDay);
 
                             String about = jsonObject.getString("about");
-                            Constants.vistedUser.setmAbout(about);
+                            Constants.visitedUser.setmAbout(about);
 
                             String profileImage = jsonObject.getString("photo_path");
-                            Constants.vistedUser.setmProfileImage(profileImage);
+                            Constants.visitedUser.setmProfileImage(profileImage);
 
                             String headerImage = jsonObject.getString("cover_path");
-                            Constants.vistedUser.setmHeaderImage(headerImage);
+                            Constants.visitedUser.setmHeaderImage(headerImage);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -694,7 +689,7 @@ public class RestService implements Requests {
                     @Override
                     public void onResponse(String response) {
                         Constants.user.setmDisplayName(displayName);
-                        Constants.vistedUser.setmDisplayName(displayName);
+                        Constants.visitedUser.setmDisplayName(displayName);
                     }
                 },
                 new Response.ErrorListener() {
@@ -733,7 +728,7 @@ public class RestService implements Requests {
                     @Override
                     public void onResponse(String response) {
                         Constants.user.setmAbout(about);
-                        Constants.vistedUser.setmAbout(about);
+                        Constants.visitedUser.setmAbout(about);
                     }
                 },
                 new Response.ErrorListener() {
@@ -772,7 +767,7 @@ public class RestService implements Requests {
                     @Override
                     public void onResponse(String response) {
                         Constants.user.setmProfileImage(profileImage);
-                        Constants.vistedUser.setmProfileImage(profileImage);
+                        Constants.visitedUser.setmProfileImage(profileImage);
                     }
                 },
                 new Response.ErrorListener() {
@@ -910,7 +905,7 @@ public class RestService implements Requests {
                             for (int i = 0; i < followers.length(); i++) {
                                 newFollowers.add(followers.get(i).toString());
                             }
-                            Constants.vistedUser.addFollowers(newFollowers);
+                            Constants.visitedUser.addFollowers(newFollowers);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -963,7 +958,7 @@ public class RestService implements Requests {
                             for (int i = 0; i < followers.length(); i++) {
                                 newFollowings.add(followers.get(i).toString());
                             }
-                            Constants.vistedUser.addFollowing(newFollowings);
+                            Constants.visitedUser.addFollowing(newFollowings);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

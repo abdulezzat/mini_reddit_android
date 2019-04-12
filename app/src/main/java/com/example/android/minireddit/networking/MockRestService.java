@@ -116,19 +116,19 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     public boolean updateUserDisplayName(Context context, String displayName){
         Constants.user.setmDisplayName(displayName);
-        Constants.vistedUser.setmDisplayName(displayName);
+        Constants.visitedUser.setmDisplayName(displayName);
         return true;
     }
 
     public boolean updateUserAbout (Context context, String about){
         Constants.user.setmAbout(about);
-        Constants.vistedUser.setmAbout(about);
+        Constants.visitedUser.setmAbout(about);
         return true;
     }
 
     public boolean updateUserProfileImage (Context context, String profileImage) {
         Constants.user.setmProfileImage(profileImage);
-        Constants.vistedUser.setmProfileImage(profileImage);
+        Constants.visitedUser.setmProfileImage(profileImage);
         return true;
     }
 
@@ -152,14 +152,14 @@ public class MockRestService implements com.example.android.minireddit.networkin
         ArrayList<String> newFollowers=new ArrayList<>();
         newFollowers.add("alyramzy");
         newFollowers.add("abdallaezzat");
-        Constants.vistedUser.addFollowers(newFollowers);
+        Constants.visitedUser.addFollowers(newFollowers);
     }
 
     public void getUserFollowing (Context context, String username){
         ArrayList<String> newFollowings=new ArrayList<>();
         newFollowings.add("3lool");
         newFollowings.add("gedo");
-        Constants.vistedUser.addFollowing(newFollowings);
+        Constants.visitedUser.addFollowing(newFollowings);
     }
 
 }

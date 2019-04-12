@@ -11,7 +11,7 @@ public class Constants {
 
     public static final boolean debug = true;
     public static User user = null;
-    public static User vistedUser = null;
+    public static User visitedUser = null;
     //public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
     public static final String TRENDIN_POST = "";
     public static PosterAdapter poster = null;

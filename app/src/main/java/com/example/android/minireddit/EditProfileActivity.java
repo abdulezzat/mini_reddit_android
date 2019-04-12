@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.networking.DependentClass;
@@ -27,7 +26,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         DependentClass.getInstance().getUserPublicInfo(this, Constants.user.getmUserName());
-        User currentUser=new User(Constants.vistedUser);
+        User currentUser=new User(Constants.visitedUser);
 
         ImageView headerPhoto = findViewById(R.id.header_photo);
         new DownloadImageTask(headerPhoto).execute(currentUser.getmHeaderImage());

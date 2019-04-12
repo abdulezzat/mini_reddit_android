@@ -1,8 +1,6 @@
 package com.example.android.minireddit.fragments;
 
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -47,10 +45,10 @@ public class MyProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         // get the user of the profile
-        DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.vistedUser.getmUserName());
-        DependentClass.getInstance().getUserFollowers(getContext(), Constants.vistedUser.getmUserName());
-        DependentClass.getInstance().getUserFollowing(getContext(), Constants.vistedUser.getmUserName());
-        mUser = new User(Constants.vistedUser);
+        DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.visitedUser.getmUserName());
+        DependentClass.getInstance().getUserFollowers(getContext(), Constants.visitedUser.getmUserName());
+        DependentClass.getInstance().getUserFollowing(getContext(), Constants.visitedUser.getmUserName());
+        mUser = new User(Constants.visitedUser);
 
         mProfilePostsFragment = new ProfilePostsFragment();
         mProfileCommentsFragment = new ProfileCommentsFragment();
@@ -83,7 +81,7 @@ public class MyProfileFragment extends Fragment {
         followButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DependentClass.getInstance().followUser(getContext(), Constants.vistedUser.getmUserName());
+                DependentClass.getInstance().followUser(getContext(), Constants.visitedUser.getmUserName());
                 followButton.setVisibility(View.GONE);
                 unFollowButton.setVisibility(View.VISIBLE);
             }
@@ -92,7 +90,7 @@ public class MyProfileFragment extends Fragment {
         unFollowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DependentClass.getInstance().unFollowUser(getContext(), Constants.vistedUser.getmUserName());
+                DependentClass.getInstance().unFollowUser(getContext(), Constants.visitedUser.getmUserName());
                 followButton.setVisibility(View.VISIBLE);
                 unFollowButton.setVisibility(View.GONE);
             }
@@ -124,8 +122,8 @@ public class MyProfileFragment extends Fragment {
         TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
         userAbout.setText(mUser.getmAbout());
 
-        boolean isCurrentUser = (Constants.vistedUser.getmUserName() == Constants.user.getmUserName());
-        boolean followed = Constants.user.isFollowed(Constants.vistedUser.getmUserName());
+        boolean isCurrentUser = (Constants.visitedUser.getmUserName() == Constants.user.getmUserName());
+        boolean followed = Constants.user.isFollowed(Constants.visitedUser.getmUserName());
 
         // Viewing other User's Profile
         if (isCurrentUser) {
