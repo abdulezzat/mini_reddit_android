@@ -25,8 +25,6 @@ import java.util.ArrayList;
 
 public class SavedFragment extends Fragment {
 
-    private SavedPostsFragment mSavedPostsFragment;
-    private SavedCommentsFragment mSavedCommentsFragment;
 
     public SavedFragment() { // empty constructor required.
     }
@@ -38,16 +36,11 @@ public class SavedFragment extends Fragment {
 
         DependentClass.getInstance().ViewSavedLinks(getContext());
 
-        mSavedPostsFragment = new SavedPostsFragment();
-        mSavedCommentsFragment = new SavedCommentsFragment();
-
-        SavedPagerAdapter savedPagerAdapter = new SavedPagerAdapter(getFragmentManager());
-        savedPagerAdapter.addFragment(mSavedPostsFragment, "Posts");
-        savedPagerAdapter.addFragment(mSavedCommentsFragment, "Comments");
+        SavedPagerAdapter savedPagerAdapter = new SavedPagerAdapter(getChildFragmentManager());
 
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
 
-        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.profile_view_pager);
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.saved_view_pager);
 
         viewPager.setAdapter(savedPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

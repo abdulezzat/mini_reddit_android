@@ -9,6 +9,7 @@
     <ListView
         android:id="@+id/saved_comments_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:dividerHeight="10.0sp" />
 
 </LinearLayout>
