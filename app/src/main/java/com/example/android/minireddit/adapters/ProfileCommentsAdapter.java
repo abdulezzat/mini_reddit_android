@@ -56,7 +56,7 @@ public class ProfileCommentsAdapter extends ArrayAdapter<Comment> {
         postTitle.setText(currentComment.getmPostTitle());
 
         TextView postSource = (TextView) ListItemView.findViewById(R.id.post_source);
-        postSource.setText(currentComment.getmPostCommunity());
+        postSource.setText(String.valueOf(currentComment.getmPostCommunity()));
 
         TextView commentDate = (TextView) ListItemView.findViewById(R.id.comment_date);
         commentDate.setText(currentComment.getmDate());

@@ -15,6 +15,7 @@ import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.ProfilePostsAdapter;
 import com.example.android.minireddit.adapters.SavedPagerAdapter;
 import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.networking.DependentClass;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,8 @@ public class SavedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_saved, container, false);
+
+        DependentClass.getInstance().ViewSavedLinks(getContext());
 
         mSavedPostsFragment = new SavedPostsFragment();
         mSavedCommentsFragment = new SavedCommentsFragment();

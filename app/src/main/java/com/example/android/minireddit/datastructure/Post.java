@@ -379,4 +379,15 @@ public class Post {
     public void setPostVideoUrl(String postVideoUrl) {
         this.postVideoUrl = postVideoUrl;
     }
+
+    /**
+     * Has community boolean.
+     *
+     * @return the boolean
+     */
+    public boolean hasCommunity(){
+        if(communityId==-1)
+            return false;
+        return true;
+    }
 }
