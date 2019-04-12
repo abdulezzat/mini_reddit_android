@@ -171,4 +171,8 @@ public class DependentClass {
         return mSupplier.updateUserProfileImage(context,profileImage);
     }
 
+    public void ViewSavedLinks (Context context) {
+        mSupplier.ViewSavedLinks(context);
+    }
+
 }

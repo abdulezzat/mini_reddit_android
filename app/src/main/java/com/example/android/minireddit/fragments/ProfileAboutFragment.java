@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.User;
 
@@ -35,6 +36,13 @@ public class ProfileAboutFragment extends Fragment {
         TextView about = (TextView) rootView.findViewById(R.id.user_about);
         TextView karma = (TextView) rootView.findViewById(R.id.karma);
         TextView redditAge = (TextView) rootView.findViewById(R.id.reddit_age);
+        View messageButton = rootView.findViewById(R.id.msg);
+
+        if (mUser.getmUserName() == Constants.user.getmUserName()) {
+            messageButton.setVisibility(View.GONE);
+        } else {
+            messageButton.setVisibility(View.VISIBLE);
+        }
 
         karma.setText(String.valueOf(mUser.getmKarma()));
         about.setText(mUser.getmAbout());
@@ -44,7 +52,7 @@ public class ProfileAboutFragment extends Fragment {
     }
 
     public void setUser(User user) {
-        mUser=user;
+        mUser = user;
     }
 
 }

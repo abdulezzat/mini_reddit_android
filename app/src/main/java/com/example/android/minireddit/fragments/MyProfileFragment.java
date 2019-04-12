@@ -2,6 +2,7 @@ package com.example.android.minireddit.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -20,6 +21,7 @@ import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.ProfilePagerAdapter;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.networking.DependentClass;
+import com.example.android.minireddit.networking.DownloadImageTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,13 +47,16 @@ public class MyProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         // get the user of the profile
-        mUser = DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.user.getmUserName());
-        mUser.setmEmail(DependentClass.getInstance().getUserPrivateInfo(getContext()).getmEmail());
+        mUser = DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.vistedUser.getmUserName());
+
+        boolean isCurrentUser = (Constants.vistedUser.getmUserName() == Constants.user.getmUserName());
+        boolean followed = Constants.user.isFollowed(Constants.vistedUser.getmUserName());
+
         mProfilePostsFragment = new ProfilePostsFragment();
         mProfileCommentsFragment = new ProfileCommentsFragment();
         mProfileAboutFragment = new ProfileAboutFragment();
 
-
+        
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
 
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.profile_view_pager);
@@ -68,16 +73,21 @@ public class MyProfileFragment extends Fragment {
 
         // Setting Fragment Views values to be equal to values retrieved form server.
         ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
-        //TODO: setting headerImage.
+        new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
+
+        ImageView avatar=(ImageView) rootView.findViewById(R.id.avatar);
+        new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
 
         Button followButton = (Button) rootView.findViewById(R.id.follow_button);
-        //TODO: setting headerImage.
+        //on click listener
+
+        Button unFollowButton = (Button) rootView.findViewById(R.id.unfollow_button);
+        //on click listener
 
         TextView editButton = (TextView) rootView.findViewById(R.id.edit_profile);
-        //TODO: if mUser isn't the currentUser then this button should disappear.
+        //Intent editProfile=new Intent();
 
         TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
-        //TODO: if mUser isn't the currentUser then this dot should disappear.
 
         TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
         displayName.setText(mUser.getmDisplayName());
@@ -94,12 +104,29 @@ public class MyProfileFragment extends Fragment {
         userDate.setText(mUser.getmCakeDay());
 
         TextView userFollowersCount = (TextView) rootView.findViewById(R.id.followers_count);
-        //TODO: if mUser isn't the currentUser then this View should disappear.
-        String mUserFollowersCount = mUser.getmFollowersNo() + " followers";
+        String mUserFollowersCount = String.valueOf(mUser.getmFollowersNo()) + " followers";
         userFollowersCount.setText(mUserFollowersCount);
 
         TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
         userAbout.setText(mUser.getmAbout());
+
+        if (isCurrentUser) {
+            followButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.VISIBLE);
+            dotBeforeFollowers.setVisibility(View.VISIBLE);
+            userFollowersCount.setVisibility(View.VISIBLE);
+        } else {
+            editButton.setVisibility(View.GONE);
+            dotBeforeFollowers.setVisibility(View.GONE);
+            userFollowersCount.setVisibility(View.GONE);
+            if (followed) {
+                followButton.setVisibility(View.GONE);
+                unFollowButton.setVisibility(View.VISIBLE);
+            } else {
+                followButton.setVisibility(View.VISIBLE);
+                unFollowButton.setVisibility(View.GONE);
+            }
+        }
 
         // setting backButton Action
         ImageView backButton = (ImageView) rootView.findViewById(R.id.back_button);

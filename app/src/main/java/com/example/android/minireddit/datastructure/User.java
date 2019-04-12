@@ -16,7 +16,6 @@ public class User {
     private String mToken;
 
 
-
     /**
      * The Unique User Name for the user.
      */
@@ -316,6 +315,19 @@ public class User {
     public int getmFollowingNo() {
         updatemFollowingNo();
         return mFollowingNo;
+    }
+
+
+    /**
+     * a method to check if a user is followed by the current user.
+     * @param username the username of the user to check
+     * @return whether the user is followed or not
+     */
+    public boolean isFollowed(String username){
+        for(int i=0;i<mFollowing.size();i++){
+            if(mFollowing.get(i)==username) return true;
+        }
+        return false;
     }
 
 }

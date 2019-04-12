@@ -209,6 +209,7 @@ public class HomePage extends AppCompatActivity
             mInHomeScreen = false;
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             getSupportActionBar().hide();
+            Constants.vistedUser.setmUserName(Constants.user.getmUserName());
             result = loadFragment(mMyProfileFragment);
         } else if (id == R.id.nav_reddit_coin) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();

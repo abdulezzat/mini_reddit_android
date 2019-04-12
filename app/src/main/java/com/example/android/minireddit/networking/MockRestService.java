@@ -108,6 +108,10 @@ public class MockRestService implements com.example.android.minireddit.networkin
         return user;
     }
 
+    public String getUsername (Context context){
+        return "karashily";
+    }
+
     public boolean updateUserDisplayName(Context context, String displayName){
         return true;
     }

@@ -101,6 +101,8 @@ public interface Requests {
       */
      User getUserPublicInfo(Context context, String username);
 
+     String getUsername (Context context);
+
      /**
       * Gets user private info.
       *

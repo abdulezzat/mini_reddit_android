@@ -15,6 +15,7 @@ import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.ProfilePostsAdapter;
 import com.example.android.minireddit.adapters.SavedPagerAdapter;
 import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.networking.DependentClass;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,8 @@ public class SavedFragment extends Fragment {
 
         mSavedPostsFragment = new SavedPostsFragment();
         mSavedCommentsFragment = new SavedCommentsFragment();
+
+        DependentClass.getInstance().ViewSavedLinks(getContext());
 
         SavedPagerAdapter savedPagerAdapter = new SavedPagerAdapter(getFragmentManager());
         savedPagerAdapter.addFragment(mSavedPostsFragment, "Posts");

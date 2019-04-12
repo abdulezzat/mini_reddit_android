@@ -625,6 +625,10 @@ public class RestService implements Requests {
         return user;
     }
 
+    public String getUsername (Context context){
+        return null;
+    }
+
     public boolean updateUserDisplayName(Context context, String displayName){
         return true;
     }
