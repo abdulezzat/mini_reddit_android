@@ -39,9 +39,7 @@ public class ProfilePostsFragment extends Fragment {
         FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.frame_layout);
         ImageView expand = (ImageView) rootView.findViewById(R.id.animation_image);
 
-        ArrayList<Post> posts = new ArrayList<Post>();
-
-        ProfilePostsAdapter adapter = new ProfilePostsAdapter(this.getContext(), posts, expand, frameLayout);
+        ProfilePostsAdapter adapter = new ProfilePostsAdapter(this.getContext(), mUser.getmPosts(), expand, frameLayout);
         ListView listView = (ListView) rootView.findViewById(R.id.profile_posts_listview);
         listView.setAdapter(adapter);
 

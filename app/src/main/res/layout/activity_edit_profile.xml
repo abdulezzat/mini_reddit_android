@@ -21,15 +21,16 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"
-            android:onClick="saveEdits"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
+            android:onClick="saveEdits"
             android:text="Save"
             android:textAllCaps="true"
             android:textColor="@color/iconsColor" />
@@ -58,9 +59,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:scaleType="centerCrop"
                     android:clickable="true"
                     android:focusable="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/iamadreamer" />
 
                 <ImageView
@@ -97,14 +98,14 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="67dp"
-                    app:cardCornerRadius="4dp"
-                    android:outlineAmbientShadowColor="@android:color/transparent">
+                    android:outlineAmbientShadowColor="@android:color/transparent"
+                    app:cardCornerRadius="4dp">
 
                     <ImageView
+                        android:id="@+id/profile_picture"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:id="@+id/profile_picture"
                         android:clickable="true"
                         android:focusable="true"
                         android:src="@drawable/default_avatar" />

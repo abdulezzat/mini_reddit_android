@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.adapters.SavedPostsAdapter;
 import com.example.android.minireddit.datastructure.Post;
@@ -34,9 +35,7 @@ public class SavedPostsFragment extends Fragment {
         FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.frame_layout);
         ImageView expand = (ImageView) rootView.findViewById(R.id.animation_image);
 
-        ArrayList<Post> posts = new ArrayList<>();
-
-        SavedPostsAdapter savedPostsAdapter = new SavedPostsAdapter(this.getContext(), posts, expand, frameLayout);
+        SavedPostsAdapter savedPostsAdapter = new SavedPostsAdapter(this.getContext(), Constants.savedPosts, expand, frameLayout);
         ListView listView = (ListView) rootView.findViewById(R.id.saved_posts_list);
         listView.setAdapter(savedPostsAdapter);
 

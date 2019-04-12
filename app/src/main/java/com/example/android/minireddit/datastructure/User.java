@@ -13,7 +13,6 @@ public class User {
 
 
 
-
     /**
      * The Unique User Name for the user.
      */
@@ -80,9 +79,15 @@ public class User {
     private int mFollowingNo;
 
     /**
-     * An Array of the Posts posted by the User.
+     * The List of Posts made by the user.
      */
-    private ArrayList<Post> mUserPosts;
+    private ArrayList<Post> mPosts;
+
+    /**
+     * The list of Comments made by the user.
+     */
+    private ArrayList<Comment> mComments;
+
 
     /**
      * A constructor that Instantiates a new user with full info.
@@ -107,6 +112,8 @@ public class User {
         mDeleted = deleted;
         mFollowers=new ArrayList<>();
         mFollowing=new ArrayList<>();
+        mPosts=new ArrayList<>();
+        mComments=new ArrayList<>();
     }
 
     /**
@@ -117,17 +124,44 @@ public class User {
      * @param cakeDay   the day on which the user joined reddit.
      * @param about     user's about.
      */
-    public User(String username, int karma, String cakeDay, String about) {
+    public User(String username, String displayName, int karma, String cakeDay, String about, String profileImage, String headerImage) {
         mUserName = username;
-        mDisplayName = username;
+        mDisplayName = displayName;
         mCakeDay = cakeDay;
         mKarma = karma;
         mAbout = about;
+        mProfileImage=profileImage;
+        mHeaderImage=headerImage;
         mFollowers=new ArrayList<>();
         mFollowing=new ArrayList<>();
+        mPosts=new ArrayList<>();
+        mComments=new ArrayList<>();
     }
 
+    public User (){
+        mFollowers=new ArrayList<>();
+        mFollowing=new ArrayList<>();
+        mPosts=new ArrayList<>();
+        mComments=new ArrayList<>();
+    }
 
+    public User(User user) {
+        this.mUserName = user.getmUserName();
+        this.mDisplayName = user.getmDisplayName();
+        this.mProfileImage = user.getmProfileImage();
+        this.mHeaderImage = user.getmHeaderImage();
+        this.mEmail = user.getmEmail();
+        this.mAbout = user.getmAbout();
+        this.mKarma = user.getmKarma();
+        this.mCakeDay = user.getmCakeDay();
+        this.mDeleted = user.ismDeleted();
+        this.mFollowers = user.getmFollowers();
+        this.mFollowersNo = user.getmFollowersNo();
+        this.mFollowing = user.getmFollowing();
+        this.mFollowingNo = user.getmFollowingNo();
+        this.mPosts=user.getmPosts();
+        this.mComments=user.getmComments();
+    }
 
     public String getmUserName() {
         return mUserName;
@@ -278,6 +312,17 @@ public class User {
         updatemFollowingNo();
     }
 
+    public void removeFollowing(ArrayList<String> removedFollowings) {
+        for(int i=0;i<removedFollowings.size();i++) {
+            for (int j=0;j<mFollowing.size();j++) {
+                if (mFollowing.get(j)==removedFollowings.get(i)) {
+                    mFollowing.remove(j);
+                    break;
+                }
+            }
+        }
+    }
+
     /**
      * updates the current mfollowing no.
      */
@@ -299,4 +344,32 @@ public class User {
         return mFollowingNo;
     }
 
+
+    /**
+     * a method to check if a user is followed by the current user.
+     * @param username the username of the user to check
+     * @return whether the user is followed or not
+     */
+    public boolean isFollowed(String username){
+        for(int i=0;i<mFollowing.size();i++){
+            if(mFollowing.get(i)==username) return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Post> getmPosts() {
+        return mPosts;
+    }
+
+    public void addPosts(ArrayList<Post> newPosts) {
+        mPosts.addAll(newPosts);
+    }
+
+    public ArrayList<Comment> getmComments() {
+        return mComments;
+    }
+
+    public void addComments(ArrayList<Comment> newComments) {
+        mComments.addAll(newComments);
+    }
 }
