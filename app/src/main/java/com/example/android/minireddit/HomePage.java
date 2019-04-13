@@ -1,5 +1,6 @@
 package com.example.android.minireddit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,16 +15,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.android.minireddit.abs.NavigateToAnotherUserProfile;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.HomePageFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.fragments.SavedFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomePage extends AppCompatActivity
@@ -105,6 +112,8 @@ public class HomePage extends AppCompatActivity
         mHomePageFragment = new HomePageFragment();
         mMyProfileFragment = new MyProfileFragment();
         mMySavedFragment = new SavedFragment();
+
+
         //set default fragment homePage
         loadFragment(mHomePageFragment);
         mInHomeScreen = true;
@@ -162,8 +171,19 @@ public class HomePage extends AppCompatActivity
             View header = getLayoutInflater().inflate(R.layout.nav_header_home_page, null);
             navigationView.addHeaderView(header);
             navigationView.removeHeaderView(navigationView.getHeaderView(0));
+            // you need to have a list of data that you want the spinner to display
+            List<String> spinnerArray =  new ArrayList<String>();
+            spinnerArray.add(Constants.user.getmUserName());
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    this, android.R.layout.simple_spinner_item, spinnerArray);
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            Spinner sItems = (Spinner) findViewById(R.id.log_in_spinner);
+            sItems.setAdapter(adapter);
 
         }
+
     }
 
 
@@ -263,7 +283,32 @@ public class HomePage extends AppCompatActivity
 
             fragmentManager.executePendingTransactions();
 
+            /*Constants.poster.mNavigateToAnotherUserProfile = new NavigateToAnotherUserProfile() {
+                @Override
+                public void navigateToAnotherUserProfile(String userName) {
 
+                    mInHomeScreen = false;
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    getSupportActionBar().hide();
+                    Constants.visitedUser=new User();
+                    Constants.visitedUser.setmUserName(userName);
+                    loadFragment(mMyProfileFragment);
+                }
+            };
+
+            Constants.homeposts.mNavigateToAnotherUserProfile = new NavigateToAnotherUserProfile() {
+                @Override
+                public void navigateToAnotherUserProfile(String userName) {
+                    //super.navigateToAnotherUserProfile();
+                    mInHomeScreen = false;
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    getSupportActionBar().hide();
+                    Constants.visitedUser=new User();
+                    Constants.visitedUser.setmUserName(userName);
+                    loadFragment(mMyProfileFragment);
+                }
+            };
+*/
             return true;
         } else return false;
     }

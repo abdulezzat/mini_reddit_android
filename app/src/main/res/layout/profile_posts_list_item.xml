@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="5dp"
-    tools:context=".adapters.ProfilePostsAdapter">
+    tools:context=".adapters.ProfilePostsAdapter"
+    tools:ignore="WebViewLayout">
 
     <RelativeLayout
         android:layout_width="match_parent"

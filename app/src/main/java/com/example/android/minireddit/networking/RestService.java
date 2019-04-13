@@ -27,6 +27,7 @@ import java.util.Map;
  * Created by Aly on 3/15/2019.
  */
 public class RestService implements Requests {
+
     @Override
     public ArrayList<Post> getTrendingPost(final Context context) {
         int pageType = 0;
@@ -417,6 +418,10 @@ public class RestService implements Requests {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             Constants.mToken=jsonObject.getString("token");
+                            Constants.user = new User(username, username, null, null, null, 1, null, false);
+                            if (Constants.mLogInSignUpSuccessful != null) {
+                                Constants.mLogInSignUpSuccessful.Successful();
+                            }
                             //TODO handel this after the connection is complete
                             Toast.makeText(context, "Login Done", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
@@ -454,6 +459,10 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            Constants.user = new User(username, username, null, email, null, 1, null, false);
+                            if (Constants.mLogInSignUpSuccessful != null) {
+                                Constants.mLogInSignUpSuccessful.Successful();
+                            }
                             //TODO handel this after the connection is complete
                             Toast.makeText(context, "Signup Done", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {

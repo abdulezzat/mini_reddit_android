@@ -44,6 +44,7 @@ import java.lang.reflect.Method;
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.ProfileActivity;
 import com.example.android.minireddit.SinglePost;
+import com.example.android.minireddit.abs.NavigateToAnotherUserProfile;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
@@ -59,6 +60,7 @@ import static android.app.AlertDialog.THEME_HOLO_LIGHT;
  */
 public class PosterAdapter extends ArrayAdapter<Post> {
     private Animator currentAnimator;
+    public NavigateToAnotherUserProfile mNavigateToAnotherUserProfile;
     private int shortAnimationDuration;
     /**
      * The Expanded image To Animate.
@@ -117,9 +119,9 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             postInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getContext(), ProfileActivity.class);
-                    intent.putExtra("username",currentPost.getPostUser());
-                   // getContext().startActivity(intent);
+                    if (mNavigateToAnotherUserProfile != null) {
+                        mNavigateToAnotherUserProfile.navigateToAnotherUserProfile(currentPost.getPostUser());
+                    }
                 }
             });
 
