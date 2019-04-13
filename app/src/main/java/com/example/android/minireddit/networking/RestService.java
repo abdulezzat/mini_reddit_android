@@ -417,13 +417,16 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Constants.mToken=jsonObject.getString("token");
-                            Constants.user = new User(username, username, null, null, null, 1, null, false);
-                            if (Constants.mLogInSignUpSuccessful != null) {
-                                Constants.mLogInSignUpSuccessful.Successful();
+                            if(jsonObject.getBoolean("success")) {
+                                Constants.mToken = jsonObject.getString("token");
+                                Constants.user = new User(username, username, null, null, null, 1, null, false);
+                                if (Constants.mLogInSignUpSuccessful != null) {
+                                    Constants.mLogInSignUpSuccessful.Successful();
+                                }
+                                Toast.makeText(context, "Login Done", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(context, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
-                            //TODO handel this after the connection is complete
-                            Toast.makeText(context, "Login Done", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -433,6 +436,7 @@ public class RestService implements Requests {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
@@ -459,12 +463,16 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Constants.user = new User(username, username, null, email, null, 1, null, false);
-                            if (Constants.mLogInSignUpSuccessful != null) {
-                                Constants.mLogInSignUpSuccessful.Successful();
+                            if (jsonObject.getBoolean("success")) {
+                                Constants.user = new User(username, username, null, email, null, 1, null, false);
+                                Constants.mToken = jsonObject.getString("token");
+                                if (Constants.mLogInSignUpSuccessful != null) {
+                                    Constants.mLogInSignUpSuccessful.Successful();
+                                }
+                                Toast.makeText(context, "Signup Done", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(context, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
-                            //TODO handel this after the connection is complete
-                            Toast.makeText(context, "Signup Done", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
