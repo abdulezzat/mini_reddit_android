@@ -153,7 +153,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
         Constants.savedComments.addAll(comments);
     }
 
-    public void getMyPostsAndComments(Context context,String username){
+    public void getUserPostsAndComments(Context context, String username){
         ArrayList<Post> posts=new ArrayList<>();
         posts.add(new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
         posts.add(new Post(1, 1, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 1h ago", "This is Photo Hint", "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", null, 15, 200, false, false, false, 1));

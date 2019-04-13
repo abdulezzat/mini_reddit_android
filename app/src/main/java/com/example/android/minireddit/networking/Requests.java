@@ -121,7 +121,7 @@ public interface Requests {
 
     boolean updateUserProfileImage(Context context, String profileImage);
 
-    void getMyPostsAndComments(Context context,String username);
+    void getUserPostsAndComments(Context context, String username);
 
     void ViewSavedLinks(Context context);
 

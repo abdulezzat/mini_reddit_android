@@ -31,9 +31,9 @@ public class RestService implements Requests {
     @Override
     public ArrayList<Post> getTrendingPost(final Context context) {
         int pageType = 0;
-        String connectionString=Constants.TRENDING_POSTS;
-        if(Constants.mToken!=null){
-            connectionString+="&token="+Constants.mToken;
+        String connectionString = Constants.TRENDING_POSTS;
+        if (Constants.mToken != null) {
+            connectionString += "&token=" + Constants.mToken;
         }
 
         Uri.Builder builder = Uri.parse(connectionString).buildUpon();
@@ -142,7 +142,7 @@ public class RestService implements Requests {
     public ArrayList<Post> getHomePost(final Context context) {
         Toast.makeText(context, "Function Triggered", Toast.LENGTH_SHORT).show();
         int pageType = 0;
-        String connectionStrong = Constants.HOME_POSTS+Constants.mToken;
+        String connectionStrong = Constants.HOME_POSTS + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
                 builder.toString(),
@@ -168,7 +168,7 @@ public class RestService implements Requests {
                                 String postUser = post.getString("username");
                                 String community = post.getString("community");
                                 // Toast.makeText(context,"outer loop 4",Toast.LENGTH_SHORT).show();
-                                int community_id=post.getInt("community_id");
+                                int community_id = post.getInt("community_id");
                                 // Toast.makeText(context,"outer loop 5 ",Toast.LENGTH_SHORT).show();
                                 boolean subs = post.getBoolean("subscribed");
                                 String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
@@ -288,7 +288,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean votePostUp(final Context context, final int postId) {
-        String connectionStrong =Constants.VOTE_POST_UP;
+        String connectionStrong = Constants.VOTE_POST_UP;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -382,7 +382,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean unsubscribeCommunity(final Context context, final int commId) {
-        String connectionStrong = Constants.UNSUBSCRIBE_COMMUNITY+Constants.mToken+"&community_id=" + commId;
+        String connectionStrong = Constants.UNSUBSCRIBE_COMMUNITY + Constants.mToken + "&community_id=" + commId;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.DELETE,
                 builder.toString(),
@@ -443,8 +443,8 @@ public class RestService implements Requests {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(Constants.username, username);
-                params.put(Constants.password, password);
+                params.put(Constants.USERNAME, username);
+                params.put(Constants.PASSWORD, password);
 
                 return params;
             }
@@ -481,17 +481,17 @@ public class RestService implements Requests {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context,error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(Constants.username, username);
-                params.put(Constants.password, password);
-                params.put(Constants.email, email);
-                params.put("password_confirmation",password);
+                params.put(Constants.USERNAME, username);
+                params.put(Constants.PASSWORD, password);
+                params.put(Constants.EMAIL, email);
+                params.put("password_confirmation", password);
 
                 return params;
             }
@@ -503,7 +503,7 @@ public class RestService implements Requests {
 
     @Override
     public User getUserPublicInfo(final Context context, final String username) {
-        String connectionStrong = "http://127.0.0.1:8000/api/unauth/viewPublicUserInfo?username=\"" + username + "\"";
+        String connectionStrong = Constants.GET_USER_PUBLIC_INFO + "?" + Constants.USERNAME + "=" + username;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         final User user = new User("", "", 0, "", "", "", "");
@@ -575,7 +575,7 @@ public class RestService implements Requests {
 
     @Override
     public User getUserPrivateInfo(final Context context) {
-        String connectionStrong = "http://127.0.0.1:8000/api/auth/viewPrivateUserInfo?&token=\"" + Constants.mToken + "\"";
+        String connectionStrong = Constants.GET_USER_PRIVATE_INFO + "?" + Constants.TOKEN + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         final User user = new User("", "", 0, "", "", "", "");
@@ -629,7 +629,7 @@ public class RestService implements Requests {
 
     @Override
     public String getUsername(final Context context) {
-        String connectionStrong = "http://localhost/api/auth/getUsername?&token=\"" + Constants.mToken + "\"";
+        String connectionStrong = Constants.GET_USERNAME + "?" + Constants.TOKEN + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         final String string = "";
@@ -681,7 +681,7 @@ public class RestService implements Requests {
     }
 
     public boolean updateUserDisplayName(final Context context, final String displayName) {
-        String connectionStrong = "http://localhost/api/auth/updateDisplayName";
+        String connectionStrong = Constants.UPDATE_USER_DISPLAY_NAME;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
                 builder.toString(),
@@ -720,7 +720,7 @@ public class RestService implements Requests {
     }
 
     public boolean updateUserAbout(final Context context, final String about) {
-        String connectionStrong = "http://localhost/api/auth/updateAbout";
+        String connectionStrong = Constants.UPDATE_USER_ABOUT;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
                 builder.toString(),
@@ -759,7 +759,7 @@ public class RestService implements Requests {
     }
 
     public boolean updateUserProfileImage(final Context context, final String profileImage) {
-        String connectionStrong = "http://localhost/api/auth/updateProfileImage";
+        String connectionStrong = Constants.UPDATE_USER_PROFILE_IMAGE;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -798,7 +798,7 @@ public class RestService implements Requests {
     }
 
     public void ViewSavedLinks(final Context context) {
-        String connectionStrong = "http://localhost/api/auth/viewSavedLink?token=" + Constants.mToken + "\"";
+        String connectionStrong = Constants.VIEW_SAVED_LINKS + "?" + Constants.TOKEN + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
@@ -915,7 +915,7 @@ public class RestService implements Requests {
     }
 
     public boolean followUser(final Context context, final String username) {
-        String connectionStrong = "http://localhost/api/auth/follow";
+        String connectionStrong = Constants.FOLLOW_USER;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -955,7 +955,7 @@ public class RestService implements Requests {
     }
 
     public boolean unFollowUser(final Context context, final String username) {
-        String connectionStrong = "http://localhost/api/auth/unfollow";
+        String connectionStrong = Constants.UN_FOLLOW_USER;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -995,7 +995,7 @@ public class RestService implements Requests {
     }
 
     public void getUserFollowers(final Context context, final String username) {
-        String connectionStrong = "http://localhost/api/auth/followers?username=\"" + username + "&token=\"" + Constants.mToken + "\"";
+        String connectionStrong = Constants.GET_USER_FOLLOWERS + "?" + Constants.USERNAME + "=" + username + "&" + Constants.TOKEN + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
@@ -1048,7 +1048,7 @@ public class RestService implements Requests {
     }
 
     public void getUserFollowing(final Context context, final String username) {
-        String connectionStrong = "http://localhost/api/auth/following?username=\"" + username + "&token=\"" + Constants.mToken + "\"";
+        String connectionStrong = Constants.GET_USER_FOLLOWING + "?" + Constants.USERNAME + "=" + username + "&" + Constants.TOKEN + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
@@ -1110,13 +1110,13 @@ public class RestService implements Requests {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context,"Post Hidden Succesfull",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Post Hidden Succesfull", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context,"Post Hidden Faield",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Post Hidden Faield", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -1145,14 +1145,14 @@ public class RestService implements Requests {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context,"User Blocked Succesfull",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "User Blocked Succesfull", Toast.LENGTH_SHORT).show();
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context,"User Blocked Faield",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "User Blocked Faield", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -1173,9 +1173,9 @@ public class RestService implements Requests {
         return true;
     }
 
-    public void getMyPostsAndComments(final Context context, final String username) {
+    public void getUserPostsAndComments(final Context context, final String username) {
 
-        String connectionStrong = "http://localhost/api/auth/viewOverview?username=\"" + Constants.visitedUser.getmUserName() + "\"";
+        String connectionStrong = Constants.GET_USER_POSTS_AND_COMMENTS + "?" + Constants.USERNAME + "=" + username + "&" + Constants.TOKEN + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
 
         StringRequest stringrequest = new StringRequest(Request.Method.GET,
@@ -1186,13 +1186,13 @@ public class RestService implements Requests {
                         //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
                         try {
 
-                            ArrayList<Post> posts=new ArrayList<>();
-                            ArrayList<Comment> comments=new ArrayList<>();
+                            ArrayList<Post> posts = new ArrayList<>();
+                            ArrayList<Comment> comments = new ArrayList<>();
 
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonPostsArray = jsonObject.getJSONArray("posts");
-                            for(int i=0;i<jsonPostsArray.length();i++){
-                                JSONObject jsonPost=jsonPostsArray.getJSONObject(i);
+                            for (int i = 0; i < jsonPostsArray.length(); i++) {
+                                JSONObject jsonPost = jsonPostsArray.getJSONObject(i);
 
                                 int postId = jsonPost.getInt("post_id");
                                 int communityId = jsonPost.getInt("community_id");
@@ -1223,9 +1223,9 @@ public class RestService implements Requests {
                                 posts.add(post);
                             }
 
-                            JSONArray jsonCommentsArray=jsonObject.getJSONArray("comments");
-                            for (int i=0;i<jsonCommentsArray.length();i++){
-                                JSONObject jsonComment=jsonCommentsArray.getJSONObject(i);
+                            JSONArray jsonCommentsArray = jsonObject.getJSONArray("comments");
+                            for (int i = 0; i < jsonCommentsArray.length(); i++) {
+                                JSONObject jsonComment = jsonCommentsArray.getJSONObject(i);
 
                                 String postTitle = "";
                                 String postBody = "";
