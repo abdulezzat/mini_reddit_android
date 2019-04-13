@@ -15,6 +15,9 @@ public class DependentClass {
     private final com.example.android.minireddit.networking.Requests mSupplier;
     private static final DependentClass restClient = new DependentClass();
 
+    public Requests getmSupplier() {
+        return mSupplier;
+    }
 
     private DependentClass() {
         if (Constants.debug) {

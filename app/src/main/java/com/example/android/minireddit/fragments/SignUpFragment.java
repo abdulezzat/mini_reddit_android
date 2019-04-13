@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.abs.LogInSignUpSuccessful;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.networking.DependentClass;
 
@@ -56,11 +57,20 @@ public class SignUpFragment extends Fragment {
         mPasswordView = (EditText)rootView.findViewById(R.id.password);
         mLogInInstead = (TextView)rootView.findViewById(R.id.log_in_instead);
 
+        Constants.mLogInSignUpSuccessful = new LogInSignUpSuccessful() {
+            @Override
+            public void Successful() {
+                Constants.mLogInSignUpSuccessful = null;
+                getActivity().finish();
+            }
+        };
+
         //Listener part
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean result = DependentClass.getInstance().signUp(getContext(),mEmail,mUserName,mPassword);
+                DependentClass dependentClass =DependentClass.getInstance();
+                boolean result = dependentClass.signUp(getContext(),mEmail,mUserName,mPassword);
                 if(result && Constants.debug){
                     Toast.makeText(getContext(),"Sign up as an admin successfully",Toast.LENGTH_SHORT).show();
                     Constants.user =new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
@@ -69,10 +79,9 @@ public class SignUpFragment extends Fragment {
                 }else if(!result&&Constants.debug){
                     Toast.makeText(getContext(),"Sign up as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
                 }else if(result && !Constants.debug){
-                    DependentClass.getInstance().signUp(getContext(),mEmail,mUserName,mPassword);
-                    //TODO handel this after the connection is complete "sign up successfully"
-                }else{
-                    //TODO handel this after the connection is complete "sign up unsuccessfully"
+
+                } else {
+                    Toast.makeText(getContext(), "Invalid user name or password", Toast.LENGTH_SHORT).show();
                 }
             }
         });

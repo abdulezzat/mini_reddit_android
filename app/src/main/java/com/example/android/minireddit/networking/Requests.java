@@ -2,6 +2,7 @@ package com.example.android.minireddit.networking;
 
 import android.content.Context;
 
+import com.example.android.minireddit.abs.LogInSignUpSuccessful;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
 
@@ -11,6 +12,9 @@ import java.util.ArrayList;
  * Created by Aly on 3/15/2019.
  */
 public interface Requests {
+
+
+    //public LogInSignUpSuccessful  mLogInSignUpSuccessful = null;
     /**
      * Gets trending post.
      *

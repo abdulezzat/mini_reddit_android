@@ -1,5 +1,6 @@
 package com.example.android.minireddit;
 
+import com.example.android.minireddit.abs.LogInSignUpSuccessful;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.adapters.SavedCommentsAdapter;
 import com.example.android.minireddit.adapters.SavedPostsAdapter;
@@ -61,5 +62,8 @@ public class Constants {
     //result for start activity for result
     final static public int CREATE_ACCOUNT_SUCCESSFULLY = 0;
     final static public int CREATE_ACCOUNT_UNSUCCESSFULLY = 1;
+
+
+    public static LogInSignUpSuccessful mLogInSignUpSuccessful ;
 
 }
