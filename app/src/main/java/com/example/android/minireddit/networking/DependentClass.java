@@ -172,7 +172,7 @@ public class DependentClass {
     }
 
     public void getMyPostsAndComments(Context context,String username){
-        mSupplier.getMyPostsAndComments(context,username);
+        mSupplier.getUserPostsAndComments(context,username);
     }
 
     public void ViewSavedLinks(Context context) {
