@@ -75,13 +75,16 @@ public class SavedCommentsAdapter extends ArrayAdapter<Comment> {
                 if (currentComment.ismUpVoted()) {
                     currentComment.setmUpVoted(false);
                     upvoteButton.setImageResource(R.drawable.upvote);
-                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes() - 1;
+                    currentComment.setmUpVotes(currentComment.getmUpVotes()-1);
+                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes();
                     upvoteCount.setText(String.valueOf(currentUpvotes));
                     // TODO: send request to cancel upvote
                 } else {
                     currentComment.setmUpVoted(true);
                     upvoteButton.setImageResource(R.drawable.upvote_clr);
-                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes() + 1;
+                    downvoteButton.setImageResource(R.drawable.downvote);
+                    currentComment.setmUpVotes(currentComment.getmUpVotes()+1);
+                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes();
                     upvoteCount.setText(String.valueOf(currentUpvotes));
                     //TODO: send request to upvote
                 }
@@ -94,13 +97,16 @@ public class SavedCommentsAdapter extends ArrayAdapter<Comment> {
                 if (currentComment.ismDownVoted()) {
                     currentComment.setmDownVoted(false);
                     downvoteButton.setImageResource(R.drawable.downvote);
-                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes() + 1;
+                    currentComment.setmDownVotes(currentComment.getmDownVotes()-1);
+                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes();
                     upvoteCount.setText(String.valueOf(currentUpvotes));
                     // TODO: send request to cancel downvote
                 } else {
                     currentComment.setmDownVoted(true);
                     downvoteButton.setImageResource(R.drawable.downvote_clr);
-                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes() - 1;
+                    upvoteButton.setImageResource(R.drawable.upvote);
+                    currentComment.setmDownVotes(currentComment.getmDownVotes()+1);
+                    int currentUpvotes = currentComment.getmUpVotes() - currentComment.getmDownVotes();
                     upvoteCount.setText(String.valueOf(currentUpvotes));
                 }
             }
