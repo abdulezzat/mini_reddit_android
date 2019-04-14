@@ -146,14 +146,13 @@ public class MyProfileFragment extends Fragment {
         userFollowersCount.setText(mUserFollowersCount);
 
         TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
-        userAbout.setText(Constants.visitedUser.getmAbout());
-        /*if(mUser.getmAbout()!=null && !mUser.getmAbout().equals("null")) {
+        if(mUser.getmAbout()!=null && !mUser.getmAbout().equals("null")) {
             userAbout.setVisibility(View.VISIBLE);
             userAbout.setText(mUser.getmAbout());
         } else {
             userAbout.setVisibility(View.GONE);
         }
-*/
+
         boolean isCurrentUser = (Constants.visitedUser.getmUserName() == Constants.user.getmUserName());
         boolean followed = Constants.user.isFollowed(Constants.visitedUser.getmUserName());
 
