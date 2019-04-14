@@ -1,6 +1,7 @@
 package com.example.android.minireddit;
 
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
+import com.example.android.minireddit.abs.UpdateProfileInfo;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.adapters.SavedCommentsAdapter;
 import com.example.android.minireddit.adapters.SavedPostsAdapter;
@@ -63,7 +64,8 @@ public class Constants {
     final static public int CREATE_ACCOUNT_SUCCESSFULLY = 0;
     final static public int CREATE_ACCOUNT_UNSUCCESSFULLY = 1;
 
-
+    //callback
     public static LogInSignUpSuccessful mLogInSignUpSuccessful;
+    public static UpdateProfileInfo mUpdateProfileInfo;
 
 }

@@ -539,6 +539,7 @@ public class RestService implements Requests {
                             String headerImage = jsonObject.getString("cover_path");
                             Constants.visitedUser.setmHeaderImage(headerImage);
 
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -692,6 +693,9 @@ public class RestService implements Requests {
                         Constants.user.setmDisplayName(displayName);
                         Constants.visitedUser.setmDisplayName(displayName);
                         Toast.makeText(context, "Display Name Updated", Toast.LENGTH_SHORT).show();
+                        if(Constants.mUpdateProfileInfo != null){
+                            Constants.mUpdateProfileInfo.updateProfileViewwdInfo();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -732,6 +736,9 @@ public class RestService implements Requests {
                         Constants.user.setmAbout(about);
                         Constants.visitedUser.setmAbout(about);
                         Toast.makeText(context, "User About Updated", Toast.LENGTH_SHORT).show();
+                        if(Constants.mUpdateProfileInfo != null){
+                            Constants.mUpdateProfileInfo.updateProfileViewwdInfo();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -772,6 +779,9 @@ public class RestService implements Requests {
                         Constants.user.setmProfileImage(profileImage);
                         Constants.visitedUser.setmProfileImage(profileImage);
                         Toast.makeText(context, "Profile Picture Updated", Toast.LENGTH_SHORT).show();
+                        if(Constants.mUpdateProfileInfo != null){
+                            Constants.mUpdateProfileInfo.updateProfileViewwdInfo();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -814,6 +824,9 @@ public class RestService implements Requests {
                         Constants.user.setmHeaderImage(headerImage);
                         Constants.visitedUser.setmHeaderImage(headerImage);
                         Toast.makeText(context, "Header Image Updated", Toast.LENGTH_SHORT).show();
+                        if(Constants.mUpdateProfileInfo != null){
+                            Constants.mUpdateProfileInfo.updateProfileViewwdInfo();
+                        }
                     }
                 },
                 new Response.ErrorListener() {

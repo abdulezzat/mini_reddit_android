@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.EditProfileActivity;
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.abs.UpdateProfileInfo;
 import com.example.android.minireddit.adapters.ProfilePagerAdapter;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.networking.DependentClass;
@@ -44,7 +45,7 @@ public class MyProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         // get the user of the profile
         DependentClass.getInstance().getUserPublicInfo(getContext(), Constants.visitedUser.getmUserName());
@@ -73,6 +74,58 @@ public class MyProfileFragment extends Fragment {
 
 
         // Setting Fragment Views values to be equal to values retrieved form server.
+        Constants.mUpdateProfileInfo = new UpdateProfileInfo() {
+            @Override
+            public void updateProfileViewwdInfo() {
+                ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
+                if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("")) {
+                    new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
+                } else {
+                    headerImage.setImageResource(R.drawable.half_transparent);
+                }
+
+                ImageView avatar = (ImageView) rootView.findViewById(R.id.avatar);
+                if (mUser.getmProfileImage() != null && !mUser.getmProfileImage().equals("")) {
+                    new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
+                } else {
+                    avatar.setImageResource(R.drawable.default_avatar);
+                }
+                TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
+                if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("")) {
+                    displayName.setText(mUser.getmDisplayName());
+                } else {
+                    displayName.setText(mUser.getmUserName());
+                }
+
+                TextView userName = (TextView) rootView.findViewById(R.id.username);
+                String mUserName = "u/" + mUser.getmUserName();
+                userName.setText(mUserName);
+
+                TextView userKarma = (TextView) rootView.findViewById(R.id.karma);
+                String mUserKarma = mUser.getmKarma() + " karma";
+                userKarma.setText(mUserKarma);
+
+                TextView userDate = (TextView) rootView.findViewById(R.id.date);
+                if (mUser.getmCakeDay() != null && !mUser.getmCakeDay().equals("")) {
+                    userDate.setText(mUser.getmCakeDay());
+                } else {
+                    userDate.setText("0d");
+                }
+
+                TextView userFollowersCount = (TextView) rootView.findViewById(R.id.followers_count);
+                String mUserFollowersCount = String.valueOf(mUser.getmFollowersNo()) + " followers";
+                userFollowersCount.setText(mUserFollowersCount);
+
+                TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
+                if(mUser.getmAbout()!=null && !mUser.getmAbout().equals("null")) {
+                    userAbout.setVisibility(View.VISIBLE);
+                    userAbout.setText(mUser.getmAbout());
+                } else {
+                    userAbout.setVisibility(View.GONE);
+                }
+
+            }
+        };
         ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
         if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("")) {
             new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
@@ -192,6 +245,11 @@ public class MyProfileFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 
     /*
     @Override
