@@ -81,7 +81,6 @@ public class SignUpFragment extends Fragment {
                 }else if(result && !Constants.debug){
 
                 } else {
-                    Toast.makeText(getContext(), "Invalid user name or password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
