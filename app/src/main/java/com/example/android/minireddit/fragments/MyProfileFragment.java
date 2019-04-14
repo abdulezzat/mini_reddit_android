@@ -36,6 +36,11 @@ public class MyProfileFragment extends Fragment {
     ProfileAboutFragment mProfileAboutFragment;
     User mUser;
 
+    ImageView headerImage;
+    ImageView avatar;
+    TextView displayName;
+    TextView userAbout;
+
     public MyProfileFragment() {
         // Required empty public constructor
     }
@@ -127,13 +132,14 @@ public class MyProfileFragment extends Fragment {
             }
         };
         ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
+        headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
         if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("")) {
             new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
         } else {
             headerImage.setImageResource(R.drawable.half_transparent);
         }
 
-        ImageView avatar = (ImageView) rootView.findViewById(R.id.avatar);
+        avatar = (ImageView) rootView.findViewById(R.id.avatar);
         if (mUser.getmProfileImage() != null && !mUser.getmProfileImage().equals("")) {
             new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
         } else {
@@ -172,7 +178,7 @@ public class MyProfileFragment extends Fragment {
 
         TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
 
-        TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
+        displayName = (TextView) rootView.findViewById(R.id.display_name);
         if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("")) {
             displayName.setText(mUser.getmDisplayName());
         } else {
@@ -198,8 +204,8 @@ public class MyProfileFragment extends Fragment {
         String mUserFollowersCount = String.valueOf(mUser.getmFollowersNo()) + " followers";
         userFollowersCount.setText(mUserFollowersCount);
 
-        TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
-        if(mUser.getmAbout()!=null && !mUser.getmAbout().equals("null")) {
+        userAbout = (TextView) rootView.findViewById(R.id.user_about);
+        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null")) {
             userAbout.setVisibility(View.VISIBLE);
             userAbout.setText(mUser.getmAbout());
         } else {
@@ -248,7 +254,18 @@ public class MyProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("")) {
+            displayName.setText(mUser.getmDisplayName());
+        } else {
+            displayName.setText(mUser.getmUserName());
+        }
 
+        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null")) {
+            userAbout.setVisibility(View.VISIBLE);
+            userAbout.setText(mUser.getmAbout());
+        } else {
+            userAbout.setVisibility(View.GONE);
+        }
     }
 
     /*
