@@ -522,7 +522,7 @@ public class RestService implements Requests {
                             Constants.visitedUser.setmUserName(username);
 
                             String displayName = jsonObject.getString("name");
-                            Constants.visitedUser.setmDisplayName(username);
+                            Constants.visitedUser.setmDisplayName(displayName);
 
                             int karma = jsonObject.getInt("karma");
                             Constants.visitedUser.setmKarma(karma);

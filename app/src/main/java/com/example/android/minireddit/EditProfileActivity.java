@@ -57,18 +57,18 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageView headerPhoto = findViewById(R.id.header_photo);
-                DependentClass.getInstance().updateUserHeaderImage(v.getContext(), headerPhoto.getDrawable().toString());
+                //DependentClass.getInstance().updateUserHeaderImage(v.getContext(), headerPhoto.getDrawable().toString());
 
                 ImageView avatar = findViewById(R.id.profile_picture);
-                DependentClass.getInstance().updateUserProfileImage(v.getContext(), avatar.getDrawable().toString());
+                //DependentClass.getInstance().updateUserProfileImage(v.getContext(), avatar.getDrawable().toString());
 
                 EditText displayName = findViewById(R.id.display_name);
-                if (displayName.getText() != null && !displayName.getText().toString().equals("") && !currentUser.getmDisplayName().equals(displayName.getText().toString())) {
+                if (displayName.getText() != null && !displayName.getText().toString().equals("")) {
                     DependentClass.getInstance().updateUserDisplayName(v.getContext(), displayName.getText().toString());
                 }
 
                 EditText about = findViewById(R.id.about);
-                if (about.getText() != null && !about.getText().toString().equals("") && !currentUser.getmAbout().equals(displayName.getText().toString())) {
+                if (about.getText() != null && !about.getText().toString().equals("")) {
                     DependentClass.getInstance().updateUserAbout(v.getContext(), about.getText().toString());
                 }
 
