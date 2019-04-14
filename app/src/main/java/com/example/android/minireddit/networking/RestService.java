@@ -539,6 +539,9 @@ public class RestService implements Requests {
                             String headerImage = jsonObject.getString("cover_path");
                             Constants.visitedUser.setmHeaderImage(headerImage);
 
+                            if(Constants.mUpdateProfileInfo != null){
+                                Constants.mUpdateProfileInfo.updateProfileViewwdInfo();
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -86,7 +86,7 @@ public class MyProfileFragment extends Fragment {
                 if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("")) {
                     new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
                 } else {
-                    headerImage.setImageResource(R.drawable.half_transparent);
+                    headerImage.setImageResource(R.drawable.iamadreamer);
                 }
 
                 ImageView avatar = (ImageView) rootView.findViewById(R.id.avatar);
@@ -136,7 +136,7 @@ public class MyProfileFragment extends Fragment {
         if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("")) {
             new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
         } else {
-            headerImage.setImageResource(R.drawable.half_transparent);
+            headerImage.setImageResource(R.drawable.iamadreamer);
         }
 
         avatar = (ImageView) rootView.findViewById(R.id.avatar);
