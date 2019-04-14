@@ -74,10 +74,18 @@ public class MyProfileFragment extends Fragment {
 
         // Setting Fragment Views values to be equal to values retrieved form server.
         ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
-        new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
+        if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("")) {
+            new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
+        } else {
+            headerImage.setImageResource(R.drawable.half_transparent);
+        }
 
         ImageView avatar = (ImageView) rootView.findViewById(R.id.avatar);
-        new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
+        if (mUser.getmProfileImage() != null && !mUser.getmProfileImage().equals("")) {
+            new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
+        } else {
+            avatar.setImageResource(R.drawable.default_avatar);
+        }
 
         final Button followButton = (Button) rootView.findViewById(R.id.follow_button);
         final Button unFollowButton = (Button) rootView.findViewById(R.id.unfollow_button);
@@ -104,7 +112,7 @@ public class MyProfileFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getContext(), EditProfileActivity.class);
+                Intent i = new Intent(getContext(), EditProfileActivity.class);
                 startActivity(i);
             }
         });
@@ -112,7 +120,11 @@ public class MyProfileFragment extends Fragment {
         TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
 
         TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
-        displayName.setText(mUser.getmDisplayName());
+        if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("")) {
+            displayName.setText(mUser.getmDisplayName());
+        } else {
+            displayName.setText(mUser.getmUserName());
+        }
 
         TextView userName = (TextView) rootView.findViewById(R.id.username);
         String mUserName = "u/" + mUser.getmUserName();
@@ -123,15 +135,25 @@ public class MyProfileFragment extends Fragment {
         userKarma.setText(mUserKarma);
 
         TextView userDate = (TextView) rootView.findViewById(R.id.date);
-        userDate.setText(mUser.getmCakeDay());
+        if (mUser.getmCakeDay() != null && !mUser.getmCakeDay().equals("")) {
+            userDate.setText(mUser.getmCakeDay());
+        } else {
+            userDate.setText("0d");
+        }
 
         TextView userFollowersCount = (TextView) rootView.findViewById(R.id.followers_count);
         String mUserFollowersCount = String.valueOf(mUser.getmFollowersNo()) + " followers";
         userFollowersCount.setText(mUserFollowersCount);
 
         TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
-        userAbout.setText(mUser.getmAbout());
-
+        userAbout.setText(Constants.visitedUser.getmAbout());
+        /*if(mUser.getmAbout()!=null && !mUser.getmAbout().equals("null")) {
+            userAbout.setVisibility(View.VISIBLE);
+            userAbout.setText(mUser.getmAbout());
+        } else {
+            userAbout.setVisibility(View.GONE);
+        }
+*/
         boolean isCurrentUser = (Constants.visitedUser.getmUserName() == Constants.user.getmUserName());
         boolean followed = Constants.user.isFollowed(Constants.visitedUser.getmUserName());
 
@@ -170,7 +192,9 @@ public class MyProfileFragment extends Fragment {
 
         return rootView;
     }
-/*
+
+
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final AppCompatActivity act = (AppCompatActivity) getActivity();

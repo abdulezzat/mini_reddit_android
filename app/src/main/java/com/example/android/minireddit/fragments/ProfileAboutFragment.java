@@ -45,8 +45,18 @@ public class ProfileAboutFragment extends Fragment {
         }
 
         karma.setText(String.valueOf(mUser.getmKarma()));
-        about.setText(mUser.getmAbout());
-        redditAge.setText(mUser.getmCakeDay());
+
+        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null")) {
+            about.setText(mUser.getmAbout());
+        } else {
+            about.setVisibility(View.GONE);
+        }
+
+        if (mUser.getmCakeDay()!=null && !mUser.getmCakeDay().equals("null")){
+            redditAge.setText(mUser.getmCakeDay());
+        } else {
+            redditAge.setText("0d");
+        }
 
         return rootView;
     }

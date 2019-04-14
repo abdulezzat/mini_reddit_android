@@ -15,6 +15,7 @@ public interface Requests {
 
 
     //public LogInSignUpSuccessful  mLogInSignUpSuccessful = null;
+
     /**
      * Gets trending post.
      *
@@ -121,6 +122,8 @@ public interface Requests {
 
     boolean updateUserProfileImage(Context context, String profileImage);
 
+    boolean updateUserHeaderImage(Context context, String headerImage);
+
     void getUserPostsAndComments(Context context, String username);
 
     void ViewSavedLinks(Context context);
@@ -133,7 +136,7 @@ public interface Requests {
 
     void getUserFollowing(Context context, String username);
 
-    boolean hidePost(Context context,int postID);
+    boolean hidePost(Context context, int postID);
 
-    boolean blockUser(Context context,String username);
+    boolean blockUser(Context context, String username);
 }

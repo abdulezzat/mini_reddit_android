@@ -42,9 +42,9 @@ public class Constants {
     final static public String GET_USER_PUBLIC_INFO = "http:/35.204.169.121/api/unauth/viewPublicUserInfo";
     final static public String GET_USER_PRIVATE_INFO = "http:/35.204.169.121/api/auth/viewPrivateUserInfo";
     final static public String GET_USERNAME = "http://35.204.169.121/api/auth/getUsername";
-    final static public String UPDATE_USER_DISPLAY_NAME = "http://35.204.169.121/api/auth/updateDisplayName";
-    final static public String UPDATE_USER_ABOUT = "http://35.204.169.121/api/auth/updateAbout";
-    final static public String UPDATE_USER_PROFILE_IMAGE = "http://35.204.169.121/api/auth/updateProfileImage";
+    final static public String UPDATE_USER_DISPLAY_NAME = "http://35.204.169.121/api/auth/updateDisplayName?";
+    final static public String UPDATE_USER_ABOUT = "http://35.204.169.121/api/auth/updateAbout?";
+    final static public String UPDATE_USER_PROFILE_IMAGE = "http://35.204.169.121/api/auth/updateProfileImage?";
     final static public String VIEW_SAVED_LINKS = "http://35.204.169.121/api/auth/viewSavedLinks";
     final static public String FOLLOW_USER = "http://35.204.169.121/api/auth/follow";
     final static public String UN_FOLLOW_USER = "http://35.204.169.121/api/auth/unfollow";
@@ -64,6 +64,6 @@ public class Constants {
     final static public int CREATE_ACCOUNT_UNSUCCESSFULLY = 1;
 
 
-    public static LogInSignUpSuccessful mLogInSignUpSuccessful ;
+    public static LogInSignUpSuccessful mLogInSignUpSuccessful;
 
 }

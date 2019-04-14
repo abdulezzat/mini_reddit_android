@@ -31,6 +31,8 @@
                     android:id="@+id/back_button"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:src="@drawable/back_button"
+                    android:layout_marginRight="20dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true" />
@@ -39,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Saved"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </android.support.v7.widget.Toolbar>
@@ -53,7 +56,7 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:layout_collapseMode="pin"
-            app:tabGravity="fill"
+            app:tabGravity="center"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/black"
             app:tabTextAppearance="@style/TabTextStyle"

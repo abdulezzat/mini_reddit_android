@@ -174,8 +174,12 @@ public class DependentClass {
         return mSupplier.updateUserProfileImage(context, profileImage);
     }
 
-    public void getMyPostsAndComments(Context context,String username){
-        mSupplier.getUserPostsAndComments(context,username);
+    public boolean updateUserHeaderImage(Context context, String headerImage) {
+        return mSupplier.updateUserHeaderImage(context, headerImage);
+    }
+
+    public void getMyPostsAndComments(Context context, String username) {
+        mSupplier.getUserPostsAndComments(context, username);
     }
 
     public void ViewSavedLinks(Context context) {
@@ -198,11 +202,12 @@ public class DependentClass {
         mSupplier.getUserFollowing(context, username);
     }
 
-    public void blockUser(Context context,String username){
-        mSupplier.blockUser(context,username);
+    public void blockUser(Context context, String username) {
+        mSupplier.blockUser(context, username);
     }
-    public void hidePost(Context context,int postID){
-        mSupplier.hidePost(context,postID);
+
+    public void hidePost(Context context, int postID) {
+        mSupplier.hidePost(context, postID);
     }
 
 }

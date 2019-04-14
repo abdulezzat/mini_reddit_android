@@ -417,7 +417,7 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Constants.mToken=jsonObject.getString("token");
+                            Constants.mToken = jsonObject.getString("token");
                             Constants.user = new User(username, username, null, null, null, 1, null, false);
                             if (Constants.mLogInSignUpSuccessful != null) {
                                 Constants.mLogInSignUpSuccessful.Successful();
@@ -673,7 +673,7 @@ public class RestService implements Requests {
     }
 
     public boolean updateUserDisplayName(final Context context, final String displayName) {
-        String connectionStrong = Constants.UPDATE_USER_DISPLAY_NAME;
+        String connectionStrong = Constants.UPDATE_USER_DISPLAY_NAME + Constants.TOKEN + Constants.mToken + "&name=" + displayName;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
                 builder.toString(),
@@ -682,6 +682,7 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         Constants.user.setmDisplayName(displayName);
                         Constants.visitedUser.setmDisplayName(displayName);
+                        Toast.makeText(context, "Display Name Updated", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -694,7 +695,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken);
+                headers.put("Authorization", "Bearer " + Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -712,7 +713,7 @@ public class RestService implements Requests {
     }
 
     public boolean updateUserAbout(final Context context, final String about) {
-        String connectionStrong = Constants.UPDATE_USER_ABOUT;
+        String connectionStrong = Constants.UPDATE_USER_ABOUT + Constants.TOKEN + Constants.mToken + "&" + "about=" + about;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
                 builder.toString(),
@@ -721,6 +722,7 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         Constants.user.setmAbout(about);
                         Constants.visitedUser.setmAbout(about);
+                        Toast.makeText(context, "User About Updated", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -751,7 +753,7 @@ public class RestService implements Requests {
     }
 
     public boolean updateUserProfileImage(final Context context, final String profileImage) {
-        String connectionStrong = Constants.UPDATE_USER_PROFILE_IMAGE;
+        String connectionStrong = Constants.UPDATE_USER_PROFILE_IMAGE + Constants.TOKEN + Constants.mToken + "&profile_image=" + profileImage + "&profile_or_cover=1";
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -760,6 +762,7 @@ public class RestService implements Requests {
                     public void onResponse(String response) {
                         Constants.user.setmProfileImage(profileImage);
                         Constants.visitedUser.setmProfileImage(profileImage);
+                        Toast.makeText(context, "Profile Picture Updated", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -772,7 +775,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken);
+                headers.put("Authorization", "Bearer " + Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -781,6 +784,50 @@ public class RestService implements Requests {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("profile_image", profileImage);
+                params.put("profile_or_cover", String.valueOf(1));
+                params.put("token", Constants.mToken);
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+        return true;
+    }
+
+    public boolean updateUserHeaderImage(final Context context, final String headerImage) {
+        String connectionStrong = Constants.UPDATE_USER_PROFILE_IMAGE + Constants.TOKEN + Constants.mToken + "&profile_image=" + headerImage + "&profile_or_cover=2";
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Constants.user.setmHeaderImage(headerImage);
+                        Constants.visitedUser.setmHeaderImage(headerImage);
+                        Toast.makeText(context, "Header Image Updated", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Accept", "application/json");
+                headers.put("Authorization", "Bearer " + Constants.mToken);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("profile_image", headerImage);
+                params.put("profile_or_cover", String.valueOf(2));
+                params.put("token", Constants.mToken);
                 return params;
             }
 
@@ -969,7 +1016,7 @@ public class RestService implements Requests {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Accept", "application/json");
-                headers.put("Authorization", "Bearer: " + Constants.mToken);
+                headers.put("token", Constants.mToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -1108,7 +1155,7 @@ public class RestService implements Requests {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Post Hidden Faield", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Post Hidden Failed", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

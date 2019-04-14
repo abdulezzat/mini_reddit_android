@@ -13,6 +13,16 @@
         android:layout_height="?attr/actionBarSize"
         app:title=" ">
 
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back_button"
+            android:layout_marginRight="20dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,11 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="saveEdits"
             android:text="Save"
             android:textAllCaps="true"
             android:textColor="@color/iconsColor" />
@@ -61,8 +70,7 @@
                     android:layout_alignParentTop="true"
                     android:clickable="true"
                     android:focusable="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/iamadreamer" />
+                    android:scaleType="centerCrop" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -98,7 +106,6 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="67dp"
-                    android:outlineAmbientShadowColor="@android:color/transparent"
                     app:cardCornerRadius="4dp">
 
                     <ImageView
@@ -108,7 +115,9 @@
                         android:layout_gravity="center"
                         android:clickable="true"
                         android:focusable="true"
-                        android:src="@drawable/default_avatar" />
+                        android:scaleType="centerCrop"
+                        android:background="@color/white"
+                        android:src="@drawable/half_transparent"/>
 
                     <ImageView
                         android:layout_width="match_parent"

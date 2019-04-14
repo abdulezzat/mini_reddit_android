@@ -87,10 +87,10 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public boolean logIn(Context context, String username, String password) {
-        if (username.equals("admin") && password.equals("admin"))
-        {
-            Constants.mToken="TEST";
-            return true;}
+        if (username.equals("admin") && password.equals("admin")) {
+            Constants.mToken = "TEST";
+            return true;
+        }
 
 
         return false;
@@ -106,7 +106,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     public User getUserPublicInfo(Context context, String username) {
         User user = new User("admin", "Ahmed Elkarashily", 49415, "4m 24d", "just a place holder for user about section. hello. hope you enjoy your visit with us.", "https://theme.zdassets.com/theme_assets/2219439/89cbe072bbb76fc29a82367bd19b511df487d018.png", "https://data.whicdn.com/images/290284739/superthumb.jpg?t=1498330484");
-        Constants.visitedUser=user;
+        Constants.visitedUser = user;
         return user;
     }
 
@@ -139,6 +139,12 @@ public class MockRestService implements com.example.android.minireddit.networkin
         return true;
     }
 
+    public boolean updateUserHeaderImage(final Context context, final String headerImage) {
+        Constants.user.setmHeaderImage(headerImage);
+        Constants.visitedUser.setmHeaderImage(headerImage);
+        return true;
+    }
+
     public void ViewSavedLinks(Context context) {
         ArrayList<Post> posts = new ArrayList<>();
         posts.add(new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
@@ -153,8 +159,8 @@ public class MockRestService implements com.example.android.minireddit.networkin
         Constants.savedComments.addAll(comments);
     }
 
-    public void getUserPostsAndComments(Context context, String username){
-        ArrayList<Post> posts=new ArrayList<>();
+    public void getUserPostsAndComments(Context context, String username) {
+        ArrayList<Post> posts = new ArrayList<>();
         posts.add(new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
         posts.add(new Post(1, 1, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 1h ago", "This is Photo Hint", "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", null, 15, 200, false, false, false, 1));
         posts.add(new Post(2, 2, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 2h ago", "This is Photo Hint", "https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80", null, 15, 200, false, false, false, 1));
