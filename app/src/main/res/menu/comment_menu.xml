@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item
+        android:id="@+id/save"
+        android:title="save"
+        android:icon="@drawable/baseline_bookmark_black_48dp"
+
+        />
+    <item
+        android:id="@+id/sharePost"
+        android:title="Share"
+        android:icon="@drawable/baseline_reply_black_48dp"/>
+
+
+    />
+    <item
+        android:id="@+id/blockUser"
+        android:title="Block User"
+        android:icon="@drawable/baseline_not_interested_black_48dp"/>
+
+
+
+</menu>

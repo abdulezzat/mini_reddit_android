@@ -153,7 +153,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         final ImageView postImage = (ImageView) ListItemView.findViewById(R.id.postImage);
         if (currentPost.getPostImageUrl() != null) {
             postImage.setVisibility(View.VISIBLE);
-            boolean connected = isNetworkAvailable();
+            boolean connected = isNetworkAvailable(getContext());
             if (connected)
                 new DownloadImageTask(postImage).execute(currentPost.getPostImageUrl());
             else
@@ -420,9 +420,9 @@ public class PosterAdapter extends ArrayAdapter<Post> {
      *
      * @return the boolean
      */
-    protected boolean isNetworkAvailable() {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }

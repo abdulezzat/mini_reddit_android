@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 //
 public class Constants {
-    public static String mToken = "";
+    public static String mToken = "t";
 
     public static final boolean debug = false;
     public static User user = null;
@@ -30,28 +30,31 @@ public class Constants {
 
 
     //URL
-    final static public String LOG_IN_URL = "http://35.204.169.121/api/unauth/signIn?";
-    final static public String SIGN_UP_URL = "http://35.204.169.121/api/unauth/signUp?";
-    final static public String TRENDING_POSTS = "http://35.204.169.121/api/unauth/ViewPosts?page_type=0";
-    final static public String HOME_POSTS = "http://35.204.169.121/api/unauth/ViewPosts?page_type=1&token=";
-    final static public String VOTE_POST_UP = "http://35.204.169.121/api/auth/upvoteLink?";
-    final static public String VOTE_LINK_DOWN = "http://35.204.169.121/api/auth/downvoteLink?";
-    final static public String SUBSCRIBE_COMMUNITY = "http://35.204.169.121/api/auth/subscribeCommunity?";
-    final static public String UNSUBSCRIBE_COMMUNITY = "http://35.204.169.121/api/auth/unSubscribeCommunity?token=";
-    final static public String HIDE_POST = "http://35.204.169.121/api/auth/hidePost?";
-    final static public String BLOCK_USER = "http:/35.204.169.121/api/auth/blockUser?";
-    final static public String GET_USER_PUBLIC_INFO = "http:/35.204.169.121/api/unauth/viewPublicUserInfo";
-    final static public String GET_USER_PRIVATE_INFO = "http:/35.204.169.121/api/auth/viewPrivateUserInfo";
-    final static public String GET_USERNAME = "http://35.204.169.121/api/auth/getUsername";
-    final static public String UPDATE_USER_DISPLAY_NAME = "http://35.204.169.121/api/auth/updateDisplayName?";
-    final static public String UPDATE_USER_ABOUT = "http://35.204.169.121/api/auth/updateAbout?";
-    final static public String UPDATE_USER_PROFILE_IMAGE = "http://35.204.169.121/api/auth/updateProfileImage?";
-    final static public String VIEW_SAVED_LINKS = "http://35.204.169.121/api/auth/viewSavedLinks";
-    final static public String FOLLOW_USER = "http://35.204.169.121/api/auth/follow";
-    final static public String UN_FOLLOW_USER = "http://35.204.169.121/api/auth/unfollow";
-    final static public String GET_USER_FOLLOWERS = "http://35.204.169.121/api/auth/followers";
-    final static public String GET_USER_FOLLOWING = "http://35.204.169.121/api/auth/following";
-    final static public String GET_USER_POSTS_AND_COMMENTS = "http://35.204.169.121/api/auth/viewOverview";
+    final static public String BASE_URL="http://35.204.169.121";
+    final static public String LOG_IN_URL  = BASE_URL+"/api/unauth/signIn?";
+    final static public String SIGN_UP_URL = BASE_URL+"/api/unauth/signUp?";
+    final static public String TRENDING_POSTS = BASE_URL+"/api/unauth/ViewPosts?page_type=0";
+    final static public String HOME_POSTS = BASE_URL+"/api/unauth/ViewPosts?page_type=1&token=";
+    final static public String VOTE_POST_UP = BASE_URL+"/api/auth/upvoteLink?";
+    final static public String VOTE_LINK_DOWN = BASE_URL+"/api/auth/downvoteLink?";
+    final static public String SUBSCRIBE_COMMUNITY = BASE_URL+"/api/auth/subscribeCommunity?";
+    final static public String UNSUBSCRIBE_COMMUNITY = BASE_URL+"/api/auth/unSubscribeCommunity?token=";
+    final static public String HIDE_POST = BASE_URL+"/api/auth/hidePost?";
+    final static public String BLOCK_USER = BASE_URL+"/api/auth/blockUser?";
+    final static public String GET_USER_PUBLIC_INFO = BASE_URL+"/api/unauth/viewPublicUserInfo";
+    final static public String GET_USER_PRIVATE_INFO = BASE_URL+"/api/auth/viewPrivateUserInfo";
+    final static public String GET_USERNAME = BASE_URL+"/api/auth/getUsername";
+    final static public String UPDATE_USER_DISPLAY_NAME = BASE_URL+"/api/auth/updateDisplayName?";
+    final static public String UPDATE_USER_ABOUT = BASE_URL+"/api/auth/updateAbout?";
+    final static public String UPDATE_USER_PROFILE_IMAGE = BASE_URL+"/api/auth/updateProfileImage?";
+    final static public String VIEW_SAVED_LINKS = BASE_URL+"/api/auth/viewSavedLinks";
+    final static public String FOLLOW_USER = BASE_URL+"/api/auth/follow";
+    final static public String UN_FOLLOW_USER = BASE_URL+"/api/auth/unfollow";
+    final static public String GET_USER_FOLLOWERS = BASE_URL+"/api/auth/followers";
+    final static public String GET_USER_FOLLOWING = BASE_URL+"/api/auth/following";
+    final static public String GET_USER_POSTS_AND_COMMENTS = BASE_URL+"/api/auth/viewOverview";
+    //930d0c7c.ngrok.io
+    //35.204.169.121
 
 
     //API parameters name

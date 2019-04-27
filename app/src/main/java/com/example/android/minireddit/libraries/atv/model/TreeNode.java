@@ -45,6 +45,7 @@ public class TreeNode {
     public TreeNode(Object value) {
         children = new ArrayList<>();
         mValue = value;
+
     }
 
     public TreeNode addChild(TreeNode childNode) {
