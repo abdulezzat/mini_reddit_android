@@ -13,6 +13,15 @@
         android:id="@+id/sharePost"
         android:title="Share"
         android:icon="@drawable/baseline_reply_black_48dp"/>
+    <item
+        android:id="@+id/copy"
+        android:title="Copy text"
+        android:icon="@drawable/copy"/>
+    <item
+        android:id="@+id/collapse"
+        android:title="Collapse thread"
+        android:icon="@drawable/collapse"/>
+
 
 
     />

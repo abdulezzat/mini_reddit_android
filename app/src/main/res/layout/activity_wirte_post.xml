@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.minireddit.WirtePost">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/choose_community"
+                android:textColor="#3eb1f2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Choose a Community"
+                android:layout_gravity="center"/>
+           <Spinner
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:spinnerMode="dropdown"
+              >
+
+           </Spinner>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/gray"
+
+            android:layout_height="1dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="An interesting title"
+            android:background="@null"
+            android:layout_margin="10dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/gray"
+            android:layout_height="1dp"/>
+        <EditText
+            android:id="@+id/comment_bodynew"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Your text Post"
+            android:gravity="start"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

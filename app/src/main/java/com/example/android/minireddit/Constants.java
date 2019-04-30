@@ -8,6 +8,7 @@ import com.example.android.minireddit.adapters.SavedPostsAdapter;
 import com.example.android.minireddit.datastructure.Comment;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
+import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
 import java.util.ArrayList;
 
@@ -70,5 +71,11 @@ public class Constants {
     //callback
     public static LogInSignUpSuccessful mLogInSignUpSuccessful;
     public static UpdateProfileInfo mUpdateProfileInfo;
+
+    public static TreeNode commentReplyNode;
+    public static Comment commentReply;
+
+
+
 
 }

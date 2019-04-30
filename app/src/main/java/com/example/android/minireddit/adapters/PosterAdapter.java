@@ -592,7 +592,8 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     }
     private void showBlockDialog(final Post post) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        String message ="Block u/"+post.getPostUser()+"?"+"\n \nYou Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
+        builder.setTitle("Block u/" + post.getPostUser() + "?" + "\n \n");
+        String message ="You Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
         builder.setMessage(message);
         builder.setPositiveButton("BLOCK USER", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

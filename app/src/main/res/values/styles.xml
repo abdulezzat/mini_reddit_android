@@ -35,6 +35,9 @@
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">true</item>
     </style>
+    <style name="myCustomMenuTextAppearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

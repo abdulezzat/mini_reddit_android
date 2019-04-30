@@ -1,10 +1,20 @@
 package com.example.android.minireddit.libraries.atv;
 
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -12,9 +22,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.minireddit.CommentActivity;
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Comment;
+import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.libraries.atv.model.TreeNode;
 import com.example.android.minireddit.networking.DependentClass;
 
@@ -40,6 +52,7 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
     boolean toggle;
     int child;
     int leftMargin;
+    public Comment mComment;
 
     public MyHolder(Context context, boolean toggle, int child, int leftMargin) {
         super(context);
@@ -52,6 +65,7 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
     @Override
     public View createNodeView(final TreeNode node, IconTreeItem value) {
         final Comment comment =value.comment;
+        mComment=value.comment;
 
 
         final LayoutInflater inflater = LayoutInflater.from(context);
@@ -85,6 +99,15 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
         if (leftMargin == DEFAULT) {
             leftMargin = getDimens(R.dimen.treeview_left_padding);
         }
+        reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Constants.commentReply=mComment;
+                Constants.commentReplyNode=node;
+                Intent intent=new Intent(context,CommentActivity.class);
+                context.startActivity(intent);
+            }
+        });
         user.setText(comment.getmUser()+"."+comment.getmDate());
         content.setText(comment.getmBody());
         votes.setText(String.valueOf(comment.getmUpVotes()-comment.getmDownVotes()));
@@ -196,20 +219,46 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
 
                                 switch (item.getItemId()) {
                                     case R.id.save:
-                                        Toast.makeText(context,"tes",Toast.LENGTH_SHORT).show();
-                                        if(!node.getParent().isRoot())
-                                        MyHolder.this.getTreeView().collapseNode(node.getParent());
+                                        MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+                                        TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, 350));
+                                        node.addChild(subChild6);
+                                        MyHolder.this.getTreeView().expandNode(node);
+
+
 
 
                                         break;
                                     case R.id.blockUser:
+                                        showBlockDialog(comment);
 
 
                                         break;
-                                    case R.id.hidePost:
-
+                                    case R.id.sharePost:
 
                                         break;
+
+                                    case R.id.copy:
+                                        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                                        ClipData clip = ClipData.newPlainText("reddit", comment.getmBody());
+                                        clipboard.setPrimaryClip(clip);
+                                        Toast.makeText(context,"Text Copied",Toast.LENGTH_SHORT).show();
+
+                                        break;
+
+                                    case R.id.collapse:
+                                        if(!node.getParent().isRoot()){
+
+
+                                        TreeNode root=node;
+                                        while(!root.getParent().isRoot())
+                                            root=root.getParent();
+                                        MyHolder.this.getTreeView().collapseNode(root);
+                                        }
+
+                                        break;
+
+
+
 
                                     default:
                                         break;
@@ -228,6 +277,44 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
         });
 
         return view;
+    }
+    private void showBlockDialog(final Comment comment) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Block u/" + comment.getmUser() + "?" + "\n \n");
+        String message ="You Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
+        builder.setMessage(message);
+        builder.setPositiveButton("BLOCK USER", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                DependentClass.getInstance().blockUser(context,comment.getmUser());
+
+
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button btnNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative. setBackgroundColor(Color.parseColor("#d3d3d3"));
+        btnPositive.setBackgroundColor(Color.parseColor("#8B0000"));
+
+        btnNegative.setTextColor(Color.parseColor("#808080"));
+        btnPositive.setTextColor(Color.parseColor("#ffffff"));
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
+
     }
 
     public void toggle(boolean active) {
