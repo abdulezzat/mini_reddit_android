@@ -4,7 +4,7 @@
     android:background="@color/white"
     android:layout_height="match_parent">
     <ImageView
-        android:id="@+id/comm_name"
+        android:id="@+id/comm_photo"
         android:layout_marginLeft="20dp"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -12,7 +12,7 @@
         android:src="@drawable/choose_community"/>
     <TextView
         android:layout_width="wrap_content"
-        android:id="@+id/comm_photo"
+        android:id="@+id/comm_name"
         android:text="r/FootballTeam"
         android:textColor="@color/black"
         android:layout_marginLeft="10dp"

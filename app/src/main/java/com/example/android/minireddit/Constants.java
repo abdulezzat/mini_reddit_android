@@ -1,13 +1,12 @@
 package com.example.android.minireddit;
 
+import com.example.android.minireddit.abs.ChooseCommunityCallback;
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
 import com.example.android.minireddit.abs.UpdateProfileInfo;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.adapters.SavedCommentsAdapter;
 import com.example.android.minireddit.adapters.SavedPostsAdapter;
-import com.example.android.minireddit.datastructure.Comment;
-import com.example.android.minireddit.datastructure.Post;
-import com.example.android.minireddit.datastructure.User;
+import com.example.android.minireddit.datastructure.*;
 import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
 import java.util.ArrayList;
@@ -71,6 +70,7 @@ public class Constants {
     //callback
     public static LogInSignUpSuccessful mLogInSignUpSuccessful;
     public static UpdateProfileInfo mUpdateProfileInfo;
+    public static ChooseCommunityCallback CHOOSEN_COMMUNITY;
 
     public static TreeNode commentReplyNode;
     public static Comment commentReply;

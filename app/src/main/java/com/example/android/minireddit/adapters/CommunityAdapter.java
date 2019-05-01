@@ -41,8 +41,8 @@ public class CommunityAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public Object getItem(int position) {
-        return position;
+    public Community getItem(int position) {
+        return mDisplayedValues.get(position);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CommunityAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View ListItemView = convertView;
         if (ListItemView == null) {//for making new List_item if there is no main one to change its data
-            ListItemView = inflater.inflate(R.layout.post_list_item, parent, false);
+            ListItemView = inflater.inflate(R.layout.community_row, parent, false);
         }
         final Community currentCommunity =  mDisplayedValues.get(position);// getting the current word in the arraylist
         TextView comm_name=(TextView) ListItemView.findViewById(R.id.comm_name);

@@ -6,21 +6,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.android.minireddit.ChooseCommunity">
-    <SearchView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <EditText
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="38dp"
+        android:hint="Search communities"
+        android:paddingLeft="15dp"
 
-        android:layout_toRightOf="@id/user_image"
+
         android:background="@color/viewColor"
-        android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent"
-        android:queryHint="@string/prompt_search_view"
+
+
         android:textColorHint="@color/colorPrimaryDark" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/search_icon"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
     <ListView
         android:id="@+id/communities"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:dividerHeight="10.0sp"
+        android:layout_marginTop="10dp"
         ></ListView>
 
 </LinearLayout>

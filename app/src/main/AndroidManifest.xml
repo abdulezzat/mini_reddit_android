@@ -55,8 +55,14 @@
             android:name=".CommentActivity"
             android:parentActivityName=".SinglePost"
             android:theme="@style/AppTheme" />
-        <activity android:name=".WritePost" />
-        <activity android:name=".ChooseCommunity"></activity>
+        <activity android:name=".WritePost"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".HomePage"/>
+        <activity android:name=".ChooseCommunity"
+            android:parentActivityName=".WritePost"
+            android:theme="@style/AppTheme">
+
+        </activity>
     </application>
 
 </manifest>
