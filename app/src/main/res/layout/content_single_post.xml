@@ -8,6 +8,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.minireddit.SinglePost"
     tools:showIn="@layout/activity_single_post">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +26,9 @@
         >
 
     </LinearLayout>
+
+    </RelativeLayout>
+
 
 
 </android.support.v4.widget.NestedScrollView>

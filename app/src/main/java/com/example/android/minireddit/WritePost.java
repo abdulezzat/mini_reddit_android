@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class WirtePost extends AppCompatActivity {
+public class WritePost extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

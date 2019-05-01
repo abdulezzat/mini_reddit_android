@@ -222,7 +222,8 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
                                         MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
                                         TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, 350));
                                         node.addChild(subChild6);
-                                        MyHolder.this.getTreeView().expandNode(node);
+                                        //MyHolder.this.getTreeView().expandNode(node);
+                                        TreeNode.BaseNodeViewHolder.tView.expandNode(node);
 
 
 

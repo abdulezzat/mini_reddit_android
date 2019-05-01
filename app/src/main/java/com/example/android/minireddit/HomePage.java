@@ -261,7 +261,12 @@ public class HomePage extends AppCompatActivity
         } else if (id == R.id.navigation_dashboard) {
 
         } else if (id == R.id.navigation_new_post) {
-
+            if(Constants.mToken.isEmpty())
+                Toast.makeText(getApplicationContext(),"Please Login First To Write Post.",Toast.LENGTH_SHORT).show();
+            else {
+                Intent intent = new Intent(this, WritePost.class);
+                startActivity(intent);
+            }
         } else if (id == R.id.navigation_chat) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.navigation_message) {

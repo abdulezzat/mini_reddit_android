@@ -229,6 +229,30 @@
 
 
     <include layout="@layout/content_single_post" />
+    <FrameLayout
+        android:id="@+id/addcomment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        android:layout_gravity="bottom">
+        <TextView
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_margin="9dp"
+            android:text="Add a comment....."
+
+            android:layout_width="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_height="45dp"
+            app:layout_anchor="@id/comments"
+            android:gravity="center_vertical"
+            android:background="#efeded"
+            app:layout_anchorGravity="bottom|right|end" />
+
+    </FrameLayout>
+
+
+
 
 
 
