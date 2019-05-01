@@ -55,9 +55,9 @@ public class CommunityAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View ListItemView = convertView;
         if (ListItemView == null) {//for making new List_item if there is no main one to change its data
-            ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.post_list_item, parent, false);
+            ListItemView = inflater.inflate(R.layout.post_list_item, parent, false);
         }
-        final Community currentCommunity =  getItem(position);// getting the current word in the arraylist
+        final Community currentCommunity =  mDisplayedValues.get(position);// getting the current word in the arraylist
         TextView comm_name=(TextView) ListItemView.findViewById(R.id.comm_name);
         comm_name.setText(currentCommunity.getCommunityName());
         ImageView comm_photo =(ImageView)ListItemView.findViewById(R.id.comm_photo);
@@ -79,10 +79,10 @@ public class CommunityAdapter extends BaseAdapter implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();        // Holds the results of a filtering operation in values
-                ArrayList<Product> FilteredArrList = new ArrayList<Product>();
+                ArrayList<Community> FilteredArrList = new ArrayList<Community>();
 
                 if (mOriginalValues == null) {
-                    mOriginalValues = new ArrayList<Product>(mDisplayedValues); // saves the original data in mOriginalValues
+                    mOriginalValues = new ArrayList<Community>(mDisplayedValues); // saves the original data in mOriginalValues
                 }
 
                 /********
@@ -99,9 +99,9 @@ public class CommunityAdapter extends BaseAdapter implements Filterable {
                 } else {
                     constraint = constraint.toString().toLowerCase();
                     for (int i = 0; i < mOriginalValues.size(); i++) {
-                        String data = mOriginalValues.get(i).name;
+                        String data = mOriginalValues.get(i).getCommunityName();
                         if (data.toLowerCase().startsWith(constraint.toString())) {
-                            FilteredArrList.add(new Product(mOriginalValues.get(i).name,mOriginalValues.get(i).price));
+                            FilteredArrList.add(mOriginalValues.get(i));
                         }
                     }
                     // set the Filtered result to return
