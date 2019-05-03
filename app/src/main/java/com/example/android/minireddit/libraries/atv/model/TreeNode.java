@@ -45,6 +45,7 @@ public class TreeNode {
     public TreeNode(Object value) {
         children = new ArrayList<>();
         mValue = value;
+
     }
 
     public TreeNode addChild(TreeNode childNode) {
@@ -221,7 +222,7 @@ public class TreeNode {
     }
 
     public static abstract class BaseNodeViewHolder<E> {
-        protected AndroidTreeView tView;
+        public static AndroidTreeView tView;
         protected TreeNode mNode;
         private View mView;
         protected int containerStyle;

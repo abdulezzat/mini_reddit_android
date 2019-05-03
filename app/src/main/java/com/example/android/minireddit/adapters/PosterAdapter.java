@@ -153,7 +153,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
         final ImageView postImage = (ImageView) ListItemView.findViewById(R.id.postImage);
         if (currentPost.getPostImageUrl() != null) {
             postImage.setVisibility(View.VISIBLE);
-            boolean connected = isNetworkAvailable();
+            boolean connected = isNetworkAvailable(getContext());
             if (connected)
                 new DownloadImageTask(postImage).execute(currentPost.getPostImageUrl());
             else
@@ -420,9 +420,9 @@ public class PosterAdapter extends ArrayAdapter<Post> {
      *
      * @return the boolean
      */
-    protected boolean isNetworkAvailable() {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
@@ -592,7 +592,8 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     }
     private void showBlockDialog(final Post post) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        String message ="Block u/"+post.getPostUser()+"?"+"\n \nYou Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
+        builder.setTitle("Block u/" + post.getPostUser() + "?" + "\n \n");
+        String message ="You Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
         builder.setMessage(message);
         builder.setPositiveButton("BLOCK USER", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

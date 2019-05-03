@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.minireddit.adapters.PosterAdapter;
+import com.example.android.minireddit.datastructure.Comment;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.fragments.PostFragment;
 import com.example.android.minireddit.libraries.atv.MyHolder;
@@ -197,16 +198,16 @@ public class SinglePost extends AppCompatActivity {
         TreeNode root = TreeNode.root();
 
         //Parent
-        MyHolder.IconTreeItem nodeItem = new MyHolder.IconTreeItem(R.drawable.ic_arrow_drop_down, "Parent");
-        TreeNode parent = new TreeNode(nodeItem).setViewHolder(new MyHolder(getApplicationContext(), true, MyHolder.DEFAULT, MyHolder.DEFAULT));
+        MyHolder.IconTreeItem nodeItem = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode parent = new TreeNode(nodeItem).setViewHolder(new MyHolder(SinglePost.this, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
 
         //Child
-        MyHolder.IconTreeItem childItem = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Child");
-        TreeNode child = new TreeNode(childItem).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 25));
+        MyHolder.IconTreeItem childItem = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode child = new TreeNode(childItem).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 25));
 
         //Sub Child
-        MyHolder.IconTreeItem subChildItem = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Sub Child");
-        TreeNode subChild = new TreeNode(subChildItem).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 50));
+        MyHolder.IconTreeItem subChildItem = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode subChild = new TreeNode(subChildItem).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 50));
 
         //Add sub child.
         child.addChild(subChild);
@@ -217,21 +218,21 @@ public class SinglePost extends AppCompatActivity {
         root.addChild(parent);
 
         //Parent
-        MyHolder.IconTreeItem nodeItem2 = new MyHolder.IconTreeItem(R.drawable.ic_arrow_drop_down, "Parent");
-        TreeNode parent2 = new TreeNode(nodeItem).setViewHolder(new MyHolder(getApplicationContext(), true, MyHolder.DEFAULT, MyHolder.DEFAULT));
+        MyHolder.IconTreeItem nodeItem2 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode parent2 = new TreeNode(nodeItem).setViewHolder(new MyHolder(SinglePost.this, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
 
         //Child
-        MyHolder.IconTreeItem childItem2 = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Child");
-        TreeNode child2 = new TreeNode(childItem2).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 25));
+        MyHolder.IconTreeItem childItem2 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode child2 = new TreeNode(childItem2).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 25));
 
         //Sub Child
-        MyHolder.IconTreeItem subChildItem2 = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Sub Child");
-        TreeNode subChild2 = new TreeNode(subChildItem2).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 50));
+        MyHolder.IconTreeItem subChildItem2 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode subChild2 = new TreeNode(subChildItem2).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 50));
 
         //Add sub child.
         child2.addChild(subChild2);
-        MyHolder.IconTreeItem subChildItem22 = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Sub Child");
-        TreeNode subChild22 = new TreeNode(subChildItem22).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 150));
+        MyHolder.IconTreeItem subChildItem22 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode subChild22 = new TreeNode(subChildItem22).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 150));
 
 
         //Add child.
@@ -239,23 +240,23 @@ public class SinglePost extends AppCompatActivity {
         root.addChild(parent2);
 
 
-        MyHolder.IconTreeItem subChildItem3 = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Sub Child");
-        TreeNode subChild3 = new TreeNode(subChildItem3).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 50));
+        MyHolder.IconTreeItem subChildItem3 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode subChild3 = new TreeNode(subChildItem3).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 50));
 
         //Add sub child.
         child2.addChild(subChild3);
-        MyHolder.IconTreeItem subChildItem4 = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Sub Child");
-        TreeNode subChild4 = new TreeNode(subChildItem4).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 150));
+        MyHolder.IconTreeItem subChildItem4 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode subChild4 = new TreeNode(subChildItem4).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 150));
 
         //Add sub child.
         subChild3.addChild(subChild4);
-        MyHolder.IconTreeItem subChildItem5 = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Sub Child");
-        TreeNode subChild5 = new TreeNode(subChildItem5).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 250));
+        MyHolder.IconTreeItem subChildItem5 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode subChild5 = new TreeNode(subChildItem5).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 250));
 
         //Add sub child.
         subChild4.addChild(subChild5);
-        MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(R.drawable.ic_folder, "Sub Child");
-        TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(getApplicationContext(), false, R.layout.child, 350));
+        MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+        TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(SinglePost.this, false, R.layout.child, 350));
 
         //Add sub child.
         subChild5.addChild(subChild6);
@@ -266,9 +267,10 @@ public class SinglePost extends AppCompatActivity {
 
 
         //Add AndroidTreeView into view.
-        AndroidTreeView tView = new AndroidTreeView(getApplicationContext(), root);
+        AndroidTreeView tView = new AndroidTreeView(SinglePost.this, root);
         LinearLayout linearLayout=(LinearLayout)findViewById(R.id.comments);
         linearLayout.addView(tView.getView());
+
 
 
 
