@@ -28,6 +28,7 @@ import com.example.android.minireddit.fragments.HomePageFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.fragments.SavedFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
+import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,11 @@ public class HomePage extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         //Set my custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -1,5 +1,19 @@
 apply plugin: 'com.android.application'
 
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.11.0, 0.99.99]'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -9,6 +23,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //onesignal config
+        manifestPlaceholders = [
+                onesignal_app_id: '52bcd1f1-af26-4d91-966d-a7a05ae69f8b',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
     buildTypes {
         release {
@@ -33,16 +53,6 @@ dependencies {
 
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
+    implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
 }
-/*
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == "com.android.support") {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion "27.1.1"
-            }
-        }
-    }
-}
-*/
+
