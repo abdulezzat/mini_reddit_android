@@ -1,5 +1,6 @@
 package com.example.android.minireddit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -119,6 +120,13 @@ public class HomePage extends AppCompatActivity
         mMyProfileFragment = new MyProfileFragment();
         mMySavedFragment = new SavedFragment();
 
+        findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(), SettingsActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         //set default fragment homePage
         loadFragment(mHomePageFragment);

@@ -3,6 +3,8 @@ package com.example.android.minireddit.fragments;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +42,9 @@ public class ProfilePostsFragment extends Fragment {
         ImageView expand = (ImageView) rootView.findViewById(R.id.animation_image);
 
         ProfilePostsAdapter adapter = new ProfilePostsAdapter(this.getContext(), mUser.getmPosts(), expand, frameLayout);
-        ListView listView = (ListView) rootView.findViewById(R.id.profile_posts_listview);
-        listView.setAdapter(adapter);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.profile_posts_recyclerview);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return rootView;
     }
