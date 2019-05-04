@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.android.minireddit.abs.NavigateToAnotherUserProfile;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.HomePageFragment;
+import com.example.android.minireddit.fragments.InboxFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.fragments.SavedFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
@@ -50,6 +51,7 @@ public class HomePage extends AppCompatActivity
     private HomePageFragment mHomePageFragment;
     private MyProfileFragment mMyProfileFragment;
     private SavedFragment mMySavedFragment;
+    private InboxFragment mInboxFragment;
 
     //helper members
     private boolean mInHomeScreen;
@@ -112,6 +114,7 @@ public class HomePage extends AppCompatActivity
         mHomePageFragment = new HomePageFragment();
         mMyProfileFragment = new MyProfileFragment();
         mMySavedFragment = new SavedFragment();
+        mInboxFragment = new InboxFragment();
 
 
         //set default fragment homePage
@@ -270,7 +273,12 @@ public class HomePage extends AppCompatActivity
         } else if (id == R.id.navigation_chat) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.navigation_message) {
-
+            mInHomeScreen = false;
+            //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            getSupportActionBar().hide();
+            //Constants.visitedUser=new User();
+            //Constants.visitedUser.setmUserName(Constants.user.getmUserName());
+            result = loadFragment(mInboxFragment);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

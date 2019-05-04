@@ -15,7 +15,8 @@
     <color name="buttonDisabledStateColor">#0099CC</color>
     <color name="textDisabledStateColor">#90CAF9</color>
     <color name="textEnabledStateColor">@color/colorPrimary</color>
-
+    <color name="colorHintTextLight">#80FFFFFF</color>
+    <color name="colorPrimaryTextLight">#FFFFFF</color>
 
     <color name="gray">#CCCCCC</color>
 </resources>
