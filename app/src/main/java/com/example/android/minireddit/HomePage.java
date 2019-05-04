@@ -67,6 +67,7 @@ public class HomePage extends AppCompatActivity
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
 
+        OneSignal.sendTag("username","admin");
         //Set my custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
