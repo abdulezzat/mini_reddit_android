@@ -4,22 +4,20 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,17 +40,15 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import com.example.android.minireddit.Constants;
-import com.example.android.minireddit.ProfileActivity;
 import com.example.android.minireddit.SinglePost;
 import com.example.android.minireddit.abs.NavigateToAnotherUserProfile;
+import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.R;
 
 import java.util.List;
-
-import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 
 
 /**
@@ -133,9 +129,19 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             postUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getContext(), ProfileActivity.class);
-                    intent.putExtra("username",currentPost.getPostUser());
+                    //Intent intent=new Intent(getContext(), ProfileActivity.class);
+                    //intent.putExtra("username",currentPost.getPostUser());
                    // getContext().startActivity(intent);
+
+                    MyProfileFragment profileFragment = new MyProfileFragment();
+                    FragmentManager fragmentManager =((AppCompatActivity) getContext()).getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, profileFragment)
+                            .addToBackStack(null)
+                            .commit();
+
+                    fragmentManager.executePendingTransactions();
+
                 }
             });
         }

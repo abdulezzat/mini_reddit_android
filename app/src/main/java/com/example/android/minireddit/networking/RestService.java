@@ -433,14 +433,15 @@ public class RestService implements Requests {
                                 Constants.mToken = jsonObject.getString("token");
                                 Constants.user = new User(username, username, null, null, null, 1, null, false);
                                 if (Constants.mLogInSignUpSuccessful != null) {
-                                    Constants.mLogInSignUpSuccessful.Successful();
+                                    Constants.mLogInSignUpSuccessful.Successful(jsonObject.getBoolean("success"));
                                 }
                                 Toast.makeText(context, "Login Done", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
+                            Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -448,7 +449,9 @@ public class RestService implements Requests {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
+
                     }
                 }) {
 
@@ -479,21 +482,23 @@ public class RestService implements Requests {
                                 Constants.user = new User(username, username, null, email, null, 1, null, false);
                                 Constants.mToken = jsonObject.getString("token");
                                 if (Constants.mLogInSignUpSuccessful != null) {
-                                    Constants.mLogInSignUpSuccessful.Successful();
+                                    Constants.mLogInSignUpSuccessful.Successful(jsonObject.getBoolean("success"));
                                 }
                                 Toast.makeText(context, "Signup Done", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
+                            Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
@@ -898,7 +903,7 @@ public class RestService implements Requests {
                                     String communityName = jsonObject.getString("community");
                                     String postLogoUrl = "";
                                     String postUser = "Essam";
-                                    String postInfo = "";
+                                    String postInfo = jsonObject.getString("date");
                                     String PostText = jsonObject.getString("body");
                                     String PostImageUrl = jsonObject.getString("post_image");
                                     String PostVideoUrl = jsonObject.getString("video_url");
@@ -945,8 +950,8 @@ public class RestService implements Requests {
                                         String date = jsonComment.getString("link_date");
                                         int commentsNum = 0;
                                         boolean saved = true;
-                                        boolean upVoted = false;
-                                        boolean downVoted = false;
+                                        boolean upVoted = jsonComment.getBoolean("upvoted");
+                                        boolean downVoted = jsonComment.getBoolean("downvoted");
 
                                         Comment comment = new Comment(commentId, commentBody, commentUser, postTitle, postBody, postCommunity, postAuthor, AuthorPhoto, downVotes, upVotes, date, commentsNum, saved, upVoted, downVoted);
                                         comments.add(comment);

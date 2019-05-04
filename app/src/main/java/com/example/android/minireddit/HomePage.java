@@ -1,5 +1,6 @@
 package com.example.android.minireddit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.example.android.minireddit.fragments.HomePageFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.fragments.SavedFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
+import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,13 @@ public class HomePage extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
+        OneSignal.sendTag("username","admin");
         //Set my custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -113,6 +121,13 @@ public class HomePage extends AppCompatActivity
         mMyProfileFragment = new MyProfileFragment();
         mMySavedFragment = new SavedFragment();
 
+        findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(), SettingsActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         //set default fragment homePage
         loadFragment(mHomePageFragment);

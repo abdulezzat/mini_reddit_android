@@ -112,48 +112,55 @@ public class MockRestService implements com.example.android.minireddit.networkin
         return false;
     }
 
-
+    @Override
     public User getUserPublicInfo(Context context, String username) {
         User user = new User("admin", "Ahmed Elkarashily", 49415, "4m 24d", "just a place holder for user about section. hello. hope you enjoy your visit with us.", "https://theme.zdassets.com/theme_assets/2219439/89cbe072bbb76fc29a82367bd19b511df487d018.png", "https://data.whicdn.com/images/290284739/superthumb.jpg?t=1498330484");
         Constants.visitedUser = user;
         return user;
     }
 
+    @Override
     public User getUserPrivateInfo(Context context) {
         User user = new User("", "", 0, "", "", "", "");
         user.setmEmail("karashily@gmail.com");
         return user;
     }
 
+    @Override
     public String getUsername(Context context) {
         Constants.user.setmUserName("MockedUserName");
         return "karashily";
     }
 
+    @Override
     public boolean updateUserDisplayName(Context context, String displayName) {
         Constants.user.setmDisplayName(displayName);
         Constants.visitedUser.setmDisplayName(displayName);
         return true;
     }
 
+    @Override
     public boolean updateUserAbout(Context context, String about) {
         Constants.user.setmAbout(about);
         Constants.visitedUser.setmAbout(about);
         return true;
     }
 
+    @Override
     public boolean updateUserProfileImage(Context context, String profileImage) {
         Constants.user.setmProfileImage(profileImage);
         Constants.visitedUser.setmProfileImage(profileImage);
         return true;
     }
 
+    @Override
     public boolean updateUserHeaderImage(final Context context, final String headerImage) {
         Constants.user.setmHeaderImage(headerImage);
         Constants.visitedUser.setmHeaderImage(headerImage);
         return true;
     }
 
+    @Override
     public void ViewSavedLinks(Context context) {
         ArrayList<Post> posts = new ArrayList<>();
         posts.add(new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
@@ -168,6 +175,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
         Constants.savedComments.addAll(comments);
     }
 
+    @Override
     public void getUserPostsAndComments(Context context, String username) {
         ArrayList<Post> posts = new ArrayList<>();
         posts.add(new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
@@ -182,6 +190,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
         Constants.visitedUser.addComments(comments);
     }
 
+    @Override
     public boolean followUser(Context context, String username) {
         ArrayList<String> newFollowings = new ArrayList<>();
         newFollowings.add(username);
@@ -189,6 +198,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
         return true;
     }
 
+    @Override
     public boolean unFollowUser(Context context, String username) {
         ArrayList<String> removedFollowings = new ArrayList<>();
         removedFollowings.add(username);
@@ -196,6 +206,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
         return true;
     }
 
+    @Override
     public void getUserFollowers(Context context, String username) {
         ArrayList<String> newFollowers = new ArrayList<>();
         newFollowers.add("alyramzy");
@@ -203,6 +214,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
         Constants.visitedUser.addFollowers(newFollowers);
     }
 
+    @Override
     public void getUserFollowing(Context context, String username) {
         ArrayList<String> newFollowings = new ArrayList<>();
         newFollowings.add("3lool");

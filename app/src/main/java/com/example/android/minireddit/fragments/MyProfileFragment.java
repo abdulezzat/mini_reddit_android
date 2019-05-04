@@ -248,6 +248,19 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
+        // activating share my profile button
+        ImageView shareProfile = rootView.findViewById(R.id.share_profile);
+        shareProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "u/" + Constants.visitedUser.getmUserName();
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
+
         return rootView;
     }
 

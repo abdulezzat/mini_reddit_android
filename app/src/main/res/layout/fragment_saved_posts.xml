@@ -11,7 +11,8 @@
         android:id="@+id/saved_posts_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="10.0sp" />
+        android:dividerHeight="2sp"
+        android:layout_marginBottom="50dp"/>
 
     <ImageView
         android:id="@+id/animation_image"
