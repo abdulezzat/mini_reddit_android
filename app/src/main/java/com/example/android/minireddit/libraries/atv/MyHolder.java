@@ -53,6 +53,7 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
     int child;
     int leftMargin;
     public Comment mComment;
+    MenuItem saveicon;
 
     public MyHolder(Context context, boolean toggle, int child, int leftMargin) {
         super(context);
@@ -66,6 +67,7 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
     public View createNodeView(final TreeNode node, IconTreeItem value) {
         final Comment comment =value.comment;
         mComment=value.comment;
+
 
 
         final LayoutInflater inflater = LayoutInflater.from(context);
@@ -98,7 +100,7 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mComment.getmCommentsNum()!=0){
+                if(mComment.getmCommentsNum()!=0&&mComment.getmCommentsNum()!=node.size()){
                     DependentClass.getInstance().getComments(context,node,mComment.getmCommentId(),1);
                 }
             }
@@ -115,6 +117,7 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
                 Constants.commentReplyNode=node;
                 Intent intent=new Intent(context,CommentActivity.class);
                 intent.putExtra("Type","Reply");
+                intent.putExtra("Func","Write");
                 context.startActivity(intent);
                 }
                 else{
@@ -221,9 +224,30 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
                         PopupMenu popup = new PopupMenu(context, v);
                         popup.getMenuInflater().inflate(R.menu.comment_menu,
                                 popup.getMenu());
+                        saveicon=popup.getMenu().findItem(R.id.save);
+                if(!mComment.ismSaved()){
+                    saveicon.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                    saveicon.setTitle("save");
+                }
+                else{
+                    saveicon.setIcon(R.drawable.unsave);
+                    saveicon.setTitle("unsave");
+                }
+
                         if(Constants.mToken.isEmpty())
                             popup.getMenu().findItem(R.id.blockUser).setVisible(false);
                         setForceShowIcon(popup);
+                        if(Constants.user!=null){
+                            if(Constants.user.getmUserName().equals(comment.getmUser())){
+                                popup.getMenu().findItem(R.id.edit).setVisible(true);
+                            }
+                            else{
+                                popup.getMenu().findItem(R.id.edit).setVisible(false);
+                            }
+                        }
+                        else{
+                            popup.getMenu().findItem(R.id.edit).setVisible(false);
+                        }
 
 
                         popup.show();
@@ -232,7 +256,33 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
                             public boolean onMenuItemClick(MenuItem item) {
 
                                 switch (item.getItemId()) {
+                                    case R.id.edit:
+                                        Constants.commentReply=comment;
+                                        Intent intent=new Intent(context,CommentActivity.class);
+                                        intent.putExtra("Type","empty");
+                                        intent.putExtra("Func","Edit");
+                                        context.startActivity(intent);
+
+                                        break;
                                     case R.id.save:
+                                        if(!Constants.mToken.isEmpty()) {
+                                            if (saveicon.getTitle().equals("save")) {
+                                                DependentClass.getInstance().saveLink(context,comment.getmCommentId());
+                                                saveicon.setTitle("unsave");
+                                                saveicon.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                                                comment.setmSaved(true);
+                                                //save
+                                            } else {
+                                                DependentClass.getInstance().unsaveLink(context,comment.getmCommentId());
+                                                saveicon.setIcon(R.drawable.unsave);
+                                                saveicon.setTitle("save");
+                                                comment.setmSaved(false);
+                                                //unsave
+                                            }
+                                        }
+                                        else{
+                                            Toast.makeText(context,"Please Login First",Toast.LENGTH_SHORT).show();
+                                        }
 
 
 
@@ -243,9 +293,7 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
 
 
                                         break;
-                                    case R.id.sharePost:
 
-                                        break;
 
                                     case R.id.copy:
                                         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);

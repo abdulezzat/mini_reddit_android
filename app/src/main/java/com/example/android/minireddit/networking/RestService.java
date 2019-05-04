@@ -2,6 +2,7 @@ package com.example.android.minireddit.networking;
 
 import android.content.Context;
 import android.net.Uri;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -98,7 +99,7 @@ public class RestService implements Requests {
                             }
                             Constants.poster.addAll(posts);
                             Constants.poster.notifyDataSetChanged();
-                            Toast.makeText(context, "Loaded Done ", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Loaded Done ", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
 
@@ -182,7 +183,7 @@ public class RestService implements Requests {
                                 String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
                                 // Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
                                 int postLikeCount = post.getInt("upvotes") - post.getInt("downvotes");
-                                String postInfo = post.getString("date");
+                                String postInfo = post.getString("duration");
                                 int postCommentCount = post.getInt("comments_num");
                                 //Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
                                 //  Toast.makeText(context,postVideoUrl,Toast.LENGTH_SHORT).show();
@@ -292,6 +293,7 @@ public class RestService implements Requests {
         }
 
         return posts;
+
     }
 
     @Override
@@ -366,11 +368,13 @@ public class RestService implements Requests {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(context, "Subscribed Successfully", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
@@ -1573,7 +1577,7 @@ public class RestService implements Requests {
                                 // Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
                                 int postLikeCount = post.getInt("upvotes");
                                 int postdisLike= post.getInt("downvotes");
-                                String postInfo = post.getString("link_date");
+                                String postInfo = post.getString("duration");
                                 int postCommentCount = post.getInt("comments_num");
                                 //Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
                                 //  Toast.makeText(context,postVideoUrl,Toast.LENGTH_SHORT).show();
@@ -1654,7 +1658,7 @@ public class RestService implements Requests {
         }
         else{
             connectionStrong+="&video_url="+secondInput;
-            connectionStrong+="&post_content="+secondInput;
+            connectionStrong+="&post_content=.";
         }
         if(community.getCommunityID()!=0){
             connectionStrong+="&community_id="+community.getCommunityID();
@@ -1687,6 +1691,153 @@ public class RestService implements Requests {
         };
         MySingleton.getInstance(context).addToRequestQueue(stringrequest);
 
+
+
+    }
+
+    @Override
+    public void saveLink(final Context context, final int id) {
+        String connectionStrong = Constants.SAVE_LINK;
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(context, "Post Saved Succesfull", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Post Save Failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("link_id", String.valueOf(id));
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+    }
+
+    @Override
+    public void unSaveLink(final Context context,final  int id) {
+        String connectionStrong = Constants.UN_SAVE_LINK;
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(context, "Post UnSaved Succesfull", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString()+"Post UnSave Failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("link_id", String.valueOf(id));
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+
+    }
+
+    @Override
+    public void editComment(final Context context, final int id, final String content) {
+        //Toast.makeText(context,String.valueOf(id),Toast.LENGTH_SHORT).show();
+        String connectionStrong = Constants.EDIT_COMMENT;
+        connectionStrong+="&token="+Constants.mToken+"&comment_id="+id+"&new_content="+content;
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(context, "Comment Edited Succesfull", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Comment edit Failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("comment_id", String.valueOf(id));
+                params.put("new_content",content);
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+    }
+
+    @Override
+    public void editPost(final Context context, final Post post) {
+        String connectionStrong = Constants.EDIT_COMMENT;
+       // connectionStrong+="&token="+Constants.mToken+"&post_id="+post.getPostId()+"&new_title="+;
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(context, "Post Edited Succesfull", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Post edit Failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
 
 
     }

@@ -100,6 +100,13 @@ public class WritePost extends AppCompatActivity {
 
 
         }else{
+            this.setTitle("Edit Post");
+            camera.setVisibility(View.GONE);
+            gallery.setVisibility(View.GONE);
+           postTitle.setText(Constants.postComment.getPostText());
+           postText.setVisibility(View.GONE);
+           choose.setVisibility(View.GONE);
+
 
         }
 
@@ -197,6 +204,7 @@ public class WritePost extends AppCompatActivity {
         post=menu.findItem(R.id.post);
         post.setEnabled(false);
 
+
         return super.onPrepareOptionsMenu(menu);
     }
     @Override
@@ -253,6 +261,7 @@ public class WritePost extends AppCompatActivity {
 
 
             case R.id.post:
+                if(postFunc.equals("Write")){
 
                if(type.equals("Text")){
                    DependentClass.getInstance().writeTextandVideoPosts(getApplicationContext(),postTitle.getText().toString(),postText.getText().toString(),currentCommunity,0);
@@ -262,6 +271,11 @@ public class WritePost extends AppCompatActivity {
 
 
                }
+               super.onBackPressed();
+                }
+                else{
+
+                }
 
                 return true;
 

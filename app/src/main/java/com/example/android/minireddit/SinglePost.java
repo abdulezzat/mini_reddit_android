@@ -1,12 +1,15 @@
 package com.example.android.minireddit;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +20,7 @@ import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -41,6 +45,8 @@ public class SinglePost extends AppCompatActivity {
     Post mCurrentPost=null;
     int mPostId=0;
     TextView writeComment;
+    MenuItem save;
+    MenuItem edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class SinglePost extends AppCompatActivity {
                     Constants.postComment = mCurrentPost;
                     Constants.commentReplyNode = TreeNode.BaseNodeViewHolder.tView.getmRoot();
                     intent.putExtra("Type","Comment");
+                    intent.putExtra("Func","Write");
                     startActivity(intent);
                 }
                 else{
@@ -70,6 +77,25 @@ public class SinglePost extends AppCompatActivity {
           @Override
           public void SinglePost(Post post) {
               mCurrentPost=post;
+              if(Constants.user!=null){
+                  if(Constants.user.getmUserName().equals(mCurrentPost.getPostUser())){
+                      edit.setVisible(true);
+                  }
+                  else{
+                      edit.setVisible(false);
+                  }
+              }
+              else{
+                  edit.setVisible(false);
+              }
+              if(!mCurrentPost.isSaved()){
+                  save.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                  save.setTitle("save");
+              }
+              else{
+                  save.setIcon(R.drawable.unsave);
+                  save.setTitle("unsave");
+              }
               ImageView postLogo = (ImageView) findViewById(R.id.postLogo);
               postLogo.setImageResource(Integer.valueOf(mCurrentPost.getPostLogoUrl()));
 
@@ -304,6 +330,12 @@ public class SinglePost extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+
+        if(Constants.mToken.isEmpty())
+            menu.findItem(R.id.blockUser).setVisible(false);
+
+        save=menu.findItem(R.id.save_post);
+        edit=menu.findItem(R.id.edit);
         Method m = null;
         try {
             m = menu.getClass().getDeclaredMethod(
@@ -327,13 +359,43 @@ public class SinglePost extends AppCompatActivity {
           switch (item.getItemId()) {
 
             case R.id.save_post:
+                if(!Constants.mToken.isEmpty()) {
+                    if (save.getTitle().equals("save")) {
+                        DependentClass.getInstance().saveLink(SinglePost.this,mPostId);
+                        save.setTitle("unsave");
+                        save.setIcon(R.drawable.unsave);
+                        //save
+                    } else {
+                        DependentClass.getInstance().unsaveLink(SinglePost.this,mPostId);
+                        save.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                        save.setTitle("save");
+                        //unsave
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Please Login First",Toast.LENGTH_SHORT).show();
+                }
 
                 return true;
+                case R.id.edit:
+                    Intent intent=new Intent(SinglePost.this,WritePost.class);
+                    intent.putExtra("Post","Edit");
+                    intent.putExtra("Type","None");
+                    Constants.postComment=mCurrentPost;
+                    startActivity(intent);
+
+
+                    return true;
+
 
             case R.id.block_user:
+                showBlockDialog();
 
                 return true;
               case R.id.hide_post:
+                  if(!Constants.mToken.isEmpty()){
+                      DependentClass.getInstance().hidePost(getApplicationContext(),mPostId);
+                  }
 
                   return true;
 
@@ -358,5 +420,44 @@ public class SinglePost extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+    private void showBlockDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SinglePost.this);
+        builder.setTitle("Block u/" + mCurrentPost.getPostUser() + "?" + "\n \n");
+        String message ="You Will no Longer see thier comments,posts,and message-except in group chat.They Will not Know that you have blocked them.You will no longer get notifications from this user. \n\n";
+        builder.setMessage(message);
+        builder.setPositiveButton("BLOCK USER", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                DependentClass.getInstance().blockUser(SinglePost.this,mCurrentPost.getPostUser());
+
+
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button btnNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative. setBackgroundColor(Color.parseColor("#d3d3d3"));
+        btnPositive.setBackgroundColor(Color.parseColor("#8B0000"));
+
+        btnNegative.setTextColor(Color.parseColor("#808080"));
+        btnPositive.setTextColor(Color.parseColor("#ffffff"));
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
+
+    }
+
 
 }

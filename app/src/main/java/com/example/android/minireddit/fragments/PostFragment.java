@@ -127,7 +127,7 @@ public class PostFragment extends Fragment {
 
             }
         };
-        listView.setOnScrollListener(scrollListener);
+       // listView.setOnScrollListener(scrollListener);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

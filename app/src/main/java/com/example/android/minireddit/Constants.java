@@ -18,7 +18,7 @@ public class Constants {
     public static String mToken = "";
 
 
-    public static final boolean debug = true;
+    public static final boolean debug = false;
     public static User user = null;
     public static User visitedUser = null;
     // public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
@@ -61,6 +61,10 @@ public class Constants {
     final static public String GET_LIST_OF_COMMUNITIES=BASE_URL+"/api/unauth/viewUserCommunities?username=";
     final static public String VIEW_SINGLE_POST=BASE_URL+"/api/unauth/viewSinglePost?";
     final static public String GET_COMMENTS=BASE_URL+"/api/unauth/viewCommentsReplies?";
+    final static public String SAVE_LINK=BASE_URL+"/api/auth/saveLink?";
+    final static public String UN_SAVE_LINK=BASE_URL+"/api/auth/unsaveLink?";
+    final static public String EDIT_COMMENT=BASE_URL+"/api/auth/editComment?";
+    final static public String EDIT_POST=BASE_URL+"/api/auth/editPost?";
     //930d0c7c.ngrok.io
     //35.204.169.121
 

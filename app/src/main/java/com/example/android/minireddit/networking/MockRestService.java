@@ -1,6 +1,7 @@
 package com.example.android.minireddit.networking;
 
 import android.content.Context;
+import android.view.MenuItem;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
@@ -294,6 +295,26 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public void writePostVideoAndText(Context context, String firstInput, String secondInput, Community community, int type) {
+
+    }
+
+    @Override
+    public void saveLink(Context context, int id) {
+
+    }
+
+    @Override
+    public void unSaveLink(Context context, int id) {
+
+    }
+
+    @Override
+    public void editComment(Context context, int id, String content) {
+
+    }
+
+    @Override
+    public void editPost(Context context, Post post) {
 
     }
 

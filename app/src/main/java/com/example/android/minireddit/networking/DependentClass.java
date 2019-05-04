@@ -1,6 +1,7 @@
 package com.example.android.minireddit.networking;
 
 import android.content.Context;
+import android.view.MenuItem;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.datastructure.Comment;
@@ -233,6 +234,15 @@ public class DependentClass {
     }
     public void writeTextandVideoPosts(Context context, String inputString1, String inputString2, Community community,int type){
         mSupplier.writePostVideoAndText(context,inputString1,inputString2,community,type);
+    }
+    public void saveLink(Context context, int id){
+        mSupplier.saveLink(context,id);
+    }
+    public void unsaveLink(Context context, int id){
+        mSupplier.unSaveLink(context,id);
+    }
+    public void editComment(Context context,int id,String content){
+        mSupplier.editComment(context,id,content);
     }
 
 }
