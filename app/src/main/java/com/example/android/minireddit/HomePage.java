@@ -265,6 +265,8 @@ public class HomePage extends AppCompatActivity
                 Toast.makeText(getApplicationContext(),"Please Login First To Write Post.",Toast.LENGTH_SHORT).show();
             else {
                 Intent intent = new Intent(this, WritePost.class);
+                intent.putExtra("Type","Video");
+                intent.putExtra("Post","Write");
                 startActivity(intent);
             }
         } else if (id == R.id.navigation_chat) {

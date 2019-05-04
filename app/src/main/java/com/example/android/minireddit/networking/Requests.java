@@ -3,8 +3,11 @@ package com.example.android.minireddit.networking;
 import android.content.Context;
 
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
+import com.example.android.minireddit.datastructure.Comment;
+import com.example.android.minireddit.datastructure.Community;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
+import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
 import java.util.ArrayList;
 
@@ -139,4 +142,10 @@ public interface Requests {
     boolean hidePost(Context context, int postID);
 
     boolean blockUser(Context context, String username);
+    void getListofCommunities(Context context);
+    void replyOnReply(Context context, TreeNode parent, Comment oldComment,Comment newComment);
+    void commentOnPost(Context context,TreeNode root,Post post,Comment newComment);
+    void getSinglePost(Context context,int postId);
+    void getComments(Context context,int link_id,TreeNode node,int type );
+    void writePostVideoAndText(Context context, String firstInput, String secondInput, Community community,int type);
 }

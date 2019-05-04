@@ -12,8 +12,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.datastructure.Comment;
+import com.example.android.minireddit.datastructure.Community;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
+import com.example.android.minireddit.libraries.atv.MyHolder;
+import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,6 +57,8 @@ public class RestService implements Requests {
                                 JSONObject post = jsonArray.getJSONObject(i);
                                 int id = post.getInt("post_id");
                                 String postText = post.getString("body");
+                                String postTitle=post.getString("title");
+                                postText+="\n"+postTitle;
                                 // Toast.makeText(context,"outer loop 1 ",Toast.LENGTH_SHORT).show();
                                 String postVideoUrl = post.getString("video_url");
                                 // Toast.makeText(context,"outer loop 2",Toast.LENGTH_SHORT).show();
@@ -67,7 +73,7 @@ public class RestService implements Requests {
                                 String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
                                 // Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
                                 int postLikeCount = post.getInt("upvotes") - post.getInt("downvotes");
-                                String postInfo = post.getString("date");
+                                String postInfo = post.getString("duration");
                                 int postCommentCount = post.getInt("comments_num");
                                 if (postVideoUrl == "-1")
                                     postVideoUrl = null;
@@ -140,7 +146,7 @@ public class RestService implements Requests {
 
     @Override
     public ArrayList<Post> getHomePost(final Context context) {
-        Toast.makeText(context, "Function Triggered", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Function Triggered", Toast.LENGTH_SHORT).show();
         int pageType = 0;
         String connectionStrong = Constants.HOME_POSTS + Constants.mToken;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
@@ -160,6 +166,8 @@ public class RestService implements Requests {
                                 JSONObject post = jsonArray.getJSONObject(i);
                                 int id = post.getInt("post_id");
                                 String postText = post.getString("body");
+                                String postTitle=post.getString("title");
+                                postText+="\n"+postTitle;
                                 // Toast.makeText(context,"outer loop 1 ",Toast.LENGTH_SHORT).show();
                                 String postVideoUrl = post.getString("video_url");
                                 // Toast.makeText(context,"outer loop 2",Toast.LENGTH_SHORT).show();
@@ -180,9 +188,9 @@ public class RestService implements Requests {
                                 //  Toast.makeText(context,postVideoUrl,Toast.LENGTH_SHORT).show();
 
 
-                                if (postVideoUrl == "null")
+                                if (postVideoUrl == "-1")
                                     postVideoUrl = null;
-                                if (postImage == "null")
+                                if (postImage == "-1")
                                     postImage = null;
 
 
@@ -197,7 +205,7 @@ public class RestService implements Requests {
                                     voteStatus = 1;
 
 
-                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
+                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, subs, voteStatus);
                                 // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
                                 posts.add(newPost);
 
@@ -382,9 +390,9 @@ public class RestService implements Requests {
 
     @Override
     public boolean unsubscribeCommunity(final Context context, final int commId) {
-        String connectionStrong = Constants.UNSUBSCRIBE_COMMUNITY + Constants.mToken + "&community_id=" + commId;
+        String connectionStrong = Constants.UNSUBSCRIBE_COMMUNITY ;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
-        StringRequest stringrequest = new StringRequest(Request.Method.DELETE,
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
                 new Response.Listener<String>() {
                     @Override
@@ -400,6 +408,9 @@ public class RestService implements Requests {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("community_id", String.valueOf(commId));
+                params.put("token", Constants.mToken);
+
                 return params;
             }
 
@@ -1202,7 +1213,7 @@ public class RestService implements Requests {
 
     @Override
     public boolean blockUser(final Context context, final String username) {
-        String connectionStrong = Constants.BLOCK_USER;
+             String connectionStrong = Constants.BLOCK_USER;
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.POST,
                 builder.toString(),
@@ -1235,6 +1246,444 @@ public class RestService implements Requests {
 
 
         return true;
+    }
+
+
+    @Override
+    public void getListofCommunities(final Context context) {
+        final ArrayList<Community> communities=new ArrayList<>();
+        communities.add(new Community(0,"Profile",null,null,null,null));
+        String connectionStrong = Constants.GET_LIST_OF_COMMUNITIES;
+        if(Constants.user!=null)
+            connectionStrong+=Constants.user.getmUserName();
+
+
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("communities");
+                            //final ArrayList<Post> posts = new ArrayList<>();
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                //  Toast.makeText(context,"inside loop "+String.valueOf(i),Toast.LENGTH_SHORT).show();
+
+                                JSONObject post = jsonArray.getJSONObject(i);
+                                int id = post.getInt("community_id");
+                                String communityName = post.getString("community_name");
+                                String communityLogo=post.getString( "community_logo");
+                                if(communityLogo.equals("null")){
+                                    communityLogo=null;
+                                }
+                                communities.add(new Community(id,communityName,null,null,null,communityLogo));
+
+
+
+
+
+
+                            }
+                            Constants.COMMUNITIES.ListOfCommunities(communities);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+
+
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+
+
+
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+    }
+
+    @Override
+    public void replyOnReply(final Context context, final TreeNode parent, Comment oldcomment, final Comment newComment) {
+        String connectionStrong = Constants.ADD_LINKK+"post_content="+newComment.getmBody()+"&parent_link_id="+oldcomment.getmCommentId();
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int id=jsonObject.getInt("link_id");
+                            newComment.setmCommentId(id);
+                            MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(newComment);
+                            TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, parent.getLevel()*Constants.SHIFT_NODE));
+                            parent.addChild(subChild6);
+                            TreeNode.BaseNodeViewHolder.tView.expandNode(parent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Cant Comment Please Try Again Later", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+
+    }
+
+    @Override
+    public void commentOnPost(final Context context,final TreeNode root, Post post,final Comment newComment) {
+        String connectionStrong = Constants.ADD_LINKK+"post_content="+newComment.getmBody()+"&parent_link_id="+post.getPostId();
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int id=jsonObject.getInt("link_id");
+                            newComment.setmCommentId(id);
+                            MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(newComment);
+                            TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, root.getLevel()*Constants.SHIFT_NODE));
+                            root.addChild(subChild6);
+                            TreeNode.BaseNodeViewHolder.tView.expandNode(root);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Cant Comment Please Try Again Later", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+
+    }
+
+    @Override
+    public void getSinglePost(final Context context, int postId) {
+        String connectionString = Constants.VIEW_SINGLE_POST+"post_id="+postId;
+        if (Constants.mToken != null) {
+            connectionString += "&token=" + Constants.mToken;
+        }
+
+        Uri.Builder builder = Uri.parse(connectionString).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            JSONObject post = new JSONObject(response);
+
+
+                                //  Toast.makeText(context,"inside loop "+String.valueOf(i),Toast.LENGTH_SHORT).show();
+
+
+                                int id = post.getInt("post_id");
+                                String postText = post.getString("body");
+                                String postTitle=post.getString("title");
+                                postText+="\n"+postTitle;
+                                // Toast.makeText(context,"outer loop 1 ",Toast.LENGTH_SHORT).show();
+//                                String postVideoUrl = post.getString("video_url");
+                                // Toast.makeText(context,"outer loop 2",Toast.LENGTH_SHORT).show();
+                                String postImage = post.getString("image");
+                                // Toast.makeText(context,"outer loop 3",Toast.LENGTH_SHORT).show();
+                                String postUser = post.getString("username");
+                                String community = post.getString("community");
+                                // Toast.makeText(context,"outer loop 4",Toast.LENGTH_SHORT).show();
+                               // int community_id = post.getInt("community_id");
+                                // Toast.makeText(context,"outer loop 5 ",Toast.LENGTH_SHORT).show();
+                               // boolean subs = post.getBoolean("subscribed");
+                                String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
+                                // Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
+                                int postLikeCount = post.getInt("upvotes") - post.getInt("downvotes");
+                                String postInfo = post.getString("duration");
+                                int postCommentCount = post.getInt("comments_num");
+                               // if (postVideoUrl == "-1")
+                                   // postVideoUrl = null;
+                                if (postImage == "-1")
+                                    postImage = null;
+                                int voteStatus = 0;
+                                boolean saved = post.getBoolean("saved");
+                                boolean hidden = post.getBoolean("hidden");
+                                boolean upvote = post.getBoolean("upvoted");
+                                boolean downvote = post.getBoolean("downvoted");
+                                if (upvote == false && downvote == true)
+                                    voteStatus = -1;
+                                else if (upvote == true && downvote == false)
+                                    voteStatus = 1;
+
+
+                                Post newPost = new Post(id, -1, community, userlogo, postUser, postInfo, postText, postImage, null, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
+                                // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
+
+
+                            Constants.SINGLE_POST.SinglePost(newPost);
+
+                            } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+                            //Toast.makeText(context, "Loaded Done ", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                       // Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                })
+
+
+        {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+
+                Map<String, String> params = new HashMap<>();
+
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "null");
+                return headers;
+            }
+        };
+
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+        //String JSON = "{ \"posts\": [ { \"post_id\": 1, \"body\": \"post1\", \"username\": \"ahmed\", \"downvotes\": 17, \"upvotes\": 30, \"date\": \" 2 days ago \", \"comments_num\": 0, \"saved\": \"true\", \"hidden\": \"false\", \"postimageurl\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\", \"votestatus\":-1, \"videourl\":\"https://www.youtube.com/watch?v=4PUFV17_VkA\" , \"userimagelogo\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\" }, { \"post_id\": 2, \"body\": \"post2\", \"username\": \"ahmed\", \"downvotes\": 15, \"upvotes\": 20, \"date\": \" 2 days ago \", \"comments_num\": 0, \"saved\": \"false\", \"hidden\": \"true\", \"postimageurl\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\", \"votestatus\":-1, \"videourl\":\"https://www.youtube.com/watch?v=_kYJDce1Hcw\", \"userimagelogo\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\" }, { \"post_id\": 3, \"body\": \"post3\", \"username\": \"ahmed\", \"downvotes\": 15, \"upvotes\": 20, \"date\": \" 2 days ago \", \"comments_num\": 0, \"saved\": \"true\", \"hidden\": \"true\", \"postimageurl\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\", \"votestatus\":-1 , \"videourl\":\"https://www.youtube.com/watch?v=_kYJDce1Hcw\", \"userimagelogo\":\"https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg\" } ] }";
+        //JSONObject jsonObject = null;
+
+        final ArrayList<Post> postssss = new ArrayList<>();
+
+
+    }
+
+    @Override
+    public void getComments(final Context context, int link_id, final TreeNode node, final int type) {
+        List<TreeNode> nodes =node.getChildren();
+        for(int i=0;i<nodes.size();i++){
+            node.deleteChild(nodes.get(i));
+        }
+        //Toast.makeText(context, "Function Triggered", Toast.LENGTH_SHORT).show();
+        int pageType = 0;
+        String connectionString = Constants.GET_COMMENTS+"link_id="+link_id ;
+        if (Constants.mToken != null) {
+            connectionString += "&token=" + Constants.mToken;
+        }
+
+        Uri.Builder builder = Uri.parse(connectionString).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.GET,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("comments");
+                            //final ArrayList<Post> posts = new ArrayList<>();
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                //  Toast.makeText(context,"inside loop "+String.valueOf(i),Toast.LENGTH_SHORT).show();
+
+                                JSONObject post = jsonArray.getJSONObject(i);
+                                int id = post.getInt("link_id");
+                                String postText = post.getString("content");
+
+                                // Toast.makeText(context,"outer loop 1 ",Toast.LENGTH_SHORT).show();
+
+                                String postUser = post.getString("author_username");
+                                //String community = post.getString("community");
+                                // Toast.makeText(context,"outer loop 4",Toast.LENGTH_SHORT).show();
+
+                                //String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
+                                // Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
+                                int postLikeCount = post.getInt("upvotes");
+                                int postdisLike= post.getInt("downvotes");
+                                String postInfo = post.getString("link_date");
+                                int postCommentCount = post.getInt("comments_num");
+                                //Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(context,postVideoUrl,Toast.LENGTH_SHORT).show();
+
+
+
+
+
+                                int voteStatus = 0;
+                                boolean saved = post.getBoolean("saved");
+                               // boolean hidden = post.getBoolean("hidden");
+                                boolean upvote = post.getBoolean("upvoted");
+                                boolean downvote = post.getBoolean("downvoted");
+                                MyHolder.IconTreeItem nodeItem = new MyHolder.IconTreeItem(new Comment(id,postText,postUser,null,null,0,null,null,postdisLike,postLikeCount,postInfo,postCommentCount,saved,upvote,downvote));
+                                if(type==0){
+                                    TreeNode parent = new TreeNode(nodeItem).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
+                                    node.addChild(parent);
+                                    TreeNode.BaseNodeViewHolder.tView.expandNode(node);
+
+                                }
+                                else{
+                                    TreeNode subChild6 = new TreeNode(nodeItem).setViewHolder(new MyHolder(context, false, R.layout.child, node.getLevel()*Constants.SHIFT_NODE));
+                                    node.addChild(subChild6);
+                                    TreeNode.BaseNodeViewHolder.tView.expandNode(node);
+                                }
+
+
+
+
+
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                })
+
+
+        {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Toast.makeText(context, params.toString(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "null");
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+    }
+
+    @Override
+    public void writePostVideoAndText(final Context context, String firstInput, String secondInput, final Community community, int type) {
+        String connectionStrong = Constants.ADD_LINKK+"post_title="+firstInput;
+        if(type==0){
+            connectionStrong+="&post_content="+secondInput;
+
+        }
+        else{
+            connectionStrong+="&video_url="+secondInput;
+            connectionStrong+="&post_content="+secondInput;
+        }
+        if(community.getCommunityID()!=0){
+            connectionStrong+="&community_id="+community.getCommunityID();
+        }
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(context,"Post Added Succesfully",Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Cant Post Please Try Again Later", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("token", Constants.mToken);
+
+                return params;
+            }
+
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
+
+
+
     }
 
     public void getUserPostsAndComments(final Context context, final String username) {

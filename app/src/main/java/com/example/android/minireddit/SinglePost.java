@@ -1,6 +1,7 @@
 package com.example.android.minireddit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.minireddit.abs.GetSinglePost;
 import com.example.android.minireddit.adapters.PosterAdapter;
 import com.example.android.minireddit.datastructure.Comment;
 import com.example.android.minireddit.datastructure.Post;
@@ -37,168 +39,185 @@ import java.lang.reflect.Method;
 
 public class SinglePost extends AppCompatActivity {
     Post mCurrentPost=null;
-    int mPostType=0;
+    int mPostId=0;
+    TextView writeComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_post);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        int position=getIntent().getIntExtra("position",0);
-        mPostType=getIntent().getIntExtra("type",0);
-        if(mPostType == 1){
-            mCurrentPost=Constants.homeposts.getItem(position);
-
-        }
-        else{
-            mCurrentPost=Constants.poster.getItem(position);
-
-        }
-        ImageView postLogo = (ImageView) findViewById(R.id.postLogo);
-        postLogo.setImageResource(Integer.valueOf(mCurrentPost.getPostLogoUrl()));
-
-        TextView postUser = (TextView) findViewById(R.id.postUser);
-        postUser.setText(mCurrentPost.getPostUser());
-
-        TextView postInfo = (TextView) findViewById(R.id.postInfo);
-        postInfo.setText(mCurrentPost.getPostInfo());
-
-        TextView postText = (TextView) findViewById(R.id.postText);
-        postText.setText(mCurrentPost.getPostText());
-
-        final ImageView postImage = (ImageView) findViewById(R.id.postImage);
-        if (mCurrentPost.getPostImageUrl() != null) {
-            postImage.setVisibility(View.VISIBLE);
-            boolean connected = isNetworkAvailable();
-            if (connected)
-                new DownloadImageTask(postImage).execute(mCurrentPost.getPostImageUrl());
-            else
-                postImage.setImageResource(R.drawable.internet_error);
-
-
-        } else {
-            postImage.setVisibility(View.GONE);
-        }
-
-        final TextView postlikeCount = (TextView) findViewById(R.id.postLikeCount);
-        postlikeCount.setText(String.valueOf(mCurrentPost.getPostLikeCount()));
-
-        TextView postCommentCount = (TextView) findViewById(R.id.postCommentCount);
-        postCommentCount.setText(String.valueOf( mCurrentPost.getPostCommentCount()));
-
-
-
-        final ImageView postUpVote = (ImageView) findViewById(R.id.postLike);
-        final ImageView postDownVote = (ImageView) findViewById(R.id.postDislike);
-
-        switch (mCurrentPost.getVoteStatus()) {
-
-            case 1:
-                postUpVote.setImageResource(R.drawable.upvote_clr);
-                postDownVote.setImageResource(R.drawable.downvote);
-                break;
-            case -1:
-                postUpVote.setImageResource(R.drawable.upvote);
-                postDownVote.setImageResource(R.drawable.downvote_clr);
-                break;
-            default:
-                postUpVote.setImageResource(R.drawable.upvote);
-                postDownVote.setImageResource(R.drawable.downvote);
-                break;
-
-        }
-        postUpVote.setOnClickListener(new View.OnClickListener() {
+        writeComment=(TextView)findViewById(R.id.addcomment);
+        writeComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePostUp(SinglePost.this,mCurrentPost.getPostId())) {
-                    if (mCurrentPost.getVoteStatus() == 0) {
-                        postUpVote.setImageResource(R.drawable.upvote_clr);
-                        mCurrentPost.setVoteStatus(1);
-                        mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() + 1);
-                        //todo send request to upvote
-                    } else if (mCurrentPost.getVoteStatus() == 1) {
-
-                        postUpVote.setImageResource(R.drawable.upvote);
-                        mCurrentPost.setVoteStatus(0);
-                        mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() - 1);
-                        //todo send request to cancel upvote
-                    } else {
-                        postDownVote.setImageResource(R.drawable.downvote);
-                        postUpVote.setImageResource(R.drawable.upvote_clr);
-                        mCurrentPost.setVoteStatus(1);
-                        mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() + 2);
-                    }
-                    postlikeCount.setText(String.valueOf(mCurrentPost.getPostLikeCount()));
-                } else {
-                    Toast.makeText(SinglePost.this, "Failed To Vote", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        });
-        postDownVote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (DependentClass.getInstance().votePostDown(SinglePost.this,mCurrentPost.getPostId())) {
-                    if (mCurrentPost.getVoteStatus() == 0) {
-                        postDownVote.setImageResource(R.drawable.downvote_clr);
-                        mCurrentPost.setVoteStatus(-1);
-                        mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() - 1);
-                    } else if (mCurrentPost.getVoteStatus() == 1) {
-                        postDownVote.setImageResource(R.drawable.downvote_clr);
-                        postUpVote.setImageResource(R.drawable.upvote);
-                        mCurrentPost.setVoteStatus(-1);
-                        mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() - 2);
-                    } else {
-                        postDownVote.setImageResource(R.drawable.downvote);
-                        mCurrentPost.setVoteStatus(0);
-                        mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() + 1);
-                    }
-                    postlikeCount.setText(String.valueOf(mCurrentPost.getPostLikeCount()));
+                if(!Constants.mToken.isEmpty()) {
+                    Intent intent = new Intent(SinglePost.this, CommentActivity.class);
+                    Constants.postComment = mCurrentPost;
+                    Constants.commentReplyNode = TreeNode.BaseNodeViewHolder.tView.getmRoot();
+                    intent.putExtra("Type","Comment");
+                    startActivity(intent);
                 }
                 else{
-                    Toast.makeText(SinglePost.this,"Failed To Vote",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please Login First",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        mPostId=getIntent().getIntExtra("id",0);
 
-        WebView youtubeWebView = (WebView) findViewById(R.id.youtube_web_view);
-        if (mCurrentPost.getPostVideoUrl() != null) {
-            youtubeWebView.setVisibility(View.VISIBLE);
-            String item = "http://www.youtube.com/embed/";
-            String url = mCurrentPost.getPostVideoUrl();
-            if (url.contains("&")) {
-                url = url.substring(url.indexOf("v=") + 2, url.indexOf('&'));
-            } else
-                url = url.substring(url.indexOf("v=") + 2);
-            item += url;
 
-            youtubeWebView.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    return false;
-                }
-            });
+      Constants.SINGLE_POST=new GetSinglePost() {
+          @Override
+          public void SinglePost(Post post) {
+              mCurrentPost=post;
+              ImageView postLogo = (ImageView) findViewById(R.id.postLogo);
+              postLogo.setImageResource(Integer.valueOf(mCurrentPost.getPostLogoUrl()));
 
-            WebSettings webSettings = youtubeWebView.getSettings();
-            webSettings.setJavaScriptEnabled(true);
-            webSettings.setLoadWithOverviewMode(true);
-            webSettings.setUseWideViewPort(true);
+              TextView postUser = (TextView) findViewById(R.id.postUser);
+              postUser.setText(mCurrentPost.getPostUser());
 
-            webSettings.setBuiltInZoomControls(true);
-            webSettings.setAppCacheEnabled(true);
-            webSettings.setSaveFormData(true);
+              TextView postInfo = (TextView) findViewById(R.id.postInfo);
+              postInfo.setText(mCurrentPost.getPostInfo());
 
-            youtubeWebView.loadUrl(item);
-        } else {
-            youtubeWebView.setVisibility(View.GONE);
+              TextView postText = (TextView) findViewById(R.id.postText);
+              postText.setText(mCurrentPost.getPostText());
 
-        }
+              final ImageView postImage = (ImageView) findViewById(R.id.postImage);
+              if (mCurrentPost.getPostImageUrl() != null) {
+                  postImage.setVisibility(View.VISIBLE);
+                  boolean connected = isNetworkAvailable();
+                  if (connected)
+                      new DownloadImageTask(postImage).execute(mCurrentPost.getPostImageUrl());
+                  else
+                      postImage.setImageResource(R.drawable.internet_error);
 
+
+              } else {
+                  postImage.setVisibility(View.GONE);
+              }
+
+              final TextView postlikeCount = (TextView) findViewById(R.id.postLikeCount);
+              postlikeCount.setText(String.valueOf(mCurrentPost.getPostLikeCount()));
+
+              TextView postCommentCount = (TextView) findViewById(R.id.postCommentCount);
+              postCommentCount.setText(String.valueOf( mCurrentPost.getPostCommentCount()));
+
+
+
+              final ImageView postUpVote = (ImageView) findViewById(R.id.postLike);
+              final ImageView postDownVote = (ImageView) findViewById(R.id.postDislike);
+
+              switch (mCurrentPost.getVoteStatus()) {
+
+                  case 1:
+                      postUpVote.setImageResource(R.drawable.upvote_clr);
+                      postDownVote.setImageResource(R.drawable.downvote);
+                      break;
+                  case -1:
+                      postUpVote.setImageResource(R.drawable.upvote);
+                      postDownVote.setImageResource(R.drawable.downvote_clr);
+                      break;
+                  default:
+                      postUpVote.setImageResource(R.drawable.upvote);
+                      postDownVote.setImageResource(R.drawable.downvote);
+                      break;
+
+              }
+              postUpVote.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      if (DependentClass.getInstance().votePostUp(SinglePost.this,mCurrentPost.getPostId())) {
+                          if (mCurrentPost.getVoteStatus() == 0) {
+                              postUpVote.setImageResource(R.drawable.upvote_clr);
+                              mCurrentPost.setVoteStatus(1);
+                              mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() + 1);
+                              //todo send request to upvote
+                          } else if (mCurrentPost.getVoteStatus() == 1) {
+
+                              postUpVote.setImageResource(R.drawable.upvote);
+                              mCurrentPost.setVoteStatus(0);
+                              mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() - 1);
+                              //todo send request to cancel upvote
+                          } else {
+                              postDownVote.setImageResource(R.drawable.downvote);
+                              postUpVote.setImageResource(R.drawable.upvote_clr);
+                              mCurrentPost.setVoteStatus(1);
+                              mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() + 2);
+                          }
+                          postlikeCount.setText(String.valueOf(mCurrentPost.getPostLikeCount()));
+                      } else {
+                          Toast.makeText(SinglePost.this, "Failed To Vote", Toast.LENGTH_SHORT).show();
+                      }
+                  }
+
+              });
+              postDownVote.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      if (DependentClass.getInstance().votePostDown(SinglePost.this,mCurrentPost.getPostId())) {
+                          if (mCurrentPost.getVoteStatus() == 0) {
+                              postDownVote.setImageResource(R.drawable.downvote_clr);
+                              mCurrentPost.setVoteStatus(-1);
+                              mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() - 1);
+                          } else if (mCurrentPost.getVoteStatus() == 1) {
+                              postDownVote.setImageResource(R.drawable.downvote_clr);
+                              postUpVote.setImageResource(R.drawable.upvote);
+                              mCurrentPost.setVoteStatus(-1);
+                              mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() - 2);
+                          } else {
+                              postDownVote.setImageResource(R.drawable.downvote);
+                              mCurrentPost.setVoteStatus(0);
+                              mCurrentPost.setPostLikeCount(mCurrentPost.getPostLikeCount() + 1);
+                          }
+                          postlikeCount.setText(String.valueOf(mCurrentPost.getPostLikeCount()));
+                      }
+                      else{
+                          Toast.makeText(SinglePost.this,"Failed To Vote",Toast.LENGTH_SHORT).show();
+                      }
+                  }
+              });
+
+              WebView youtubeWebView = (WebView) findViewById(R.id.youtube_web_view);
+              if (mCurrentPost.getPostVideoUrl() != null) {
+                  youtubeWebView.setVisibility(View.VISIBLE);
+                  String item = "http://www.youtube.com/embed/";
+                  String url = mCurrentPost.getPostVideoUrl();
+                  if (url.contains("&")) {
+                      url = url.substring(url.indexOf("v=") + 2, url.indexOf('&'));
+                  } else
+                      url = url.substring(url.indexOf("v=") + 2);
+                  item += url;
+
+                  youtubeWebView.setWebViewClient(new WebViewClient() {
+                      @Override
+                      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                          return false;
+                      }
+                  });
+
+                  WebSettings webSettings = youtubeWebView.getSettings();
+                  webSettings.setJavaScriptEnabled(true);
+                  webSettings.setLoadWithOverviewMode(true);
+                  webSettings.setUseWideViewPort(true);
+
+                  webSettings.setBuiltInZoomControls(true);
+                  webSettings.setAppCacheEnabled(true);
+                  webSettings.setSaveFormData(true);
+
+                  youtubeWebView.loadUrl(item);
+              } else {
+                  youtubeWebView.setVisibility(View.GONE);
+
+              }
+
+
+          }
+      };
         //Root
         TreeNode root = TreeNode.root();
 
         //Parent
-        MyHolder.IconTreeItem nodeItem = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
+     /*   MyHolder.IconTreeItem nodeItem = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
         TreeNode parent = new TreeNode(nodeItem).setViewHolder(new MyHolder(SinglePost.this, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
 
         //Child
@@ -265,11 +284,16 @@ public class SinglePost extends AppCompatActivity {
 
         subChild2.addChild(subChild22);
 
-
+*/
         //Add AndroidTreeView into view.
         AndroidTreeView tView = new AndroidTreeView(SinglePost.this, root);
+
         LinearLayout linearLayout=(LinearLayout)findViewById(R.id.comments);
         linearLayout.addView(tView.getView());
+        DependentClass.getInstance().getSinglePost(getApplicationContext(),mPostId);
+        DependentClass.getInstance().getComments(SinglePost.this, TreeNode.BaseNodeViewHolder.tView.getmRoot(),mPostId,0);
+
+
 
 
 

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.minireddit.datastructure.Comment;
+import com.example.android.minireddit.datastructure.Post;
+import com.example.android.minireddit.libraries.atv.model.TreeNode;
 import com.example.android.minireddit.networking.DependentClass;
 
 import java.lang.reflect.InvocationTargetException;
@@ -24,6 +26,10 @@ public class CommentActivity extends AppCompatActivity {
     TextView date;
     TextView body;
     EditText content;
+    String Type;
+    Comment mComment=null;
+    Post mPost=null;
+    TreeNode parent=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +40,21 @@ public class CommentActivity extends AppCompatActivity {
         date=(TextView)findViewById(R.id.comment_dateago);
         body=(TextView)findViewById(R.id.comment_bodyold);
         content=(EditText)findViewById(R.id.comment_bodynew);
-        com.example.android.minireddit.datastructure.Comment comment=Constants.commentReply;
-        user.setText(comment.getmUser());
-        date.setText(comment.getmDate());
-        body.setText(comment.getmBody());
+
+        Type=this.getIntent().getStringExtra("Type");
+        if(Type.equals("Reply")) {
+             mComment = Constants.commentReply;
+            user.setText(mComment.getmUser());
+            date.setText(mComment.getmDate());
+            body.setText(mComment.getmBody());
+        }
+        else{
+            mPost=Constants.postComment;
+            user.setText(mPost.getPostUser());
+            date.setText(mPost.getPostInfo());
+            body.setText(mPost.getPostText());
+        }
+        parent=Constants.commentReplyNode;
     }
     @Override
     public void onBackPressed() {
@@ -99,6 +116,19 @@ public class CommentActivity extends AppCompatActivity {
             case R.id.post:
                 if(content.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Please enter a message",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Comment comment = new Comment(0, content.getText().toString(), Constants.user.getmUserName(), null, null, 0, null, null, 0, 0, "1 min ago", 0, false, false, false);
+
+                    if(Type.equals("Reply")) {
+                        DependentClass.getInstance().replyOnReply(getApplicationContext(),parent,mComment,comment);
+
+                    }
+                    else{
+                        DependentClass.getInstance().commentOnPost(getApplicationContext(),parent,mPost,comment);
+
+                    }
+                    super.onBackPressed();
                 }
 
                 return true;

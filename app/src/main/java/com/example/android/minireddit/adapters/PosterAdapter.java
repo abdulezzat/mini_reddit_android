@@ -405,6 +405,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(getContext(),SinglePost.class);
+                intent.putExtra("id",currentPost.getPostId());
                 getContext().startActivity(intent);
 
             }

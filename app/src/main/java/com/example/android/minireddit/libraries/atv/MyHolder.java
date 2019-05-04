@@ -95,6 +95,14 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
             params.setMargins(leftMargin, 0, 0, 0);
             viewVertical.setLayoutParams(params);
         }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mComment.getmCommentsNum()!=0){
+                    DependentClass.getInstance().getComments(context,node,mComment.getmCommentId(),1);
+                }
+            }
+        });
 
         if (leftMargin == DEFAULT) {
             leftMargin = getDimens(R.dimen.treeview_left_padding);
@@ -102,10 +110,16 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
         reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!Constants.mToken.isEmpty()){
                 Constants.commentReply=mComment;
                 Constants.commentReplyNode=node;
                 Intent intent=new Intent(context,CommentActivity.class);
+                intent.putExtra("Type","Reply");
                 context.startActivity(intent);
+                }
+                else{
+                    Toast.makeText(context,"Please Login First",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         user.setText(comment.getmUser()+"."+comment.getmDate());
@@ -219,11 +233,6 @@ public class MyHolder extends TreeNode.BaseNodeViewHolder<MyHolder.IconTreeItem>
 
                                 switch (item.getItemId()) {
                                     case R.id.save:
-                                        MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true));
-                                        TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, 350));
-                                        node.addChild(subChild6);
-                                        //MyHolder.this.getTreeView().expandNode(node);
-                                        TreeNode.BaseNodeViewHolder.tView.expandNode(node);
 
 
 

@@ -72,6 +72,8 @@ public class PostFragment extends Fragment {
         expand = (ImageView) rootView.findViewById(R.id.imageforanimation);
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
         listView = (ListView) rootView.findViewById(R.id.postsListView);
+        View emptyview=rootView.findViewById(R.id.empty_view);
+        listView.setEmptyView(emptyview);
         posts=new ArrayList<>();
 
 
