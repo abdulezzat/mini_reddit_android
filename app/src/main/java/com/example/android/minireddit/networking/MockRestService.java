@@ -87,7 +87,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public boolean logIn(Context context, String username, String password) {
-        if (username.equals("admin") && password.equals("admin")) {
+        if (username.equals("admin") && password.equals("admin111")) {
             Constants.mToken = "TEST";
             return true;
         }
