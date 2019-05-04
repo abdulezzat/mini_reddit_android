@@ -1,10 +1,14 @@
 package com.example.android.minireddit.networking;
 
 import android.content.Context;
+import android.view.MenuItem;
 
 import com.example.android.minireddit.Constants;
+import com.example.android.minireddit.datastructure.Comment;
+import com.example.android.minireddit.datastructure.Community;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
+import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
 import java.util.ArrayList;
 
@@ -208,6 +212,37 @@ public class DependentClass {
 
     public void hidePost(Context context, int postID) {
         mSupplier.hidePost(context, postID);
+    }
+
+    public void getListOfCommunities(Context context){
+        mSupplier.getListofCommunities(context);
+    }
+
+    public void replyOnReply(Context context, TreeNode parent, Comment oldComment,Comment newComment){
+       mSupplier.replyOnReply(context,parent,oldComment,newComment);
+    }
+
+    public void commentOnPost(Context context, TreeNode root, Post post, Comment newComment) {
+        mSupplier.commentOnPost(context,root,post,newComment);
+
+    }
+    public void getSinglePost(Context context,int id){
+        mSupplier.getSinglePost(context,id);
+    }
+    public void getComments(Context context,TreeNode node,int link_id,int type){
+        mSupplier.getComments(context,link_id,node,type);
+    }
+    public void writeTextandVideoPosts(Context context, String inputString1, String inputString2, Community community,int type){
+        mSupplier.writePostVideoAndText(context,inputString1,inputString2,community,type);
+    }
+    public void saveLink(Context context, int id){
+        mSupplier.saveLink(context,id);
+    }
+    public void unsaveLink(Context context, int id){
+        mSupplier.unSaveLink(context,id);
+    }
+    public void editComment(Context context,int id,String content){
+        mSupplier.editComment(context,id,content);
     }
 
 }

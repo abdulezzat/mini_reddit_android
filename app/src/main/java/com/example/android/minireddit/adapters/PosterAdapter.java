@@ -58,6 +58,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     private Animator currentAnimator;
     public NavigateToAnotherUserProfile mNavigateToAnotherUserProfile;
     private int shortAnimationDuration;
+    MenuItem save;
     /**
      * The Expanded image To Animate.
      */
@@ -104,6 +105,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
 
 
         TextView postInfo = (TextView) ListItemView.findViewById(R.id.postInfo);
+
 
 
 
@@ -167,7 +169,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             postImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    zoomImageFromThumb(postImage, postImage.getDrawable());
+                    //zoomImageFromThumb(postImage, postImage.getDrawable());
                 }
             });
 
@@ -203,17 +205,17 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                             if (DependentClass.getInstance().subscribeCommunity(getContext(), currentPost.getCommunityId())) {
                                 subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
                                 currentPost.setSubscribed(true);
-                                Toast.makeText(getContext(), "Subscribed Successfully", Toast.LENGTH_SHORT).show();
+
                             } else {
-                                Toast.makeText(getContext(), "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
+
                             }
                         } else {
                             if (DependentClass.getInstance().unsubscribeCommunity(getContext(), currentPost.getCommunityId())) {
                                 subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
                                 currentPost.setSubscribed(false);
-                                Toast.makeText(getContext(), "unSubscribed Successfully", Toast.LENGTH_SHORT).show();
+
                             } else {
-                                Toast.makeText(getContext(), "Faieled To unSubscribe", Toast.LENGTH_SHORT).show();
+
                             }
 
                         }
@@ -365,6 +367,15 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                         popup.getMenuInflater().inflate(R.menu.post_menu,
                                 popup.getMenu());
                         setForceShowIcon(popup);
+                        save=popup.getMenu().findItem(R.id.save);
+                        if(!currentPost.isSaved()){
+                            save.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                            save.setTitle("save");
+                        }
+                        else{
+                            save.setIcon(R.drawable.unsave);
+                            save.setTitle("unsave");
+                        }
 
 
                         popup.show();
@@ -374,6 +385,24 @@ public class PosterAdapter extends ArrayAdapter<Post> {
 
                                 switch (item.getItemId()) {
                                     case R.id.save:
+                                        if(!Constants.mToken.isEmpty()) {
+                                            if (save.getTitle().equals("save")) {
+                                                DependentClass.getInstance().saveLink(getContext(),currentPost.getPostId());
+                                                save.setTitle("unsave");
+                                                save.setIcon(R.drawable.unsave);
+                                                currentPost.setSaved(true);
+                                                //save
+                                            } else {
+                                                DependentClass.getInstance().unsaveLink(getContext(),currentPost.getPostId());
+                                                save.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                                                currentPost.setSaved(false);
+                                                save.setTitle("save");
+                                                //unsave
+                                            }
+                                        }
+                                        else{
+                                            Toast.makeText(getContext(),"Please Login First",Toast.LENGTH_SHORT).show();
+                                        }
 
                                         break;
                                     case R.id.blockUser:
@@ -411,6 +440,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(getContext(),SinglePost.class);
+                intent.putExtra("id",currentPost.getPostId());
                 getContext().startActivity(intent);
 
             }

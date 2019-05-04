@@ -1,12 +1,17 @@
 package com.example.android.minireddit.networking;
 
 import android.content.Context;
+import android.view.MenuItem;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.SinglePost;
 import com.example.android.minireddit.datastructure.Comment;
+import com.example.android.minireddit.datastructure.Community;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.datastructure.User;
+import com.example.android.minireddit.libraries.atv.MyHolder;
+import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
 import java.util.ArrayList;
 
@@ -89,6 +94,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
     public boolean logIn(Context context, String username, String password) {
         if (username.equals("admin") && password.equals("admin111")) {
             Constants.mToken = "TEST";
+            Constants.user=new User(username,username,0,null,null,null,null);
             return true;
         }
 
@@ -98,8 +104,12 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public boolean signUp(Context context, String email, String username, String password) {
-        if (username.equals("admin") && password.equals("admin") && email.equals("admin"))
+        if (username.equals("admin") && password.equals("admin") && email.equals("admin")){
+            Constants.user=new User(username,username,0,null,null,null,null);
             return true;
+        }
+
+
         return false;
     }
 
@@ -221,6 +231,91 @@ public class MockRestService implements com.example.android.minireddit.networkin
     @Override
     public boolean blockUser(Context context, String username) {
         return true;
+    }
+
+    @Override
+    public void getListofCommunities(Context context) {
+        ArrayList<Community> mCommunityArrayList=new ArrayList<>();
+        mCommunityArrayList.add(new Community(0,"Profile","","","",""));
+        mCommunityArrayList.add(new Community(0,"Ramzy","","","",""));
+        mCommunityArrayList.add(new Community(0,"Hassan","","","",""));
+        mCommunityArrayList.add(new Community(0,"AlyHello","","","",""));
+        mCommunityArrayList.add(new Community(0,"Ahmed","","","",""));
+        mCommunityArrayList.add(new Community(0,"Gdo","","","",""));
+        mCommunityArrayList.add(new Community(0,"Sheko","","","",""));
+        mCommunityArrayList.add(new Community(0,"Kesho","","","",""));
+        mCommunityArrayList.add(new Community(0,"Work","","","",""));
+        mCommunityArrayList.add(new Community(0,"Please","","","",""));
+        mCommunityArrayList.add(new Community(0,"keh","","","",""));
+        Constants.COMMUNITIES.ListOfCommunities(mCommunityArrayList);
+    }
+
+    @Override
+    public void replyOnReply(Context context, TreeNode parent, Comment oldComment, Comment newComment) {
+        MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(newComment);
+        TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, parent.getLevel()*Constants.SHIFT_NODE));
+        parent.addChild(subChild6);
+        TreeNode.BaseNodeViewHolder.tView.expandNode(parent);
+
+
+    }
+
+    @Override
+    public void commentOnPost(Context context, TreeNode root, Post post, Comment newComment) {
+        MyHolder.IconTreeItem nodeItem = new MyHolder.IconTreeItem(newComment);
+        TreeNode parent = new TreeNode(nodeItem).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
+        root.addChild(parent);
+        TreeNode.BaseNodeViewHolder.tView.expandNode(root);
+
+
+    }
+
+    @Override
+    public void getSinglePost(Context context, int postId) {
+        new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0);
+
+
+    }
+
+    @Override
+    public void getComments(Context context, int link_id, TreeNode node, int type) {
+        Comment comment=new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true);
+        MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(comment);
+        if(type==1) {
+            TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, node.getLevel() * Constants.SHIFT_NODE));
+            node.addChild(subChild6);
+            TreeNode.BaseNodeViewHolder.tView.expandNode(node);
+        }
+        else{
+            TreeNode parent = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
+            node.addChild(parent);
+            TreeNode.BaseNodeViewHolder.tView.expandNode(node);
+        }
+       }
+
+    @Override
+    public void writePostVideoAndText(Context context, String firstInput, String secondInput, Community community, int type) {
+
+    }
+
+    @Override
+    public void saveLink(Context context, int id) {
+
+    }
+
+    @Override
+    public void unSaveLink(Context context, int id) {
+
+    }
+
+    @Override
+    public void editComment(Context context, int id, String content) {
+
+    }
+
+    @Override
+    public void editPost(Context context, Post post) {
+
     }
 
 }
