@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfilePostsFragment">
 
-    <ListView
-        android:id="@+id/profile_posts_listview"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/profile_posts_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        />
 
     <ImageView
         android:id="@+id/animation_image"

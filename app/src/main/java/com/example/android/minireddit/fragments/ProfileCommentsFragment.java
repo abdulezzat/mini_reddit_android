@@ -3,6 +3,8 @@ package com.example.android.minireddit.fragments;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +38,9 @@ public class ProfileCommentsFragment extends Fragment {
 
 
         ProfileCommentsAdapter adapter = new ProfileCommentsAdapter(this.getContext(), mUser.getmComments());
-        ListView listView = (ListView) rootView.findViewById(R.id.profile_comments_listview);
-        listView.setAdapter(adapter);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.profile_comments_recyclerview);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return rootView;
     }

@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.example.android.minireddit.datastructure.Post;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +45,22 @@ import java.util.List;
  * </p>
  */
 
-public class ProfilePostsAdapter extends ArrayAdapter<Post> {
+public class ProfilePostsAdapter extends RecyclerView.Adapter {
+
+    List<Post> mPosts;
+    Context mContext;
+
+    // UI elements
+    TextView postInfo;
+    TextView postText;
+    ImageView postImage;
+    TextView postVotesCount;
+    TextView postCommentCount;
+    ImageView postUpVote;
+    ImageView postDownVote;
+    WebView youtubeWebView;
+    ImageView menu;
+
 
     private Animator currentAnimator;
     private int shortAnimationDuration;
@@ -65,33 +82,36 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
      * @param container the container view of the animation
      */
     public ProfilePostsAdapter(@NonNull Context context, @NonNull List<Post> objects, ImageView expand, FrameLayout container) {
-        super(context, 0, objects);
+        this.mContext = context;
+        this.mPosts = objects;
+
         expanded_image = expand;
         this.container = container;
 
-        shortAnimationDuration = getContext().getResources().getInteger(
+        shortAnimationDuration = mContext.getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
     }
 
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View Item = inflater.inflate(R.layout.profile_posts_list_item, parent, false);
+        return new ProfilePostsItemHolder(Item);
+    }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        View ListItemView = convertView;
-        if (ListItemView == null) { //for making new List_item if there is no main one to change its data
-            ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.profile_posts_list_item, parent, false);
-        }
-        final Post currentPost = getItem(position); // getting the current Post in the ArrayList
+        final Post currentPost = mPosts.get(position); // getting the current Post in the ArrayList
 
-        TextView postInfo = (TextView) ListItemView.findViewById(R.id.post_info);
+
         postInfo.setText(currentPost.getPostInfo());
 
-        TextView postText = (TextView) ListItemView.findViewById(R.id.post_title);
         postText.setText(currentPost.getPostText());
 
-        ImageView postImage = (ImageView) ListItemView.findViewById(R.id.post_image);
         if (currentPost.getPostImageUrl() != null) {
             boolean connected = isNetworkAvailable();
             if (connected) {
@@ -104,14 +124,10 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
             postImage.setVisibility(View.GONE);
         }
 
-        final TextView postVotesCount = (TextView) ListItemView.findViewById(R.id.post_votes_count);
         postVotesCount.setText(String.valueOf(currentPost.getPostLikeCount()));
 
-        TextView postCommentCount = (TextView) ListItemView.findViewById(R.id.post_comments_count);
         postCommentCount.setText(String.valueOf(currentPost.getPostCommentCount()));
 
-        final ImageView postUpVote = (ImageView) ListItemView.findViewById(R.id.post_up_vote);
-        final ImageView postDownVote = (ImageView) ListItemView.findViewById(R.id.post_down_vote);
         switch (currentPost.getVoteStatus()) {
 
             case 1:
@@ -131,7 +147,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
         postUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePostUp(getContext(), currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePostUp(mContext, currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
                         postUpVote.setImageResource(R.drawable.upvote_clr);
                         currentPost.setVoteStatus(1);
@@ -151,7 +167,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
                     }
                     postVotesCount.setText(String.valueOf(currentPost.getPostLikeCount()));
                 } else {
-                    Toast.makeText(getContext(), "Failed To Vote", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Failed To Vote", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -159,7 +175,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
         postDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DependentClass.getInstance().votePostDown(getContext(), currentPost.getPostId())) {
+                if (DependentClass.getInstance().votePostDown(mContext, currentPost.getPostId())) {
                     if (currentPost.getVoteStatus() == 0) {
                         postDownVote.setImageResource(R.drawable.downvote_clr);
                         currentPost.setVoteStatus(-1);
@@ -176,12 +192,11 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
                     }
                     postVotesCount.setText(String.valueOf(currentPost.getPostLikeCount()));
                 } else {
-                    Toast.makeText(getContext(), "Failed To Vote", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Failed To Vote", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        WebView youtubeWebView = (WebView) ListItemView.findViewById(R.id.youtube_web_view);
         if (currentPost.getPostVideoUrl() != null) {
             youtubeWebView.setVisibility(View.VISIBLE);
             String item = "http://www.youtube.com/embed/";
@@ -215,9 +230,6 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
         }
 
 
-        ImageView menu = (ImageView) ListItemView.findViewById(R.id.post_menu);
-
-
         menu.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -227,7 +239,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
                 switch (v.getId()) {
                     case (R.id.post_menu):
 
-                        PopupMenu popup = new PopupMenu(getContext(), v);
+                        PopupMenu popup = new PopupMenu(mContext, v);
                         popup.getMenuInflater().inflate(R.menu.post_menu, popup.getMenu());
                         setForceShowIcon(popup);
 
@@ -238,17 +250,17 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
                                 switch (item.getItemId()) {
                                     case (R.id.save):
                                         //TODO: add Post to Saved Posts.
-                                        Toast.makeText(getContext(), "Post Saved", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(mContext, "Post Saved", Toast.LENGTH_LONG).show();
                                         break;
 
                                     case (R.id.hidePost):
                                         //TODO: Hide the Post.
-                                        Toast.makeText(getContext(), "post Hidden", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(mContext, "post Hidden", Toast.LENGTH_LONG).show();
                                         break;
 
                                     case (R.id.blockUser):
                                         //TODO: add The User who wrote the post to the BlockedUsers List.
-                                        Toast.makeText(getContext(), "post Hidden", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(mContext, "post Hidden", Toast.LENGTH_LONG).show();
                                         break;
 
                                     default:
@@ -265,13 +277,33 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
             }
         });
 
-        return ListItemView;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mPosts.size();
+    }
+
+    public class ProfilePostsItemHolder extends RecyclerView.ViewHolder {
+
+        public ProfilePostsItemHolder(View ListItemView) {
+            super(ListItemView);
+            postInfo = (TextView) ListItemView.findViewById(R.id.post_info);
+            postText = (TextView) ListItemView.findViewById(R.id.post_title);
+            postImage = (ImageView) ListItemView.findViewById(R.id.post_image);
+            postVotesCount = (TextView) ListItemView.findViewById(R.id.post_votes_count);
+            postCommentCount = (TextView) ListItemView.findViewById(R.id.post_comments_count);
+            postUpVote = (ImageView) ListItemView.findViewById(R.id.post_up_vote);
+            postDownVote = (ImageView) ListItemView.findViewById(R.id.post_down_vote);
+            youtubeWebView = (WebView) ListItemView.findViewById(R.id.youtube_web_view);
+            menu = (ImageView) ListItemView.findViewById(R.id.post_menu);
+        }
     }
 
 
     protected boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
@@ -435,4 +467,7 @@ public class ProfilePostsAdapter extends ArrayAdapter<Post> {
         });
     }
 
+
 }
+
+
