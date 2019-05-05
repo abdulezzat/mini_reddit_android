@@ -3,6 +3,7 @@ package com.example.android.minireddit;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -67,20 +68,14 @@ public class HomePage extends AppCompatActivity
     //helper members
     private boolean mInHomeScreen;
     private Point mPoint;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        // OneSignal Initialization
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
-
-        OneSignal.sendTag("username", "admin");
-        OneSignal.sendTag("username", "admin2");
         //Set my custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -155,6 +150,11 @@ public class HomePage extends AppCompatActivity
         loadFragment(mHomePageFragment);
         mInHomeScreen = true;
 
+        //pref
+        pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
+        editor = pref.edit();
+
+
     }
 
     @Override
@@ -176,7 +176,7 @@ public class HomePage extends AppCompatActivity
                 JustView.setVisibility(View.GONE);
                 JustImage.setVisibility(View.GONE);
                 RootView.setVisibility(View.VISIBLE);
-
+                checkLogenIn();
 
             }
         }, 2000);
@@ -224,6 +224,13 @@ public class HomePage extends AppCompatActivity
                     mPoint.y = height - height / 2;
 
                     showPopup(HomePage.this, mPoint);
+
+                    OneSignal.startInit(HomePage.this)
+                            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                            .unsubscribeWhenNotificationsAreDisabled(true)
+                            .init();
+
+                    OneSignal.sendTag("username", Constants.user.getmUserName());
                 }
             });
 
@@ -316,17 +323,18 @@ public class HomePage extends AppCompatActivity
                 int width = displayMetrics.widthPixels;
                 point.x = width * 0;
                 point.y = height - height / 2;
-                showPopupCreatePost(this,point);
+                showPopupCreatePost(this, point);
             }
         } else if (id == R.id.navigation_chat) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.navigation_message) {
-            mInHomeScreen = false;
-            //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-            getSupportActionBar().hide();
-            //Constants.visitedUser=new User();
-            //Constants.visitedUser.setmUserName(Constants.user.getmUserName());
-            result = loadFragment(mInboxFragment);
+            if (Constants.mToken.isEmpty())
+                Toast.makeText(getApplicationContext(), "Please Login First To Write Post.", Toast.LENGTH_SHORT).show();
+            else {
+                mInHomeScreen = false;
+                getSupportActionBar().hide();
+                result = loadFragment(mInboxFragment);
+            }
         }
         drawer.closeDrawer(GravityCompat.START);
         return result;
@@ -362,7 +370,7 @@ public class HomePage extends AppCompatActivity
 
         // Inflate the popup_layout.xml
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.popup_layout,null);
+        View layout = layoutInflater.inflate(R.layout.popup_layout, null);
 
         // Creating the PopupWindow
         final PopupWindow popup = new PopupWindow(context);
@@ -379,7 +387,7 @@ public class HomePage extends AppCompatActivity
         // Some offset to align the popup a bit to the right, and a bit down, relative to button's
         // position.
         int OFFSET_X = width;
-        int OFFSET_Y = height/2;
+        int OFFSET_Y = height / 2;
 
         // Clear the default translucent background
         popup.setBackgroundDrawable(new BitmapDrawable());
@@ -389,11 +397,11 @@ public class HomePage extends AppCompatActivity
 
         ArrayList<String> usernames = new ArrayList<String>();
         usernames.add(Constants.user.getmUserName());
-        AccountsAdapter accountsAdapter = new AccountsAdapter(this,usernames);
-        ListView listView = (ListView)layout.findViewById(R.id.accounts_list);
+        AccountsAdapter accountsAdapter = new AccountsAdapter(this, usernames);
+        ListView listView = (ListView) layout.findViewById(R.id.accounts_list);
         listView.setAdapter(accountsAdapter);
-        RelativeLayout anon =(RelativeLayout)layout.findViewById(R.id.anonymous);
-        RelativeLayout add = (RelativeLayout)layout.findViewById(R.id.add_account);
+        RelativeLayout anon = (RelativeLayout) layout.findViewById(R.id.anonymous);
+        RelativeLayout add = (RelativeLayout) layout.findViewById(R.id.add_account);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -406,6 +414,7 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 logOut();
+                popup.dismiss();
             }
         });
     }
@@ -423,7 +432,7 @@ public class HomePage extends AppCompatActivity
 
         // Inflate the popup_layout.xml
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.popup_create_post_layout,null);
+        View layout = layoutInflater.inflate(R.layout.popup_create_post_layout, null);
 
         // Creating the PopupWindow
         final PopupWindow popup = new PopupWindow(context);
@@ -440,7 +449,7 @@ public class HomePage extends AppCompatActivity
         // Some offset to align the popup a bit to the right, and a bit down, relative to button's
         // position.
         int OFFSET_X = width;
-        int OFFSET_Y = height/2;
+        int OFFSET_Y = height / 2;
 
         // Clear the default translucent background
         popup.setBackgroundDrawable(new BitmapDrawable());
@@ -449,11 +458,11 @@ public class HomePage extends AppCompatActivity
         popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
 
 
-        ImageView cross = (ImageView)layout.findViewById(R.id.cross);
-        RelativeLayout link = (RelativeLayout)layout.findViewById(R.id.link);
-        RelativeLayout image = (RelativeLayout)layout.findViewById(R.id.image);
-        RelativeLayout video = (RelativeLayout)layout.findViewById(R.id.video);
-        RelativeLayout text = (RelativeLayout)layout.findViewById(R.id.text);
+        ImageView cross = (ImageView) layout.findViewById(R.id.cross);
+        RelativeLayout link = (RelativeLayout) layout.findViewById(R.id.link);
+        RelativeLayout image = (RelativeLayout) layout.findViewById(R.id.image);
+        RelativeLayout video = (RelativeLayout) layout.findViewById(R.id.video);
+        RelativeLayout text = (RelativeLayout) layout.findViewById(R.id.text);
 
         cross.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -466,8 +475,8 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, WritePost.class);
-                intent.putExtra("Type","Image");
-                intent.putExtra("Post","Write");
+                intent.putExtra("Type", "Image");
+                intent.putExtra("Post", "Write");
                 startActivity(intent);
             }
         });
@@ -476,8 +485,8 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, WritePost.class);
-                intent.putExtra("Type","Text");
-                intent.putExtra("Post","Write");
+                intent.putExtra("Type", "Text");
+                intent.putExtra("Post", "Write");
                 startActivity(intent);
             }
         });
@@ -486,8 +495,8 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, WritePost.class);
-                intent.putExtra("Type","Link");
-                intent.putExtra("Post","Write");
+                intent.putExtra("Type", "Text");
+                intent.putExtra("Post", "Write");
                 startActivity(intent);
             }
         });
@@ -496,15 +505,34 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, WritePost.class);
-                intent.putExtra("Type","Video");
-                intent.putExtra("Post","Write");
+                intent.putExtra("Type", "Video");
+                intent.putExtra("Post", "Write");
                 startActivity(intent);
             }
         });
 
     }
 
-    private void logOut(){
-        Toast.makeText(this,"logOut",Toast.LENGTH_SHORT).show();
+    private void logOut() {
+        Toast.makeText(this, "logOut", Toast.LENGTH_SHORT).show();
+        Constants.user = null;
+        onResume();
+        Constants.mToken = "";
+        editor.clear();
+        editor.commit();
+        Constants.homeposts.clear();
+        Constants.homeposts.notifyDataSetChanged();
+    }
+
+    private void checkLogenIn() {
+        if (pref.getString("token", null) != null) {
+            if (Constants.user == null) {
+                Constants.user = new User();
+            }
+            Constants.user.setmUserName(pref.getString("acc", null));
+            Constants.mToken = pref.getString("token", null);
+            onResume();
+        }
     }
 }
+

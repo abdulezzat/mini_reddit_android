@@ -263,12 +263,21 @@ public class SignUpFragment extends Fragment {
                 enableAll();
                 if(result && Constants.debug){
                     Toast.makeText(getContext(),"Sign up as an admin successfully",Toast.LENGTH_SHORT).show();
-                    Constants.user =new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
+                    pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    editor = pref.edit();
+                    editor.putString("acc", Constants.user.getmUserName());
+                    editor.putString("token", Constants.mToken);
+                    editor.commit();
                     Constants.mSignUpSuccessful = null;
                     getActivity().finish();
                 }else if(!result&&Constants.debug){
                     Toast.makeText(getContext(),"Sign up as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
                 }else if(result && !Constants.debug){
+                    pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    editor = pref.edit();
+                    editor.putString("acc", Constants.user.getmUserName());
+                    editor.putString("token", Constants.mToken);
+                    editor.commit();
                     Constants.mSignUpSuccessful = null;
                     getActivity().finish();
                 } else {

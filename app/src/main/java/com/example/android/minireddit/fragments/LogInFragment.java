@@ -3,6 +3,7 @@ package com.example.android.minireddit.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -64,10 +65,10 @@ public class LogInFragment extends Fragment {
         mUserNameView = (AutoCompleteTextView) rootView.findViewById(R.id.email);
         mPasswordView = (EditText) rootView.findViewById(R.id.password);
         mSignUpView = (TextView) rootView.findViewById(R.id.sign_up_text_view);
-        mInputPassword =(TextInputLayout) rootView.findViewById(R.id.password_auto);
-        mInputUserNmae =(TextInputLayout) rootView.findViewById(R.id.user_name_auto);
-        mProgressView = (ProgressBar)rootView.findViewById(R.id.login_progress);
-        mForgetPasswordView = (TextView)rootView.findViewById(R.id.forget_password);
+        mInputPassword = (TextInputLayout) rootView.findViewById(R.id.password_auto);
+        mInputUserNmae = (TextInputLayout) rootView.findViewById(R.id.user_name_auto);
+        mProgressView = (ProgressBar) rootView.findViewById(R.id.login_progress);
+        mForgetPasswordView = (TextView) rootView.findViewById(R.id.forget_password);
         //Listener part
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,25 +82,25 @@ public class LogInFragment extends Fragment {
                 String userName = mUserNameView.getText().toString();
                 validePassword[0] = true;
                 validUserName[0] = true;
-                if(userName.contains(" ")){
+                if (userName.contains(" ")) {
                     validUserName[0] = false;
                     mInputUserNmae.setError("Spaces not allowed");
 
                 }
-                if (password.contains(" ")){
-                    validePassword[0] =false;
+                if (password.contains(" ")) {
+                    validePassword[0] = false;
                     mInputPassword.setError("Spaces not allowed");
                 }
 
-                if(userName.length()<=3 || userName.length()>=20){
-                    validUserName[0]=false;
+                if (userName.length() <= 3 || userName.length() >= 20) {
+                    validUserName[0] = false;
                     mInputUserNmae.setError("Username have to be more than 3 and less than 20 char");
                 }
-                if(password.length()<8){
+                if (password.length() < 8) {
                     validePassword[0] = false;
                     mInputPassword.setError("Password have to be more than 8 char");
                 }
-                if (validePassword[0]&&validUserName[0]) {
+                if (validePassword[0] && validUserName[0]) {
                     unenableAll();
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -109,7 +110,7 @@ public class LogInFragment extends Fragment {
                             dependentClass.logIn(getContext(), mUserName, mPassword);
                         }
                     }, 1000);
-                }else if(Constants.debug){
+                } else if (Constants.debug) {
                     DependentClass dependentClass = DependentClass.getInstance();
                     dependentClass.logIn(getContext(), mUserName, mPassword);
                 }
@@ -204,12 +205,26 @@ public class LogInFragment extends Fragment {
                 enableAll();
                 if (result && Constants.debug) {
                     Toast.makeText(getContext(), "Log in as an admin successfully", Toast.LENGTH_SHORT).show();
-                    Constants.user = new User("admin", "admin", null, "admin@gamil.com", null, 200, null, false);
+                    SharedPreferences pref;
+                    SharedPreferences.Editor editor;
+                    pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    editor = pref.edit();
+
+                    editor.putString("acc", mUserName);
+                    editor.putString("token", Constants.mToken);
+                    editor.commit();
                     Constants.mLogInSuccessful = null;
                     getActivity().finish();
                 } else if (!result && Constants.debug) {
                     Toast.makeText(getContext(), "Log in as an admin unsuccessfully", Toast.LENGTH_SHORT).show();
                 } else if (result && !Constants.debug) {
+                    SharedPreferences pref;
+                    SharedPreferences.Editor editor;
+                    pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    editor = pref.edit();
+                    editor.putString("acc", mUserName);
+                    editor.putString("token", Constants.mToken);
+                    editor.commit();
                     Constants.mLogInSuccessful = null;
                     getActivity().finish();
                 } else {
@@ -224,7 +239,8 @@ public class LogInFragment extends Fragment {
         super.onStop();
         Constants.mLogInSuccessful = null;
     }
-    private void unenableAll(){
+
+    private void unenableAll() {
         mLoginButton.setEnabled(false);
         mLoginButton.setBackgroundColor(getResources().getColor(R.color.buttonDisabledStateColor));
         mLoginButton.setTextColor(getResources().getColor(R.color.textDisabledStateColor));
@@ -236,7 +252,8 @@ public class LogInFragment extends Fragment {
         mForgetPasswordView.setEnabled(false);
 
     }
-    private void enableAll(){
+
+    private void enableAll() {
         mLoginButton.setEnabled(true);
         mLoginButton.setBackgroundColor(getResources().getColor(R.color.buttonEnabledStateColor));
         mLoginButton.setTextColor(getResources().getColor(R.color.textEnabledStateColor));
@@ -249,17 +266,17 @@ public class LogInFragment extends Fragment {
 
     }
 
-    private void openDialog(){
+    private void openDialog() {
 
 
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder( getContext());
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
         View mView = getLayoutInflater().inflate(R.layout.dialog_login, null);
         final EditText mEmail = (EditText) mView.findViewById(R.id.email);
         final EditText mUsername = (EditText) mView.findViewById(R.id.username);
         Button send = (Button) mView.findViewById(R.id.email_me);
         Button cancel = (Button) mView.findViewById(R.id.cancel_action);
-        final TextInputLayout dmInputEmail = (TextInputLayout)mView.findViewById(R.id.email_auto);
-        final TextInputLayout dmInputUserNmae = (TextInputLayout)mView.findViewById(R.id.user_name_auto);
+        final TextInputLayout dmInputEmail = (TextInputLayout) mView.findViewById(R.id.email_auto);
+        final TextInputLayout dmInputUserNmae = (TextInputLayout) mView.findViewById(R.id.user_name_auto);
 
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
@@ -276,35 +293,35 @@ public class LogInFragment extends Fragment {
                 String userName = mUsername.getText().toString();
                 validEmail[0] = true;
                 validUserName[0] = true;
-                if(userName.contains(" ")){
+                if (userName.contains(" ")) {
                     validUserName[0] = false;
                     dmInputUserNmae.setError("Spaces not allowed");
 
                 }
-                if (email.contains(" ")){
-                    validEmail[0] =false;
+                if (email.contains(" ")) {
+                    validEmail[0] = false;
                     dmInputEmail.setError("Spaces not allowed");
                 }
 
-                if(userName.length()<=3 || userName.length()>=20){
-                    validUserName[0]=false;
+                if (userName.length() <= 3 || userName.length() >= 20) {
+                    validUserName[0] = false;
                     dmInputUserNmae.setError("Username have to be more than 3 and less than 20 char");
                 }
-                if(!email.contains("@gmail.com")&&!email.contains("@hotmail.com")&&!email.contains("@yahoo.com")){
+                if (!email.contains("@gmail.com") && !email.contains("@hotmail.com") && !email.contains("@yahoo.com")) {
                     validEmail[0] = false;
                     dmInputEmail.setError("Invalid email address");
                 }
-                if (email.length() == 0){
-                    validEmail[0] =false;
+                if (email.length() == 0) {
+                    validEmail[0] = false;
                     dmInputEmail.setError("Empty field");
                 }
-                if (userName.length() == 0){
-                    validEmail[0] =false;
+                if (userName.length() == 0) {
+                    validEmail[0] = false;
                     dmInputUserNmae.setError("Empty field");
                 }
-                if (validEmail[0]&&validUserName[0]) {
+                if (validEmail[0] && validUserName[0]) {
                     DependentClass dependentClass = DependentClass.getInstance();
-                    dependentClass.forgetPassword(getContext(),email);
+                    dependentClass.forgetPassword(getContext(), email);
                     dialog.cancel();
                 }
             }

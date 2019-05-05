@@ -100,7 +100,9 @@ public class MockRestService implements com.example.android.minireddit.networkin
             }
             return true;
         }
-
+        if(Constants.mLogInSuccessful!=null){
+            Constants.mLogInSuccessful.Successful(false);
+        }
 
         return false;
     }
@@ -109,13 +111,16 @@ public class MockRestService implements com.example.android.minireddit.networkin
     public boolean signUp(Context context, String email, String username, String password) {
         if (username.equals("admin") && password.equals("admin123") && email.equals("admin@gmail.com")){
             Constants.user=new User(username,username,0,null,null,null,null);
+            Constants.mToken = "TEST";
             if(Constants.mSignUpSuccessful!=null){
                 Constants.mSignUpSuccessful.Successful(true);
             }
             return true;
         }
 
-
+        if(Constants.mSignUpSuccessful!=null){
+            Constants.mSignUpSuccessful.Successful(false);
+        }
         return false;
     }
 
