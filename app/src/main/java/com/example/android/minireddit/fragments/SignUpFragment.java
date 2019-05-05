@@ -47,8 +47,7 @@ public class SignUpFragment extends Fragment {
     private String mEmail;
     private String mPassword;
     private String mUserName;
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
+
 
 
     public SignUpFragment() {
@@ -247,9 +246,6 @@ public class SignUpFragment extends Fragment {
         });
 
 
-        pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        editor = pref.edit();
-
 
         return rootView;
     }
@@ -269,6 +265,19 @@ public class SignUpFragment extends Fragment {
                 }else if(!result&&Constants.debug){
                     Toast.makeText(getContext(),"Sign up as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
                 }else if(result && !Constants.debug){
+                    SharedPreferences pref;
+                    SharedPreferences.Editor editor;
+                    pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    editor = pref.edit();
+                    int counter = pref.getInt("count",-1);
+                    if(counter == -1) editor.putInt("count",0);
+                    editor.commit();
+                    editor.putString("acc"+Integer.toString(counter),mUserName);
+                    editor.putString("token"+Integer.toString(counter),Constants.mToken);
+                    counter++;
+                    editor.putString("count",String.valueOf(counter));
+                    editor.commit();
+                    Constants.accounts.add(mUserName);
                     Constants.mSignUpSuccessful = null;
                     getActivity().finish();
                 } else {
