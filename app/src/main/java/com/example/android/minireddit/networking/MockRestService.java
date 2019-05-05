@@ -38,7 +38,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
     @Override
     public ArrayList<Post> getHomePost(Context context) {
         ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "admin", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
+        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
         posts.add(new Post(1, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 1h ago", "This is Photo Hint", "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", null, 15, 200, false, false, false, 1));
         posts.add(new Post(2, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 2h ago", "This is Photo Hint", "https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80", null, 15, 200, false, false, false, 1));
         posts.add(new Post(3, 3, "r/Communityname", String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 4h ago", "This is Text Message only works as a test for posts with no photos", null, "https://www.youtube.com/watch?v=U2dv_oDof4M&list=RDWfJD6ode3Sw&index=5", 15, 200, false, false, false, -1));
@@ -269,18 +269,6 @@ public class MockRestService implements com.example.android.minireddit.networkin
         TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, parent.getLevel()*Constants.SHIFT_NODE));
         parent.addChild(subChild6);
         TreeNode.BaseNodeViewHolder.tView.expandNode(parent);
-        MyHolder.IconTreeItem subChildItem7 = new MyHolder.IconTreeItem(newComment);
-        TreeNode subChild7 = new TreeNode(subChildItem7).setViewHolder(new MyHolder(context, false, R.layout.child, parent.getLevel()*Constants.SHIFT_NODE));
-        parent.addChild(subChild7);
-        TreeNode.BaseNodeViewHolder.tView.expandNode(parent);
-        MyHolder.IconTreeItem subChildItem1 = new MyHolder.IconTreeItem(newComment);
-        TreeNode subChild1 = new TreeNode(subChildItem1).setViewHolder(new MyHolder(context, false, R.layout.child, parent.getLevel()*Constants.SHIFT_NODE));
-        parent.addChild(subChild1);
-        TreeNode.BaseNodeViewHolder.tView.expandNode(parent);
-        MyHolder.IconTreeItem subChildItem2 = new MyHolder.IconTreeItem(newComment);
-        TreeNode subChild2 = new TreeNode(subChildItem2).setViewHolder(new MyHolder(context, false, R.layout.child, parent.getLevel()*Constants.SHIFT_NODE));
-        parent.addChild(subChild2);
-
 
 
     }
@@ -291,16 +279,6 @@ public class MockRestService implements com.example.android.minireddit.networkin
         TreeNode parent = new TreeNode(nodeItem).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
         root.addChild(parent);
         TreeNode.BaseNodeViewHolder.tView.expandNode(root);
-        MyHolder.IconTreeItem nodeItem1 = new MyHolder.IconTreeItem(newComment);
-        TreeNode parent1 = new TreeNode(nodeItem1).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
-        root.addChild(parent1);
-        TreeNode.BaseNodeViewHolder.tView.expandNode(root);
-
-        MyHolder.IconTreeItem nodeItem2 = new MyHolder.IconTreeItem(newComment);
-        TreeNode parent2 = new TreeNode(nodeItem2).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
-        root.addChild(parent2);
-        TreeNode.BaseNodeViewHolder.tView.expandNode(root);
-
 
 
     }
