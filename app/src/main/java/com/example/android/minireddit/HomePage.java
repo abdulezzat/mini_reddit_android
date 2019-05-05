@@ -3,6 +3,7 @@ package com.example.android.minireddit;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -67,20 +68,15 @@ public class HomePage extends AppCompatActivity
     //helper members
     private boolean mInHomeScreen;
     private Point mPoint;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        // OneSignal Initialization
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
 
-        OneSignal.sendTag("username", "admin");
-        OneSignal.sendTag("username", "admin2");
         //Set my custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -155,6 +151,12 @@ public class HomePage extends AppCompatActivity
         loadFragment(mHomePageFragment);
         mInHomeScreen = true;
 
+        //pref
+        pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
+        editor = pref.edit();
+
+        checkLogenIn();
+
     }
 
     @Override
@@ -198,6 +200,14 @@ public class HomePage extends AppCompatActivity
             navigationView.addHeaderView(header);
             navigationView.removeHeaderView(navigationView.getHeaderView(0));
         } else {
+            // OneSignal Initialization
+            OneSignal.startInit(this)
+                    .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                    .unsubscribeWhenNotificationsAreDisabled(true)
+                    .init();
+
+            OneSignal.sendTag("username", Constants.user.getmUserName());
+
             //Update the navigation view if the user isn't anonymous
             navigationView.getMenu().getItem(0).setVisible(true);
             navigationView.getMenu().getItem(2).setVisible(true);
@@ -387,9 +397,7 @@ public class HomePage extends AppCompatActivity
         // Displaying the popup at the specified location, + offsets.
         popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
 
-        ArrayList<String> usernames = new ArrayList<String>();
-        usernames.add(Constants.user.getmUserName());
-        AccountsAdapter accountsAdapter = new AccountsAdapter(this,usernames);
+        AccountsAdapter accountsAdapter = new AccountsAdapter(this,Constants.accounts);
         ListView listView = (ListView)layout.findViewById(R.id.accounts_list);
         listView.setAdapter(accountsAdapter);
         RelativeLayout anon =(RelativeLayout)layout.findViewById(R.id.anonymous);
@@ -486,7 +494,7 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, WritePost.class);
-                intent.putExtra("Type","Link");
+                intent.putExtra("Type","Text");
                 intent.putExtra("Post","Write");
                 startActivity(intent);
             }
@@ -506,5 +514,25 @@ public class HomePage extends AppCompatActivity
 
     private void logOut(){
         Toast.makeText(this,"logOut",Toast.LENGTH_SHORT).show();
+        Constants.user = null;
+        onResume();
+        Constants.mToken="";
+        editor.remove(Constants.TokenTag);
+        editor.commit();
+        Constants.TokenTag = "";
+    }
+    private void checkLogenIn(){
+        int counter = pref.getInt("count",-1);
+        if(counter == -1) editor.putInt("count",0);
+        Constants.accounts.clear();
+        for(int i = 0 ; i < counter ; i ++){
+            String tag = "acc"+Integer.toString(i);
+            Constants.accounts.add(pref.getString(tag,null));
+            if(pref.getString("token"+Integer.toString(i),null)!=null){
+                Constants.TokenTag = "token"+Integer.toString(i);
+                Constants.user.setmUserName(pref.getString(tag,null));
+                Constants.mToken = pref.getString("token"+Integer.toString(i),null);
+            }
+        }
     }
 }

@@ -29,6 +29,8 @@ public class Constants {
     //Saved Links
     public static ArrayList<Post> savedPosts = new ArrayList<>();
     public static ArrayList<Comment> savedComments = new ArrayList<>();
+    public static ArrayList<String> accounts = new ArrayList<>();
+    public static String TokenTag = "";
 
 
     //URL

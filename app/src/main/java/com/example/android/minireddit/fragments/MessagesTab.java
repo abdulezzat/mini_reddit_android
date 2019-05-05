@@ -1,17 +1,21 @@
 package com.example.android.minireddit.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.android.minireddit.Constants;
+import com.example.android.minireddit.MessageReply;
 import com.example.android.minireddit.R;
+import com.example.android.minireddit.SingleMessage;
 import com.example.android.minireddit.adapters.MessagesTabListAdapter;
 import com.example.android.minireddit.adapters.SavedCommentsAdapter;
 import com.example.android.minireddit.datastructure.Comment;
@@ -47,6 +51,13 @@ public class MessagesTab extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.message_tab_listview);
         listView.setAdapter(messagesTabListAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(view.getContext(), SingleMessage.class);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }
