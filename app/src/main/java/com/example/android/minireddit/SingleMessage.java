@@ -9,33 +9,24 @@ import android.widget.TextView;
 
 public class SingleMessage extends AppCompatActivity {
 
+    Button back= (Button) findViewById(R.id.single_message_back_button);;
+    TextView user_name_top = (TextView) findViewById(R.id.single_message_user_name);
+    TextView subject = (TextView) findViewById(R.id.single_message_title_text_view);
+    TextView context_user_name = (TextView) findViewById(R.id.single_post_context_user_name_text_view);
+    TextView hours_ago = (TextView) findViewById(R.id.single_post_context_hours_ago);
+    TextView context = (TextView) findViewById(R.id.sinle_message_context_text_view);
+    TextView reply = (TextView) findViewById(R.id.single_message_reply_edit_text);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_message);
-        Button back= (Button) findViewById(R.id.single_message_back_button);;
-        TextView user_name_top = (TextView) findViewById(R.id.single_message_user_name);
-        TextView subject = (TextView) findViewById(R.id.single_message_title_text_view);
-        TextView context_user_name = (TextView) findViewById(R.id.single_post_context_user_name_text_view);
-        TextView hours_ago = (TextView) findViewById(R.id.single_post_context_hours_ago);
-        TextView context = (TextView) findViewById(R.id.sinle_message_context_text_view);
-        TextView reply = (TextView) findViewById(R.id.single_message_reply_edit_text);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goBack();
-            }
-        });
         reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openReplyActivity();
             }
         });
-    }
-    public void goBack()
-    {
-        finish();
     }
     public void openReplyActivity()
     {

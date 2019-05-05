@@ -19,10 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?android:attr/colorPrimary"
+            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar"
-            tools:targetApi="lollipop">
+            app:toolbarId="@+id/toolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,8 +39,8 @@
 
                     <Button
                         android:id="@+id/reply_message_x_button"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/x_button" />
 
                     <TextView
@@ -50,9 +49,8 @@
                         android:layout_height="wrap_content"
                         android:text="Reply to message"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"/>
+                        android:textSize="30dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <Button
                         android:id="@+id/reply_message_post_button"
@@ -63,8 +61,7 @@
                         android:background="@color/colorPrimary"
                         android:text="POST"
                         android:textSize="15dp"
-                        android:textColor="@color/buttonEnabledStateColor"
-                        android:layout_gravity="right"/>
+                        android:textColor="@color/buttonEnabledStateColor" />
                 </LinearLayout>
 
                 <LinearLayout

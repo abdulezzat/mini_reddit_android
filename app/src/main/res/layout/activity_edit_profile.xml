@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         app:title=" ">
 
         <ImageView
@@ -19,10 +19,9 @@
             android:layout_height="24dp"
             android:src="@drawable/back_button"
             android:layout_marginRight="20dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:focusable="true"
-            tools:targetApi="lollipop" />
+            android:focusable="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,13 +37,12 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="15dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
             android:text="Save"
             android:textAllCaps="true"
-            android:textColor="@color/iconsColor"
-            tools:targetApi="lollipop" />
+            android:textColor="@color/iconsColor" />
 
     </android.support.v7.widget.Toolbar>
 
