@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
-                        android:background="?android:attr/selectableItemBackground"
+                        android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
                         android:paddingLeft="30dp"
@@ -204,7 +204,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title=" ">
@@ -219,11 +219,10 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_alignParentLeft="true"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:src="@drawable/back_button"
-                        tools:targetApi="lollipop" />
+                        android:src="@drawable/back_button" />
 
                     <ImageView
                         android:id="@+id/share_profile"
@@ -231,11 +230,10 @@
                         android:layout_height="24dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="15dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:src="@drawable/share"
-                        tools:targetApi="lollipop" />
+                        android:src="@drawable/share" />
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
@@ -247,7 +245,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:minHeight="?android:attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:layout_collapseMode="pin"
             app:tabGravity="fill"

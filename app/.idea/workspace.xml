@@ -10,16 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b74f979-8347-46c4-b5e5-3cc7084a8d28" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_home_page.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_saved.xml" />
+      <change beforePath="$PROJECT_DIR$/../.idea/codeStyles/Project.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/LogInFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/LogInFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SignUpFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SignUpFragment.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/MessageReply.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/MessageReply.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SingleMessage.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/SingleMessage.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/MessagesTab.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/MessagesTab.java" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_edit_profile.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_edit_profile.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_home_page.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_message_reply.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_message_reply.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_settings.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_settings.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_single_message.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_single_message.xml" />
@@ -29,7 +31,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_inbox.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_inbox.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_my_profile.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_my_profile.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_profile_about.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_profile_about.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_saved.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/popup_create_post_layout.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/popup_create_post_layout.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/popup_layout.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/popup_layout.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/saved_comments_list_item.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/saved_comments_list_item.xml" />
@@ -55,18 +56,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="HomePage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomePage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="683">
-              <caret line="496" column="44" lean-forward="false" selection-start-line="496" selection-start-column="44" selection-end-line="496" selection-end-column="44" />
+            <state relative-caret-position="1219">
+              <caret line="145" column="25" lean-forward="false" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4535#4882#0" expanded="true" />
+                <element signature="e#4881#4882#0" expanded="true" />
+                <element signature="e#5136#5265#0" expanded="true" />
+                <element signature="e#5264#5265#0" expanded="true" />
+                <element signature="e#5370#5624#0" expanded="true" />
+                <element signature="e#5623#5624#0" expanded="true" />
+                <element signature="e#5960#6561#0" expanded="true" />
+                <element signature="e#6560#6561#0" expanded="true" />
+                <element signature="e#8427#8994#0" expanded="true" />
+                <element signature="e#8993#8994#0" expanded="true" />
+                <element signature="e#15459#15467#0" expanded="true" />
+                <element signature="e#15927#16172#0" expanded="true" />
+                <element signature="e#16171#16172#0" expanded="true" />
+                <element signature="e#16207#16352#0" expanded="true" />
+                <element signature="e#16351#16352#0" expanded="true" />
+                <element signature="e#18315#18467#0" expanded="true" />
+                <element signature="e#18466#18467#0" expanded="true" />
+                <element signature="e#18504#18836#0" expanded="true" />
+                <element signature="e#18835#18836#0" expanded="true" />
+                <element signature="e#18872#19203#0" expanded="true" />
+                <element signature="e#19202#19203#0" expanded="true" />
+                <element signature="e#19239#19570#0" expanded="true" />
+                <element signature="e#19569#19570#0" expanded="true" />
+                <element signature="e#19607#19939#0" expanded="true" />
+                <element signature="e#19938#19939#0" expanded="true" />
+                <element signature="e#19975#19976#0" expanded="true" />
+                <element signature="e#20046#20047#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignUpFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SignUpFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="119" column="43" lean-forward="false" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_profile_comments.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_profile_comments.xml">
+      <file leaf-file-name="test_profile_header.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/test_profile_header.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -78,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_profile_posts.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_profile_posts.xml">
+      <file leaf-file-name="saved_comments_list_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/saved_comments_list_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="87" column="41" lean-forward="false" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -91,94 +131,66 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_saved_comments.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_saved_comments.xml">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="1491">
+              <caret line="71" column="31" lean-forward="false" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2">
+          <provider editor-type-id="android-manifest">
             <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_saved_posts.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_saved_posts.xml">
+      <file leaf-file-name="MyProfileFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/MyProfileFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="178">
+              <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inbox_messages_list_item.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/inbox_messages_list_item.xml">
+      <file leaf-file-name="SavedFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SavedFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="295">
+              <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nav_header_home_page.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/nav_header_home_page.xml">
+      <file leaf-file-name="Community.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Community.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="84">
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nav_header_home_page_anonymous.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/nav_header_home_page_anonymous.xml">
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="105">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parent.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/parent.xml">
+      <file leaf-file-name="InboxFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/InboxFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="-999">
+              <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="popup_create_post_layout.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/popup_create_post_layout.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="100" column="49" lean-forward="false" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
@@ -2381,7 +2393,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/MockRestService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/LogInFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SignUpFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/RestService.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_home_page.xml" />
@@ -2400,6 +2411,7 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_single_message.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_single_post.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SignUpFragment.java" />
       </list>
     </option>
   </component>
@@ -2409,7 +2421,7 @@
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="AndroidView" proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -2429,6 +2441,11 @@
             <path>
               <item name="app" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="app" type="1abcf292:AndroidViewProjectNode" />
@@ -2808,7 +2825,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26100966" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293979" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32585597" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2816,7 +2833,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20998926" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33175915" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33175915" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29215896" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -2898,103 +2915,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SignUpFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="119" column="42" lean-forward="false" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
-          <folding>
-            <element signature="e#10282#12045#0" expanded="false" />
-            <element signature="e#12044#12045#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="64" lean-forward="false" selection-start-line="0" selection-start-column="64" selection-end-line="0" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/networking/RestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22364">
-          <caret line="458" column="64" lean-forward="false" selection-start-line="458" selection-start-column="64" selection-end-line="458" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_home_page.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="93" column="53" lean-forward="false" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout-v21/activity_home_page.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_interests.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_saved.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="35" column="49" lean-forward="true" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout-v21/fragment_saved.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/test_profile_header.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/saved_comments_list_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="87" column="41" lean-forward="false" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -3435,8 +3359,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/popup_create_post_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="100" column="49" lean-forward="false" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
+        <state relative-caret-position="-63">
+          <caret line="96" column="49" lean-forward="false" selection-start-line="96" selection-start-column="49" selection-end-line="96" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -3444,10 +3368,120 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Community.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/InboxFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-999">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1491">
+          <caret line="71" column="31" lean-forward="false" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/MyProfileFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/test_profile_header.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/saved_comments_list_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="87" column="41" lean-forward="false" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SavedFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="496" column="44" lean-forward="false" selection-start-line="496" selection-start-column="44" selection-end-line="496" selection-end-column="44" />
+        <state relative-caret-position="1219">
+          <caret line="145" column="25" lean-forward="false" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4535#4882#0" expanded="true" />
+            <element signature="e#4881#4882#0" expanded="true" />
+            <element signature="e#5136#5265#0" expanded="true" />
+            <element signature="e#5264#5265#0" expanded="true" />
+            <element signature="e#5370#5624#0" expanded="true" />
+            <element signature="e#5623#5624#0" expanded="true" />
+            <element signature="e#5960#6561#0" expanded="true" />
+            <element signature="e#6560#6561#0" expanded="true" />
+            <element signature="e#8427#8994#0" expanded="true" />
+            <element signature="e#8993#8994#0" expanded="true" />
+            <element signature="e#15459#15467#0" expanded="true" />
+            <element signature="e#15927#16172#0" expanded="true" />
+            <element signature="e#16171#16172#0" expanded="true" />
+            <element signature="e#16207#16352#0" expanded="true" />
+            <element signature="e#16351#16352#0" expanded="true" />
+            <element signature="e#18315#18467#0" expanded="true" />
+            <element signature="e#18466#18467#0" expanded="true" />
+            <element signature="e#18504#18836#0" expanded="true" />
+            <element signature="e#18835#18836#0" expanded="true" />
+            <element signature="e#18872#19203#0" expanded="true" />
+            <element signature="e#19202#19203#0" expanded="true" />
+            <element signature="e#19239#19570#0" expanded="true" />
+            <element signature="e#19569#19570#0" expanded="true" />
+            <element signature="e#19607#19939#0" expanded="true" />
+            <element signature="e#19938#19939#0" expanded="true" />
+            <element signature="e#19975#19976#0" expanded="true" />
+            <element signature="e#20046#20047#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/SignUpFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="119" column="43" lean-forward="false" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
           <folding />
         </state>
       </provider>

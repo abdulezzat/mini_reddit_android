@@ -21,10 +21,9 @@ android:background="#eee">
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?android:attr/colorPrimary"
+            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar"
-            tools:targetApi="lollipop">
+            app:toolbarId="@+id/toolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
