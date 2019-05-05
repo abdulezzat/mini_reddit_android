@@ -92,9 +92,12 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public boolean logIn(Context context, String username, String password) {
-        if (username.equals("admin") && password.equals("admin111")) {
+        if (username.equals("admin") && password.equals("admin123")) {
             Constants.mToken = "TEST";
             Constants.user=new User(username,username,0,null,null,null,null);
+            if(Constants.mLogInSuccessful!=null){
+                Constants.mLogInSuccessful.Successful(true);
+            }
             return true;
         }
 
@@ -104,8 +107,11 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public boolean signUp(Context context, String email, String username, String password) {
-        if (username.equals("admin") && password.equals("admin") && email.equals("admin")){
+        if (username.equals("admin") && password.equals("admin123") && email.equals("admin@gmail.com")){
             Constants.user=new User(username,username,0,null,null,null,null);
+            if(Constants.mSignUpSuccessful!=null){
+                Constants.mSignUpSuccessful.Successful(true);
+            }
             return true;
         }
 

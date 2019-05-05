@@ -1,5 +1,6 @@
 package com.example.android.minireddit.fragments;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,6 +47,8 @@ public class SignUpFragment extends Fragment {
     private String mEmail;
     private String mPassword;
     private String mUserName;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
 
     public SignUpFragment() {
@@ -115,6 +118,7 @@ public class SignUpFragment extends Fragment {
                     mEmailAuto.setError("Invalid email address");
                 }
 
+                if(email.contains("admin")
                 if (validePassword[0]&&validUserName[0]&&validEmail[0]) {
                     unenableAll();
                     final Handler handler = new Handler();
@@ -241,6 +245,11 @@ public class SignUpFragment extends Fragment {
                 }
             }
         });
+
+
+        pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        editor = pref.edit();
+
 
         return rootView;
     }
