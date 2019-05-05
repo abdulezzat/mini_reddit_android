@@ -335,6 +335,7 @@ public class WritePost extends AppCompatActivity {
 
         } else if (requestCode == CAMERA) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+
             uploaded.setVisibility(View.VISIBLE);
             hasPhoto=true;
 

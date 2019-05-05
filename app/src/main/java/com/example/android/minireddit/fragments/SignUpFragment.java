@@ -118,7 +118,7 @@ public class SignUpFragment extends Fragment {
                     mEmailAuto.setError("Invalid email address");
                 }
 
-                if(email.contains("admin")
+                if(email.contains("admin"))
                 if (validePassword[0]&&validUserName[0]&&validEmail[0]) {
                     unenableAll();
                     final Handler handler = new Handler();
