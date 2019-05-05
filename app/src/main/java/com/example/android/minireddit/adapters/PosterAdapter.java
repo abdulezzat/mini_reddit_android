@@ -42,6 +42,7 @@ import java.lang.reflect.Method;
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.SinglePost;
 import com.example.android.minireddit.abs.NavigateToAnotherUserProfile;
+import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
@@ -136,6 +137,8 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                    // getContext().startActivity(intent);
 
                     MyProfileFragment profileFragment = new MyProfileFragment();
+                    Constants.visitedUser=new User();
+                    Constants.visitedUser.setmUserName(currentPost.getPostUser());
                     FragmentManager fragmentManager =((AppCompatActivity) getContext()).getSupportFragmentManager();
                     fragmentManager.beginTransaction()
                             .replace(R.id.fragment_container, profileFragment)
