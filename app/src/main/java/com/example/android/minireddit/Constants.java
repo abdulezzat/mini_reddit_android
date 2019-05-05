@@ -1,6 +1,8 @@
 package com.example.android.minireddit;
 
 import com.example.android.minireddit.abs.ChooseCommunityCallback;
+import com.example.android.minireddit.abs.GetListOfCommunities;
+import com.example.android.minireddit.abs.GetSinglePost;
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
 import com.example.android.minireddit.abs.LogOutCallBack;
 import com.example.android.minireddit.abs.UpdateProfileInfo;
@@ -38,9 +40,10 @@ public class Constants {
     final static public String VOTE_POST_UP = BASE_URL+"/api/auth/upvoteLink?";
     final static public String VOTE_LINK_DOWN = BASE_URL+"/api/auth/downvoteLink?";
     final static public String SUBSCRIBE_COMMUNITY = BASE_URL+"/api/auth/subscribeCommunity?";
-    final static public String UNSUBSCRIBE_COMMUNITY = BASE_URL+"/api/auth/unSubscribeCommunity?token=";
+    final static public String UNSUBSCRIBE_COMMUNITY = BASE_URL+"/api/auth/unSubscribeCommunity?";
     final static public String HIDE_POST = BASE_URL+"/api/auth/hidePost?";
     final static public String BLOCK_USER = BASE_URL+"/api/auth/blockUser?";
+    final static public String ADD_LINKK=BASE_URL+"/api/auth/addLink?";
     final static public String GET_USER_PUBLIC_INFO = BASE_URL+"/api/unauth/viewPublicUserInfo";
     final static public String GET_USER_PRIVATE_INFO = BASE_URL+"/api/auth/viewPrivateUserInfo";
     final static public String GET_USERNAME = BASE_URL+"/api/auth/getUsername";
@@ -53,7 +56,15 @@ public class Constants {
     final static public String GET_USER_FOLLOWERS = BASE_URL+"/api/auth/followers";
     final static public String GET_USER_FOLLOWING = BASE_URL+"/api/auth/following";
     final static public String GET_USER_POSTS_AND_COMMENTS = BASE_URL+"/api/auth/viewOverview";
-        final static public String FORGET_PASSWORD = BASE_URL+"/api/auth/forgetPassword";
+
+    final static public String FORGET_PASSWORD = BASE_URL+"/api/auth/forgetPassword";
+    final static public String GET_LIST_OF_COMMUNITIES=BASE_URL+"/api/unauth/viewUserCommunities?username=";
+    final static public String VIEW_SINGLE_POST=BASE_URL+"/api/unauth/viewSinglePost?";
+    final static public String GET_COMMENTS=BASE_URL+"/api/unauth/viewCommentsReplies?";
+    final static public String SAVE_LINK=BASE_URL+"/api/auth/saveLink?";
+    final static public String UN_SAVE_LINK=BASE_URL+"/api/auth/unsaveLink?";
+    final static public String EDIT_COMMENT=BASE_URL+"/api/auth/editComment?";
+    final static public String EDIT_POST=BASE_URL+"/api/auth/editPost?";
     //930d0c7c.ngrok.io
     //35.204.169.121
 
@@ -73,9 +84,18 @@ public class Constants {
     public static LogInSignUpSuccessful mSignUpSuccessful;
     public static UpdateProfileInfo mUpdateProfileInfo;
     public static ChooseCommunityCallback CHOOSEN_COMMUNITY;
+
     public static LogOutCallBack logOutCallBack;
+    public static GetListOfCommunities COMMUNITIES;
+    public static GetSinglePost SINGLE_POST;
     public static TreeNode commentReplyNode;
     public static Comment commentReply;
+    public static Post postComment;
+    public final static int SHIFT_NODE=25;
+
+
+
+
 
 
 

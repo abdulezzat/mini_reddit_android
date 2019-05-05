@@ -34,6 +34,7 @@ import com.example.android.minireddit.abs.LogOutCallBack;
 import com.example.android.minireddit.adapters.AccountsAdapter;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.fragments.HomePageFragment;
+import com.example.android.minireddit.fragments.InboxFragment;
 import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.fragments.SavedFragment;
 import com.example.android.minireddit.libraries.BottomNavigationViewEx;
@@ -61,6 +62,7 @@ public class HomePage extends AppCompatActivity
     private HomePageFragment mHomePageFragment;
     private MyProfileFragment mMyProfileFragment;
     private SavedFragment mMySavedFragment;
+    private InboxFragment mInboxFragment;
 
     //helper members
     private boolean mInHomeScreen;
@@ -137,6 +139,8 @@ public class HomePage extends AppCompatActivity
                 logOut();
             }
         };
+        mInboxFragment = new InboxFragment();
+
 
         findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -316,7 +320,12 @@ public class HomePage extends AppCompatActivity
         } else if (id == R.id.navigation_chat) {
             Toast.makeText(this, "Not available yet!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.navigation_message) {
-
+            mInHomeScreen = false;
+            //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            getSupportActionBar().hide();
+            //Constants.visitedUser=new User();
+            //Constants.visitedUser.setmUserName(Constants.user.getmUserName());
+            result = loadFragment(mInboxFragment);
         }
         drawer.closeDrawer(GravityCompat.START);
         return result;

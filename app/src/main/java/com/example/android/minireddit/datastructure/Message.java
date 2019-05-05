@@ -11,6 +11,11 @@ public class Message {
     private int MessageID;
 
     /**
+     * The subject of the message
+     */
+    private  String MessageSubject;
+
+    /**
      * The text of the message
      */
     private String MessageContent;
@@ -35,24 +40,33 @@ public class Message {
      */
     private String SenderPhotoURL;
 
+    /**
+     * The time since the message was sent
+     */
+    private String Duration;
+
 
     /**
      * Constructing a new Message.
      *
      * @param messageID         the id of the message
      * @param messageContent    the text of the message
+     * @param messageSubject    the subject of the message
      * @param receiverName      the message receiver name
      * @param senderName        the message sender name
      * @param receiverPhotoURL  the message receiver photo URL
-     * @param senderPhotoURL    he message sender photo URL
+     * @param senderPhotoURL    the message sender photo URL
+     * @param duration          the time since the message was sent
      */
-    public Message(int messageID, String messageContent, String receiverName, String senderName, String receiverPhotoURL, String senderPhotoURL) {
+    public Message(int messageID, String messageContent, String messageSubject, String receiverName, String senderName, String receiverPhotoURL, String senderPhotoURL, String duration) {
         MessageID = messageID;
         MessageContent = messageContent;
+        MessageSubject = messageSubject;
         ReceiverName = receiverName;
         SenderName = senderName;
         ReceiverPhotoURL = receiverPhotoURL;
         SenderPhotoURL = senderPhotoURL;
+        Duration = duration;
     }
 
 
@@ -64,7 +78,6 @@ public class Message {
     public int getMessageID() {
         return MessageID;
     }
-
 
     /**
      * Sets message ID.
@@ -85,7 +98,6 @@ public class Message {
         return MessageContent;
     }
 
-
     /**
      * Sets message content.
      *
@@ -97,14 +109,30 @@ public class Message {
 
 
     /**
-     * Gets message content.
+     * Gets message subject.
      *
-     * @return the text of the message
+     * @return the subject of the message
+     */
+    public String getMessageSubject() {
+        return MessageSubject;
+    }
+
+    /**
+     * Sets message subject.
+     *
+     * @param messageSubject the message text
+     */
+    public void setMessageSubject(String messageSubject) { MessageSubject = messageSubject; }
+
+
+    /**
+     * Gets receiver name.
+     *
+     * @return the message receiver name
      */
     public String getReceiverName() {
         return ReceiverName;
     }
-
 
     /**
      * Sets receiver name.
@@ -115,10 +143,15 @@ public class Message {
         ReceiverName = receiverName;
     }
 
+
+    /**
+     * Gets sender name.
+     *
+     * @return the message sender name
+     */
     public String getSenderName() {
         return SenderName;
     }
-
 
     /**
      * Sets sender name.
@@ -129,10 +162,15 @@ public class Message {
         SenderName = senderName;
     }
 
+
+    /**
+     * Gets the url of the receiver photo.
+     *
+     * @return the message receiver photo URL
+     */
     public String getReceiverPhotoURL() {
         return ReceiverPhotoURL;
     }
-
 
     /**
      * Sets receiver photo.
@@ -143,10 +181,15 @@ public class Message {
         ReceiverPhotoURL = receiverPhotoURL;
     }
 
+
+    /**
+     * Gets the url of the sender photo.
+     *
+     * @return the message sender photo URL
+     */
     public String getSenderPhotoURL() {
         return SenderPhotoURL;
     }
-
 
     /**
      * Sets sender photo.
@@ -155,5 +198,24 @@ public class Message {
      */
     public void setSenderPhotoURL(String senderPhotoURL) {
         SenderPhotoURL = senderPhotoURL;
+    }
+
+
+    /**
+     * Gets the time since the message was sent
+     *
+     * @return the duration from the message sending
+     */
+    public String getDuration() {
+        return Duration;
+    }
+
+    /**
+     * Sets the time since the message was sent
+     *
+     * @param duration the duration from the message sending
+     */
+    public void setDuration(String duration) {
+        Duration = duration;
     }
 }

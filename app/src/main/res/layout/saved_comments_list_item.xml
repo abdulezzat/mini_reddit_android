@@ -9,10 +9,10 @@
         android:id="@+id/post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="the post title should show here"
         android:textColor="@color/black"
         android:textSize="16sp" />
@@ -20,9 +20,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/comment_user"
@@ -58,22 +58,23 @@
         android:id="@+id/comment_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="Comment text should appear here in this section."
         android:textColor="@color/black" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
+        android:layout_gravity="right"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center"
             android:padding="5dp"
             android:src="@drawable/baseline_more_vert_black_48dp" />
 
@@ -81,12 +82,14 @@
             android:id="@+id/reply_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="5dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -104,6 +107,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center">
 
             <ImageView
