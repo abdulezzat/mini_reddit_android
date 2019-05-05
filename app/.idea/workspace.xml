@@ -32,6 +32,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_inbox.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_inbox.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_my_profile.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_my_profile.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_profile_about.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_profile_about.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_saved.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/popup_create_post_layout.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/popup_create_post_layout.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/popup_layout.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/popup_layout.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/saved_comments_list_item.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/saved_comments_list_item.xml" />
@@ -62,7 +63,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="HomePage.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomePage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -125,6 +126,9 @@
               </folding>
 >>>>>>> 5c1d8acbef58d7720da617edf51fa1202ba2f5b6
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -189,6 +193,9 @@
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="SignUpFragment.java" pinned="false" current-in-tab="false">
@@ -218,6 +225,9 @@
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
         </entry>
       </file>
 <<<<<<< HEAD
@@ -235,6 +245,9 @@
 >>>>>>> 5c1d8acbef58d7720da617edf51fa1202ba2f5b6
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -254,6 +267,9 @@
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
         </entry>
       </file>
 <<<<<<< HEAD
@@ -271,6 +287,9 @@
 >>>>>>> 5c1d8acbef58d7720da617edf51fa1202ba2f5b6
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -3081,6 +3100,9 @@
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/menu/home_page.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -3428,6 +3450,9 @@
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3436,6 +3461,9 @@
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/fragments/InboxFragment.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3443,6 +3471,9 @@
           <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
@@ -3462,6 +3493,9 @@
           <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/test_profile_header.xml">
@@ -3492,6 +3526,9 @@
           <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/android/minireddit/HomePage.java">

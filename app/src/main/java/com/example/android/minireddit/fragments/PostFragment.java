@@ -86,7 +86,7 @@ public class PostFragment extends Fragment {
          else {
               Constants.homeposts = new PosterAdapter(this.getContext(), posts, expand, frameLayout);
               if (Constants.mToken.isEmpty()) {
-                 // Toast.makeText(getContext(), "Please Login First", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(getContext(), "Please Login First", Toast.LENGTH_SHORT).show();
               } else {
                   posts = DependentClass.getInstance().getListOfHomePosts(getContext());
                   homeposts.addAll(posts);

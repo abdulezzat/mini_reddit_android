@@ -394,7 +394,7 @@ public class SinglePost extends AppCompatActivity {
                 }
 
                 return true;
-                case R.id.edit:
+                case R.id.editpost:
                     Intent intent=new Intent(SinglePost.this,WritePost.class);
                     intent.putExtra("Post","Edit");
                     intent.putExtra("Type","None");
