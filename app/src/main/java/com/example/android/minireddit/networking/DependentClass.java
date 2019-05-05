@@ -244,5 +244,8 @@ public class DependentClass {
     public void editComment(Context context,int id,String content){
         mSupplier.editComment(context,id,content);
     }
+    public void editPost(Context context,Post post){
+        mSupplier.editPost(context,post);
+    }
 
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.minireddit.SinglePost">
     <item
-        android:id="@+id/edit"
+        android:id="@+id/editpost"
         android:title="edit"
         android:icon="@drawable/edit"
 
