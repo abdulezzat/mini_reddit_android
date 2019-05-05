@@ -27,7 +27,7 @@ import java.util.Set;
 public class AndroidTreeView {
     private static final String NODES_PATH_SEPARATOR = ";";
 
-    protected TreeNode mRoot;
+    protected static TreeNode mRoot;
     private Context mContext;
     private boolean applyForRoot;
     private int containerStyle = 0;
@@ -45,6 +45,9 @@ public class AndroidTreeView {
 
     public void setRoot(TreeNode mRoot) {
         this.mRoot = mRoot;
+    }
+    public TreeNode getmRoot(){
+        return mRoot;
     }
 
     public AndroidTreeView(Context context, TreeNode root) {

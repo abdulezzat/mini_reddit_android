@@ -122,7 +122,7 @@ public class MyProfileFragment extends Fragment {
                 userFollowersCount.setText(mUserFollowersCount);
 
                 TextView userAbout = (TextView) rootView.findViewById(R.id.user_about);
-                if(mUser.getmAbout()!=null && !mUser.getmAbout().equals("null")) {
+                if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null")) {
                     userAbout.setVisibility(View.VISIBLE);
                     userAbout.setText(mUser.getmAbout());
                 } else {
@@ -133,14 +133,12 @@ public class MyProfileFragment extends Fragment {
         };
         ImageView headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
         headerImage = (ImageView) rootView.findViewById(R.id.header_photo);
-        if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("")) {
+        if (mUser.getmHeaderImage() != null && !mUser.getmHeaderImage().equals("") && mUser.getmHeaderImage() != "null") {
             new DownloadImageTask(headerImage).execute(mUser.getmHeaderImage());
-        } else {
-            headerImage.setImageResource(R.drawable.iamadreamer);
         }
 
         avatar = (ImageView) rootView.findViewById(R.id.avatar);
-        if (mUser.getmProfileImage() != null && !mUser.getmProfileImage().equals("")) {
+        if (mUser.getmProfileImage() != null && !mUser.getmProfileImage().equals("") && mUser.getmProfileImage() != "null") {
             new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
         } else {
             avatar.setImageResource(R.drawable.default_avatar);
@@ -179,7 +177,7 @@ public class MyProfileFragment extends Fragment {
         TextView dotBeforeFollowers = (TextView) rootView.findViewById(R.id.dot_before_followers);
 
         displayName = (TextView) rootView.findViewById(R.id.display_name);
-        if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("")) {
+        if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("") && mUser.getmDisplayName() != "null") {
             displayName.setText(mUser.getmDisplayName());
         } else {
             displayName.setText(mUser.getmUserName());
@@ -205,7 +203,7 @@ public class MyProfileFragment extends Fragment {
         userFollowersCount.setText(mUserFollowersCount);
 
         userAbout = (TextView) rootView.findViewById(R.id.user_about);
-        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null")) {
+        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null") && mUser.getmAbout() != "null") {
             userAbout.setVisibility(View.VISIBLE);
             userAbout.setText(mUser.getmAbout());
         } else {
@@ -248,19 +246,32 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
+        // activating share my profile button
+        ImageView shareProfile = rootView.findViewById(R.id.share_profile);
+        shareProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "u/" + Constants.visitedUser.getmUserName();
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
+
         return rootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("")) {
+        if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("") && mUser.getmDisplayName() != "null") {
             displayName.setText(mUser.getmDisplayName());
         } else {
             displayName.setText(mUser.getmUserName());
         }
 
-        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null")) {
+        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null") && mUser.getmAbout() != "null") {
             userAbout.setVisibility(View.VISIBLE);
             userAbout.setText(mUser.getmAbout());
         } else {

@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp"
+        android:paddingRight="15dp">
 
         <TextView
             android:id="@+id/post_info"
@@ -31,6 +31,8 @@
             android:layout_height="16dp"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/baseline_more_vert_black_48dp" />
     </RelativeLayout>
 
@@ -38,9 +40,9 @@
         android:id="@+id/post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:paddingBottom="5dp"
         android:text="the post title should appear here"
         android:textColor="@color/black"
         android:textSize="18sp" />
@@ -61,8 +63,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="18dp"
-        android:layout_marginBottom="14dp"
         android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -80,6 +82,8 @@
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/upvote" />
 
             <TextView
@@ -93,11 +97,12 @@
                 android:text="5k" />
 
             <ImageView
-
                 android:id="@+id/post_down_vote"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/downvote" />
 
 
@@ -111,6 +116,8 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center">
 
             <ImageView
@@ -140,6 +147,8 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center">
 
             <ImageView

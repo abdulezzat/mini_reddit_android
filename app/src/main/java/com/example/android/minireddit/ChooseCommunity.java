@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.android.minireddit.abs.GetListOfCommunities;
 import com.example.android.minireddit.adapters.CommunityAdapter;
 import com.example.android.minireddit.datastructure.*;
 import com.example.android.minireddit.datastructure.Community;
+import com.example.android.minireddit.networking.DependentClass;
 
 import java.util.ArrayList;
 
@@ -31,23 +33,22 @@ public class ChooseCommunity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_community);
         communityList=(ListView)findViewById(R.id.communities);
         search=(EditText)findViewById(R.id.search_bar) ;
-        mCommunityArrayList.add(new Community(0,"Profile","","","",""));
-        mCommunityArrayList.add(new Community(0,"Ramzy","","","",""));
-        mCommunityArrayList.add(new Community(0,"Hassan","","","",""));
-        mCommunityArrayList.add(new Community(0,"AlyHello","","","",""));
-        mCommunityArrayList.add(new Community(0,"Ahmed","","","",""));
-        mCommunityArrayList.add(new Community(0,"Gdo","","","",""));
-        mCommunityArrayList.add(new Community(0,"Sheko","","","",""));
-        mCommunityArrayList.add(new Community(0,"Kesho","","","",""));
-        mCommunityArrayList.add(new Community(0,"Work","","","",""));
-        mCommunityArrayList.add(new Community(0,"Please","","","",""));
-        mCommunityArrayList.add(new Community(0,"keh","","","",""));
+
         this.setTitle("Choose a community");
+        Constants.COMMUNITIES=new GetListOfCommunities() {
+            @Override
+            public void ListOfCommunities(ArrayList<Community> communities) {
+                mCommunityArrayList.addAll(communities);
+                mAdapter = new CommunityAdapter(ChooseCommunity.this, mCommunityArrayList);
+                communityList.setAdapter(mAdapter);
+
+            }
+        };
+        DependentClass.getInstance().getListOfCommunities(getApplicationContext());
 
 
 
-        mAdapter = new CommunityAdapter(ChooseCommunity.this, mCommunityArrayList);
-        communityList.setAdapter(mAdapter);
+
         communityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

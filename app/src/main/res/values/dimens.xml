@@ -14,4 +14,5 @@
     <dimen name="treeview_top_padding">0dp</dimen>
 
     <dimen name="treeview_bottom_padding">0dp</dimen>
+    <dimen name="node_shift">25dp</dimen>
 </resources>

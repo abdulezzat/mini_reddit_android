@@ -4,22 +4,20 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,17 +40,15 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import com.example.android.minireddit.Constants;
-import com.example.android.minireddit.ProfileActivity;
 import com.example.android.minireddit.SinglePost;
 import com.example.android.minireddit.abs.NavigateToAnotherUserProfile;
+import com.example.android.minireddit.fragments.MyProfileFragment;
 import com.example.android.minireddit.networking.DependentClass;
 import com.example.android.minireddit.networking.DownloadImageTask;
 import com.example.android.minireddit.datastructure.Post;
 import com.example.android.minireddit.R;
 
 import java.util.List;
-
-import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 
 
 /**
@@ -62,6 +58,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
     private Animator currentAnimator;
     public NavigateToAnotherUserProfile mNavigateToAnotherUserProfile;
     private int shortAnimationDuration;
+    MenuItem save;
     /**
      * The Expanded image To Animate.
      */
@@ -113,6 +110,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
 
 
 
+
         if(currentPost.hasCommunity()){
             postUser.setText(currentPost.getCommunityName());
             postInfo.setText("Posted by "+currentPost.getPostUser()+" ."+currentPost.getPostInfo());
@@ -133,9 +131,19 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             postUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getContext(), ProfileActivity.class);
-                    intent.putExtra("username",currentPost.getPostUser());
+                    //Intent intent=new Intent(getContext(), ProfileActivity.class);
+                    //intent.putExtra("username",currentPost.getPostUser());
                    // getContext().startActivity(intent);
+
+                    MyProfileFragment profileFragment = new MyProfileFragment();
+                    FragmentManager fragmentManager =((AppCompatActivity) getContext()).getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, profileFragment)
+                            .addToBackStack(null)
+                            .commit();
+
+                    fragmentManager.executePendingTransactions();
+
                 }
             });
         }
@@ -161,7 +169,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             postImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    zoomImageFromThumb(postImage, postImage.getDrawable());
+                    //zoomImageFromThumb(postImage, postImage.getDrawable());
                 }
             });
 
@@ -197,17 +205,17 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                             if (DependentClass.getInstance().subscribeCommunity(getContext(), currentPost.getCommunityId())) {
                                 subscribe.setImageResource(R.drawable.iconfinder_right_correct_308223);
                                 currentPost.setSubscribed(true);
-                                Toast.makeText(getContext(), "Subscribed Successfully", Toast.LENGTH_SHORT).show();
+
                             } else {
-                                Toast.makeText(getContext(), "Faieled To Subscribe", Toast.LENGTH_SHORT).show();
+
                             }
                         } else {
                             if (DependentClass.getInstance().unsubscribeCommunity(getContext(), currentPost.getCommunityId())) {
                                 subscribe.setImageResource(R.drawable.ic_add_box_black_48dp);
                                 currentPost.setSubscribed(false);
-                                Toast.makeText(getContext(), "unSubscribed Successfully", Toast.LENGTH_SHORT).show();
+
                             } else {
-                                Toast.makeText(getContext(), "Faieled To unSubscribe", Toast.LENGTH_SHORT).show();
+
                             }
 
                         }
@@ -359,6 +367,15 @@ public class PosterAdapter extends ArrayAdapter<Post> {
                         popup.getMenuInflater().inflate(R.menu.post_menu,
                                 popup.getMenu());
                         setForceShowIcon(popup);
+                        save=popup.getMenu().findItem(R.id.save);
+                        if(!currentPost.isSaved()){
+                            save.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                            save.setTitle("save");
+                        }
+                        else{
+                            save.setIcon(R.drawable.unsave);
+                            save.setTitle("unsave");
+                        }
 
 
                         popup.show();
@@ -368,6 +385,24 @@ public class PosterAdapter extends ArrayAdapter<Post> {
 
                                 switch (item.getItemId()) {
                                     case R.id.save:
+                                        if(!Constants.mToken.isEmpty()) {
+                                            if (save.getTitle().equals("save")) {
+                                                DependentClass.getInstance().saveLink(getContext(),currentPost.getPostId());
+                                                save.setTitle("unsave");
+                                                save.setIcon(R.drawable.unsave);
+                                                currentPost.setSaved(true);
+                                                //save
+                                            } else {
+                                                DependentClass.getInstance().unsaveLink(getContext(),currentPost.getPostId());
+                                                save.setIcon(R.drawable.baseline_bookmark_black_48dp);
+                                                currentPost.setSaved(false);
+                                                save.setTitle("save");
+                                                //unsave
+                                            }
+                                        }
+                                        else{
+                                            Toast.makeText(getContext(),"Please Login First",Toast.LENGTH_SHORT).show();
+                                        }
 
                                         break;
                                     case R.id.blockUser:
@@ -405,6 +440,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(getContext(),SinglePost.class);
+                intent.putExtra("id",currentPost.getPostId());
                 getContext().startActivity(intent);
 
             }

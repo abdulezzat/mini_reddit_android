@@ -5,10 +5,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -30,7 +32,17 @@ import java.util.List;
  * </p>
  */
 
-public class ProfileCommentsAdapter extends ArrayAdapter<Comment> {
+public class ProfileCommentsAdapter extends RecyclerView.Adapter {
+
+    Context mContext;
+    List<Comment> mComments;
+
+    //UI Elements
+    TextView postTitle;
+    TextView postSource;
+    TextView commentDate;
+    TextView commentVoteCount;
+    TextView commentText;
 
     /**
      * A Constructor that takes the Context and the Array of Objects(Posts) and passes them to the Superclass Constructor
@@ -39,35 +51,44 @@ public class ProfileCommentsAdapter extends ArrayAdapter<Comment> {
      * @param objects The List of objects (Comments)
      */
     public ProfileCommentsAdapter(@NonNull Context context, @NonNull List<Comment> objects) {
-        super(context, 0, objects);
+        this.mContext=context;
+        this.mComments=objects;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        View ListItemView = convertView;
-        if (ListItemView == null) { //for making new List_item if there is no main one to change its data
-            ListItemView = LayoutInflater.from(getContext()).inflate(R.layout.profile_comments_list_item, parent, false);
-        }
-        Comment currentComment = getItem(position); // getting the current Comment in the ArrayList
-
-        TextView postTitle = (TextView) ListItemView.findViewById(R.id.post_title);
-        postTitle.setText(currentComment.getmPostTitle());
-
-        TextView postSource = (TextView) ListItemView.findViewById(R.id.post_source);
-        postSource.setText(String.valueOf(currentComment.getmPostCommunity()));
-
-        TextView commentDate = (TextView) ListItemView.findViewById(R.id.comment_date);
-        commentDate.setText(currentComment.getmDate());
-
-        TextView commentVoteCount = (TextView) ListItemView.findViewById(R.id.comment_vote_count);
-        commentVoteCount.setText(String.valueOf(currentComment.getmUpVotes()));
-
-        TextView commentText = (TextView) ListItemView.findViewById(R.id.comment_text);
-        commentText.setText(currentComment.getmBody());
-
-        return ListItemView;
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View Item = inflater.inflate(R.layout.profile_comments_list_item, parent, false);
+        return new ProfilePostsItemHolder(Item);
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+        Comment currentComment = mComments.get(position); // getting the current Comment in the ArrayList
+
+        postTitle.setText(currentComment.getmPostTitle());
+        postSource.setText(String.valueOf(currentComment.getmPostCommunity()));
+        commentDate.setText(currentComment.getmDate());
+        commentVoteCount.setText(String.valueOf(currentComment.getmUpVotes()));
+        commentText.setText(currentComment.getmBody());
+    }
+
+    @Override
+    public int getItemCount() {
+        return mComments.size();
+    }
+
+    public class ProfilePostsItemHolder extends RecyclerView.ViewHolder {
+
+        public ProfilePostsItemHolder(View ListItemView) {
+            super(ListItemView);
+            postTitle = (TextView) ListItemView.findViewById(R.id.post_title);
+            postSource = (TextView) ListItemView.findViewById(R.id.post_source);
+            commentDate = (TextView) ListItemView.findViewById(R.id.comment_date);
+            commentVoteCount = (TextView) ListItemView.findViewById(R.id.comment_vote_count);
+            commentText = (TextView) ListItemView.findViewById(R.id.comment_text);
+        }
+    }
 }

@@ -57,31 +57,15 @@ public class SignUpFragment extends Fragment {
         mPasswordView = (EditText)rootView.findViewById(R.id.password);
         mLogInInstead = (TextView)rootView.findViewById(R.id.log_in_instead);
 
-        Constants.mLogInSignUpSuccessful = new LogInSignUpSuccessful() {
-            @Override
-            public void Successful() {
-                Constants.mLogInSignUpSuccessful = null;
-                getActivity().finish();
-            }
-        };
+
 
         //Listener part
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DependentClass dependentClass =DependentClass.getInstance();
-                boolean result = dependentClass.signUp(getContext(),mEmail,mUserName,mPassword);
-                if(result && Constants.debug){
-                    Toast.makeText(getContext(),"Sign up as an admin successfully",Toast.LENGTH_SHORT).show();
-                    Constants.user =new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
-                    //setResult(Constants.CREATE_ACCOUNT_SUCCESSFULLY);
-                    //finish();
-                }else if(!result&&Constants.debug){
-                    Toast.makeText(getContext(),"Sign up as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
-                }else if(result && !Constants.debug){
+                dependentClass.signUp(getContext(),mEmail,mUserName,mPassword);
 
-                } else {
-                }
             }
         });
 
@@ -193,6 +177,35 @@ public class SignUpFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Constants.mLogInSignUpSuccessful = new LogInSignUpSuccessful() {
+            @Override
+            public void Successful(boolean result) {
+                if(result && Constants.debug){
+                    Toast.makeText(getContext(),"Sign up as an admin successfully",Toast.LENGTH_SHORT).show();
+                    Constants.user =new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
+                    Constants.mLogInSignUpSuccessful = null;
+                    getActivity().finish();
+                }else if(!result&&Constants.debug){
+                    Toast.makeText(getContext(),"Sign up as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
+                }else if(result && !Constants.debug){
+                    Constants.mLogInSignUpSuccessful = null;
+                    getActivity().finish();
+                } else {
+                    Toast.makeText(getContext(),"Something wrong please try again later",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Constants.mLogInSignUpSuccessful = null;
     }
 
 }
