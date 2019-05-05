@@ -3,6 +3,7 @@ package com.example.android.minireddit.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -210,6 +211,32 @@ public class LogInFragment extends Fragment {
                 } else if (!result && Constants.debug) {
                     Toast.makeText(getContext(), "Log in as an admin unsuccessfully", Toast.LENGTH_SHORT).show();
                 } else if (result && !Constants.debug) {
+                    SharedPreferences pref;
+                    SharedPreferences.Editor editor;
+                    pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    editor = pref.edit();
+
+                    boolean exsit = false;
+                    int counter = pref.getInt("count",-1);
+                    if(counter == -1) editor.putInt("count",0);
+                    editor.commit();
+                    for(int i = 0 ; i < counter ; i ++){
+                        String tag = "acc"+Integer.toString(i);
+                        if(pref.getString(tag,null)!=null && pref.getString(tag,null).equals(mUserName)){
+                            exsit = true;
+                            Constants.TokenTag = "token"+Integer.toString(i);
+                            break;
+                        }
+                    }
+
+                    if(!exsit){
+                        editor.putString("acc"+Integer.toString(counter),mUserName);
+                        editor.putString("token"+Integer.toString(counter),Constants.mToken);
+                        counter++;
+                        editor.putString("count",String.valueOf(counter));
+                        editor.commit();
+                        Constants.accounts.add(mUserName);
+                    }
                     Constants.mLogInSuccessful = null;
                     getActivity().finish();
                 } else {

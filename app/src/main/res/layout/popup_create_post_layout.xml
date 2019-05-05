@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -28,7 +29,8 @@
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
 
-            android:background="?attr/selectableItemBackgroundBorderless">
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            tools:targetApi="lollipop">
 
             <ImageView
                 android:layout_width="50dp"
@@ -50,7 +52,8 @@
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/link"
-            android:background="?attr/selectableItemBackgroundBorderless">
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            tools:targetApi="lollipop">
 
             <ImageView
                 android:layout_width="50dp"
@@ -72,7 +75,8 @@
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/image"
-            android:background="?attr/selectableItemBackgroundBorderless">
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            tools:targetApi="lollipop">
 
             <ImageView
                 android:layout_width="50dp"
@@ -94,7 +98,8 @@
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/video"
-            android:background="?attr/selectableItemBackgroundBorderless">
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            tools:targetApi="lollipop">
 
             <ImageView
                 android:layout_width="50dp"
