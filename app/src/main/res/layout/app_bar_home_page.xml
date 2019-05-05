@@ -20,12 +20,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/colorPrimary"
-            android:minHeight="?android:attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
             android:translationZ="0.1dp"
             app:elevation="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            tools:targetApi="lollipop">
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <RelativeLayout
                 android:layout_width="match_parent"
