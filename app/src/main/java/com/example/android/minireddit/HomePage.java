@@ -80,6 +80,7 @@ public class HomePage extends AppCompatActivity
                 .init();
 
         OneSignal.sendTag("username", "admin");
+        OneSignal.sendTag("username", "admin2");
         //Set my custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
