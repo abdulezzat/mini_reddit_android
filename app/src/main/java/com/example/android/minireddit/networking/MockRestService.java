@@ -23,7 +23,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
     @Override
     public ArrayList<Post> getTrendingPost(Context context) {
         ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
+        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "admin", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
         posts.add(new Post(1, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 1h ago", "This is Photo Hint", "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", null, 15, 200, false, false, false, 1));
         posts.add(new Post(2, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", "2h ago", "This is Photo Hint", "https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80", null, 15, 200, false, false, false, 1));
         posts.add(new Post(3, 3, "r/Communityname", String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 4h ago", "This is Text Message only works as a test for posts with no photos", null, "https://www.youtube.com/watch?v=U2dv_oDof4M&list=RDWfJD6ode3Sw&index=5", 15, 200, false, false, false, -1));
@@ -38,7 +38,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
     @Override
     public ArrayList<Post> getHomePost(Context context) {
         ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
+        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "admin", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
         posts.add(new Post(1, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 1h ago", "This is Photo Hint", "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", null, 15, 200, false, false, false, 1));
         posts.add(new Post(2, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 2h ago", "This is Photo Hint", "https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80", null, 15, 200, false, false, false, 1));
         posts.add(new Post(3, 3, "r/Communityname", String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 4h ago", "This is Text Message only works as a test for posts with no photos", null, "https://www.youtube.com/watch?v=U2dv_oDof4M&list=RDWfJD6ode3Sw&index=5", 15, 200, false, false, false, -1));
@@ -55,7 +55,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
     @Override
     public ArrayList<Post> getMoreTrendingPost(int index) {
         ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
+        posts.add(new Post(0, -1, null, String.valueOf(R.drawable.reddit_icon), "admin", " 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0));
         posts.add(new Post(1, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 1h ago", "This is Photo Hint", "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", null, 15, 200, false, false, false, 1));
         posts.add(new Post(2, -1, null, String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 2h ago", "This is Photo Hint", "https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80", null, 15, 200, false, false, false, 1));
         posts.add(new Post(3, 3, "r/Communityname", String.valueOf(R.drawable.reddit_icon), "u/alyramzy", " 4h ago", "This is Text Message only works as a test for posts with no photos", null, "https://www.youtube.com/watch?v=U2dv_oDof4M&list=RDWfJD6ode3Sw&index=5", 15, 200, false, false, false, -1));
@@ -285,8 +285,8 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public void getSinglePost(Context context, int postId) {
-        Post post=new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0);
-        Constants.SINGLE_POST.SinglePost(post);
+        Post post=new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "admin", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0);
+        Constants.SINGLE_POST.SinglePost(Constants.poster.getItem(postId));
 
 
 
@@ -296,20 +296,40 @@ public class MockRestService implements com.example.android.minireddit.networkin
     public void getComments(Context context, int link_id, TreeNode node, int type) {
         Comment comment=new Comment(0,"Aly Ramzy is onFire ","AlyRamzy",null,null,5,null,null,5,6,"2day ago",5,true,false,true);
         MyHolder.IconTreeItem subChildItem6 = new MyHolder.IconTreeItem(comment);
+        Comment commen1t=new Comment(0,"Aly Ramzy is onFire ","admin",null,null,5,null,null,5,6,"2day ago",5,true,false,true);
+        MyHolder.IconTreeItem subChildItem1 = new MyHolder.IconTreeItem(commen1t);
         if(type==1) {
             TreeNode subChild6 = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, false, R.layout.child, node.getLevel() * Constants.SHIFT_NODE));
             node.addChild(subChild6);
+            TreeNode.BaseNodeViewHolder.tView.expandNode(node);
+            TreeNode subChild1 = new TreeNode(subChildItem1).setViewHolder(new MyHolder(context, false, R.layout.child, node.getLevel() * Constants.SHIFT_NODE));
+            node.addChild(subChild1);
             TreeNode.BaseNodeViewHolder.tView.expandNode(node);
         }
         else{
             TreeNode parent = new TreeNode(subChildItem6).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
             node.addChild(parent);
             TreeNode.BaseNodeViewHolder.tView.expandNode(node);
+            TreeNode parent1 = new TreeNode(subChildItem1).setViewHolder(new MyHolder(context, true, MyHolder.DEFAULT, MyHolder.DEFAULT));
+            node.addChild(parent1);
+            TreeNode.BaseNodeViewHolder.tView.expandNode(node);
         }
        }
 
     @Override
     public void writePostVideoAndText(Context context, String firstInput, String secondInput, Community community, int type) {
+        Post post=new Post(20,community.getCommunityID(),community.getCommunityName(),null,Constants.user.getmUserName(),"1min ago",null,firstInput,null,null,0,0,false,false,false,0);
+        if(type==0){
+            post.setPostText(secondInput);
+
+        }
+        else{
+            post.setPostVideoUrl(secondInput);
+        }
+        Constants.homeposts.add(post);
+        Constants.homeposts.notifyDataSetChanged();
+        Constants.poster.add(post);
+        Constants.poster.notifyDataSetChanged();
 
     }
 

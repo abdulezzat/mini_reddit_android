@@ -106,7 +106,7 @@ public class WritePost extends AppCompatActivity {
            postTitle.setText(Constants.postComment.getPostText());
            postText.setVisibility(View.GONE);
            choose.setVisibility(View.GONE);
-           post.setEnabled(true);
+//           post.setEnabled(true);
 
 
         }
@@ -203,6 +203,7 @@ public class WritePost extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         post=menu.findItem(R.id.post);
+        if(postFunc.equals("Write"))
         post.setEnabled(false);
 
 
@@ -277,6 +278,7 @@ public class WritePost extends AppCompatActivity {
                 else{
                     Constants.postComment.setPostText(postTitle.getText().toString());
                     DependentClass.getInstance().editPost(getApplicationContext(),Constants.postComment);
+                    super.onBackPressed();
 
                 }
 
