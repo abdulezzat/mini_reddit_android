@@ -330,6 +330,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
         Constants.homeposts.notifyDataSetChanged();
         Constants.poster.add(post);
         Constants.poster.notifyDataSetChanged();
+        Toast.makeText(context,"Post Added Succesfuly",Toast.LENGTH_SHORT).show();
 
     }
 
