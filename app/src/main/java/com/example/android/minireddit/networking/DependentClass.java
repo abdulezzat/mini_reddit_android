@@ -214,6 +214,9 @@ public class DependentClass {
         mSupplier.hidePost(context, postID);
     }
 
+
+    public void forgetPassword(final Context context, final String email) {mSupplier.forgetPassword(context,email);}
+
     public void getListOfCommunities(Context context){
         mSupplier.getListofCommunities(context);
     }

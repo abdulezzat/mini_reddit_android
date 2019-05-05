@@ -21,22 +21,36 @@
         android:src="@drawable/user_default_image"
         android:layout_marginTop="60dp"/>
 
-    <Spinner
-        android:id="@+id/log_in_spinner"
-        android:minWidth="100dp"
+    <RelativeLayout
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_below="@id/imageView"
         android:layout_centerHorizontal="true"
-        android:entries="@array/user_accounts"
-        android:backgroundTint="@color/black"
-        />
+        android:layout_below="@id/imageView"
+        android:minWidth="100dp">
+        <TextView
+            android:id="@+id/username_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="admin"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/down"
+            android:layout_toRightOf="@id/username_text"
+            android:layout_marginTop="4dp"
+            />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/karma_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@id/log_in_spinner"
+        android:layout_below="@id/username"
         android:src="@drawable/karma"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
@@ -69,13 +83,13 @@
         android:layout_height="30dp"
         android:background="@color/viewColor"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/log_in_spinner"
+        android:layout_below="@id/username"
         />
     <ImageView
         android:id="@+id/reddit_age_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@id/log_in_spinner"
+        android:layout_below="@id/username"
         android:layout_toRightOf="@id/just_view"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"

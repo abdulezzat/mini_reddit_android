@@ -27,6 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".MessageReply"></activity>
+        <activity android:name=".SingleMessage" />
         <activity
             android:name=".HomePage"
             android:label="@string/app_name"

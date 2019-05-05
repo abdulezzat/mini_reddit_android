@@ -1,8 +1,8 @@
 package com.example.android.minireddit.networking;
 
 import android.content.Context;
+import android.widget.Toast;
 import android.view.MenuItem;
-
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.SinglePost;
@@ -92,7 +92,7 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public boolean logIn(Context context, String username, String password) {
-        if (username.equals("admin") && password.equals("admin")) {
+        if (username.equals("admin") && password.equals("admin111")) {
             Constants.mToken = "TEST";
             Constants.user=new User(username,username,0,null,null,null,null);
             return true;
@@ -221,6 +221,13 @@ public class MockRestService implements com.example.android.minireddit.networkin
         newFollowings.add("3lool");
         newFollowings.add("gedo");
         Constants.visitedUser.addFollowing(newFollowings);
+    }
+
+    @Override
+    public void forgetPassword(Context context, String email) {
+        if(email.equals("admin")){
+            Toast.makeText(context,"forget password invoked",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

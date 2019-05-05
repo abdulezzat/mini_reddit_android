@@ -4,10 +4,9 @@ import com.example.android.minireddit.abs.ChooseCommunityCallback;
 import com.example.android.minireddit.abs.GetListOfCommunities;
 import com.example.android.minireddit.abs.GetSinglePost;
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
+import com.example.android.minireddit.abs.LogOutCallBack;
 import com.example.android.minireddit.abs.UpdateProfileInfo;
 import com.example.android.minireddit.adapters.PosterAdapter;
-import com.example.android.minireddit.adapters.SavedCommentsAdapter;
-import com.example.android.minireddit.adapters.SavedPostsAdapter;
 import com.example.android.minireddit.datastructure.*;
 import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
@@ -17,8 +16,7 @@ import java.util.ArrayList;
 public class Constants {
     public static String mToken = "";
 
-
-    public static final boolean debug = true;
+    public static final boolean debug = false;
     public static User user = null;
     public static User visitedUser = null;
     // public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
@@ -58,6 +56,8 @@ public class Constants {
     final static public String GET_USER_FOLLOWERS = BASE_URL+"/api/auth/followers";
     final static public String GET_USER_FOLLOWING = BASE_URL+"/api/auth/following";
     final static public String GET_USER_POSTS_AND_COMMENTS = BASE_URL+"/api/auth/viewOverview";
+
+    final static public String FORGET_PASSWORD = BASE_URL+"/api/auth/forgetPassword";
     final static public String GET_LIST_OF_COMMUNITIES=BASE_URL+"/api/unauth/viewUserCommunities?username=";
     final static public String VIEW_SINGLE_POST=BASE_URL+"/api/unauth/viewSinglePost?";
     final static public String GET_COMMENTS=BASE_URL+"/api/unauth/viewCommentsReplies?";
@@ -80,12 +80,14 @@ public class Constants {
     final static public int CREATE_ACCOUNT_UNSUCCESSFULLY = 1;
 
     //callback
-    public static LogInSignUpSuccessful mLogInSignUpSuccessful;
+    public static LogInSignUpSuccessful mLogInSuccessful;
+    public static LogInSignUpSuccessful mSignUpSuccessful;
     public static UpdateProfileInfo mUpdateProfileInfo;
     public static ChooseCommunityCallback CHOOSEN_COMMUNITY;
+
+    public static LogOutCallBack logOutCallBack;
     public static GetListOfCommunities COMMUNITIES;
     public static GetSinglePost SINGLE_POST;
-
     public static TreeNode commentReplyNode;
     public static Comment commentReply;
     public static Post postComment;

@@ -140,6 +140,8 @@ public interface Requests {
 
     void getUserFollowing(Context context, String username);
 
+    void forgetPassword (Context context , String email);
+
     boolean hidePost(Context context, int postID);
 
     boolean blockUser(Context context, String username);

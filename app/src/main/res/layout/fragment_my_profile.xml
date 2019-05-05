@@ -225,15 +225,15 @@
                         android:src="@drawable/back_button" />
 
                     <ImageView
+                        android:id="@+id/share_profile"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/share"
-                        android:id="@+id/share_profile"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="15dp"/>
+                        android:src="@drawable/share" />
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
