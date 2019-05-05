@@ -38,6 +38,29 @@ public class Post {
     String postText;
 
     /**
+     * Gets post title.
+     *
+     * @return the post title
+     */
+    public String getPostTitle() {
+        return postTitle;
+    }
+
+    /**
+     * Sets post title.
+     *
+     * @param postTitle the post title
+     */
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
+
+    /**
+     * The Post title.
+     */
+    String postTitle;
+
+    /**
      * The Url of The YouTube embedded Video in The Post.
      */
     String postVideoUrl;
@@ -90,6 +113,44 @@ public class Post {
      * @param subscribed       the user has subscribed the post publisher or not .
      * @param voteStatus       the vote status
      */
+    public Post(int postId,int communityId,String communityName,String postLogoUrl, String postUser, String postInfo, String postText,String postTitle, String postImageUrl,String postVideoUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden,boolean subscribed, int voteStatus) {
+        this.postId=postId;
+        this.communityId=communityId;
+        this.communityName=communityName;
+        this.postLogoUrl = postLogoUrl;
+        this.postUser = postUser;
+        this.postInfo = postInfo;
+        this.postText = postText;
+        this.postTitle=postTitle;
+        this.postImageUrl = postImageUrl;
+        this.postVideoUrl=postVideoUrl;
+        this.postLikeCount = postLikeCount;
+        this.postCommentCount = postCommentCount;
+        this.saved = saved;
+        this.hidden = hidden;
+        this.subscribed=subscribed;
+        this.voteStatus = voteStatus;
+    }
+
+    /**
+     * Instantiates a new Post.
+     *
+     * @param postId           the id of the post
+     * @param communityId      the community id
+     * @param communityName    the community name
+     * @param postLogoUrl      the post logo url
+     * @param postUser         the post user
+     * @param postInfo         the post info
+     * @param postText         the post text
+     * @param postImageUrl     the post image url
+     * @param postVideoUrl     the post video url
+     * @param postLikeCount    the post like count
+     * @param postCommentCount the post comment count
+     * @param saved            saved
+     * @param hidden           hidden
+     * @param subscribed       the user has subscribed the post publisher or not .
+     * @param voteStatus       the vote status
+     */
     public Post(int postId,int communityId,String communityName,String postLogoUrl, String postUser, String postInfo, String postText, String postImageUrl,String postVideoUrl, int postLikeCount, int postCommentCount, boolean saved, boolean hidden,boolean subscribed, int voteStatus) {
         this.postId=postId;
         this.communityId=communityId;
@@ -98,6 +159,7 @@ public class Post {
         this.postUser = postUser;
         this.postInfo = postInfo;
         this.postText = postText;
+        this.postTitle="";
         this.postImageUrl = postImageUrl;
         this.postVideoUrl=postVideoUrl;
         this.postLikeCount = postLikeCount;

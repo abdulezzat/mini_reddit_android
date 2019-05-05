@@ -159,7 +159,7 @@ public class PosterAdapter extends ArrayAdapter<Post> {
 
 
         TextView postText = (TextView) ListItemView.findViewById(R.id.postText);
-        postText.setText(currentPost.getPostText());
+        postText.setText(currentPost.getPostTitle()+"\n"+currentPost.getPostText());
 
         final ImageView postImage = (ImageView) ListItemView.findViewById(R.id.postImage);
         if (currentPost.getPostImageUrl() != null) {
@@ -347,6 +347,17 @@ public class PosterAdapter extends ArrayAdapter<Post> {
             youtubeWebView.setVisibility(View.GONE);
 
         }
+        LinearLayout share=(LinearLayout)ListItemView.findViewById(R.id.postShare);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL");
+                i.putExtra(Intent.EXTRA_TEXT, "http://www.minireddit.com/"+currentPost.getPostId());
+                getContext().startActivity(Intent.createChooser(i, "Mini Reddit Post"));
+            }
+        });
 
         ImageView menu = (ImageView) ListItemView.findViewById(R.id.postOptions);
         if(Constants.mToken.isEmpty()){

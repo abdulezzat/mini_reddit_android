@@ -59,7 +59,7 @@ public class RestService implements Requests {
                                 int id = post.getInt("post_id");
                                 String postText = post.getString("body");
                                 String postTitle=post.getString("title");
-                                postText+="\n"+postTitle;
+                                //postText+="\n"+postTitle;
                                 // Toast.makeText(context,"outer loop 1 ",Toast.LENGTH_SHORT).show();
                                 String postVideoUrl = post.getString("video_url");
                                 // Toast.makeText(context,"outer loop 2",Toast.LENGTH_SHORT).show();
@@ -91,7 +91,7 @@ public class RestService implements Requests {
                                     voteStatus = 1;
 
 
-                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
+                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText,postTitle, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, subs, voteStatus);
                                 // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
                                 posts.add(newPost);
 
@@ -168,7 +168,7 @@ public class RestService implements Requests {
                                 int id = post.getInt("post_id");
                                 String postText = post.getString("body");
                                 String postTitle=post.getString("title");
-                                postText+="\n"+postTitle;
+                               // postText+="\n"+postTitle;
                                 // Toast.makeText(context,"outer loop 1 ",Toast.LENGTH_SHORT).show();
                                 String postVideoUrl = post.getString("video_url");
                                 // Toast.makeText(context,"outer loop 2",Toast.LENGTH_SHORT).show();
@@ -206,7 +206,7 @@ public class RestService implements Requests {
                                     voteStatus = 1;
 
 
-                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, subs, voteStatus);
+                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText,postTitle, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, subs, voteStatus);
                                 // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
                                 posts.add(newPost);
 
@@ -1513,25 +1513,25 @@ public class RestService implements Requests {
                                 int id = post.getInt("post_id");
                                 String postText = post.getString("body");
                                 String postTitle=post.getString("title");
-                                postText+="\n"+postTitle;
+                                //postText+="\n"+postTitle;
                                 // Toast.makeText(context,"outer loop 1 ",Toast.LENGTH_SHORT).show();
-//                                String postVideoUrl = post.getString("video_url");
+                                String postVideoUrl = post.getString("video_url");
                                 // Toast.makeText(context,"outer loop 2",Toast.LENGTH_SHORT).show();
                                 String postImage = post.getString("image");
                                 // Toast.makeText(context,"outer loop 3",Toast.LENGTH_SHORT).show();
                                 String postUser = post.getString("username");
                                 String community = post.getString("community");
                                 // Toast.makeText(context,"outer loop 4",Toast.LENGTH_SHORT).show();
-                               // int community_id = post.getInt("community_id");
+                                int community_id = post.getInt("community_id");
                                 // Toast.makeText(context,"outer loop 5 ",Toast.LENGTH_SHORT).show();
-                               // boolean subs = post.getBoolean("subscribed");
+                                boolean subs = post.getBoolean("subscribed");
                                 String userlogo = String.valueOf(R.drawable.default_avatar);//post.getString("userimagelogo");
                                 // Toast.makeText(context,"outer loop ",Toast.LENGTH_SHORT).show();
                                 int postLikeCount = post.getInt("upvotes") - post.getInt("downvotes");
                                 String postInfo = post.getString("duration");
                                 int postCommentCount = post.getInt("comments_num");
-                               // if (postVideoUrl == "-1")
-                                   // postVideoUrl = null;
+                               if (postVideoUrl == "-1")
+                                   postVideoUrl = null;
                                 if (postImage == "-1")
                                     postImage = null;
                                 int voteStatus = 0;
@@ -1545,7 +1545,7 @@ public class RestService implements Requests {
                                     voteStatus = 1;
 
 
-                                Post newPost = new Post(id, -1, community, userlogo, postUser, postInfo, postText, postImage, null, postLikeCount, postCommentCount, saved, hidden, false, voteStatus);
+                                Post newPost = new Post(id, community_id, community, userlogo, postUser, postInfo, postText,postTitle, postImage, postVideoUrl, postLikeCount, postCommentCount, saved, hidden, subs, voteStatus);
                                 // Post newPost =new Post(0,0,"null",String.valueOf(R.drawable.default_avatar),"test","test","test",null,null,0,0,false,false,false,0);
 
 
@@ -1870,8 +1870,8 @@ public class RestService implements Requests {
 
     @Override
     public void editPost(final Context context, final Post post) {
-        String connectionStrong = Constants.EDIT_COMMENT;
-       // connectionStrong+="&token="+Constants.mToken+"&post_id="+post.getPostId()+"&new_title="+;
+        String connectionStrong = Constants.EDIT_POST;
+        connectionStrong+="&token="+Constants.mToken+"&post_id="+post.getPostId()+"&new_title="+post.getPostText()+"&new_content=.";
         Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
         StringRequest stringrequest = new StringRequest(Request.Method.PATCH,
                 builder.toString(),

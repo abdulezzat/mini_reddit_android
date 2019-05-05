@@ -106,6 +106,7 @@ public class WritePost extends AppCompatActivity {
            postTitle.setText(Constants.postComment.getPostText());
            postText.setVisibility(View.GONE);
            choose.setVisibility(View.GONE);
+           post.setEnabled(true);
 
 
         }
@@ -274,6 +275,8 @@ public class WritePost extends AppCompatActivity {
                super.onBackPressed();
                 }
                 else{
+                    Constants.postComment.setPostText(postTitle.getText().toString());
+                    DependentClass.getInstance().editPost(getApplicationContext(),Constants.postComment);
 
                 }
 

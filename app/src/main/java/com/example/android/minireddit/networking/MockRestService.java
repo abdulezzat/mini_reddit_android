@@ -285,7 +285,9 @@ public class MockRestService implements com.example.android.minireddit.networkin
 
     @Override
     public void getSinglePost(Context context, int postId) {
-        new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0);
+        Post post=new Post(0, 0, null, String.valueOf(R.drawable.reddit_icon), "r/alyramzy", "Posted by Aly Ramzy. 9h ago", "This is Photo Hint", "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg", null, 15, 200, false, false, false, 0);
+        Constants.SINGLE_POST.SinglePost(post);
+
 
 
     }
