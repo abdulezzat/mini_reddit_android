@@ -2,10 +2,9 @@ package com.example.android.minireddit;
 
 import com.example.android.minireddit.abs.ChooseCommunityCallback;
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
+import com.example.android.minireddit.abs.LogOutCallBack;
 import com.example.android.minireddit.abs.UpdateProfileInfo;
 import com.example.android.minireddit.adapters.PosterAdapter;
-import com.example.android.minireddit.adapters.SavedCommentsAdapter;
-import com.example.android.minireddit.adapters.SavedPostsAdapter;
 import com.example.android.minireddit.datastructure.*;
 import com.example.android.minireddit.libraries.atv.model.TreeNode;
 
@@ -13,9 +12,9 @@ import java.util.ArrayList;
 
 //
 public class Constants {
-    public static String mToken = "t";
+    public static String mToken = "";
 
-    public static final boolean debug = true;
+    public static final boolean debug = false;
     public static User user = null;
     public static User visitedUser = null;
     // public static User user = new User("admin","admin",null,"admin@gamil.com",null,200,null,false);
@@ -54,6 +53,7 @@ public class Constants {
     final static public String GET_USER_FOLLOWERS = BASE_URL+"/api/auth/followers";
     final static public String GET_USER_FOLLOWING = BASE_URL+"/api/auth/following";
     final static public String GET_USER_POSTS_AND_COMMENTS = BASE_URL+"/api/auth/viewOverview";
+        final static public String FORGET_PASSWORD = BASE_URL+"/api/auth/forgetPassword";
     //930d0c7c.ngrok.io
     //35.204.169.121
 
@@ -69,10 +69,11 @@ public class Constants {
     final static public int CREATE_ACCOUNT_UNSUCCESSFULLY = 1;
 
     //callback
-    public static LogInSignUpSuccessful mLogInSignUpSuccessful;
+    public static LogInSignUpSuccessful mLogInSuccessful;
+    public static LogInSignUpSuccessful mSignUpSuccessful;
     public static UpdateProfileInfo mUpdateProfileInfo;
     public static ChooseCommunityCallback CHOOSEN_COMMUNITY;
-
+    public static LogOutCallBack logOutCallBack;
     public static TreeNode commentReplyNode;
     public static Comment commentReply;
 

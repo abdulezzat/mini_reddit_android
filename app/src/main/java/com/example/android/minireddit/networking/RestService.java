@@ -421,15 +421,18 @@ public class RestService implements Requests {
                             if (jsonObject.getBoolean("success")) {
                                 Constants.mToken = jsonObject.getString("token");
                                 Constants.user = new User(username, username, null, null, null, 1, null, false);
-                                if (Constants.mLogInSignUpSuccessful != null) {
-                                    Constants.mLogInSignUpSuccessful.Successful(jsonObject.getBoolean("success"));
+                                if (Constants.mLogInSuccessful != null) {
+                                    Constants.mLogInSuccessful.Successful(jsonObject.getBoolean("success"));
                                 }
                                 Toast.makeText(context, "Login Done", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            //e.printStackTrace();
+                            e.printStackTrace();
+                            if (Constants.mLogInSuccessful != null) {
+                                Constants.mLogInSuccessful.Successful(false);
+                            }
                             Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
                         }
 
@@ -438,8 +441,11 @@ public class RestService implements Requests {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                        if (Constants.mLogInSuccessful != null) {
+                            Constants.mLogInSuccessful.Successful(false);
+                        }
+                        // Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -470,24 +476,30 @@ public class RestService implements Requests {
                             if (jsonObject.getBoolean("success")) {
                                 Constants.user = new User(username, username, null, email, null, 1, null, false);
                                 Constants.mToken = jsonObject.getString("token");
-                                if (Constants.mLogInSignUpSuccessful != null) {
-                                    Constants.mLogInSignUpSuccessful.Successful(jsonObject.getBoolean("success"));
+                                if (Constants.mSignUpSuccessful != null) {
+                                    Constants.mSignUpSuccessful.Successful(jsonObject.getBoolean("success"));
                                 }
                                 Toast.makeText(context, "Signup Done", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            //e.printStackTrace();
-                            Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                            if (Constants.mSignUpSuccessful != null) {
+                                Constants.mSignUpSuccessful.Successful(false);
+                            }
+                            //Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                        if (Constants.mSignUpSuccessful != null) {
+                            Constants.mSignUpSuccessful.Successful(false);
+                        }
+                        //Toast.makeText(context, "something wrong please check your connection", Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
@@ -1168,6 +1180,56 @@ public class RestService implements Requests {
         };
         MySingleton.getInstance(context).addToRequestQueue(stringrequest);
 
+    }
+
+    @Override
+    public void forgetPassword(final Context context, final String email) {
+
+        String connectionStrong = Constants.FORGET_PASSWORD + "?" + Constants.EMAIL + "=" + email;
+        Uri.Builder builder = Uri.parse(connectionStrong).buildUpon();
+
+        StringRequest stringrequest = new StringRequest(Request.Method.POST,
+                builder.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //  Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                           if(jsonObject.getBoolean("success")){
+                               Toast.makeText(context,"Check your mail",Toast.LENGTH_SHORT).show();
+                           }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "email doesn't exist", Toast.LENGTH_LONG).show();
+
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email",email);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("email", email);
+                return headers;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringrequest);
     }
 
     @Override

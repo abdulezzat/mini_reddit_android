@@ -117,6 +117,26 @@ public class User {
     }
 
     /**
+     * A constructor that Instantiates a new user with full info.
+     *
+     * @param userName     User's mUserName
+     * @param about        User's About
+     * @param karma        User's Karma
+     * @param cakeDay      User's Join Day
+     */
+    public User(String userName, int karma, String cakeDay, String about) {
+        mUserName = userName;
+        mDisplayName = userName;
+        mAbout = about;
+        mKarma = karma;
+        mCakeDay = cakeDay;
+        mFollowers=new ArrayList<>();
+        mFollowing=new ArrayList<>();
+        mPosts=new ArrayList<>();
+        mComments=new ArrayList<>();
+    }
+
+    /**
      * A constructor for constructing a User object from the data returned by the getUserPublicInfo request.
      *
      * @param username  user's unique username.

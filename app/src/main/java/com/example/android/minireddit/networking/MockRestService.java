@@ -1,6 +1,7 @@
 package com.example.android.minireddit.networking;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.android.minireddit.Constants;
 import com.example.android.minireddit.R;
@@ -199,6 +200,13 @@ public class MockRestService implements com.example.android.minireddit.networkin
         newFollowings.add("3lool");
         newFollowings.add("gedo");
         Constants.visitedUser.addFollowing(newFollowings);
+    }
+
+    @Override
+    public void forgetPassword(Context context, String email) {
+        if(email.equals("admin")){
+            Toast.makeText(context,"forget password invoked",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
