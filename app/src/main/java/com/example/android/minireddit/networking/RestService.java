@@ -97,6 +97,7 @@ public class RestService implements Requests {
 
 
                             }
+                            Constants.poster.clear();
                             Constants.poster.addAll(posts);
                             Constants.poster.notifyDataSetChanged();
                             //Toast.makeText(context, "Loaded Done ", Toast.LENGTH_SHORT).show();
@@ -212,6 +213,7 @@ public class RestService implements Requests {
 
 
                             }
+                            Constants.homeposts.clear();
                             Constants.homeposts.addAll(posts);
                             Constants.homeposts.notifyDataSetChanged();
 
@@ -1323,7 +1325,7 @@ public class RestService implements Requests {
     @Override
     public void getListofCommunities(final Context context) {
         final ArrayList<Community> communities=new ArrayList<>();
-        communities.add(new Community(0,"Profile",null,null,null,null));
+
         String connectionStrong = Constants.GET_LIST_OF_COMMUNITIES;
         if(Constants.user!=null)
             connectionStrong+=Constants.user.getmUserName();

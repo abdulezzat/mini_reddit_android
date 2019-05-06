@@ -25,10 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.minireddit.Constants;
+import com.example.android.minireddit.HomePage;
 import com.example.android.minireddit.R;
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.networking.DependentClass;
+import com.onesignal.OneSignal;
 
 public class LogInFragment extends Fragment {
 
@@ -218,6 +220,13 @@ public class LogInFragment extends Fragment {
                 } else if (!result && Constants.debug) {
                     Toast.makeText(getContext(), "Log in as an admin unsuccessfully", Toast.LENGTH_SHORT).show();
                 } else if (result && !Constants.debug) {
+                    OneSignal.startInit(getContext())
+                            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                            .unsubscribeWhenNotificationsAreDisabled(true)
+                            .init();
+
+                    OneSignal.sendTag("username", Constants.user.getmUserName());
+
                     SharedPreferences pref;
                     SharedPreferences.Editor editor;
                     pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode

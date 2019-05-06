@@ -169,6 +169,7 @@ public class WritePost extends AppCompatActivity {
                 }
                 else{
                     hasTitle=false;
+                    if(postFunc.equals("Write"))
                     post.setEnabled(false);
                 }
 

@@ -90,10 +90,8 @@ public class MyProfileFragment extends Fragment {
                 }
 
                 ImageView avatar = (ImageView) rootView.findViewById(R.id.avatar);
-                if (mUser.getmProfileImage() != null && !mUser.getmProfileImage().equals("")) {
+                if (mUser.getmProfileImage() != null && !mUser.getmProfileImage().equals("") && mUser.getmProfileImage() != "null") {
                     new DownloadImageTask(avatar).execute(mUser.getmProfileImage());
-                } else {
-                    avatar.setImageResource(R.drawable.default_avatar);
                 }
                 TextView displayName = (TextView) rootView.findViewById(R.id.display_name);
                 if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("")) {
@@ -262,22 +260,6 @@ public class MyProfileFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mUser.getmDisplayName() != null && !mUser.getmDisplayName().equals("") && mUser.getmDisplayName() != "null") {
-            displayName.setText(mUser.getmDisplayName());
-        } else {
-            displayName.setText(mUser.getmUserName());
-        }
-
-        if (mUser.getmAbout() != null && !mUser.getmAbout().equals("null") && mUser.getmAbout() != "null") {
-            userAbout.setVisibility(View.VISIBLE);
-            userAbout.setText(mUser.getmAbout());
-        } else {
-            userAbout.setVisibility(View.GONE);
-        }
-    }
 
     /*
     @Override

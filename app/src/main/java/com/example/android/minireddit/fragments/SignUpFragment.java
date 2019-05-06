@@ -26,6 +26,7 @@ import com.example.android.minireddit.R;
 import com.example.android.minireddit.abs.LogInSignUpSuccessful;
 import com.example.android.minireddit.datastructure.User;
 import com.example.android.minireddit.networking.DependentClass;
+import com.onesignal.OneSignal;
 
 public class SignUpFragment extends Fragment {
 
@@ -118,7 +119,6 @@ public class SignUpFragment extends Fragment {
                     mEmailAuto.setError("Invalid email address");
                 }
 
-                if(email.contains("admin"))
                 if (validePassword[0]&&validUserName[0]&&validEmail[0]) {
                     unenableAll();
                     final Handler handler = new Handler();
@@ -273,6 +273,13 @@ public class SignUpFragment extends Fragment {
                 }else if(!result&&Constants.debug){
                     Toast.makeText(getContext(),"Sign up as an admin unsuccessfully",Toast.LENGTH_SHORT).show();
                 }else if(result && !Constants.debug){
+                    OneSignal.startInit(getContext())
+                            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                            .unsubscribeWhenNotificationsAreDisabled(true)
+                            .init();
+
+                    OneSignal.sendTag("username", Constants.user.getmUserName());
+
                     pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                     editor = pref.edit();
                     editor.putString("acc", Constants.user.getmUserName());

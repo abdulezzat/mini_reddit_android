@@ -209,7 +209,7 @@ public class HomePage extends AppCompatActivity
             navigationView.addHeaderView(header);
             navigationView.removeHeaderView(navigationView.getHeaderView(0));
             // you need to have a list of data that you want the spinner to display
-            mAccountsRelative = (RelativeLayout) findViewById(R.id.username);
+            mAccountsRelative = (RelativeLayout) findViewById(R.id.usernamerel);
             mUsername = (TextView) findViewById(R.id.username_text);
             mUsername.setText(Constants.user.getmUserName());
 
@@ -514,6 +514,13 @@ public class HomePage extends AppCompatActivity
     }
 
     private void logOut() {
+        OneSignal.startInit(HomePage.this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
+        OneSignal.sendTag("username", "");
+
         Toast.makeText(this, "logOut", Toast.LENGTH_SHORT).show();
         Constants.user = null;
         onResume();

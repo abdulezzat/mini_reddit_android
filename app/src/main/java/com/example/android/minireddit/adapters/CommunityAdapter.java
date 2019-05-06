@@ -31,6 +31,8 @@ public class CommunityAdapter extends BaseAdapter implements Filterable {
     public CommunityAdapter(Context context, ArrayList<Community> mProductArrayList) {
         this.mOriginalValues = mProductArrayList;
         this.mDisplayedValues = mProductArrayList;
+        mOriginalValues.add(new Community(0,"Profile",null,null,null,null));
+       // mDisplayedValues.add(new Community(0,"Profile",null,null,null,null));
         inflater = LayoutInflater.from(context);
     }
 

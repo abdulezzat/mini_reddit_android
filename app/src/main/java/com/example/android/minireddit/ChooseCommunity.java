@@ -62,6 +62,7 @@ public class ChooseCommunity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Call back the Adapter with current character to Filter
+                if(mAdapter.getCount()!=0)
                 mAdapter.getFilter().filter(s.toString());
             }
 
