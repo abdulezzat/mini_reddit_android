@@ -1,0 +1,15 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
+        <item name="bottomNavigationStyle">@style/Widget.Design.BottomNavigationView</item>
+        <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
+    </style>
+</resources>
+<!--
+<item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
+        <item name="bottomNavigationStyle">@style/Widget.Design.BottomNavigationView</item>
+-->

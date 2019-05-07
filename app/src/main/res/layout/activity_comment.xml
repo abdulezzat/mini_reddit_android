@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.minireddit.CommentActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="UserName"
+            android:id="@+id/comment_username"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#3eb1f2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text=".4month ago"
+                android:id="@+id/comment_dateago"
+                android:textColor="@color/colorPrimaryDark"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/comment_bodyold"
+            android:layout_marginLeft="20dp"
+            android:text="Content of the Comment To Reply At and test the reply on reply Tree"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/gray"
+            android:layout_marginTop="20dp"
+            android:layout_height="1dp"/>
+        <EditText
+            android:background="@null"
+            android:id="@+id/comment_bodynew"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:hint="Your reply"
+            android:gravity="start"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

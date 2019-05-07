@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FAFAFA</color>
+    <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#616161</color>
-    <color name="colorAccent">#2196F3</color>
-    <color name="backGroung">#F5F5F5</color>
+    <color name="colorAccent">#24a0ed</color>
     <color name="black">#000000</color>
-    <color name="buttonColor">#0288D1</color>
+    <color name="separatorsColor">#edeff1</color>
+    <color name="grayIconsColor">#a4a7a8</color>
+    <color name="activeGrayIconColor">#373c3f</color>
+    <color name="iconsColor">#24a0ed</color>
+    <color name="viewColor">#EEEEEE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="startBackground">#263238</color>
+    <color name="buttonEnabledStateColor">#0000CC</color>
+    <color name="buttonDisabledStateColor">#0099CC</color>
+    <color name="textDisabledStateColor">#90CAF9</color>
+    <color name="textEnabledStateColor">@color/colorPrimary</color>
+    <color name="colorHintTextLight">#80FFFFFF</color>
+    <color name="colorPrimaryTextLight">#FFFFFF</color>
+
+    <color name="gray">#CCCCCC</color>
 </resources>
